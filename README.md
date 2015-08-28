@@ -1,5 +1,4 @@
 # Transferuj.pl
-----------
 
 Library for all payment methods available in Transferuj.pl
 
