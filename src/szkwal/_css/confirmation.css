@@ -1,0 +1,30 @@
+#transferuj-szkwal-confirmation {
+    border: 1px solid #B2B2B2;
+    padding: 10px;
+    background: #FFFFF0;
+    max-width: 500px;
+}
+
+#transferuj-szkwal-confirmation .transferuj-row {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#transferuj-szkwal-confirmation .transferuj-row > div {
+    float: left;
+    box-sizing: border-box;
+}
+
+#transferuj-szkwal-confirmation .transferuj-row .col-l {
+    float: left;
+    width: 30%;
+}
+
+#transferuj-szkwal-confirmation .transferuj-row .col-r {
+    float: left;
+    width: 70%;
+}
+
+#transferuj-szkwal-confirmation .client-title {
+    font-weight: bold;
+}
