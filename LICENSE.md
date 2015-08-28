@@ -1,5 +1,4 @@
-@todo fill this
-Copyright (c) <year> <copyright holders>
+Copyright (c) 2015 Krajowy Integrator Płatności Spółka Akcyjna
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
