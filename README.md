@@ -1,5 +1,4 @@
 # Transferuj.pl
-----------
 
 Library for all payment methods available in Transferuj.pl
 
@@ -34,13 +33,13 @@ Be sure that file src/log is writable and add rule to htaccess to deny access to
 For this moment library supports two languages (EN, PL). Default language is english.
 Change language example:
 
-    :::php
-    //All Transferuj class constructors load Lang class
-    $transferuj = new Transferuj\PaymentSzkwal();
+```php
+//All Transferuj class constructors load Lang class
+$transferuj = new Transferuj\PaymentSzkwal();
 
-    //After this line all static messages (input labels, buttons titles) will be displayed in Polish
-    Transferuj\Lang::setLang('pl');
-
+//After this line all static messages (input labels, buttons titles) will be displayed in Polish
+Transferuj\Lang::setLang('pl');
+```
 
 ## License
 
