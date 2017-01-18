@@ -5,7 +5,7 @@ if (isset($_GET['check_sms'])) {
     $result = $transferuj->verifyCode();
 
     echo '<h1>sprawdzenie SMS</h1>';
-    echo 'result: '.(int) $result;
+    echo 'result: ' . (int)$result;
     die;
 }
 

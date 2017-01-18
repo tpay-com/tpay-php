@@ -43,13 +43,13 @@ class PaymentSMS
 
         $postData = array(
             'tfCodeToCheck' => $codeToCheck,
-            'tfHash' => $hash,
+            'tfHash'        => $hash,
         );
         $response = Curl::doCurlRequest($this->secureURL, $postData);
 
         $data = explode("\n", $response);
 
-        $status = (int) $data[0];
+        $status = (int)$data[0];
         $lifetime = rtrim($data[1]);
 
         if ($status === 1) {

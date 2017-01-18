@@ -44,10 +44,10 @@ class CardAPI
     /**
      * PaymentCardAPI class constructor
      *
-     * @param string $cardApiKey       api key
-     * @param string $cardApiPassword  api password
+     * @param string $cardApiKey api key
+     * @param string $cardApiPassword api password
      * @param string $verificationCode verification code
-     * @param string $hashAlg          hash algorithm
+     * @param string $hashAlg hash algorithm
      *
      * @throws TException
      */
@@ -56,7 +56,7 @@ class CardAPI
         Validate::validateCardApiKey($cardApiKey);
         Validate::validateCardApiPassword($cardApiPassword);
         Validate::validateCardHashAlg($hashAlg);
-        if($verificationCode !== '') Validate::validateCardCode($verificationCode);
+        if ($verificationCode !== '') Validate::validateCardCode($verificationCode);
 
         $this->apiKey = $cardApiKey;
         $this->apiPass = $cardApiPassword;
@@ -70,14 +70,14 @@ class CardAPI
      * Method used to sale initialization in Transferuj system.
      * Successful request returns sale_auth used to redirect client to transaction panel
      *
-     * @param string      $clientName      client name
-     * @param string      $clientEmail     client email
-     * @param string      $saleDescription sale description
-     * @param float       $amount          amount
-     * @param string      $currency        currency
-     * @param string|null $orderID         order id
-     * @param bool        $onetimer
-     * @param string      $lang
+     * @param string $clientName client name
+     * @param string $clientEmail client email
+     * @param string $saleDescription sale description
+     * @param float $amount amount
+     * @param string $currency currency
+     * @param string|null $orderID order id
+     * @param bool $onetimer
+     * @param string $lang
      *
      * @return bool|mixed
      */
@@ -90,7 +90,8 @@ class CardAPI
         $orderID = null,
         $onetimer = true,
         $lang = 'pl'
-    ) {
+    )
+    {
         return $this->registerSaleBase(
             $clientName,
             $clientEmail,
@@ -112,15 +113,15 @@ class CardAPI
      * on client side (javascript) with Merchant's public RSA key and send it as one parameter (card) to our API gate.
      * A valid SSL certificate on domain is required
      *
-     * @param string      $clientName      client name
-     * @param string      $clientEmail     client email
-     * @param string      $saleDescription sale description
-     * @param float       $amount          amount
-     * @param string      $carddata        encrypted credit card data
-     * @param string      $curr            currency
-     * @param string|null $orderID         order id
-     * @param bool        $onetimer
-     * @param string      $lang
+     * @param string $clientName client name
+     * @param string $clientEmail client email
+     * @param string $saleDescription sale description
+     * @param float $amount amount
+     * @param string $carddata encrypted credit card data
+     * @param string $curr currency
+     * @param string|null $orderID order id
+     * @param bool $onetimer
+     * @param string $lang
      *
      * @return bool|mixed
      *
@@ -136,7 +137,8 @@ class CardAPI
         $orderID = null,
         $onetimer = true,
         $lang = 'pl'
-    ) {
+    )
+    {
         if (!is_string($carddata) || strlen($carddata) === 0) {
             throw new TException('Card data are not set');
         }
@@ -160,12 +162,12 @@ class CardAPI
      * It can be called after receiving notification with cli_auth (see communication schema in register_sale method).
      * It cannot be used if onetimer option was sent in register_sale or client has unregistered (by link in email or by API).
      *
-     * @param string $clientAuthCode  client auth code
+     * @param string $clientAuthCode client auth code
      * @param string $saleDescription sale description
-     * @param float  $amount          amount
-     * @param string $currency        currency
-     * @param null   $orderID         order id
-     * @param string $lang            language
+     * @param float $amount amount
+     * @param string $currency currency
+     * @param null $orderID order id
+     * @param string $lang language
      *
      * @return bool|mixed
      *
@@ -183,21 +185,22 @@ class CardAPI
         $params['sign'] = hash($this->hashAlg, 'presale' . $clientAuthCode . $saleDescription . $amount . $currency . $orderID . $lang . $this->verificationCode);
         $params['api_password'] = $this->apiPass;
 
-        Util::log('Pre sale params with hash ', print_r($params, true) . 'req url ' . $this->apiURL.$this->apiKey);
+        Util::log('Pre sale params with hash ', print_r($params, true) . 'req url ' . $this->apiURL . $this->apiKey);
 
-        $response = $this->postRequest($this->apiURL.$this->apiKey, $params);
+        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         return $response;
     }
+
     /**
      * Make sale by client auth code
      *
-     * @param string      $clientAuthCode  client auth code
-     * @param string      $saleDescription sale description
-     * @param float       $amount          amount
-     * @param string      $currency        currency
-     * @param string|null $orderID         order id
-     * @param string      $lang            language
+     * @param string $clientAuthCode client auth code
+     * @param string $saleDescription sale description
+     * @param float $amount amount
+     * @param string $currency currency
+     * @param string|null $orderID order id
+     * @param string $lang language
      *
      * @return bool|mixed
      *
@@ -210,10 +213,11 @@ class CardAPI
         $currency = '985',
         $orderID = null,
         $lang = 'pl'
-    ) {
+    )
+    {
 
         $params = $this->saleValidateAndPrepareParams($clientAuthCode, $saleDescription, $amount, $currency, $orderID, $lang, 'presale');
-        $response = $this->postRequest($this->apiURL.$this->apiKey, $params);
+        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         if ($response['result']) {
             $saleAuthCode = $response['sale_auth'];
@@ -232,7 +236,7 @@ class CardAPI
      * In that case, client card is not charged the second time.
      *
      * @param string $clientAuthCode client auth code
-     * @param string $saleAuthCode   sale auth code
+     * @param string $saleAuthCode sale auth code
      *
      * @return bool|mixed
      */
@@ -246,14 +250,14 @@ class CardAPI
         }
 
         $params = array(
-            'method' => 'sale',
-            'cli_auth' => $clientAuthCode,
+            'method'    => 'sale',
+            'cli_auth'  => $clientAuthCode,
             'sale_auth' => $saleAuthCode,
         );
         $params['sign'] = hash($this->hashAlg, 'sale' . $clientAuthCode . $saleAuthCode . $this->verificationCode);
         $params['api_password'] = $this->apiPass;
 
-        $response = $this->postRequest($this->apiURL.$this->apiKey, $params);
+        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         return $response;
     }
@@ -265,12 +269,12 @@ class CardAPI
      * If only cli_auth is sent amount parameter is required, if sale_auth is passed amount and currency is not necessary -
      * system will take default values from the specified sale. With sale_auth refund can be made only once
      *
-     * @param string      $clientAuthCode client auth code
-     * @param string|bool $saleAuthCode   sale auth code
-     * @param string      $refundDesc     refund description
-     * @param float|null  $amount         amount
-     * @param string      $currency       currency
-     * @param string      $lang
+     * @param string $clientAuthCode client auth code
+     * @param string|bool $saleAuthCode sale auth code
+     * @param string $refundDesc refund description
+     * @param float|null $amount amount
+     * @param string $currency currency
+     * @param string $lang
      *
      * @return bool|mixed
      *
@@ -347,10 +351,10 @@ class CardAPI
         }
 
 
-        $params['sign'] = hash($this->hashAlg, implode('', $params).$this->verificationCode);
+        $params['sign'] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params['api_password'] = $this->apiPass;
 
-        $response = $this->postRequest($this->apiURL.$this->apiKey, $params);
+        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         return $response;
     }
@@ -385,10 +389,10 @@ class CardAPI
         $params['method'] = 'deregister';
         $params['cli_auth'] = $clientAuthCode;
 
-        $params['sign'] = hash($this->hashAlg, implode('', $params).$this->verificationCode);
+        $params['sign'] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params['api_password'] = $this->apiPass;
 
-        $response = $this->postRequest($this->apiURL.$this->apiKey, $params);
+        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         return $response;
     }
@@ -397,14 +401,14 @@ class CardAPI
      * Validate all transaction parameters and throw TException if any error occurs
      * Add required fields sign and api password to config
      *
-     * @param string      $clientAuthCode  client auth code
-     * @param string      $saleDescription sale description
-     * @param float       $amount          amount
-     * @param string      $currency        currency
-     * @param string|null $orderID         order id
-     * @param string      $lang            language
-     * @param string      $method          sale method
-     * @param array       $errors          validation errors
+     * @param string $clientAuthCode client auth code
+     * @param string $saleDescription sale description
+     * @param float $amount amount
+     * @param string $currency currency
+     * @param string|null $orderID order id
+     * @param string $lang language
+     * @param string $method sale method
+     * @param array $errors validation errors
      *
      * @return array    parameters for sale request
      *
@@ -445,10 +449,10 @@ class CardAPI
         $amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
 
         $params = array(
-            'method' => $method,
+            'method'   => $method,
             'cli_auth' => $clientAuthCode,
-            'desc' => $saleDescription,
-            'amount' => $amount,
+            'desc'     => $saleDescription,
+            'amount'   => $amount,
         );
 
         if ($currency) {
@@ -461,7 +465,7 @@ class CardAPI
             $params['language'] = $lang;
         }
 
-        $params['sign'] = hash($this->hashAlg, implode('', $params).$this->verificationCode);
+        $params['sign'] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params['api_password'] = $this->apiPass;
 
         return $params;
@@ -470,16 +474,16 @@ class CardAPI
     /**
      * Prepare for register sale @see $this->registerSale
      *
-     * @param string      $clientName client name
-     * @param string      $clientEmail client email
-     * @param string      $saleDescription sale description
-     * @param float       $amount amount
-     * @param string      $currency currency
+     * @param string $clientName client name
+     * @param string $clientEmail client email
+     * @param string $saleDescription sale description
+     * @param float $amount amount
+     * @param string $currency currency
      * @param string|null $orderID order id
-     * @param bool        $onetimer
-     * @param bool        $direct
+     * @param bool $onetimer
+     * @param bool $direct
      * @param string|null $saledata encrypted credit card data
-     * @param string      $lang
+     * @param string $lang
      *
      * @return bool|mixed
      *
@@ -503,18 +507,18 @@ class CardAPI
         if ($direct && !empty($saledata)) {
             $params = array(
                 'method' => 'directsale',
-                'card' => $saledata,
-                'name' => $clientName,
-                'email' => $clientEmail,
-                'desc' => $saleDescription,
+                'card'   => $saledata,
+                'name'   => $clientName,
+                'email'  => $clientEmail,
+                'desc'   => $saleDescription,
                 'amount' => $amount,
             );
         } else {
             $params = array(
                 'method' => 'register_sale',
-                'name' => $clientName,
-                'email' => $clientEmail,
-                'desc' => $saleDescription,
+                'name'   => $clientName,
+                'email'  => $clientEmail,
+                'desc'   => $saleDescription,
                 'amount' => $amount,
             );
         }
@@ -531,12 +535,12 @@ class CardAPI
             $params['language'] = $lang;
         }
 
-        $params['sign'] = hash($this->hashAlg, implode('', $params).$this->verificationCode);
+        $params['sign'] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params['api_password'] = $this->apiPass;
 
         Util::log('Card request', print_r($params, true));
 
-        $response = $this->postRequest($this->apiURL.$this->apiKey, $params);
+        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         return $response;
     }

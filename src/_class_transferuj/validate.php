@@ -11,15 +11,15 @@ namespace Transferuj;
 class Validate
 {
     const
-        PAYMENT_TYPE_BASIC       = 'basic',
-        PAYMENT_TYPE_BASIC_API   = 'basic_api',
-        PAYMENT_TYPE_CARD        = 'card',
+        PAYMENT_TYPE_BASIC = 'basic',
+        PAYMENT_TYPE_BASIC_API = 'basic_api',
+        PAYMENT_TYPE_CARD = 'card',
         PAYMENT_TYPE_CARD_DIRECT = 'card_direct',
-        PAYMENT_TYPE_SZKWAL      = 'szkwal',
+        PAYMENT_TYPE_SZKWAL = 'szkwal',
         PAYMENT_TYPE_WHITE_LABEL = 'whiteLabel',
-        PAYMENT_TYPE_EHAT        = 'ehat',
-        PAYMENT_TYPE_SMS         = 'sms',
-        CARD_DEREGISTER          = 'deregister';
+        PAYMENT_TYPE_EHAT = 'ehat',
+        PAYMENT_TYPE_SMS = 'sms',
+        CARD_DEREGISTER = 'deregister';
 
 
     /**
@@ -29,13 +29,13 @@ class Validate
     private static $filters = array(
         'numbers' => '/[^0-9]/',
         'letters' => '/[^A-Za-z]/',
-        'mixed' => '/[^A-Za-z0-9]/',
-        'date' => '/[^0-9 \-:]/',
-        'text' => '/[^\-\p{Latin}A-Za-z0-9 \.,_]/u',
-        'url' => '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS',
-        'mail' => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
-        'name' => '/[^\-\p{Latin} ]/u',
-        'sign' => '/[^A-Za-z!\., _\-0-9]/'
+        'mixed'   => '/[^A-Za-z0-9]/',
+        'date'    => '/[^0-9 \-:]/',
+        'text'    => '/[^\-\p{Latin}A-Za-z0-9 \.,_]/u',
+        'url'     => '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS',
+        'mail'    => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
+        'name'    => '/[^\-\p{Latin} ]/u',
+        'sign'    => '/[^A-Za-z!\., _\-0-9]/'
     );
 
     /**
@@ -299,76 +299,76 @@ class Validate
         /**
          * Transaction amount with dot as decimal separator.
          */
-        'kwota' => array(
-            'required' => true,
+        'kwota'               => array(
+            'required'   => true,
             'validation' => array('float'),
         ),
         /**
          * Transaction description
          */
-        'opis' => array(
-            'required' => true,
+        'opis'                => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_128'),
-            'filter' => 'text'
+            'filter'     => 'text'
         ),
         /**
          * The secondary parameter to the transaction identification.
          * After the transaction returned as a parameter tr_crc.
          */
-        'crc' => array(
-            'required' => false,
+        'crc'                 => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_128'),
-            'filter' => 'sign'
+            'filter'     => 'sign'
         ),
         /**
          * Allow only online payment.
          * Prevents the channel selection, which at the moment is not able to post real-time payment.
          */
-        'online' => array(
-            'required' => false,
+        'online'              => array(
+            'required'   => false,
             'validation' => array('options'),
-            'options' => array(0, 1),
+            'options'    => array(0, 1),
         ),
         /**
          * Imposing the customer the pre-payment channel.
          * Could be changed manually by customer.
          * Required for register transaction by transaction API
          */
-        'kanal' => array(
-            'required' => false,
+        'kanal'               => array(
+            'required'   => false,
             'validation' => array('uint'),
         ),
         /**
          * Blocking the channel selection of payment - only works together with the parameter channel.
          * Customer will be presented only the selected channel.
          */
-        'zablokuj' => array(
-            'required' => false,
+        'zablokuj'            => array(
+            'required'   => false,
             'validation' => array('options'),
-            'options' => array(0, 1),
+            'options'    => array(0, 1),
         ),
         /**
          * The resulting URL return address that will send the result of a transaction in the form POST parameters.
          */
-        'wyn_url' => array(
-            'required' => false,
+        'wyn_url'             => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_512'),
-            'filter' => 'url'
+            'filter'     => 'url'
         ),
         /**
          * E-mail address to which you will be notified about the status of the transaction.
          */
-        'wyn_email' => array(
-            'required' => false,
+        'wyn_email'           => array(
+            'required'   => false,
             'validation' => array('email_list'),
         ),
         /**
          * Description payees during the transaction.
          */
-        'opis_sprzed' => array(
-            'required' => false,
+        'opis_sprzed'         => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_128'),
-            'filter' => 'text'
+            'filter'     => 'text'
         ),
         /**
          * Optional field used during card transactions processed through Elavon.
@@ -377,108 +377,108 @@ class Validate
          * All others will be removed.
          * Max 32 signs.
          */
-        'opis_dodatkowy' => array(
-            'required' => false,
+        'opis_dodatkowy'      => array(
+            'required'   => false,
             'validation' => array('opis_dodatkowy', 'maxlenght_32'),
-            'filter' => 'mixed'
+            'filter'     => 'mixed'
         ),
         /**
          * The URL to which the customer will be transferred after successful completion of the transaction.
          */
-        'pow_url' => array(
-            'required' => false,
+        'pow_url'             => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_512'),
-            'filter' => 'url'
+            'filter'     => 'url'
         ),
         /**
          * The URL to which the client will be transferred in the event of an error.
          * Default is pow_url
          */
-        'pow_url_blad' => array(
-            'required' => false,
+        'pow_url_blad'        => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_512'),
-            'filter' => 'url'
+            'filter'     => 'url'
         ),
         /**
          * Transactional panel language.
          * Default is PL
          */
-        'jezyk' => array(
-            'required' => false,
+        'jezyk'               => array(
+            'required'   => false,
             'validation' => array('options'),
-            'options' => array('PL', 'EN', 'DE', 'IT', 'ES', 'FR', 'RU'),
+            'options'    => array('PL', 'EN', 'DE', 'IT', 'ES', 'FR', 'RU'),
         ),
         /**
          * Customer email address.
          */
-        'email' => array(
-            'required' => false,
+        'email'               => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_64'),
-            'filter' => 'mail'
+            'filter'     => 'mail'
         ),
         /**
          * Customer surname.
          */
-        'nazwisko' => array(
-            'required' => false,
+        'nazwisko'            => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_64'),
-            'filter' => 'name'
+            'filter'     => 'name'
         ),
         /**
          * Customer name.
          */
-        'imie' => array(
-            'required' => false,
+        'imie'                => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_64'),
-            'filter' => 'name'
+            'filter'     => 'name'
         ),
         /**
          * Customer address.
          */
-        'adres' => array(
-            'required' => false,
+        'adres'               => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_64'),
-            'filter' => 'text'
+            'filter'     => 'text'
         ),
         /**
          * Customer city.
          */
-        'miasto' => array(
-            'required' => false,
+        'miasto'              => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_32'),
-            'filter' => 'name'
+            'filter'     => 'name'
         ),
         /**
          * Customer postal code.
          */
-        'kod' => array(
-            'required' => false,
+        'kod'                 => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_10'),
-            'filter' => 'text'
+            'filter'     => 'text'
         ),
         /**
          * Country code.
          * Alphanumeric, 2 or 3 signs compatible with ISO 3166-1
          */
-        'kraj' => array(
-            'required' => false,
+        'kraj'                => array(
+            'required'   => false,
             'validation' => array('country_code'),
         ),
         /**
          * Customer phone.
          */
-        'telefon' => array(
-            'required' => false,
+        'telefon'             => array(
+            'required'   => false,
             'validation' => array('string', 'maxlenght_16'),
-            'filter' => 'numbers'
+            'filter'     => 'numbers'
         ),
         /**
          * The parameter indicating acceptance of Terms Transferuj if it is available on the payee.
          */
         'akceptuje_regulamin' => array(
-            'required' => false,
+            'required'   => false,
             'validation' => array('options'),
-            'options' => array(0, 1),
+            'options'    => array(0, 1),
         ),
     );
 
@@ -490,51 +490,51 @@ class Validate
         /**
          * The transaction ID assigned by the system Transferuj
          */
-        'tr_id' => array(
-            'required' => true,
-            'type' => 'string',
+        'tr_id'     => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string'),
         ),
         /**
          * Date of transaction.
          */
-        'tr_date' => array(
-            'required' => true,
-            'type' => 'string',
+        'tr_date'   => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string'),
 
         ),
         /**
          * The secondary parameter to the transaction identification.
          */
-        'tr_crc' => array(
-            'required' => true,
-            'type' => 'string',
+        'tr_crc'    => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string'),
         ),
         /**
          * Transaction amount.
          */
         'tr_amount' => array(
-            'required' => true,
-            'type' => 'float',
+            'required'   => true,
+            'type'       => 'float',
             'validation' => array('float'),
         ),
         /**
          * The amount paid for the transaction.
          * Note: Depending on the settings, the amount paid can be different than transactions eg. When the customer does overpayment.
          */
-        'tr_paid' => array(
-            'required' => true,
-            'type' => 'float',
+        'tr_paid'   => array(
+            'required'   => true,
+            'type'       => 'float',
             'validation' => array('float'),
         ),
         /**
          * Description of the transaction.
          */
-        'tr_desc' => array(
-            'required' => true,
-            'type' => 'string',
+        'tr_desc'   => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string'),
         ),
         /**
@@ -543,10 +543,10 @@ class Validate
          * Eg. If the Seller accepts the overpayment or underpayment threshold is set.
          */
         'tr_status' => array(
-            'required' => true,
-            'type' => 'string',
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('options'),
-            'options' => array(0, 1, true, false, 'TRUE', 'FALSE'),
+            'options'    => array(0, 1, true, false, 'TRUE', 'FALSE'),
         ),
         /**
          * Transaction error status.
@@ -555,18 +555,18 @@ class Validate
          * - overpay
          * - surcharge
          */
-        'tr_error' => array(
-            'required' => true,
-            'type' => 'string',
+        'tr_error'  => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('options'),
-            'options' => array('none', 'overpay', 'surcharge'),
+            'options'    => array('none', 'overpay', 'surcharge'),
         ),
         /**
          * Customer email address.
          */
-        'tr_email' => array(
-            'required' => true,
-            'type' => 'string',
+        'tr_email'  => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('email_list'),
         ),
         /**
@@ -574,9 +574,9 @@ class Validate
          * It is built according to the following scheme using the MD5 hash function:
          * MD5(id + tr_id + tr_amount + tr_crc + security code)
          */
-        'md5sum' => array(
-            'required' => true,
-            'type' => 'string',
+        'md5sum'    => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlength_32', 'minlength_32'),
         ),
         /**
@@ -585,18 +585,18 @@ class Validate
          * 0 – in normal mode
          */
         'test_mode' => array(
-            'required' => false,
-            'type' => 'int',
+            'required'   => false,
+            'type'       => 'int',
             'validation' => array('options'),
-            'options' => array(0, 1),
+            'options'    => array(0, 1),
         ),
         /**
          * The parameter is sent only when you use a payment channel or MasterPass or V.me.
          * Could have the following values: „masterpass” or „vme”
          */
-        'wallet' => array(
+        'wallet'    => array(
             'required' => false,
-            'type' => 'string',
+            'type'     => 'string',
         ),
     );
 
@@ -608,45 +608,45 @@ class Validate
         /**
          * Transaction amount
          */
-        'amount' => array(
-            'required' => true,
+        'amount'   => array(
+            'required'   => true,
             'validation' => array('float'),
         ),
         /**
          * Client name
          */
-        'name' => array(
-            'required' => true,
+        'name'     => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_64'),
         ),
         /**
          * Client email
          */
-        'email' => array(
-            'required' => true,
+        'email'    => array(
+            'required'   => true,
             'validation' => array('string', 'email_list'),
         ),
         /**
          * Sale description
          */
-        'desc' => array(
-            'required' => true,
+        'desc'     => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_128'),
         ),
         /**
          * Value from partner system
          */
         'order_id' => array(
-            'required' => true,
+            'required'   => true,
             'validation' => array('string', 'maxlenght_40'),
         ),
         /**
          * Value from partner system
          */
         'currency' => array(
-            'required' => true,
+            'required'   => true,
             'validation' => array('options'),
-            'options' => array('985', '826', '840', '978', '203'),
+            'options'    => array('985', '826', '840', '978', '203'),
         ),
     );
 
@@ -658,67 +658,67 @@ class Validate
         /**
          * Method type
          */
-        'type' => array(
-            'required' => true,
-            'type' => 'string',
+        'type'      => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('options'),
-            'options' => array('sale', 'refund', 'deregister'),
+            'options'    => array('sale', 'refund', 'deregister'),
         ),
         /**
          * Merchant optional value
          */
-        'order_id' => array(
-            'required' => true,
-            'type' => 'string',
+        'order_id'  => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlenght_40')
         ),
         /**
          * Payment status
          */
-        'status' => array(
-            'required' => true,
-            'type' => 'string',
+        'status'    => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('options'),
-            'options' => array('correct', 'declined'),
+            'options'    => array('correct', 'declined'),
         ),
         /**
          * Message checksum
          */
-        'sign' => array(
-            'required' => true,
-            'type' => 'string',
+        'sign'      => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlenght_128', 'minlength_40')
         ),
         /**
          * Created sale/refund id
          */
         'sale_auth' => array(
-            'required' => true,
-            'type' => 'string',
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlenght_40')
         ),
         /**
          * Date of accounting/deregistering
          */
-        'date' => array(
-            'required' => true,
-            'type' => 'string',
+        'date'      => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string')
         ),
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
         'test_mode' => array(
-            'required' => false,
-            'type' => 'string',
+            'required'   => false,
+            'type'       => 'string',
             'validation' => array('string', 'maxlength_1', 'minlength_1')
         ),
         /**
          * shortcut for client card number, eg ****5678
          */
-        'card' => array(
-            'required' => true,
-            'type' => 'string',
+        'card'      => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlength_8', 'minlength_8')
         ),
     );
@@ -731,36 +731,36 @@ class Validate
         /**
          * Transaction amount
          */
-        'amount' => array(
-            'required' => true,
+        'amount'   => array(
+            'required'   => true,
             'validation' => array('float'),
         ),
         /**
          * Client name
          */
-        'name' => array(
-            'required' => true,
+        'name'     => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_64'),
         ),
         /**
          * Client email
          */
-        'email' => array(
-            'required' => true,
+        'email'    => array(
+            'required'   => true,
             'validation' => array('string', 'email_list'),
         ),
         /**
          * Sale description
          */
-        'desc' => array(
-            'required' => true,
+        'desc'     => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_128'),
         ),
         /**
          * Value from partner system
          */
         'order_id' => array(
-            'required' => false,
+            'required'   => false,
             'validation' => array('string', 'maxlenght_40'),
         ),
     );
@@ -773,34 +773,34 @@ class Validate
         /**
          * client authorization ID, sent if onetimer option is not set when creating client and client has not been deregistered (himself or by api)
          */
-        'cli_auth' => array(
-            'required' => true,
-            'type' => 'string',
+        'cli_auth'  => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlength_40', 'minlength_40'),
         ),
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
         'test_mode' => array(
-            'required' => false,
-            'type' => 'int',
+            'required'   => false,
+            'type'       => 'int',
             'validation' => array('int'),
         ),
         /**
          * Date of accounting/deregistering
          */
-        'date' => array(
-            'required' => true,
-            'type' => 'string',
+        'date'      => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string'),
-            'filter' => 'date'
+            'filter'     => 'date'
         ),
         /**
          * Message checksum
          */
-        'sign' => array(
-            'required' => true,
-            'type' => 'string',
+        'sign'      => array(
+            'required'   => true,
+            'type'       => 'string',
             'validation' => array('string', 'maxlength_128', 'minlength_40'),
         ),
     );
@@ -813,71 +813,71 @@ class Validate
         /**
          * User api login
          */
-        'api_login' => array(
-            'required' => true,
+        'api_login'    => array(
+            'required'   => true,
             'validation' => array('string'),
         ),
         /**
          * User api password
          */
         'api_password' => array(
-            'required' => true,
+            'required'   => true,
             'validation' => array('string'),
         ),
         /**
          * Client name
          */
-        'cli_name' => array(
-            'required' => true,
+        'cli_name'     => array(
+            'required'   => true,
             'validation' => array('string', 'maxlength_96'),
-            'filter' => 'name'
+            'filter'     => 'name'
         ),
         /**
          * Client email
          */
-        'cli_email' => array(
-            'required' => true,
+        'cli_email'    => array(
+            'required'   => true,
             'validation' => array('string', 'maxlength_128'),
-            'filter' => 'mail'
+            'filter'     => 'mail'
         ),
         /**
          * Client phone
          */
-        'cli_phone' => array(
-            'required' => true,
+        'cli_phone'    => array(
+            'required'   => true,
             'validation' => array('string', 'maxlength_32'),
-            'filter' => 'numbers'
+            'filter'     => 'numbers'
         ),
         /**
          * Title the client will be paying with; according to agreed format;
          */
-        'title' => array(
-            'required' => true,
+        'title'        => array(
+            'required'   => true,
             'validation' => array('string'),
         ),
         /**
          * Optional field sent in notifications
          */
-        'crc' => array(
-            'required' => true,
+        'crc'          => array(
+            'required'   => true,
             'validation' => array('string', 'maxlength_64'),
-            'filter' => 'text'
+            'filter'     => 'text'
         ),
         /**
          * Client account number
          */
-        'cli_account' => array(
-            'required' => true,
+        'cli_account'  => array(
+            'required'   => true,
             'validation' => array('string', 'minlenght_26', 'maxlength_26'),
-            'filter' => 'numbers'
+            'filter'     => 'numbers'
         ),
         /**
          * Checksum
          */
-        'hash' => array(
-            'required' => true,
+        'hash'         => array(
+            'required'   => true,
             'validation' => array('string', 'minlength_40', 'maxlength_40'),
-            'filter' => 'sign'
+            'filter'     => 'sign'
         ),
     );
 
@@ -890,48 +890,48 @@ class Validate
          * Unique SZKWał payment ID
          */
         'pay_id' => array(
-            'required' => false,
-            'type' => 'int',
+            'required'   => false,
+            'type'       => 'int',
             'validation' => array('uint'),
         ),
         /**
          * Unique SZKWał notification ID
          */
         'not_id' => array(
-            'required' => false,
-            'type' => 'int',
+            'required'   => false,
+            'type'       => 'int',
             'validation' => array('uint'),
         ),
         /**
          * The title of payment in agreed format
          */
-        'title' => array(
-            'required' => false,
-            'type' => 'string',
+        'title'  => array(
+            'required'   => false,
+            'type'       => 'string',
             'validation' => array('string'),
         ),
         /**
          * Additional client field
          */
-        'crc' => array(
-            'required' => false,
-            'type' => 'string',
+        'crc'    => array(
+            'required'   => false,
+            'type'       => 'string',
             'validation' => array('string'),
         ),
         /**
          * Transaction amount
          */
         'amount' => array(
-            'required' => false,
-            'type' => 'float',
+            'required'   => false,
+            'type'       => 'float',
             'validation' => array('float'),
         ),
         /**
          * Message checksum
          */
-        'hash' => array(
-            'required' => false,
-            'type' => 'string',
+        'hash'   => array(
+            'required'   => false,
+            'type'       => 'string',
             'validation' => array('string', 'maxlength_40', 'minlength_40'),
         ),
     );
@@ -944,62 +944,62 @@ class Validate
         /**
          * User api login
          */
-        'api_login' => array(
-            'required' => true,
+        'api_login'    => array(
+            'required'   => true,
             'validation' => array('string'),
         ),
         /**
          * User api password
          */
         'api_password' => array(
-            'required' => true,
+            'required'   => true,
             'validation' => array('string'),
         ),
         /**
          * Client name
          */
-        'cli_name' => array(
-            'required' => true,
+        'cli_name'     => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_96'),
-            'filter' => 'text'
+            'filter'     => 'text'
         ),
         /**
          * Client email
          */
-        'cli_email' => array(
-            'required' => true,
+        'cli_email'    => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_128'),
-            'filter' => 'mail'
+            'filter'     => 'mail'
         ),
         /**
          * Client phone
          */
-        'cli_phone' => array(
-            'required' => true,
+        'cli_phone'    => array(
+            'required'   => true,
             'validation' => array('maxlenght_32'),
-            'filter' => 'numbers'
+            'filter'     => 'numbers'
         ),
         /**
          * Order id (payment title) the customer will be paying with; according to agreed format;
          */
-        'order' => array(
-            'required' => true,
+        'order'        => array(
+            'required'   => true,
             'validation' => array('string'),
         ),
         /**
          * Transaction amount
          */
-        'amount' => array(
-            'required' => true,
+        'amount'       => array(
+            'required'   => true,
             'validation' => array('float'),
         ),
         /**
          * Message checksum
          */
-        'hash' => array(
-            'required' => true,
+        'hash'         => array(
+            'required'   => true,
             'validation' => array('string', 'maxlenght_40'),
-            'filter' => 'sign'
+            'filter'     => 'sign'
         ),
     );
 
@@ -1007,7 +1007,7 @@ class Validate
      * Check if all required fields isset in config
      *
      * @param string $paymentType
-     * @param array  $config
+     * @param array $config
      *
      * @return bool
      * @throws TException
@@ -1016,7 +1016,7 @@ class Validate
     {
         $missing = array();
 
-        switch($paymentType) {
+        switch ($paymentType) {
             case self::PAYMENT_TYPE_BASIC:
             case self::PAYMENT_TYPE_EHAT:
                 $requestFields = self::$panelPaymentRequestFields;
@@ -1054,10 +1054,10 @@ class Validate
     /**
      * Check one field form
      *
-     * @param string $paymentType  payment type
-     * @param string $name         field name
-     * @param mixed  $value        field value
-     * @param bool   $notResp      is it not response value
+     * @param string $paymentType payment type
+     * @param string $name field name
+     * @param mixed $value field value
+     * @param bool $notResp is it not response value
      *
      * @return bool
      *
@@ -1103,18 +1103,32 @@ class Validate
             return true;
         }
 
-        if (isset($fieldConfig['validation']) === true){
+        if (isset($fieldConfig['validation']) === true) {
 
             foreach ($fieldConfig['validation'] as $validator) {
 
-                switch ($validator){
-                    case 'uint':            self::validateUint($value, $name); break;
-                    case 'float':           self::validateFloat($value, $name); break;
-                    case 'string':          self::validateString($value, $name); break;
-                    case 'opis_dodatkowy':  self::validateDescription($value, $name); break;
-                    case 'email_list':      self::validateEmailList($value, $name); break;
-                    case 'options':         self::validateOptions($value, $fieldConfig['options'], $name); break;
-                    case 'country_code':    self::validateCountryCode($value, $name); break;
+                switch ($validator) {
+                    case 'uint':
+                        self::validateUint($value, $name);
+                        break;
+                    case 'float':
+                        self::validateFloat($value, $name);
+                        break;
+                    case 'string':
+                        self::validateString($value, $name);
+                        break;
+                    case 'opis_dodatkowy':
+                        self::validateDescription($value, $name);
+                        break;
+                    case 'email_list':
+                        self::validateEmailList($value, $name);
+                        break;
+                    case 'options':
+                        self::validateOptions($value, $fieldConfig['options'], $name);
+                        break;
+                    case 'country_code':
+                        self::validateCountryCode($value, $name);
+                        break;
                 }
                 if (strpos($validator, 'maxlenght') === 0) {
                     $max = explode('_', $validator);
@@ -1134,11 +1148,11 @@ class Validate
 
             $negationFileter = in_array($filterName, array('mail', 'url'));
 
-            if(!$negationFileter && (bool)preg_match(self::$filters[$filterName], $value)) {
+            if (!$negationFileter && (bool)preg_match(self::$filters[$filterName], $value)) {
                 throw new TException(
                     sprintf('Value of field "%s" contains illegal characters', $name)
                 );
-            } elseif($negationFileter && !(bool)preg_match(self::$filters[$filterName], $value)) {
+            } elseif ($negationFileter && !(bool)preg_match(self::$filters[$filterName], $value)) {
                 throw new TException(
                     sprintf('Value of field "%s" contains illegal characters', $name)
                 );
@@ -1162,7 +1176,7 @@ class Validate
         $ready = array();
         $missed = array();
 
-        switch($paymentType) {
+        switch ($paymentType) {
             case self::PAYMENT_TYPE_BASIC:
             case self::PAYMENT_TYPE_EHAT:
                 $responseFields = self::$panelPaymentResponseFields;
@@ -1189,13 +1203,13 @@ class Validate
                 $val = Util::post($fieldName, 'string');
                 switch ($field['type']) {
                     case 'string':
-                        $val = (string) $val;
+                        $val = (string)$val;
                         break;
                     case 'int':
-                        $val = (int) $val;
+                        $val = (int)$val;
                         break;
                     case 'float':
-                        $val = (float) $val;
+                        $val = (float)$val;
                         break;
                     default:
                         throw new TException(sprintf('unknown field type in getResponse - field name= %s', $fieldName));
@@ -1208,7 +1222,7 @@ class Validate
             throw new TException(sprintf('Missing fields in transferuj response: %s', join(',', $missed)));
         }
 
-        foreach($ready as $fieldName => $fieldVal) {
+        foreach ($ready as $fieldName => $fieldVal) {
             self::validateOne($paymentType, $fieldName, $fieldVal, false);
         }
 
@@ -1442,7 +1456,7 @@ class Validate
      */
     public static function validateCardCode($cardCode)
     {
-        if(!is_string($cardCode) || strlen($cardCode) === 0 || strlen($cardCode) > 40) {
+        if (!is_string($cardCode) || strlen($cardCode) === 0 || strlen($cardCode) > 40) {
             throw new TException('Invalid card code');
         }
     }
@@ -1454,7 +1468,7 @@ class Validate
      */
     public static function validateCardHashAlg($hashAlg)
     {
-        if(!in_array($hashAlg, array('sha1', 'sha256', 'sha512', 'ripemd160', 'ripemd320', 'md5'))) {
+        if (!in_array($hashAlg, array('sha1', 'sha256', 'sha512', 'ripemd160', 'ripemd320', 'md5'))) {
             throw new TException('Invalid hash algorithm');
         }
     }
@@ -1468,7 +1482,7 @@ class Validate
      */
     public static function validateCardRSAKey($keyRSA)
     {
-        if(!is_string($keyRSA) || strlen($keyRSA) === 0) {
+        if (!is_string($keyRSA) || strlen($keyRSA) === 0) {
             throw new TException('Invalid card RSA key');
         }
     }
@@ -1491,7 +1505,7 @@ class Validate
      * Validate payment config
      *
      * @param  string $paymentType
-     * @param  array  $config
+     * @param  array $config
      * @return array
      *
      * @throws TException

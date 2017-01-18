@@ -30,9 +30,9 @@
                 ?>
             </div>
         </div>
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
     <div>
         <?php Transferuj\Lang::l('szkwal_info') ?>
     </div>
