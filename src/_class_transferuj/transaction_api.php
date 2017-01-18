@@ -59,11 +59,11 @@ class TransactionAPI
 
         'ERR96' => 'Invalid transaction id or can\'t make refund',
 
-        'ERR4'  => 'Nie został przesłany plik o rozszerzeniu csv',
-        'ERR6'  => 'Niepoprawna suma kontrolna (sign)',
-        'ERR7'  => 'Niepoprawny format linii',
-        'ERR8'  => 'Niepoprawny format numeru rachunku',
-        'ERR9'  => 'Nazwa odbiorcy nie może być pusta',
+        'ERR4' => 'Nie został przesłany plik o rozszerzeniu csv',
+        'ERR6' => 'Niepoprawna suma kontrolna (sign)',
+        'ERR7' => 'Niepoprawny format linii',
+        'ERR8' => 'Niepoprawny format numeru rachunku',
+        'ERR9' => 'Nazwa odbiorcy nie może być pusta',
         'ERR10' => 'Nazwa odbiorcy 1 jest za długa - maks. 35 znaków',
         'ERR11' => 'Nazwa odbiorcy 2 jest za długa - maks. 35 znaków',
         'ERR12' => 'Nazwa odbiorcy 3 jest za długa - maks. 35 znaków',
@@ -81,11 +81,10 @@ class TransactionAPI
         'ERR24' => 'Paczka została już autoryzowana',
 
     );
-
     /**
      * PaymentTransactionAPI class constructor
      *
-     * @param string $apiKey api key
+     * @param string $apiKey  api key
      * @param string $apiPass api password
      * @param int $merchantId merchant id
      * @param string $merchantSecret merchant secret
@@ -131,7 +130,7 @@ class TransactionAPI
     {
         $ready = Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC, $config);
 
-        $ready['md5sum'] = md5($this->merchantId . $ready['kwota'] . $ready['crc'] . $this->merchantSecret);
+        $ready['md5sum'] = md5($this->merchantId.$ready['kwota'].$ready['crc'].$this->merchantSecret);
         $ready['id'] = $this->merchantId;
 
         return $ready;
@@ -140,8 +139,8 @@ class TransactionAPI
     /**
      * Execute request to Transferuj transaction API
      *
-     * @param string $url url
-     * @param array $params post params
+     * @param string $url    url
+     * @param array  $params post params
      *
      * @return bool|mixed
      */
@@ -161,10 +160,10 @@ class TransactionAPI
      */
     private function checkError($response)
     {
-        if ($response['result'] !== 1) {
-            if (isset($response['err']) && isset($this->errorCodes[$response['err']])) {
+        if ($response['result'] !== 1){
+            if (isset($response['err']) && isset($this->errorCodes[$response['err']])){
                 throw new TException($this->errorCodes[$response['err']]);
-            } else if (isset($response['error_code']) && isset($this->errorCodes[$response['error_code']])) {
+            } else if (isset($response['error_code']) && isset($this->errorCodes[$response['error_code']])){
                 throw new TException($this->errorCodes[$response['error_code']]);
             } else {
                 throw new TException('Unexpected error');
@@ -184,23 +183,23 @@ class TransactionAPI
      */
     public function create($config)
     {
-        $url = $this->apiURL . $this->apiKey . '/transaction/create';
+        $url = $this->apiURL.$this->apiKey.'/transaction/create';
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC_API, $config);
         $config = $this->prepareConfig($config);
         $res = $this->requests($url, $config);
 
         $response = array(
-            'result'         => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'title'          => Util::findSubstring('/<title>(.*)<\/title>/', $res),
-            'amount'         => (float)Util::findSubstring('/<amount>([0-9\.]*)<\/amount>/', $res),
-            'account_number' => Util::findSubstring('/<account_number>([0-9]*)<\/account_number>/', $res),
-            'online'         => (int)Util::findSubstring('/<online>([0-1]*)<\/online>/', $res),
-            'url'            => Util::findSubstring('/<url>(.*)<\/url>/', $res),
-            'desc'           => Util::findSubstring('/<desc>(.*)<\/desc>/', $res),
+            'result'          => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'title'           => Util::findSubstring('/<title>(.*)<\/title>/', $res),
+            'amount'          => (float)Util::findSubstring('/<amount>([0-9\.]*)<\/amount>/', $res),
+            'account_number'  => Util::findSubstring('/<account_number>([0-9]*)<\/account_number>/', $res),
+            'online'          => (int)Util::findSubstring('/<online>([0-1]*)<\/online>/', $res),
+            'url'             => Util::findSubstring('/<url>(.*)<\/url>/', $res),
+            'desc'            => Util::findSubstring('/<desc>(.*)<\/desc>/', $res),
         );
 
-        if ($response['result'] !== 1) {
+        if ($response['result'] !== 1){
             throw new TException(sprintf('Error in %s', $response['desc']));
         }
         return $response;
@@ -217,7 +216,7 @@ class TransactionAPI
      */
     public function get($transaction_id)
     {
-        $url = $this->apiURL . $this->apiKey . '/transaction/get';
+        $url = $this->apiURL.$this->apiKey.'/transaction/get';
 
         $res = $this->requests($url, array('title' => $transaction_id));
 
@@ -257,20 +256,20 @@ class TransactionAPI
      */
     public function report($from_date, $to_date = false)
     {
-        $url = $this->apiURL . $this->apiKey . '/transaction/report';
+        $url = $this->apiURL.$this->apiKey.'/transaction/report';
         $postData = array(
             'from_date' => $from_date
         );
 
-        if ($to_date !== false) {
+        if ($to_date !== false){
             $postData['to_date'] = $to_date;
         }
 
         $res = $this->requests($url, $postData);
 
         $response = array(
-            'result' => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'report' => Util::findSubstring('/<report>(.*)<\/report>/', $res),
+            'result'          => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'report'          => Util::findSubstring('/<report>(.*)<\/report>/', $res),
         );
         $this->checkError($response);
         $response['report'] = base64_decode($response['report']);
@@ -289,13 +288,13 @@ class TransactionAPI
      */
     public function refund($transaction_id)
     {
-        $url = $this->apiURL . $this->apiKey . '/chargeback/transaction';
+        $url = $this->apiURL.$this->apiKey.'/chargeback/transaction';
 
         $res = $this->requests($url, array('title' => $transaction_id));
 
         $response = array(
-            'result' => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'err'    => Util::findSubstring('/<err>(.*)<\/err>/', $res),
+            'result'    => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'err'       => Util::findSubstring('/<err>(.*)<\/err>/', $res),
         );
         $this->checkError($response);
 
@@ -314,17 +313,17 @@ class TransactionAPI
      */
     public function refundAny($transaction_id, $amount)
     {
-        $url = $this->apiURL . $this->apiKey . '/chargeback/any';
+        $url = $this->apiURL.$this->apiKey.'/chargeback/any';
 
         $postData = array(
-            'title'             => $transaction_id,
+            'title' => $transaction_id,
             'chargeback_amount' => $amount,
         );
         $res = $this->requests($url, $postData);
 
         $response = array(
-            'result' => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'err'    => Util::findSubstring('/<err>(.*)<\/err>/', $res),
+            'result'    => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'err'       => Util::findSubstring('/<err>(.*)<\/err>/', $res),
         );
         $this->checkError($response);
 
@@ -341,23 +340,23 @@ class TransactionAPI
      */
     public function masspaymentCreate($csv)
     {
-        $url = $this->apiURL . $this->apiKey . '/masspayment/any';
+        $url = $this->apiURL.$this->apiKey.'/masspayment/any';
 
         $csv = base64_encode($csv);
 
         $postData = array(
-            'csv'  => $csv,
-            'sign' => sha1($this->merchantId . $csv . $this->merchantSecret),
+            'csv' => $csv,
+            'sign' => sha1($this->merchantId.$csv.$this->merchantSecret),
         );
         $res = $this->requests($url, $postData);
 
         $response = array(
-            'result'   => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'count'    => (int)Util::findSubstring('/<count>([0-9]*)<\/count>/', $res),
-            'sum'      => (float)Util::findSubstring('/<sum>([0-9\.]*)<\/sum>/', $res),
-            'pack_id'  => Util::findSubstring('/<pack_id>(.*)<\/pack_id>/', $res),
-            'referers' => Util::findSubstring('/<referers>(.*)<\/referers>/', $res),
-            'err'      => Util::findSubstring('/<err>(.*)<\/err>/', $res),
+            'result'    => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'count'     => (int)Util::findSubstring('/<count>([0-9]*)<\/count>/', $res),
+            'sum'       => (float)Util::findSubstring('/<sum>([0-9\.]*)<\/sum>/', $res),
+            'pack_id'   => Util::findSubstring('/<pack_id>(.*)<\/pack_id>/', $res),
+            'referers'  => Util::findSubstring('/<referers>(.*)<\/referers>/', $res),
+            'err'       => Util::findSubstring('/<err>(.*)<\/err>/', $res),
         );
         $this->checkError($response);
 
@@ -374,7 +373,7 @@ class TransactionAPI
      */
     public function masspaymentAuthorize($pack_id)
     {
-        $url = $this->apiURL . $this->apiKey . '/masspayment/authorize';
+        $url = $this->apiURL.$this->apiKey.'/masspayment/authorize';
 
         $postData = array(
             'pack_id' => $pack_id,
@@ -382,8 +381,8 @@ class TransactionAPI
         $res = $this->requests($url, $postData);
 
         $response = array(
-            'result' => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'err'    => Util::findSubstring('/<error>(.*)<\/error>/', $res),
+            'result'    => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'err'       => Util::findSubstring('/<error>(.*)<\/error>/', $res),
         );
         $this->checkError($response);
 
@@ -400,28 +399,28 @@ class TransactionAPI
      * @return bool
      * @throws TException
      */
-    public function masspaymentPacks($pack_id = false, $from_date = false, $to_date = false)
+    public function masspaymentPacks($pack_id = false, $from_date = false, $to_date = false )
     {
-        $url = $this->apiURL . $this->apiKey . '/masspayment/packs';
+        $url = $this->apiURL.$this->apiKey.'/masspayment/packs';
 
         $postData = array();
 
-        if ($pack_id !== false) {
+        if ($pack_id !== false){
             $postData['pack_id'] = $pack_id;
         }
-        if ($from_date !== false) {
+        if ($from_date !== false){
             $postData['from_date'] = $from_date;
         }
-        if ($to_date !== false) {
+        if ($to_date !== false){
             $postData['to_date'] = $to_date;
         }
 
         $res = $this->requests($url, $postData);
 
         $response = array(
-            'result' => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
-            'packs'  => Util::findSubstring('/<packs>(.*)<\/packs>/', $res),
-            'err'    => Util::findSubstring('/<error>(.*)<\/error>/', $res),
+            'result'    => (int)Util::findSubstring('/<result>([0-1]*)<\/result>/', $res),
+            'packs'     => Util::findSubstring('/<packs>(.*)<\/packs>/', $res),
+            'err'       => Util::findSubstring('/<error>(.*)<\/error>/', $res),
         );
         $this->checkError($response);
 
@@ -439,11 +438,11 @@ class TransactionAPI
      */
     public function masspaymentTransfers($pack_id, $tr_id)
     {
-        $url = $this->apiURL . $this->apiKey . '/masspayment/transfers';
+        $url = $this->apiURL.$this->apiKey.'/masspayment/transfers';
 
         $postData = array(
             'pack_id' => $pack_id,
-            'tr_id'   => $tr_id,
+            'tr_id' => $tr_id,
         );
         $res = $this->requests($url, $postData);
 

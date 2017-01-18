@@ -4,7 +4,7 @@ $apiKey = '[TRANSACTION_API_KEY]';
 $apiPass = '[TRANSACTION_API_PASS]';
 $merchantId = '[MERCHANT_ID]';
 $merchantSecret = '[MERCHANT_SECRET]';
-require_once dirname(dirname(__FILE__)) . '/src/_class_transferuj/transaction_api.php';
+require_once dirname(dirname(__FILE__)).'/src/_class_transferuj/transaction_api.php';
 
 $api = new \Transferuj\TransactionAPI($apiKey, $apiPass, $merchantId, $merchantSecret);
 
@@ -49,7 +49,7 @@ $to = '2015-01-01';
 try {
     $result = $api->masspaymentPacks($pack_id, $from, $to);
     print_r($result);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
 
@@ -65,11 +65,12 @@ $transaction_id = 'TR-C7K-9E5VFX';
 try {
     $result = $api->masspaymentTransfers($pack_id, $transaction_id);
     print_r($result);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
 
 die;
+
 
 
 /**
@@ -81,7 +82,7 @@ $pack_id = '123123123';
 try {
     $result = $api->masspaymentAuthorize($pack_id);
     print_r($result);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
 
@@ -98,7 +99,7 @@ $csv = file_get_contents('masspayment.csv');
 try {
     $result = $api->masspaymentCreate($csv);
     print_r($result);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
 
@@ -115,9 +116,10 @@ $transaction_id = 'TR-C7K-9E5VFX';
 try {
     $result = $api->refundAny($transaction_id);
     print_r($result);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
+
 
 
 die;
@@ -133,9 +135,10 @@ $transaction_id = 'TR-C7K-9E5VFX';
 try {
     $result = $api->refund($transaction_id);
     print_r($result);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
+
 
 
 die;
@@ -149,12 +152,15 @@ $from = '2014-01-01';
 try {
     $report = $api->report($from);
     print_r($report);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
 
 
 die;
+
+
+
 
 
 /**
@@ -168,7 +174,7 @@ $transaction_id = 'TR-C7K-9E5VFX';
 try {
     $transaction = $api->get($transaction_id);
     print_r($transaction);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
 }
 
@@ -180,22 +186,22 @@ die;
 
 
 $config = array(
-    'kwota'     => 999.99,
-    'opis'      => 'Transaction description',
-    'crc'       => '100020003000',
-    'wyn_url'   => 'http://example.pl/examples/transaction_api.php?transaction_confirmation',
-    'wyn_email' => 'shop@example.com',
-    'pow_url'   => 'http://example.pl/examples/transaction_api.php',
-    'email'     => 'customer@example.com',
-    'imie'      => 'Jan',
-    'nazwisko'  => 'Kowalski',
-    'kanal'     => 23,
+    'kwota'             => 999.99,
+    'opis'              => 'Transaction description',
+    'crc'               => '100020003000',
+    'wyn_url'           => 'http://example.pl/examples/transaction_api.php?transaction_confirmation',
+    'wyn_email'         => 'shop@example.com',
+    'pow_url'           => 'http://example.pl/examples/transaction_api.php',
+    'email'             => 'customer@example.com',
+    'imie'              => 'Jan',
+    'nazwisko'          => 'Kowalski',
+    'kanal'             => 23,
 );
 try {
     $res = $api->create($config);
-} catch (\Transferuj\TException $e) {
+} catch(\Transferuj\TException $e){
     var_dump($e);
     die;
 }
 
-echo '<a href="' . $res['url'] . '">go to payment</a>';
+echo '<a href="'.$res['url'].'">go to payment</a>';

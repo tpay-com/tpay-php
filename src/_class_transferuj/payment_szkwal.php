@@ -35,7 +35,7 @@ class PaymentSzkwal
      * API partner unique address
      * @var string
      */
-    protected $partnerUniqueAddress = '[SZKWAL_PARTNER_ADDRESS]';
+    protected $partnerUniqueAddress  = '[SZKWAL_PARTNER_ADDRESS]';
 
     /**
      * API title format
@@ -75,19 +75,19 @@ class PaymentSzkwal
     /**
      * PaymentSzkwal class constructor
      *
-     * @param string|bool $apiLogin API login
-     * @param string|bool $apiPassword API password
-     * @param string|bool $apiHash API hash
+     * @param string|bool $apiLogin             API login
+     * @param string|bool $apiPassword          API password
+     * @param string|bool $apiHash              API hash
      * @param string|bool $partnerUniqueAddress API partner unique address
-     * @param string|bool $titleFormat API title format
+     * @param string|bool $titleFormat          API title format
      */
     public function __construct($apiLogin = false, $apiPassword = false, $apiHash = false, $partnerUniqueAddress = false, $titleFormat = false)
     {
-        if ($apiLogin !== false) $this->apiLogin = $apiLogin;
-        if ($apiPassword !== false) $this->apiPassword = $apiPassword;
-        if ($apiHash !== false) $this->apiHash = $apiHash;
-        if ($partnerUniqueAddress !== false) $this->partnerUniqueAddress = $partnerUniqueAddress;
-        if ($titleFormat !== false) $this->titleFormat = $titleFormat;
+        if($apiLogin !== false) $this->apiLogin = $apiLogin;
+        if($apiPassword !== false) $this->apiPassword = $apiPassword;
+        if($apiHash !== false) $this->apiHash = $apiHash;
+        if($partnerUniqueAddress !== false) $this->partnerUniqueAddress = $partnerUniqueAddress;
+        if($titleFormat !== false) $this->titleFormat = $titleFormat;
 
         require_once(dirname(__FILE__) . '/util.php');
 
@@ -104,11 +104,11 @@ class PaymentSzkwal
      * dedicated constant payment title, together with his bank account number. If Client will make a payment with
      * incorrect title, SZKWAL can automatically connect the payment from that bank account to this Client.
      *
-     * @param string $clientName customer name; up to 96 alphanumeric characters;
-     * @param string $clientEmail customer e-mail; up to 128 alphanumeric characters, must be a valid e-mail address;
-     * @param int $clientPhone customer phone; up to 32 numeric characters;
-     * @param string $crc optional field sent in notifications; up to 64 characters;
-     * @param int $clientAccount client account number; 26 digits
+     * @param string $clientName    customer name; up to 96 alphanumeric characters;
+     * @param string $clientEmail   customer e-mail; up to 128 alphanumeric characters, must be a valid e-mail address;
+     * @param int    $clientPhone   customer phone; up to 32 numeric characters;
+     * @param string $crc           optional field sent in notifications; up to 64 characters;
+     * @param int    $clientAccount client account number; 26 digits
      *
      * @throws TException
      *
@@ -120,26 +120,26 @@ class PaymentSzkwal
         $title = $this->generateTitle();
 
         Util::log('SZKWal register client sha1 params', print_r(array(
-            'cli_name'  => $clientName,
-            'cli_mail'  => $clientEmail,
+            'cli_name' => $clientName,
+            'cli_mail' => $clientEmail,
             'cli_phone' => $clientPhone,
-            'title'     => $title,
-            'crc'       => $crc,
-            'account'   => $clientAccount,
-            'apiHash'   => $this->apiHash,
+            'title' => $title,
+            'crc' => $crc,
+            'account' => $clientAccount,
+            'apiHash' => $this->apiHash,
         ), true));
-        $sha1 = sha1($clientName . $clientEmail . $clientPhone . $title . $crc . $clientAccount . $this->apiHash);
+        $sha1 = sha1($clientName.$clientEmail.$clientPhone.$title.$crc.$clientAccount.$this->apiHash);
 
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
-            'cli_name'     => $clientName,
-            'cli_email'    => $clientEmail,
-            'cli_phone'    => $clientPhone,
-            'title'        => $title,
-            'crc'          => $crc,
-            'cli_account'  => $clientAccount,
-            'hash'         => $sha1,
+            'cli_name' => $clientName,
+            'cli_email' => $clientEmail,
+            'cli_phone' => $clientPhone,
+            'title' => $title,
+            'crc' => $crc,
+            'cli_account' => $clientAccount,
+            'hash' => $sha1,
         );
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_SZKWAL, $postData);
@@ -150,14 +150,14 @@ class PaymentSzkwal
         preg_match_all('/<cli_id>([0-9]*)<\/cli_id>/', $res, $matchesCliId);
 
         if (isset($matchesCliId[1]) && isset($matchesCliId[1][0])) {
-            $clientID = (int)$matchesCliId[1][0];
+            $clientID = (int) $matchesCliId[1][0];
         } else {
             throw new TException('Invalid server response');
         }
 
         return array(
             'client_id' => $clientID,
-            'title'     => $title,
+            'title' => $title,
         );
     }
 
@@ -169,16 +169,16 @@ class PaymentSzkwal
      */
     public static function generateTitle()
     {
-        return 'KIP' . substr(time(), 1);
+        return 'KIP'.substr(time(), 1);
     }
 
     /**
      * Create HTML confirmation block with transaction info and merchant data
      *
-     * @param string $title transaction title
+     * @param string     $title transaction title
      * @param bool|float $amount transaction amount
-     * @param string $staticFilesURL static file URL
-     * @param string $merchantData merchant data to display
+     * @param string     $staticFilesURL static file URL
+     * @param string     $merchantData merchant data to display
      *
      * @return string
      *
@@ -187,11 +187,11 @@ class PaymentSzkwal
     public function getConfirmationBlock($title, $amount = false, $staticFilesURL = '', $merchantData = '')
     {
         $data = array(
-            'title'            => $title,
-            'banks'            => $this->getBanks(),
-            'amount'           => $amount,
+            'title' => $title,
+            'banks' => $this->getBanks(),
+            'amount' => $amount,
             'static_files_url' => $staticFilesURL,
-            'merchant_data'    => $merchantData
+            'merchant_data' => $merchantData
         );
 
         return Util::parseTemplate('szkwal/_tpl/confirmation', $data);
@@ -207,7 +207,7 @@ class PaymentSzkwal
     public function getBanks()
     {
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
         );
         $res = $this->request('GetBanksData', $postData);
@@ -237,12 +237,12 @@ class PaymentSzkwal
      */
     public function changeSellerData($notifyURL)
     {
-        $sha1 = sha1($notifyURL . $this->apiHash);
+        $sha1 = sha1($notifyURL.$this->apiHash);
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
-            'notify_url'   => $notifyURL,
-            'hash'         => $sha1,
+            'notify_url' => $notifyURL,
+            'hash' => $sha1,
         );
         $res = $this->request('ChangeSellerData', $postData);
         $this->checkError($res);
@@ -257,21 +257,21 @@ class PaymentSzkwal
     /**
      * Method used to block/unblock payments for specific client.
      *
-     * @param string $title client title according to agreed format
-     * @param int $status Type 1 to enable client, 0 to disable
+     * @param string $title  client title according to agreed format
+     * @param int    $status Type 1 to enable client, 0 to disable
      *
      * @return bool
      */
     public function clientStatus($title, $status)
     {
-        $sha1 = sha1($title . $status . $this->apiHash);
+        $sha1 = sha1($title.$status.$this->apiHash);
 
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
-            'title'        => $title,
-            'status'       => $status,
-            'hash'         => $sha1,
+            'title' => $title,
+            'status' => $status,
+            'hash' => $sha1,
         );
 
         return $this->request('ClientStatus', $postData);
@@ -282,17 +282,17 @@ class PaymentSzkwal
      * return a list of payments for one client (providing cli_id or title) or list of all payments in the specified
      * period.
      *
-     * @param int $clientId
-     * @param string $title
-     * @param int $startTime time in unix timestamp format
-     * @param int|bool $endTime time in unix timestamp format, if false than now
+     * @param int      $clientId
+     * @param string   $title
+     * @param int      $startTime time in unix timestamp format
+     * @param int|bool $endTime   time in unix timestamp format, if false than now
      *
      * @return array
      */
     public function paymentsReport($clientId, $title, $startTime, $endTime = false)
     {
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
         );
         $postData['from'] = date('Y-m-d', $startTime);
@@ -306,7 +306,7 @@ class PaymentSzkwal
         $postData['to'] = date('Y-m-d', $endTime);
 
         $postData['hash'] = sha1(
-            $postData['cli_id'] . $postData['title'] . $postData['from'] . $postData['to'] . $this->apiHash
+            $postData['cli_id'].$postData['title'].$postData['from'].$postData['to'].$this->apiHash
         );
 
         return $this->request('PaymentsReport', $postData);
@@ -315,29 +315,28 @@ class PaymentSzkwal
     /**
      * Simulate user payment in test mode
      * @param string $title client/transaction title
-     * @param float $amount amount
+     * @param float  $amount amount
      *
      * @return mixed
      */
     public function registerIncome($title, $amount)
     {
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
-            'title'        => $title,
-            'amount'       => $amount,
+            'title' => $title,
+            'amount' => $amount,
         );
 
-        $postData['hash'] = sha1($title . $amount . $this->apiHash);
+        $postData['hash'] = sha1($title.$amount.$this->apiHash);
 
         return $this->request('RegisterIncome', $postData);
     }
-
     /**
      * Generate monthly report
      *
-     * @param int $startTime time in unix timestamp format
-     * @param int|bool $endTime time in unix timestamp format, if false than now
+     * @param int      $startTime time in unix timestamp format
+     * @param int|bool $endTime   time in unix timestamp format, if false than now
      *
      * @return array
      */
@@ -349,8 +348,8 @@ class PaymentSzkwal
     /**
      * Generate daily report
      *
-     * @param int $startTime time in unix timestamp format
-     * @param int|bool $endTime time in unix timestamp format, if false than now
+     * @param int      $startTime time in unix timestamp format
+     * @param int|bool $endTime   time in unix timestamp format, if false than now
      *
      * @return array
      */
@@ -391,7 +390,7 @@ class PaymentSzkwal
      */
     protected function request($method, $postData)
     {
-        $url = $this->apiUrl . $this->partnerUniqueAddress . '/' . $method;
+        $url = $this->apiUrl.$this->partnerUniqueAddress.'/'.$method;
 
         return Curl::doCurlRequest($url, $postData);
     }
@@ -415,16 +414,16 @@ class PaymentSzkwal
     /**
      * Generate monthly report
      *
-     * @param string $type generate daily or monthly report
-     * @param int $startTime time in unix timestamp format
-     * @param int|bool $endTime time in unix timestamp format, if false than now
+     * @param string   $type generate daily or monthly report
+     * @param int      $startTime time in unix timestamp format
+     * @param int|bool $endTime   time in unix timestamp format, if false than now
      *
      * @return array
      */
     private function generateReport($type, $startTime, $endTime)
     {
         $postData = array(
-            'api_login'    => $this->apiLogin,
+            'api_login' => $this->apiLogin,
             'api_password' => $this->apiPassword,
         );
         $postData['from'] = date('Y-m-d', $startTime);
@@ -434,7 +433,7 @@ class PaymentSzkwal
             $postData['to'] = date('Y-m-d');
         }
 
-        $sha1 = sha1($postData['from'] . $postData['to'] . $this->apiHash);
+        $sha1 = sha1($postData['from'].$postData['to'].$this->apiHash);
         $postData['hash'] = $sha1;
 
         return $this->request($type, $postData);
@@ -443,30 +442,30 @@ class PaymentSzkwal
     /**
      * Check md5 sum to confirm Transferuj response and value of payment amount
      *
-     * @param string $sign sha1 checksum
-     * @param string $payId unique szkwal payment id
-     * @param string $notId unique szkwal notification id
-     * @param string $title payment title in agreed format
-     * @param string $crc additional client field
-     * @param float $amount amount of payment
+     * @param string $sign   sha1 checksum
+     * @param string $payId  unique szkwal payment id
+     * @param string $notId  unique szkwal notification id
+     * @param string $title  payment title in agreed format
+     * @param string $crc    additional client field
+     * @param float  $amount amount of payment
      *
      * @throws TException
      */
     public function validateSign($sign, $payId, $notId, $title, $crc, $amount)
     {
         Util::log('Szkwal sign check components', print_r(array(
-            'sign'    => $sign,
-            'payId'   => $payId,
+            'sign' => $sign,
+            'payId' => $payId,
             'noti_id' => $notId,
-            'title'   => $title,
-            'crc'     => $crc,
-            'amount'  => $amount,
-            'hash'    => $this->apiHash,
+            'title' => $title,
+            'crc' => $crc,
+            'amount' => $amount,
+            'hash' => $this->apiHash,
         ), true));
 
         $amount = number_format($amount, 2, '.', '');
 
-        if ($sign !== sha1($payId . $notId . $title . $crc . $amount . $this->apiHash)) {
+        if($sign !== sha1($payId . $notId . $title . $crc . $amount . $this->apiHash)) {
             throw new TException('invalid checksum');
         }
     }

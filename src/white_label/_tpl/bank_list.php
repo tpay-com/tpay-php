@@ -9,7 +9,7 @@
             <div class="availability">
                 <?php foreach ($bank['availability'] as $date => $availability) { ?>
                     <?php foreach ($availability as $time) { ?>
-                        <div><?php echo $date . ' : ' . $time ?></div>
+                        <div><?php echo $date.' : '.$time ?></div>
                     <?php } ?>
                 <?php } ?>
             </div>

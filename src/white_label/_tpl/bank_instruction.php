@@ -4,8 +4,8 @@
         <img src="https://secure.transferuj.pl/_/banks/b<?php echo $data['bank_id'] ?>.png" alt=""/>
         <?php foreach ($data['instructions'] as $paragraph) { ?>
             <p><?php echo $paragraph ?></p>
-            <?php
-        }
+<?php
+}
         ?>
     </div>
 </div>

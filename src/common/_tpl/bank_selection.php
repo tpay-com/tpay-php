@@ -1,16 +1,7 @@
 <style>
-    #bank-selection-form {
-        overflow: hidden
-    }
-
-    .bank-block.bank-active {
-        box-shadow: 0 0 10px 3px #15428F
-    }
-
-    .bank-block label input {
-        display: none
-    }
-
+    #bank-selection-form { overflow: hidden }
+    .bank-block.bank-active {  box-shadow: 0 0 10px 3px #15428F }
+    .bank-block label input { display: none }
     .bank-block {
         width: 150px;
         height: 70px;
@@ -23,7 +14,6 @@
         background-repeat: no-repeat;
         background-color: #FFF;
     }
-
     .bank-block label {
         position: absolute;
         top: 0;
@@ -36,11 +26,10 @@
 
 <div id="bank-selection-form"></div>
 
-<?php if ($data['show_regulations_checkbox'] === true) { ?>
+<?php if ($data['show_regulations_checkbox'] === true){ ?>
     <input id="transferuj-accept-regulations-checkbox" type="checkbox" value="0">
     <label for="transferuj-accept-regulations-checkbox">
-        <?php Transferuj\Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                                 target="_blank"><?php Transferuj\Lang::l('regulations') ?></a>
+        <?php Transferuj\Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>" target="_blank"><?php Transferuj\Lang::l('regulations') ?></a>
     </label>
 <?php } ?>
 
@@ -96,15 +85,15 @@
 
     <?php if ($data['show_regulations_checkbox'] === true){ ?>
 
-    submit_form_input.onclick = function () {
-        if (regulations_form_input.value == 0) {
+    submit_form_input.onclick =  function(){
+        if (regulations_form_input.value == 0){
             alert('<?php Transferuj\Lang::l('acceptance_is_required') ?>');
             return false;
         }
         return true;
     };
 
-    regulation_checkbox.onchange = function () {
+    regulation_checkbox.onchange = function(){
         regulations_form_input.value = (this.checked) ? 1 : 0;
     };
 

@@ -14,15 +14,13 @@
                    autocompletetype="cc-exp" tabindex="2" value=""/>
         </div>
         <div id="cvc_wrapper">
-            <label for="cvc">CSC</label><span class="info_button"
-                                              title="<?php Transferuj\Lang::l('signature') ?>">?</span>
+            <label for="cvc">CSC</label><span class="info_button" title="<?php Transferuj\Lang::l('signature') ?>">?</span>
             <input id="cvc" maxlength="3" type="tel" autocomplete="off" autocompletetype="cc-cvc" placeholder="000"
                    tabindex="4" value=""/>
         </div>
         <br>
         <label for="c_name"><?php Transferuj\Lang::l('name_on_card') ?></label>
-        <input type="text" id="c_name" placeholder="<?php Transferuj\Lang::l('name_surname') ?>" autocomplete="off"
-               name="client_name"
+        <input type="text" id="c_name" placeholder="<?php Transferuj\Lang::l('name_surname') ?>" autocomplete="off" name="client_name"
                maxlength="64" tabindex="5" value=""/>
 
         <label for="c_email">E-mail</label>
@@ -30,9 +28,8 @@
                name="client_email" value="" maxlength="64" tabindex="6">
 
         <div class="amPmCheckbox">
-            <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
-                for="card_save"><?php Transferuj\Lang::l('save_card') ?></label> <span class="info_button"
-                                                                                       title="<?php Transferuj\Lang::l('save_card_info') ?>">?</span>
+            <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label for="card_save"><?php Transferuj\Lang::l('save_card') ?></label> <span class="info_button"
+                                   title="<?php Transferuj\Lang::l('save_card_info') ?>">?</span>
         </div>
     </div>
 
@@ -46,8 +43,7 @@
 
     <p id="info_msg"></p>
 
-    <div id="loading_scr" style="display:none"><img src="<?php echo $data['static_files_url'] ?>common/_img/loading.gif"
-                                                    style="vertical-align: middle;"/>&nbsp;&nbsp;<?php Transferuj\Lang::l('processing') ?>
+    <div id="loading_scr" style="display:none"><img src="<?php echo $data['static_files_url'] ?>common/_img/loading.gif" style="vertical-align: middle;"/>&nbsp;&nbsp;<?php Transferuj\Lang::l('processing') ?>
     </div>
 </form>
 <button id="continue_btn">&nbsp;<?php Transferuj\Lang::l('card_payment') ?>&nbsp;</button>

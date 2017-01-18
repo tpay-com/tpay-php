@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_transferuj/payment_white_label.php';
+require_once dirname(dirname(__FILE__)).'/src/_class_transferuj/payment_white_label.php';
 
 $transferuj = new Transferuj\PaymentWhiteLabel();
 

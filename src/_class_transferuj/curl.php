@@ -24,7 +24,6 @@ class Curl
      * @var string
      */
     private static $curlErrno = '';
-
     /**
      * Get last info
      *
@@ -38,15 +37,15 @@ class Curl
     /**
      * Execute cURL request
      *
-     * @param string $url action url
-     * @param array $postData array with post variables
+     * @param string $url      action url
+     * @param array  $postData array with post variables
      *
      * @return mixed
      * @throws TException
      */
     public static function doCurlRequest($url, $postData = array())
     {
-        if (!function_exists('curl_init') || !function_exists('curl_exec')) {
+        if(!function_exists('curl_init') || !function_exists('curl_exec')) {
             throw new TException('cURL function not available');
         }
         $ch = curl_init();
@@ -96,8 +95,8 @@ class Curl
     private static function checkResponse()
     {
         $responseCode = self::$curlInfo['http_code'];
-        if ($responseCode !== 200) {
-            if (isset(self::$httpCodes[$responseCode])) {
+        if ($responseCode !== 200){
+            if (isset(self::$httpCodes[$responseCode])){
                 throw new TException(sprintf('Transferuj.pl server return %s', self::$httpCodes[$responseCode]));
             } else {
                 throw new TException('Unexpected response from Transferuj server');

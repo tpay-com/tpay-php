@@ -17,12 +17,12 @@ class Util
     /**
      * Parse template file
      * @param string $templateFileName filename
-     * @param array $data
+     * @param array  $data
      * @return string
      */
     public static function parseTemplate($templateFileName, $data = array())
     {
-        $templateDirectory = dirname(__FILE__) . '/../';
+        $templateDirectory = dirname(__FILE__).'/../';
         $buffer = false;
 
         if (ob_get_length() > 0) {
@@ -31,10 +31,10 @@ class Util
         }
         ob_start();
 
-        if (!file_exists($templateDirectory . $templateFileName . '.php')) {
+        if (!file_exists($templateDirectory.$templateFileName.'.php')) {
             return '';
         }
-        include $templateDirectory . $templateFileName . '.php';
+        include $templateDirectory.$templateFileName.'.php';
         $parsedHTML = ob_get_contents();
         ob_clean();
 
@@ -67,13 +67,13 @@ class Util
      */
     public static function loadClass($name)
     {
-        $classDirectory = dirname(__FILE__) . '/../_class_transferuj/';
-        $filePath = $classDirectory . $name . '.php';
+        $classDirectory = dirname(__FILE__).'/../_class_transferuj/';
+        $filePath = $classDirectory.$name.'.php';
 
-        if (!file_exists($classDirectory))
+        if(!file_exists($classDirectory))
             throw new TException('directory not found (' . $classDirectory . ')');
 
-        if (!file_exists($filePath))
+        if(!file_exists($filePath))
             throw new TException('no such a file (' . $filePath . ')');
 
         require_once($filePath);
@@ -83,20 +83,20 @@ class Util
      * Save text to log file with details
      *
      * @param string $title action name
-     * @param string $text text to save
+     * @param string $text  text to save
      */
     public static function log($title, $text)
     {
-        $text = (string)$text;
-        $logFilePath = dirname(__FILE__) . '/../log';
+        $text = (string) $text;
+        $logFilePath = dirname(__FILE__).'/../log';
 
         $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '';
 
         $logText = "\n===========================";
-        $logText .= "\n" . $title;
+        $logText .= "\n".$title;
         $logText .= "\n===========================";
-        $logText .= "\n" . date('Y-m-d H:i:s');
-        $logText .= "\nip: " . $ip;
+        $logText .= "\n".date('Y-m-d H:i:s');
+        $logText .= "\nip: ".$ip;
         $logText .= "\n";
         $logText .= $text;
         $logText .= "\n\n";
@@ -113,10 +113,10 @@ class Util
      */
     public static function logLine($text)
     {
-        $text = (string)$text;
-        $logFilePath = dirname(__FILE__) . '/../log';
+        $text = (string) $text;
+        $logFilePath = dirname(__FILE__).'/../log';
         if (file_exists($logFilePath) && is_writable($logFilePath)) {
-            file_put_contents($logFilePath, "\n" . $text, FILE_APPEND);
+            file_put_contents($logFilePath, "\n".$text, FILE_APPEND);
         }
     }
 
@@ -138,11 +138,11 @@ class Util
         $val = $_POST[$name];
 
         if ($type === 'int') {
-            $val = (int)$val;
+            $val = (int) $val;
         } elseif ($type === 'float') {
-            $val = (float)$val;
+            $val = (float) $val;
         } elseif ($type === 'string') {
-            $val = (string)$val;
+            $val = (string) $val;
         } else {
             throw new TException('Undefined $_POST variable type');
         }

@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_transferuj/payment_szkwal.php';
+require_once dirname(dirname(__FILE__)).'/src/_class_transferuj/payment_szkwal.php';
 
 $transferuj = new Transferuj\PaymentSzkwal();
 Transferuj\Lang::setLang('pl');
@@ -24,11 +24,14 @@ $html = $transferuj->getConfirmationBlock($szkwalResult['title'], $amount, $stat
 echo $html;
 
 /**
- * array(2) {
- * ["client_id"]=> int(658901)
- * ["title"]=> string(12) "KIP438010354"
- * }
+array(2) {
+["client_id"]=> int(658901)
+["title"]=> string(12) "KIP438010354"
+}
  */
+
+
+
 
 
 die;
