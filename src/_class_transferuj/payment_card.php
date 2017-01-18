@@ -73,8 +73,8 @@ class PaymentCard
      * @var string
      */
     private $secureIP = array(
-                            '176.119.38.175'
-                        );
+        '176.119.38.175'
+    );
 
     /**
      * If false library not validate Transferuj server IP
@@ -88,23 +88,23 @@ class PaymentCard
      * - card direct sale
      * - for saved cards
      *
-     * @param string|bool $merchantId     merchant id
+     * @param string|bool $merchantId merchant id
      * @param string|bool $merchantSecret merchant secret
-     * @param string|bool $apiKey         card api key
-     * @param string|bool $apiPassword    card API password
-     * @param string|bool $code           card API code
-     * @param string|bool $hashAlg        card hash algorithm
-     * @param string|bool $keyRSA         card RSA key
+     * @param string|bool $apiKey card api key
+     * @param string|bool $apiPassword card API password
+     * @param string|bool $code card API code
+     * @param string|bool $hashAlg card hash algorithm
+     * @param string|bool $keyRSA card RSA key
      */
     public function __construct($merchantId = false, $merchantSecret = false, $apiKey = false, $apiPassword = false, $code = false, $hashAlg = false, $keyRSA = false)
     {
-        if($merchantId !== false) $this->merchantId = $merchantId;
-        if($merchantSecret !== false) $this->merchantSecret = $merchantSecret;
-        if($apiKey !== false) $this->apiKey = $apiKey;
-        if($apiPassword !== false) $this->apiPassword = $apiPassword;
-        if($code !== false) $this->code = $code;
-        if($hashAlg !== false) $this->hashAlg = $hashAlg;
-        if($keyRSA !== false) $this->keyRSA = $keyRSA;
+        if ($merchantId !== false) $this->merchantId = $merchantId;
+        if ($merchantSecret !== false) $this->merchantSecret = $merchantSecret;
+        if ($apiKey !== false) $this->apiKey = $apiKey;
+        if ($apiPassword !== false) $this->apiPassword = $apiPassword;
+        if ($code !== false) $this->code = $code;
+        if ($hashAlg !== false) $this->hashAlg = $hashAlg;
+        if ($keyRSA !== false) $this->keyRSA = $keyRSA;
 
         require_once(dirname(__FILE__) . '/util.php');
         Util::loadClass('validate');
@@ -174,9 +174,9 @@ class PaymentCard
         }
 
         $data = array(
-            'action_url' => $this->apiURL,
+            'action_url'  => $this->apiURL,
             'merchant_id' => $this->merchantId,
-            'sale_auth' => $apiResponse['sale_auth'],
+            'sale_auth'   => $apiResponse['sale_auth'],
         );
 
         return Util::parseTemplate('card/_tpl/payment_form', $data);
@@ -196,30 +196,30 @@ class PaymentCard
         Util::log('card handle notification', print_r($_POST, true));
 
         $notificationType = Util::post('type', 'string');
-        if($notificationType === 'sale') {
+        if ($notificationType === 'sale') {
             $response = Validate::getResponse(Validate::PAYMENT_TYPE_CARD);
-        } elseif($notificationType === 'deregister') {
+        } elseif ($notificationType === 'deregister') {
             $response = Validate::getResponse(Validate::CARD_DEREGISTER);
         } else {
             throw new TException('Unknown notification type');
         }
 
-        if ($this->validateServerIP === true && $this->checkServer() === false){
+        if ($this->validateServerIP === true && $this->checkServer() === false) {
             throw new TException('Request is not from secure server');
         }
 
         echo json_encode(array('result' => '1'));
 
-        if($notificationType === 'sale' && $response['status'] === 'correct') {
+        if ($notificationType === 'sale' && $response['status'] === 'correct') {
             return array(
-                'order_id' => $response['order_id'],
-                'sign' => $response['sign'],
+                'order_id'  => $response['order_id'],
+                'sign'      => $response['sign'],
                 'sale_auth' => $response['sale_auth'],
                 'sale_date' => $response['date'],
                 'test_mode' => $response['test_mode'],
-                'card' => $response['card']
+                'card'      => $response['card']
             );
-        } else if($notificationType === 'deregister') {
+        } else if ($notificationType === 'deregister') {
             return $response;
         } else {
             throw new TException('Incorrect payment');
@@ -243,7 +243,7 @@ class PaymentCard
     /**
      * Get HTML form for direct sale gate. Using for payment in merchant shop
      *
-     * @param string $staticFilesURL      path to library static files
+     * @param string $staticFilesURL path to library static files
      * @param string $paymentRedirectPath payment redirect path
      *
      * @return string
@@ -259,8 +259,8 @@ class PaymentCard
         }
 
         $data = array(
-            'rsa_key' => $keyRSA,
-            'static_files_url' => $staticFilesURL,
+            'rsa_key'               => $keyRSA,
+            'static_files_url'      => $staticFilesURL,
             'payment_redirect_path' => $paymentRedirectPath
         );
 
@@ -272,7 +272,7 @@ class PaymentCard
      *
      * @param string $cliAuth client auth sign form prev payment
      * @param string $desc transaction description
-     * @param float  $amount amount
+     * @param float $amount amount
      * @param string $confirmationUrl url to send confirmation
      * @param string $orderId order id
      * @param string $language language
@@ -290,11 +290,11 @@ class PaymentCard
 
         Util::log('Card saved presale response', print_r($resp, true));
 
-        if((int)$resp['result'] === 1) {
+        if ((int)$resp['result'] === 1) {
             $data = array(
-                'sale_auth' => $resp['sale_auth'],
+                'sale_auth'        => $resp['sale_auth'],
                 'confirmation_url' => $confirmationUrl,
-                'order_id' => $orderId
+                'order_id'         => $orderId
             );
 
             return Util::parseTemplate('card/_tpl/saved_card', $data);
@@ -308,8 +308,8 @@ class PaymentCard
      * from method getDirectCardForm
      * Validate transaction config and all input fields
      *
-     * @param float  $orderAmount amount of payment
-     * @param int    $orderID order id
+     * @param float $orderAmount amount of payment
+     * @param int $orderID order id
      * @param string $orderDesc order description
      * @param string $currency transaction currency
      *
@@ -333,10 +333,10 @@ class PaymentCard
         $api = new CardAPI($this->apiKey, $this->apiPassword, $this->code, $this->hashAlg);
 
         $tmpConfig = array(
-            'amount' => $amount,
-            'name' => $clientName,
-            'email' => $clientEmail,
-            'desc' => $orderDesc,
+            'amount'   => $amount,
+            'name'     => $clientName,
+            'email'    => $clientEmail,
+            'desc'     => $orderDesc,
             'order_id' => $orderID,
         );
 
@@ -391,7 +391,7 @@ class PaymentCard
      */
     public function validateSign($sign, $testMode, $saleAuth, $orderId, $card, $amount, $saleDate, $currency = '985')
     {
-        if($sign !== hash($this->hashAlg, 'sale' . $testMode . $saleAuth . $orderId . $card . $currency . $amount. $saleDate . 'correct' . $this->code)) {
+        if ($sign !== hash($this->hashAlg, 'sale' . $testMode . $saleAuth . $orderId . $card . $currency . $amount . $saleDate . 'correct' . $this->code)) {
             throw new TException('Card payment - invalid checksum');
         }
     }

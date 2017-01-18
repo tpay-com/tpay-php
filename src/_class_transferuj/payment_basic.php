@@ -33,8 +33,8 @@ class PaymentBasic
      * @var string
      */
     private $secureIP = array(
-                            '195.149.229.109',
-                        );
+        '195.149.229.109',
+    );
 
     /**
      * If false library not validate Transferuj server IP
@@ -49,6 +49,21 @@ class PaymentBasic
     private $templateDir = 'common/_tpl/';
 
     /**
+     * @var string
+     */
+
+    const ACTIONURL = 'action_url';
+
+    /**
+     * @var string
+     */
+    const FIELDS = 'fields';
+    /**
+     * @var string
+     */
+    const PAYMENTFORM = 'payment_form';
+
+    /**
      * URL to Transferuj regulations file
      * @var string
      */
@@ -60,13 +75,17 @@ class PaymentBasic
      * - with bank selection in merchant shop
      * - eHat
      *
-     * @param string|bool $merchantId     merchant id
+     * @param string|bool $merchantId merchant id
      * @param string|bool $merchantSecret merchant secret
      */
     public function __construct($merchantId = false, $merchantSecret = false)
     {
-        if($merchantId !== false) $this->merchantId = $merchantId;
-        if($merchantSecret !== false) $this->merchantSecret = $merchantSecret;
+        if ($merchantId !== false) {
+            $this->merchantId = $merchantId;
+        }
+        if ($merchantSecret !== false) {
+            $this->merchantSecret = $merchantSecret;
+        }
 
         require_once(dirname(__FILE__) . '/util.php');
 
@@ -110,7 +129,7 @@ class PaymentBasic
      */
     public function checkPayment($paymentType = Validate::PAYMENT_TYPE_BASIC)
     {
-        Util::log('check basic payment', '$_POST: '."\n".print_r($_POST, true));
+        Util::log('check basic payment', '$_POST: ' . "\n" . print_r($_POST, true));
 
         $res = Validate::getResponse($paymentType);
 
@@ -120,9 +139,9 @@ class PaymentBasic
             number_format($res['tr_amount'], 2, '.', ''),
             $res['tr_crc']
         );
-        Util::logLine('Check MD5: '.(int) $checkMD5);
+        Util::logLine('Check MD5: ' . (int)$checkMD5);
 
-        if ($this->validateServerIP === true && $this->checkServer() === false){
+        if ($this->validateServerIP === true && $this->checkServer() === false) {
             throw new TException('Request is not from secure server');
         }
 
@@ -150,13 +169,11 @@ class PaymentBasic
         $config['akceptuje_regulamin'] = 1;
 
         $data = array(
-            'action_url' => $this->apiURL,
-            'fields' => $config,
+            static::ACTIONURL => $this->apiURL,
+            static::FIELDS    => $config,
         );
 
-        $form = Util::parseTemplate($this->templateDir.'payment_form', $data);
-
-        return $form;
+        return Util::parseTemplate($this->templateDir . static::PAYMENTFORM, $data);
     }
 
     /**
@@ -172,13 +189,11 @@ class PaymentBasic
         $config = $this->prepareConfig($config);
 
         $data = array(
-            'action_url' => $this->apiURL,
-            'fields' => $config,
+            static::ACTIONURL => $this->apiURL,
+            static::FIELDS    => $config,
         );
 
-        $form = Util::parseTemplate($this->templateDir.'payment_form', $data);
-
-        return $form;
+        return Util::parseTemplate($this->templateDir . static::PAYMENTFORM, $data);
     }
 
     /**
@@ -200,26 +215,24 @@ class PaymentBasic
         $config['akceptuje_regulamin'] = ($showRegulations) ? 0 : 1;
 
         $data = array(
-            'action_url' => $this->apiURL,
-            'fields' => $config,
+            static::ACTIONURL => $this->apiURL,
+            static::FIELDS    => $config,
         );
 
-        $form = Util::parseTemplate($this->templateDir.'payment_form', $data);
+        $form = Util::parseTemplate($this->templateDir . static::PAYMENTFORM, $data);
 
         $data = array(
-            'merchant_id' => $this->merchantId,
-            'regulation_url' => $this->regulationURL,
+            'merchant_id'               => $this->merchantId,
+            'regulation_url'            => $this->regulationURL,
             'show_regulations_checkbox' => $showRegulations,
-            'form' => $form
+            'form'                      => $form
         );
-        if ($smallList){
+        if ($smallList) {
             $templateFile = 'bank_selection_list';
         } else {
             $templateFile = 'bank_selection';
         }
-        $bankSelectionForm = Util::parseTemplate($this->templateDir.$templateFile, $data);
-
-        return $bankSelectionForm;
+        return Util::parseTemplate($this->templateDir . $templateFile, $data);
     }
 
     /**
@@ -229,7 +242,7 @@ class PaymentBasic
      *
      * @param string $md5sum md5 sum received from Transferuj
      * @param string $transactionId transaction id
-     * @param float  $transactionAmount transaction amount
+     * @param float $transactionAmount transaction amount
      * @param string $crc transaction crc
      *
      * @return bool
@@ -240,7 +253,7 @@ class PaymentBasic
             return false;
         }
 
-        return ($md5sum === md5($this->merchantId.$transactionId.$transactionAmount.$crc.$this->merchantSecret));
+        return ($md5sum === md5($this->merchantId . $transactionId . $transactionAmount . $crc . $this->merchantSecret));
     }
 
     /**
@@ -255,7 +268,7 @@ class PaymentBasic
      */
     public function validateSign($md5sum, $transactionId, $transactionAmount, $crc)
     {
-        if($md5sum !== md5($this->merchantId.$transactionId.$transactionAmount.$crc.$this->merchantSecret)) {
+        if ($md5sum !== md5($this->merchantId . $transactionId . $transactionAmount . $crc . $this->merchantSecret)) {
             throw new TException('Invalid checksum');
         }
     }
@@ -274,7 +287,7 @@ class PaymentBasic
     {
         $ready = Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC, $config);
 
-        $ready['md5sum'] = md5($this->merchantId.$ready['kwota'].$ready['crc'].$this->merchantSecret);
+        $ready['md5sum'] = md5($this->merchantId . $ready['kwota'] . $ready['crc'] . $this->merchantSecret);
         $ready['id'] = $this->merchantId;
 
         return $ready;
