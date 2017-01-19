@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -14,6 +19,10 @@ namespace tpay;
  */
 class PaymentCard
 {
+    const RESULT = 'result';
+    const ORDERID = 'order_id';
+    const STRING = 'string';
+    const SALE_AUTH = 'sale_auth';
     /**
      * Merchant id
      * @var int
@@ -66,7 +75,7 @@ class PaymentCard
      * tpay payment url
      * @var string
      */
-    private $apiURL = 'https://secure.tpay.com/cards/';
+    private $apiURL = 'https://secure.transferuj.pl/cards/';
 
     /**
      * tpay response IP
@@ -96,15 +105,30 @@ class PaymentCard
      * @param string|bool $hashAlg card hash algorithm
      * @param string|bool $keyRSA card RSA key
      */
-    public function __construct($merchantId = false, $merchantSecret = false, $apiKey = false, $apiPass = false, $code = false, $hashAlg = false, $keyRSA = false)
+    public function __construct($merchantId = false, $merchantSecret = false, $apiKey = false,
+                                $apiPass = false, $code = false, $hashAlg = false, $keyRSA = false)
     {
-        if ($merchantId !== false) $this->merchantId = $merchantId;
-        if ($merchantSecret !== false) $this->merchantSecret = $merchantSecret;
-        if ($apiKey !== false) $this->apiKey = $apiKey;
-        if ($apiPass !== false) $this->apiPass = $apiPass;
-        if ($code !== false) $this->code = $code;
-        if ($hashAlg !== false) $this->hashAlg = $hashAlg;
-        if ($keyRSA !== false) $this->keyRSA = $keyRSA;
+        if ($merchantId !== false) {
+            $this->merchantId = $merchantId;
+        }
+        if ($merchantSecret !== false) {
+            $this->merchantSecret = $merchantSecret;
+        }
+        if ($apiKey !== false) {
+            $this->apiKey = $apiKey;
+        }
+        if ($apiPass !== false) {
+            $this->apiPass = $apiPass;
+        }
+        if ($code !== false) {
+            $this->code = $code;
+        }
+        if ($hashAlg !== false) {
+            $this->hashAlg = $hashAlg;
+        }
+        if ($keyRSA !== false) {
+            $this->keyRSA = $keyRSA;
+        }
 
         require_once(dirname(__FILE__) . '/util.php');
         Util::loadClass('validate');
@@ -116,7 +140,7 @@ class PaymentCard
         Validate::validateMerchantSecret($this->merchantSecret);
 
         Validate::validateCardApiKey($this->apiKey);
-        Validate::validateCardApiPass($this->apiPass);
+        Validate::validateCardApiPassword($this->apiPass);
         Validate::validateCardCode($this->code);
         Validate::validateCardHashAlg($this->hashAlg);
         Validate::validateCardRSAKey($this->keyRSA);
@@ -165,18 +189,22 @@ class PaymentCard
             $config['desc'],
             $config['amount'],
             $currency,
-            $config['order_id']
+            $config[static::ORDERID]
         );
 
         Util::log('card register sale', print_r($apiResponse, true));
-        if (!is_array($apiResponse) || !isset($apiResponse['result']) || !isset($apiResponse['sale_auth'])) {
+        if (!is_array($apiResponse)
+            ||
+            !isset($apiResponse[static::RESULT])
+            ||
+            !isset($apiResponse[static::SALE_AUTH])) {
             throw new TException('Invalid api response code');
         }
 
         $data = array(
-            'action_url'  => $this->apiURL,
-            'merchant_id' => $this->merchantId,
-            'sale_auth'   => $apiResponse['sale_auth'],
+            'action_url'    => $this->apiURL,
+            'merchant_id'   => $this->merchantId,
+            static::SALE_AUTH => $apiResponse[static::SALE_AUTH],
         );
 
         return Util::parseTemplate('card/_tpl/payment_form', $data);
@@ -193,9 +221,9 @@ class PaymentCard
      */
     public function handleNotification()
     {
-        Util::log('card handle notification', print_r($_POST, true));
+        Util::log('card handle notification', print_r(INPUT_POST, true));
 
-        $notificationType = Util::post('type', 'string');
+        $notificationType = Util::post('type', static::STRING);
         if ($notificationType === 'sale') {
             $response = Validate::getResponse(Validate::PAYMENT_TYPE_CARD);
         } elseif ($notificationType === 'deregister') {
@@ -208,18 +236,18 @@ class PaymentCard
             throw new TException('Request is not from secure server');
         }
 
-        echo json_encode(array('result' => '1'));
+        echo json_encode(array(static::RESULT => '1'));
 
         if ($notificationType === 'sale' && $response['status'] === 'correct') {
             return array(
-                'order_id'  => $response['order_id'],
-                'sign'      => $response['sign'],
-                'sale_auth' => $response['sale_auth'],
-                'sale_date' => $response['date'],
-                'test_mode' => $response['test_mode'],
-                'card'      => $response['card']
+                static::ORDERID => $response[static::ORDERID],
+                'sign'          => $response['sign'],
+                static::SALE_AUTH => $response[static::SALE_AUTH],
+                'sale_date'     => $response['date'],
+                'test_mode'     => $response['test_mode'],
+                'card'          => $response['card']
             );
-        } else if ($notificationType === 'deregister') {
+        } elseif ($notificationType === 'deregister') {
             return $response;
         } else {
             throw new TException('Incorrect payment');
@@ -233,7 +261,7 @@ class PaymentCard
      */
     private function checkServer()
     {
-        if (!isset($_SERVER['REMOTE_ADDR']) || !in_array($_SERVER['REMOTE_ADDR'], $this->secureIP)) {
+        if (!filter_input(INPUT_SERVER, ['REMOTE_ADDR']) || !in_array(INPUT_SERVER['REMOTE_ADDR'], $this->secureIP)) {
             return false;
         }
 
@@ -282,7 +310,8 @@ class PaymentCard
      *
      * @throws TException
      */
-    public function getCardSavedForm($cliAuth, $desc, $amount, $confirmationUrl, $orderId = '', $language = 'pl', $currency = '985')
+    public function getCardSavedForm($cliAuth, $desc, $amount, $confirmationUrl,
+                                     $orderId = '', $language = 'pl', $currency = '985')
     {
         $api = new CardAPI($this->apiKey, $this->apiPass, $this->code, $this->hashAlg);
 
@@ -290,11 +319,11 @@ class PaymentCard
 
         Util::log('Card saved presale response', print_r($resp, true));
 
-        if ((int)$resp['result'] === 1) {
+        if ((int)$resp[static::RESULT] === 1) {
             $data = array(
-                'sale_auth'        => $resp['sale_auth'],
+                static::SALE_AUTH    => $resp[static::SALE_AUTH],
                 'confirmation_url' => $confirmationUrl,
-                'order_id'         => $orderId
+                static::ORDERID    => $orderId
             );
 
             return Util::parseTemplate('card/_tpl/saved_card', $data);
@@ -319,12 +348,12 @@ class PaymentCard
      */
     public function directSale($orderAmount, $orderID, $orderDesc, $currency = '985')
     {
-        $cardData = Util::post('carddata', 'string');
-        $clientName = Util::post('client_name', 'string');
-        $clientEmail = Util::post('client_email', 'string');
-        $saveCard = Util::post('card_save', 'string');
+        $cardData = Util::post('carddata', static::STRING);
+        $clientName = Util::post('client_name', static::STRING);
+        $clientEmail = Util::post('client_email', static::STRING);
+        $saveCard = Util::post('card_save', static::STRING);
 
-        Util::log('Card direct post params', print_r($_POST, true));
+        Util::log('Card direct post params', print_r(INPUT_POST, true));
 
         $oneTimeTransaction = ($saveCard !== 'on');
         $amount = number_format(str_replace(array(',', ' '), array('.', ''), $orderAmount), 2, '.', '');
@@ -337,7 +366,7 @@ class PaymentCard
             'name'     => $clientName,
             'email'    => $clientEmail,
             'desc'     => $orderDesc,
-            'order_id' => $orderID,
+            static::ORDERID => $orderID,
         );
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_CARD_DIRECT, $tmpConfig);
@@ -391,7 +420,9 @@ class PaymentCard
      */
     public function validateSign($sign, $testMode, $saleAuth, $orderId, $card, $amount, $saleDate, $currency = '985')
     {
-        if ($sign !== hash($this->hashAlg, 'sale' . $testMode . $saleAuth . $orderId . $card . $currency . $amount . $saleDate . 'correct' . $this->code)) {
+        if ($sign !== hash($this->hashAlg, 'sale' . $testMode . $saleAuth . $orderId . $card .
+                $currency . $amount . $saleDate . 'correct' . $this->code)
+        ) {
             throw new TException('Card payment - invalid checksum');
         }
     }

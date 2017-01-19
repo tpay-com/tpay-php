@@ -1,4 +1,13 @@
-<?php ?><link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>card/_css/gate.css"/>
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+const STATIC_FILES_URL = 'static_files_url';
+?>
+<link rel="stylesheet" type="text/css" href="<?php
+echo $data[STATIC_FILES_URL] ?>card/_css/gate.css"/>
 <form method="post" id="card_payment_form" name="card_payment_form">
     <input type="hidden" name="carddata" id="carddata" value=""/>
 
@@ -31,8 +40,8 @@
 
         <div class="amPmCheckbox">
             <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
-                for="card_save"><?php tpay\Lang::l('save_card') ?></label> <span class="info_button"
-                                                                                       title="<?php tpay\Lang::l('save_card_info') ?>">?</span>
+                for="card_save"><?php tpay\Lang::l('save_card') ?></label>
+            <span class="info_button" title="<?php tpay\Lang::l('save_card_info') ?>">?</span>
         </div>
     </div>
 
@@ -46,16 +55,17 @@
 
     <p id="info_msg"></p>
 
-    <div id="loading_scr" style="display:none"><img src="<?php echo $data['static_files_url'] ?>common/_img/loading.gif"
-                                                    style="vertical-align: middle;"/>&nbsp;&nbsp;<?php tpay\Lang::l('processing') ?>
+    <div id="loading_scr" style="display:none">
+        <img src="<?php echo $data[STATIC_FILES_URL] ?>common/_img/loading.gif"
+             style="vertical-align: middle;"/>&nbsp;&nbsp;<?php tpay\Lang::l('processing') ?>
     </div>
 </form>
 <button id="continue_btn">&nbsp;<?php tpay\Lang::l('card_payment') ?>&nbsp;</button>
-<script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/jquery.formance.min.js"></script>
-<script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/cardpayment.js"></script>
-<script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/jsencrypt.min.js"></script>
-<script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/string_routines.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>common/_js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>common/_js/jquery.formance.min.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>common/_js/cardpayment.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>common/_js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>common/_js/string_routines.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

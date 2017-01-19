@@ -1,7 +1,10 @@
 <?php
-namespace tpay;
 
-require_once dirname(__FILE__) . '/paymentSzkwal.php';
+/*
+ * Created by tpay.com
+ */
+
+namespace tpay;
 
 /**
  * Class PaymentWhiteLabel
@@ -10,16 +13,20 @@ require_once dirname(__FILE__) . '/paymentSzkwal.php';
  */
 class PaymentWhiteLabel extends PaymentSzkwal
 {
+    const APILOGIN = 'api_login';
+    const APIPASS = 'api_password';
+
     /**
      * PaymentWhiteLabel class constructor
      *
-     * @param string|bool $apiLogin             API login
-     * @param string|bool $apiPass          API password
-     * @param string|bool $apiHash              API hash
+     * @param string|bool $apiLogin API login
+     * @param string|bool $apiPass API password
+     * @param string|bool $apiHash API hash
      * @param string|bool $partnerUniqueAddress API partner unique address
-     * @param string|bool $titleFormat          API title format
+     * @param string|bool $titleFormat API title format
      */
-    public function __construct($apiLogin = false, $apiPass = false, $apiHash = false, $partnerUniqueAddress = false, $titleFormat = false)
+    public function __construct($apiLogin = false, $apiPass = false, $apiHash = false,
+                                $partnerUniqueAddress = false, $titleFormat = false)
     {
         parent::__construct($apiLogin, $apiPass, $apiHash, $partnerUniqueAddress, $titleFormat);
     }
@@ -27,10 +34,10 @@ class PaymentWhiteLabel extends PaymentSzkwal
     /**
      * Method used to add new order to the system
      *
-     * @param string $clientName  customer name; up to 96 alphanumeric characters
+     * @param string $clientName customer name; up to 96 alphanumeric characters
      * @param string $clientEmail customer e-mail; up to 128 alphanumeric characters, must be a valid e-mail address
      * @param string $clientPhone customer phone; up to 32 numeric characters
-     * @param float  $amount      field containing order amount, dot separated, e.g. 123.45
+     * @param float $amount field containing order amount, dot separated, e.g. 123.45
      *
      * @throws TException
      *
@@ -40,17 +47,17 @@ class PaymentWhiteLabel extends PaymentSzkwal
     {
         $title = $this->generateTitle();
 
-        $hash = sha1($clientName.$clientEmail.$clientPhone.$title.$amount.$this->apiHash);
+        $hash = sha1($clientName . $clientEmail . $clientPhone . $title . $amount . $this->apiHash);
 
         $postData = array(
-            'api_login' => $this->apiLogin,
-            'api_password' => $this->apiPass,
-            'cli_name' => $clientName,
-            'cli_email' => $clientEmail,
-            'cli_phone' => $clientPhone,
-            'order' => $title,
-            'amount' => $amount,
-            'hash' => $hash,
+            static::APILOGIN => $this->apiLogin,
+            static::APIPASS  => $this->apiPass,
+            'cli_name'       => $clientName,
+            'cli_email'      => $clientEmail,
+            'cli_phone'      => $clientPhone,
+            'order'          => $title,
+            'amount'         => $amount,
+            'hash'           => $hash,
         );
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_WHITE_LABEL, $postData);
@@ -71,26 +78,26 @@ class PaymentWhiteLabel extends PaymentSzkwal
      * Method used to acquire report of incoming payments.
      * Method returns list of all payments in the specified period.
      *
-     * @param string   $order
-     * @param int      $startTime time in unix timestamp format
-     * @param int|bool $endTime   time in unix timestamp format
-     * @param string   $separator
+     * @param string $order
+     * @param int $startTime time in unix timestamp format
+     * @param int|bool $endTime time in unix timestamp format
+     * @param string $separator
      *
      * @return mixed
      */
     public function paymentsReport($order, $startTime, $endTime = false, $separator = ';')
     {
         $postData = array(
-            'api_login' => $this->apiLogin,
-            'api_password' => $this->apiPass,
-            'order' => $order,
-            'separator' => $separator,
+            static::APILOGIN => $this->apiLogin,
+            static::APIPASS  => $this->apiPass,
+            'order'          => $order,
+            'separator'      => $separator,
         );
-        $postData['from'] = date('Y-m-d', (int) $startTime);
-        $endTime = ($endTime !== false) ? (int) $endTime : time();
+        $postData['from'] = date('Y-m-d', (int)$startTime);
+        $endTime = ($endTime !== false) ? (int)$endTime : time();
         $postData['to'] = date('Y-m-d', $endTime);
 
-        $postData['hash'] = sha1($order.$postData['from'].$postData['to'].$separator.$this->apiHash);
+        $postData['hash'] = sha1($order . $postData['from'] . $postData['to'] . $separator . $this->apiHash);
 
         return $this->request('PaymentsReport', $postData);
     }
@@ -105,12 +112,11 @@ class PaymentWhiteLabel extends PaymentSzkwal
     public function getBanksData()
     {
         $data = $this->getBanks();
-        $final = array(
+        return array(
             'data' => $data,
             'html' => Util::parseTemplate('white_label/_tpl/bank_list', $data),
         );
 
-        return $final;
     }
 
     /**
@@ -125,9 +131,9 @@ class PaymentWhiteLabel extends PaymentSzkwal
     public function getBankInstr($bankID)
     {
         $postData = array(
-            'api_login' => $this->apiLogin,
-            'api_password' => $this->apiPass,
-            'bank_id' => $bankID,
+            static::APILOGIN => $this->apiLogin,
+            static::APIPASS  => $this->apiPass,
+            'bank_id'        => $bankID,
         );
         $res = $this->request('GetBankInstr', $postData);
 
@@ -139,7 +145,7 @@ class PaymentWhiteLabel extends PaymentSzkwal
         }
 
         $data = array(
-            'bank_id' => $bankID,
+            'bank_id'      => $bankID,
             'instructions' => $instructions,
         );
 

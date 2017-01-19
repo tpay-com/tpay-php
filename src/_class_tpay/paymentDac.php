@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -50,10 +55,18 @@ class PaymentDAC
      */
     public function __construct($merchantId = false, $merchantSecret = false, $apiKey = false, $apiPass = false)
     {
-        if($merchantId !== false) $this->merchantId = $merchantId;
-        if($merchantSecret !== false) $this->merchantSecret = $merchantSecret;
-        if($apiKey !== false) $this->apiKey = $apiKey;
-        if($apiPass !== false) $this->apiPass = $apiPass;
+        if($merchantId !== false) {
+            $this->merchantId = $merchantId;
+        }
+        if($merchantSecret !== false) {
+            $this->merchantSecret = $merchantSecret;
+        }
+        if($apiKey !== false) {
+            $this->apiKey = $apiKey;
+        }
+        if($apiPass !== false) {
+            $this->apiPass = $apiPass;
+        }
 
         require_once(dirname(__FILE__) . '/util.php');
 

@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -50,12 +55,7 @@ class PaymentSMS
         $data = explode("\n", $response);
 
         $status = (int)$data[0];
-        $lifetime = rtrim($data[1]);
 
-        if ($status === 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (bool)$status;
     }
 }

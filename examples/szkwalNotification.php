@@ -1,25 +1,25 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 18.01.2017
- * Time: 19:30
+/*
+ * Created by tpay.com
  */
+
 class SzkwalNotification
 {
-    public function __construct()
+    private $tpay;
+
+    public function __construct(tpay\PaymentSzkwal $object)
     {
         if (filter_input(INPUT_GET, ['szkwal_notification'])) {
+            $this->tpay = $object;
             $this->handleNotification();
         }
     }
 
     public function handleNotification()
     {
-        $tpay = new tpay\PaymentSzkwal();
         tpay\Lang::setLang('pl');
-        return $tpay->handleNotification();
+        return $this->tpay->handleNotification();
 
     }
 }

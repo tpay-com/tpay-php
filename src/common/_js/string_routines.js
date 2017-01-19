@@ -1,7 +1,7 @@
 var Base64 = {};
 Base64.code = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 Base64.encode = function (e, t) {
-    t = typeof t == "undefined" ? false : t;
+    t = typeof t === "undefined" ? false : t;
     var n, r, i, s, o, u, a, f, l = [], c = "", h, p, d;
     var v = Base64.code;
     p = t ? Utf8.encode(e) : e;
@@ -28,7 +28,7 @@ Base64.encode = function (e, t) {
     return d
 };
 Base64.decode = function (e, t) {
-    t = typeof t == "undefined" ? false : t;
+    t = typeof t === "undefined" ? false : t;
     var n, r, i, s, o, u, a, f, l = [], c, h;
     var p = Base64.code;
     h = t ? Utf8.decode(e) : e;
@@ -42,8 +42,8 @@ Base64.decode = function (e, t) {
         r = f >>> 8 & 255;
         i = f & 255;
         l[d / 4] = String.fromCharCode(n, r, i);
-        if (a == 64)l[d / 4] = String.fromCharCode(n, r);
-        if (u == 64)l[d / 4] = String.fromCharCode(n)
+        if (a === 64)l[d / 4] = String.fromCharCode(n, r);
+        if (u === 64)l[d / 4] = String.fromCharCode(n)
     }
     c = l.join("");
     return t ? Utf8.decode(c) : c

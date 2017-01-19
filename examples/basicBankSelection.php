@@ -1,19 +1,16 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentBasic.php';
-
-/**
- * Class TpayBasicBankSelection
- *
- * Class returns bank selection form
- *
- * @package tpay
+/*
+ * Created by tpay.com
  */
+
 class TpayBasicBankSelection
 {
+    private $tpay;
 
-    public function __construct()
+    public function __construct(tpay\PaymentBasic $object)
     {
+        $this->tpay = $object;
         $this->getBankForm();
     }
 
@@ -35,18 +32,15 @@ class TpayBasicBankSelection
             'nazwisko'  => 'Kowalski',
         );
 
-        $tpay = new tpay\PaymentBasic();
-        echo $tpay->getBankSelectionForm($config, true, true);
-        ?>
-
-        <button id="go-to-payment" type="button">Pay</button>
-
+        $form = $this->tpay->getBankSelectionForm($config, true, true) .
+            '<button id="go-to-payment" type="button">Pay</button>';
+        $form .= "
         <script>
             var button = document.getElementById('go-to-payment');
             button.onclick = function () {
                 document.getElementById('tpay-payment-submit').click();
             }
-        </script>
-        <?php
+        </script>";
+        echo $form;
     }
 }

@@ -1,12 +1,16 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentCard.php';
+/*
+ * Created by tpay.com
+ */
 
 class CardBasic
 {
+    private $tpay;
 
-    public function __construct()
+    public function __construct(tpay\PaymentCard $object)
     {
+        $this->tpay = $object;
         $this->getCardTransactionForm();
     }
 
@@ -21,8 +25,7 @@ class CardBasic
             'desc'     => 'Transaction description',
         );
 
-        $tpay = new tpay\PaymentCard();
-        echo $tpay->getTransactionForm($config);
+        echo $this->tpay->getTransactionForm($config);
 
     }
 

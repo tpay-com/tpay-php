@@ -1,4 +1,10 @@
-<?php ?>
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+?>
 <link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>dac/_css/confirmation.css"/>
 
 <div id="tpay-dac-confirmation">

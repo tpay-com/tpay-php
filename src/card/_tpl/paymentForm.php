@@ -1,4 +1,10 @@
-<?php ?><form id="tpay-payment" class="tpay-form" action="<?php echo $data['action_url'] ?>" method="POST">
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+?><form id="tpay-payment" class="tpay-form" action="<?php echo $data['action_url'] ?>" method="POST">
     <input type="hidden" name="sale_auth" value="<?php echo $data['sale_auth'] ?>"/>
     <input type="hidden" name="id" value="<?php echo $data['merchant_id'] ?>"/>
     <input id="tpay-payment-submit" type="submit" value="<?php tpay\Lang::l('pay') ?>">

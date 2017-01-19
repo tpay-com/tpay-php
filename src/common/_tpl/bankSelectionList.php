@@ -1,4 +1,10 @@
-<?php if ($data['show_regulations_checkbox'] === true) { ?>
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+if ($data['show_regulations_checkbox'] === true) { ?>
     <input id="tpay-accept-regulations-checkbox" type="checkbox" value="0">
     <label for="tpay-accept-regulations-checkbox">
         <?php tpay\Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"

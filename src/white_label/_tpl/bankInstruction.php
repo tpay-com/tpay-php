@@ -1,4 +1,10 @@
-<?php ?>
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+?>
 <link rel="stylesheet" type="text/css" href="../_css/bank_instruction.css"/>
 <div id="white-label-bank-instruction">
     <div class="bank-block">

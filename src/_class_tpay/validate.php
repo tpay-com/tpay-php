@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -10,16 +15,37 @@ namespace tpay;
  */
 class Validate
 {
-    const
-        PAYMENT_TYPE_BASIC = 'basic',
-        PAYMENT_TYPE_BASIC_API = 'basic_api',
-        PAYMENT_TYPE_CARD = 'card',
-        PAYMENT_TYPE_CARD_DIRECT = 'card_direct',
-        PAYMENT_TYPE_SZKWAL = 'szkwal',
-        PAYMENT_TYPE_WHITE_LABEL = 'whiteLabel',
-        PAYMENT_TYPE_EHAT = 'ehat',
-        PAYMENT_TYPE_SMS = 'sms',
-        CARD_DEREGISTER = 'deregister';
+    const PAYMENT_TYPE_BASIC = 'basic';
+    const PAYMENT_TYPE_BASIC_API = 'basic_api';
+    const PAYMENT_TYPE_CARD = 'card';
+    const PAYMENT_TYPE_CARD_DIRECT = 'card_direct';
+    const PAYMENT_TYPE_SZKWAL = 'szkwal';
+    const PAYMENT_TYPE_WHITE_LABEL = 'whiteLabel';
+    const PAYMENT_TYPE_EHAT = 'ehat';
+    const PAYMENT_TYPE_SMS = 'sms';
+    const CARD_DEREGISTER = 'deregister';
+    const NUMBERS = 'numbers';
+    const REQUIRED = 'required';
+    const VALIDATION = 'validation';
+    const FLOAT = 'float';
+    const FILTER = 'filter';
+    const STRING = 'string';
+    const MAXLENGHT_128 = 'maxlenght_128';
+    const OPTIONS = 'options';
+    const KANAL = 'kanal';
+    const MAXLENGHT_512 = 'maxlenght_512';
+    const EMAIL_LIST = 'email_list';
+    const OPIS_DODATKOWY = 'opis_dodatkowy';
+    const MAXLENGHT_32 = 'maxlenght_32';
+    const EMAIL = 'email';
+    const MAXLENGHT_64 = 'maxlenght_64';
+    const TEST_MODE = 'test_mode';
+    const AMOUNT = 'amount';
+    const ORDER_ID = 'order_id';
+    const MAXLENGHT_40 = 'maxlenght_40';
+    const MINLENGTH_40 = 'minlength_40';
+    const MAXLENGTH_40 = 'maxlength_40';
+    const UNKNOWN_PAYMENT_TYPE_S = 'Unknown payment type: %s';
 
 
     /**
@@ -27,15 +53,20 @@ class Validate
      * @var array
      */
     private static $filters = array(
-        'numbers' => '/[^0-9]/',
-        'letters' => '/[^A-Za-z]/',
-        'mixed'   => '/[^A-Za-z0-9]/',
-        'date'    => '/[^0-9 \-:]/',
-        'text'    => '/[^\-\p{Latin}A-Za-z0-9 \.,_]/u',
-        'url'     => '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS',
-        'mail'    => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
-        'name'    => '/[^\-\p{Latin} ]/u',
-        'sign'    => '/[^A-Za-z!\., _\-0-9]/'
+        self::NUMBERS => '/[^0-9]/',
+        'letters'     => '/[^A-Za-z]/',
+        'mixed'       => '/[^A-Za-z0-9]/',
+        'date'        => '/[^0-9 \-:]/',
+        'text'        => '/[^\-\p{Latin}A-Za-z0-9 \.,_]/u',
+        'url'         => '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})
+        (?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})
+        (?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]
+        \d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}
+        -\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))
+        (?::\d{2,5})?(?:/[^\s]*)?$_iuS',
+        'mail'        => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
+        'name'        => '/[^\-\p{Latin} ]/u',
+        'sign'        => '/[^A-Za-z!\., _\-0-9]/'
     );
 
     /**
@@ -300,75 +331,75 @@ class Validate
          * Transaction amount with dot as decimal separator.
          */
         'kwota'               => array(
-            'required'   => true,
-            'validation' => array('float'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Transaction description
          */
         'opis'                => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_128'),
-            'filter'     => 'text'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
+            self::FILTER     => 'text'
         ),
         /**
          * The secondary parameter to the transaction identification.
          * After the transaction returned as a parameter tr_crc.
          */
         'crc'                 => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_128'),
-            'filter'     => 'sign'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
+            self::FILTER     => 'sign'
         ),
         /**
          * Allow only online payment.
          * Prevents the channel selection, which at the moment is not able to post real-time payment.
          */
         'online'              => array(
-            'required'   => false,
-            'validation' => array('options'),
-            'options'    => array(0, 1),
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array(0, 1),
         ),
         /**
          * Imposing the customer the pre-payment channel.
          * Could be changed manually by customer.
          * Required for register transaction by transaction API
          */
-        'kanal'               => array(
-            'required'   => false,
-            'validation' => array('uint'),
+        self::KANAL           => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array('uint'),
         ),
         /**
          * Blocking the channel selection of payment - only works together with the parameter channel.
          * Customer will be presented only the selected channel.
          */
         'zablokuj'            => array(
-            'required'   => false,
-            'validation' => array('options'),
-            'options'    => array(0, 1),
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array(0, 1),
         ),
         /**
          * The resulting URL return address that will send the result of a transaction in the form POST parameters.
          */
         'wyn_url'             => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_512'),
-            'filter'     => 'url'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_512),
+            self::FILTER     => 'url'
         ),
         /**
          * E-mail address to which you will be notified about the status of the transaction.
          */
         'wyn_email'           => array(
-            'required'   => false,
-            'validation' => array('email_list'),
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::EMAIL_LIST),
         ),
         /**
          * Description payees during the transaction.
          */
         'opis_sprzed'         => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_128'),
-            'filter'     => 'text'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
+            self::FILTER     => 'text'
         ),
         /**
          * Optional field used during card transactions processed through Elavon.
@@ -377,108 +408,108 @@ class Validate
          * All others will be removed.
          * Max 32 signs.
          */
-        'opis_dodatkowy'      => array(
-            'required'   => false,
-            'validation' => array('opis_dodatkowy', 'maxlenght_32'),
-            'filter'     => 'mixed'
+        self::OPIS_DODATKOWY  => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::OPIS_DODATKOWY, self::MAXLENGHT_32),
+            self::FILTER     => 'mixed'
         ),
         /**
          * The URL to which the customer will be transferred after successful completion of the transaction.
          */
         'pow_url'             => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_512'),
-            'filter'     => 'url'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_512),
+            self::FILTER     => 'url'
         ),
         /**
          * The URL to which the client will be transferred in the event of an error.
          * Default is pow_url
          */
         'pow_url_blad'        => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_512'),
-            'filter'     => 'url'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_512),
+            self::FILTER     => 'url'
         ),
         /**
          * Transactional panel language.
          * Default is PL
          */
         'jezyk'               => array(
-            'required'   => false,
-            'validation' => array('options'),
-            'options'    => array('PL', 'EN', 'DE', 'IT', 'ES', 'FR', 'RU'),
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array('PL', 'EN', 'DE', 'IT', 'ES', 'FR', 'RU'),
         ),
         /**
          * Customer email address.
          */
-        'email'               => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_64'),
-            'filter'     => 'mail'
+        self::EMAIL           => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
+            self::FILTER     => 'mail'
         ),
         /**
          * Customer surname.
          */
         'nazwisko'            => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_64'),
-            'filter'     => 'name'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
+            self::FILTER     => 'name'
         ),
         /**
          * Customer name.
          */
         'imie'                => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_64'),
-            'filter'     => 'name'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
+            self::FILTER     => 'name'
         ),
         /**
          * Customer address.
          */
         'adres'               => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_64'),
-            'filter'     => 'text'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
+            self::FILTER     => 'text'
         ),
         /**
          * Customer city.
          */
         'miasto'              => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_32'),
-            'filter'     => 'name'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_32),
+            self::FILTER     => 'name'
         ),
         /**
          * Customer postal code.
          */
         'kod'                 => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_10'),
-            'filter'     => 'text'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, 'maxlenght_10'),
+            self::FILTER     => 'text'
         ),
         /**
          * Country code.
          * Alphanumeric, 2 or 3 signs compatible with ISO 3166-1
          */
         'kraj'                => array(
-            'required'   => false,
-            'validation' => array('country_code'),
+            self::REQUIRED   => false,
+            self::VALIDATION => array('country_code'),
         ),
         /**
          * Customer phone.
          */
         'telefon'             => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_16'),
-            'filter'     => 'numbers'
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, 'maxlenght_16'),
+            self::FILTER     => self::NUMBERS
         ),
         /**
          * The parameter indicating acceptance of Terms tpay if it is available on the payee.
          */
         'akceptuje_regulamin' => array(
-            'required'   => false,
-            'validation' => array('options'),
-            'options'    => array(0, 1),
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array(0, 1),
         ),
     );
 
@@ -490,63 +521,65 @@ class Validate
         /**
          * The transaction ID assigned by the system tpay
          */
-        'tr_id'     => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string'),
+        'tr_id'         => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Date of transaction.
          */
-        'tr_date'   => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string'),
+        'tr_date'       => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
 
         ),
         /**
          * The secondary parameter to the transaction identification.
          */
-        'tr_crc'    => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string'),
+        'tr_crc'        => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Transaction amount.
          */
-        'tr_amount' => array(
-            'required'   => true,
-            'type'       => 'float',
-            'validation' => array('float'),
+        'tr_amount'     => array(
+            self::REQUIRED   => true,
+            'type'           => self::FLOAT,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * The amount paid for the transaction.
-         * Note: Depending on the settings, the amount paid can be different than transactions eg. When the customer does overpayment.
+         * Note: Depending on the settings, the amount paid can be different
+         * than transactions eg. When the customer does overpayment.
          */
-        'tr_paid'   => array(
-            'required'   => true,
-            'type'       => 'float',
-            'validation' => array('float'),
+        'tr_paid'       => array(
+            self::REQUIRED   => true,
+            'type'           => self::FLOAT,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Description of the transaction.
          */
-        'tr_desc'   => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string'),
+        'tr_desc'       => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Transaction status: TRUE in the case of the correct result or FALSE in the case of an error.
-         * Note: Depending on the settings, the transaction may be correct status, even if the amount paid is different from the amount of the transaction!
+         * Note: Depending on the settings, the transaction may be correct status,
+         * even if the amount paid is different from the amount of the transaction!
          * Eg. If the Seller accepts the overpayment or underpayment threshold is set.
          */
-        'tr_status' => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('options'),
-            'options'    => array(0, 1, true, false, 'TRUE', 'FALSE'),
+        'tr_status'     => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array(0, 1, true, false, 'TRUE', 'FALSE'),
         ),
         /**
          * Transaction error status.
@@ -555,48 +588,48 @@ class Validate
          * - overpay
          * - surcharge
          */
-        'tr_error'  => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('options'),
-            'options'    => array('none', 'overpay', 'surcharge'),
+        'tr_error'      => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array('none', 'overpay', 'surcharge'),
         ),
         /**
          * Customer email address.
          */
-        'tr_email'  => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('email_list'),
+        'tr_email'      => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::EMAIL_LIST),
         ),
         /**
          * The checksum verifies the data sent to the payee.
          * It is built according to the following scheme using the MD5 hash function:
          * MD5(id + tr_id + tr_amount + tr_crc + security code)
          */
-        'md5sum'    => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlength_32', 'minlength_32'),
+        'md5sum'        => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, 'maxlength_32', 'minlength_32'),
         ),
         /**
          * Transaction marker indicates whether the transaction was executed in test mode:
          * 1 – in test mode
          * 0 – in normal mode
          */
-        'test_mode' => array(
-            'required'   => false,
-            'type'       => 'int',
-            'validation' => array('options'),
-            'options'    => array(0, 1),
+        self::TEST_MODE => array(
+            self::REQUIRED   => false,
+            'type'           => 'int',
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array(0, 1),
         ),
         /**
          * The parameter is sent only when you use a payment channel or MasterPass or V.me.
          * Could have the following values: „masterpass” or „vme”
          */
-        'wallet'    => array(
-            'required' => false,
-            'type'     => 'string',
+        'wallet'        => array(
+            self::REQUIRED => false,
+            'type'         => self::STRING,
         ),
     );
 
@@ -608,45 +641,45 @@ class Validate
         /**
          * Transaction amount
          */
-        'amount'   => array(
-            'required'   => true,
-            'validation' => array('float'),
+        self::AMOUNT   => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Client name
          */
-        'name'     => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_64'),
+        'name'         => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
         ),
         /**
          * Client email
          */
-        'email'    => array(
-            'required'   => true,
-            'validation' => array('string', 'email_list'),
+        self::EMAIL    => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::EMAIL_LIST),
         ),
         /**
          * Sale description
          */
-        'desc'     => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_128'),
+        'desc'         => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
         ),
         /**
          * Value from partner system
          */
-        'order_id' => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_40'),
+        self::ORDER_ID => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_40),
         ),
         /**
          * Value from partner system
          */
-        'currency' => array(
-            'required'   => true,
-            'validation' => array('options'),
-            'options'    => array('985', '826', '840', '978', '203'),
+        'currency'     => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array('985', '826', '840', '978', '203'),
         ),
     );
 
@@ -658,68 +691,68 @@ class Validate
         /**
          * Method type
          */
-        'type'      => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('options'),
-            'options'    => array('sale', 'refund', 'deregister'),
+        'type'          => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array('sale', 'refund', 'deregister'),
         ),
         /**
          * Merchant optional value
          */
-        'order_id'  => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlenght_40')
+        self::ORDER_ID  => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_40)
         ),
         /**
          * Payment status
          */
-        'status'    => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('options'),
-            'options'    => array('correct', 'declined'),
+        'status'        => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::OPTIONS),
+            self::OPTIONS    => array('correct', 'declined'),
         ),
         /**
          * Message checksum
          */
-        'sign'      => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlenght_128', 'minlength_40')
+        'sign'          => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128, self::MINLENGTH_40)
         ),
         /**
          * Created sale/refund id
          */
-        'sale_auth' => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlenght_40')
+        'sale_auth'     => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_40)
         ),
         /**
          * Date of accounting/deregistering
          */
-        'date'      => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string')
+        'date'          => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING)
         ),
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
-        'test_mode' => array(
-            'required'   => false,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlength_1', 'minlength_1')
+        self::TEST_MODE => array(
+            self::REQUIRED   => false,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, 'maxlength_1', 'minlength_1')
         ),
         /**
          * shortcut for client card number, eg ****5678
          */
-        'card'      => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlength_8', 'minlength_8')
+        'card'          => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, 'maxlength_8', 'minlength_8')
         ),
     );
 
@@ -731,37 +764,37 @@ class Validate
         /**
          * Transaction amount
          */
-        'amount'   => array(
-            'required'   => true,
-            'validation' => array('float'),
+        self::AMOUNT   => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Client name
          */
-        'name'     => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_64'),
+        'name'         => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
         ),
         /**
          * Client email
          */
-        'email'    => array(
-            'required'   => true,
-            'validation' => array('string', 'email_list'),
+        self::EMAIL    => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::EMAIL_LIST),
         ),
         /**
          * Sale description
          */
-        'desc'     => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_128'),
+        'desc'         => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
         ),
         /**
          * Value from partner system
          */
-        'order_id' => array(
-            'required'   => false,
-            'validation' => array('string', 'maxlenght_40'),
+        self::ORDER_ID => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_40),
         ),
     );
 
@@ -771,37 +804,38 @@ class Validate
      */
     private static $cardDeregisterResponseFields = array(
         /**
-         * client authorization ID, sent if onetimer option is not set when creating client and client has not been deregistered (himself or by api)
+         * client authorization ID, sent if onetimer option is not set
+         * when creating client and client has not been deregistered (himself or by api)
          */
-        'cli_auth'  => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlength_40', 'minlength_40'),
+        'cli_auth'      => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, self::MAXLENGTH_40, self::MINLENGTH_40),
         ),
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
-        'test_mode' => array(
-            'required'   => false,
-            'type'       => 'int',
-            'validation' => array('int'),
+        self::TEST_MODE => array(
+            self::REQUIRED   => false,
+            'type'           => 'int',
+            self::VALIDATION => array('int'),
         ),
         /**
          * Date of accounting/deregistering
          */
-        'date'      => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string'),
-            'filter'     => 'date'
+        'date'          => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
+            self::FILTER     => 'date'
         ),
         /**
          * Message checksum
          */
-        'sign'      => array(
-            'required'   => true,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlength_128', 'minlength_40'),
+        'sign'          => array(
+            self::REQUIRED   => true,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, 'maxlength_128', self::MINLENGTH_40),
         ),
     );
 
@@ -814,70 +848,70 @@ class Validate
          * User api login
          */
         'api_login'    => array(
-            'required'   => true,
-            'validation' => array('string'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * User api password
          */
         'api_password' => array(
-            'required'   => true,
-            'validation' => array('string'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Client name
          */
         'cli_name'     => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlength_96'),
-            'filter'     => 'name'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, 'maxlength_96'),
+            self::FILTER     => 'name'
         ),
         /**
          * Client email
          */
         'cli_email'    => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlength_128'),
-            'filter'     => 'mail'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, 'maxlength_128'),
+            self::FILTER     => 'mail'
         ),
         /**
          * Client phone
          */
         'cli_phone'    => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlength_32'),
-            'filter'     => 'numbers'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, 'maxlength_32'),
+            self::FILTER     => self::NUMBERS
         ),
         /**
          * Title the client will be paying with; according to agreed format;
          */
         'title'        => array(
-            'required'   => true,
-            'validation' => array('string'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Optional field sent in notifications
          */
         'crc'          => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlength_64'),
-            'filter'     => 'text'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, 'maxlength_64'),
+            self::FILTER     => 'text'
         ),
         /**
          * Client account number
          */
         'cli_account'  => array(
-            'required'   => true,
-            'validation' => array('string', 'minlenght_26', 'maxlength_26'),
-            'filter'     => 'numbers'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, 'minlenght_26', 'maxlength_26'),
+            self::FILTER     => self::NUMBERS
         ),
         /**
          * Checksum
          */
         'hash'         => array(
-            'required'   => true,
-            'validation' => array('string', 'minlength_40', 'maxlength_40'),
-            'filter'     => 'sign'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MINLENGTH_40, self::MAXLENGTH_40),
+            self::FILTER     => 'sign'
         ),
     );
 
@@ -889,50 +923,50 @@ class Validate
         /**
          * Unique SZKWał payment ID
          */
-        'pay_id' => array(
-            'required'   => false,
-            'type'       => 'int',
-            'validation' => array('uint'),
+        'pay_id'     => array(
+            self::REQUIRED   => false,
+            'type'           => 'int',
+            self::VALIDATION => array('uint'),
         ),
         /**
          * Unique SZKWał notification ID
          */
-        'not_id' => array(
-            'required'   => false,
-            'type'       => 'int',
-            'validation' => array('uint'),
+        'not_id'     => array(
+            self::REQUIRED   => false,
+            'type'           => 'int',
+            self::VALIDATION => array('uint'),
         ),
         /**
          * The title of payment in agreed format
          */
-        'title'  => array(
-            'required'   => false,
-            'type'       => 'string',
-            'validation' => array('string'),
+        'title'      => array(
+            self::REQUIRED   => false,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Additional client field
          */
-        'crc'    => array(
-            'required'   => false,
-            'type'       => 'string',
-            'validation' => array('string'),
+        'crc'        => array(
+            self::REQUIRED   => false,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Transaction amount
          */
-        'amount' => array(
-            'required'   => false,
-            'type'       => 'float',
-            'validation' => array('float'),
+        self::AMOUNT => array(
+            self::REQUIRED   => false,
+            'type'           => self::FLOAT,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Message checksum
          */
-        'hash'   => array(
-            'required'   => false,
-            'type'       => 'string',
-            'validation' => array('string', 'maxlength_40', 'minlength_40'),
+        'hash'       => array(
+            self::REQUIRED   => false,
+            'type'           => self::STRING,
+            self::VALIDATION => array(self::STRING, self::MAXLENGTH_40, self::MINLENGTH_40),
         ),
     );
 
@@ -945,61 +979,61 @@ class Validate
          * User api login
          */
         'api_login'    => array(
-            'required'   => true,
-            'validation' => array('string'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * User api password
          */
         'api_password' => array(
-            'required'   => true,
-            'validation' => array('string'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Client name
          */
         'cli_name'     => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_96'),
-            'filter'     => 'text'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, 'maxlenght_96'),
+            self::FILTER     => 'text'
         ),
         /**
          * Client email
          */
         'cli_email'    => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_128'),
-            'filter'     => 'mail'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
+            self::FILTER     => 'mail'
         ),
         /**
          * Client phone
          */
         'cli_phone'    => array(
-            'required'   => true,
-            'validation' => array('maxlenght_32'),
-            'filter'     => 'numbers'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::MAXLENGHT_32),
+            self::FILTER     => self::NUMBERS
         ),
         /**
          * Order id (payment title) the customer will be paying with; according to agreed format;
          */
         'order'        => array(
-            'required'   => true,
-            'validation' => array('string'),
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * Transaction amount
          */
-        'amount'       => array(
-            'required'   => true,
-            'validation' => array('float'),
+        self::AMOUNT   => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Message checksum
          */
         'hash'         => array(
-            'required'   => true,
-            'validation' => array('string', 'maxlenght_40'),
-            'filter'     => 'sign'
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING, self::MAXLENGHT_40),
+            self::FILTER     => 'sign'
         ),
     );
 
@@ -1032,24 +1066,24 @@ class Validate
                 $responseFields = static::$cardDeregisterResponseFields;
                 break;
             default:
-                throw new TException(sprintf('Unknown payment type: %s', $paymentType));
+                throw new TException(sprintf(static::UNKNOWN_PAYMENT_TYPE_S, $paymentType));
         }
 
         foreach ($responseFields as $fieldName => $field) {
-            if (Util::post($fieldName, 'string') === false) {
-                if ($field['required'] === true) {
+            if (Util::post($fieldName, static::STRING) === false) {
+                if ($field[static::REQUIRED] === true) {
                     $missed[] = $fieldName;
                 }
             } else {
-                $val = Util::post($fieldName, 'string');
+                $val = Util::post($fieldName, static::STRING);
                 switch ($field['type']) {
-                    case 'string':
+                    case static::STRING:
                         $val = (string)$val;
                         break;
                     case 'int':
                         $val = (int)$val;
                         break;
-                    case 'float':
+                    case static::FLOAT:
                         $val = (float)$val;
                         break;
                     default:
@@ -1059,8 +1093,8 @@ class Validate
             }
         }
 
-        if (sizeof($missed) > 0) {
-            throw new TException(sprintf('Missing fields in tpay response: %s', join(',', $missed)));
+        if (count($missed) > 0) {
+            throw new TException(sprintf('Missing fields in tpay response: %s', implode(',', $missed)));
         }
 
         foreach ($ready as $fieldName => $fieldVal) {
@@ -1091,7 +1125,7 @@ class Validate
                 break;
             case static::PAYMENT_TYPE_BASIC_API:
                 $requestFields = static::$panelPaymentRequestFields;
-                $requestFields['kanal']['required'] = true;
+                $requestFields[static::KANAL][static::REQUIRED] = true;
                 break;
             case static::PAYMENT_TYPE_CARD:
                 $requestFields = $notResp ? static::$cardPaymentRequestFields : static::$cardPaymentResponseFields;
@@ -1106,7 +1140,7 @@ class Validate
                 $requestFields = static::$whiteLabelRequestFields;
                 break;
             default:
-                throw new TException(sprintf('Unknown payment type: %s', $paymentType));
+                throw new TException(sprintf(static::UNKNOWN_PAYMENT_TYPE_S, $paymentType));
         }
 
         if (!is_string($name)) {
@@ -1118,35 +1152,37 @@ class Validate
 
         $fieldConfig = $requestFields[$name];
 
-        if ($fieldConfig['required'] === false && ($value === '' || $value === false)) {
+        if ($fieldConfig[static::REQUIRED] === false && ($value === '' || $value === false)) {
             return true;
         }
 
-        if (isset($fieldConfig['validation']) === true) {
+        if (isset($fieldConfig[static::VALIDATION]) === true) {
 
-            foreach ($fieldConfig['validation'] as $validator) {
+            foreach ($fieldConfig[static::VALIDATION] as $validator) {
 
                 switch ($validator) {
                     case 'uint':
                         static::validateUint($value, $name);
                         break;
-                    case 'float':
+                    case static::FLOAT:
                         static::validateFloat($value, $name);
                         break;
-                    case 'string':
+                    case static::STRING:
                         static::validateString($value, $name);
                         break;
-                    case 'opis_dodatkowy':
+                    case static::OPIS_DODATKOWY:
                         static::validateDescription($value, $name);
                         break;
-                    case 'email_list':
+                    case static::EMAIL_LIST:
                         static::validateEmailList($value, $name);
                         break;
-                    case 'options':
-                        static::validateOptions($value, $fieldConfig['options'], $name);
+                    case static::OPTIONS:
+                        static::validateOptions($value, $fieldConfig[static::OPTIONS], $name);
                         break;
                     case 'country_code':
                         static::validateCountryCode($value, $name);
+                        break;
+                    default:
                         break;
                 }
                 if (strpos($validator, 'maxlenght') === 0) {
@@ -1162,8 +1198,8 @@ class Validate
             }
         }
 
-        if (isset($fieldConfig['filter'])) {
-            $filterName = $fieldConfig['filter'];
+        if (isset($fieldConfig[static::FILTER])) {
+            $filterName = $fieldConfig[static::FILTER];
 
             $negationFileter = in_array($filterName, array('mail', 'url'));
 
@@ -1299,7 +1335,9 @@ class Validate
      */
     private static function validateCountryCode($value, $name)
     {
-        if (!is_string($value) || (strlen($value) !== 2 && strlen($value) !== 3) || (!in_array($value, static::$isoCountryCodes) && !isset(static::$isoCountryCodes[$value]))) {
+        if (!is_string($value)
+            || (strlen($value) !== 2 && strlen($value) !== 3)
+            || (!in_array($value, static::$isoCountryCodes) && !isset(static::$isoCountryCodes[$value]))) {
             throw new TException(
                 sprintf('Field "%s" has invalid country code', $name)
             );
@@ -1391,7 +1429,7 @@ class Validate
      *
      * @throws TException
      */
-    public static function validateCardApiPass($cardApiPassword)
+    public static function validateCardApiPassword($cardApiPassword)
     {
         if (!is_string($cardApiPassword) || strlen($cardApiPassword) === 0) {
             throw new TException('Invalid card API pass');
@@ -1466,7 +1504,7 @@ class Validate
         if (!is_array($config)) {
             throw new TException('Config is not an array');
         } else {
-            if (sizeof($config) === 0) {
+            if (count($config) === 0) {
                 throw new TException('Config is empty');
             }
         }
@@ -1476,7 +1514,7 @@ class Validate
                 $ready[$key] = $value;
             }
         }
-        Validate::checkRequiredPaymentFields($paymentType, $ready);
+        Validate::isSetRequiredPaymentFields($paymentType, $ready);
 
         return $ready;
     }
@@ -1487,10 +1525,9 @@ class Validate
      * @param string $paymentType
      * @param array $config
      *
-     * @return bool
      * @throws TException
      */
-    public static function checkRequiredPaymentFields($paymentType, $config)
+    public static function isSetRequiredPaymentFields($paymentType, $config)
     {
         $missing = array();
 
@@ -1501,7 +1538,7 @@ class Validate
                 break;
             case static::PAYMENT_TYPE_BASIC_API:
                 $requestFields = static::$panelPaymentRequestFields;
-                $requestFields['kanal']['required'] = true;
+                $requestFields[static::KANAL][static::REQUIRED] = true;
                 break;
             case static::PAYMENT_TYPE_CARD:
                 $requestFields = static::$cardPaymentRequestFields;
@@ -1516,16 +1553,16 @@ class Validate
                 $requestFields = static::$whiteLabelRequestFields;
                 break;
             default:
-                throw new TException(sprintf('Unknown payment type: %s', $paymentType));
+                throw new TException(sprintf(static::UNKNOWN_PAYMENT_TYPE_S, $paymentType));
         }
 
         foreach ($requestFields as $fieldName => $field) {
-            if ($field['required'] === true && !isset($config[$fieldName])) {
+            if ($field[static::REQUIRED] === true && !isset($config[$fieldName])) {
                 $missing[] = $fieldName;
             }
         }
-        if (sizeof($missing) !== 0) {
-            throw new TException(sprintf('Missing mandatory fields: %s', join(',', $missing)));
+        if (count($missing) !== 0) {
+            throw new TException(sprintf('Missing mandatory fields: %s', implode(',', $missing)));
         }
     }
 }

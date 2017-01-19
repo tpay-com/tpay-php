@@ -1,26 +1,24 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 19.01.2017
- * Time: 12:21
+/*
+ * Created by tpay.com
  */
+
 class WhiteLabelNotification
 {
-    public function __construct()
+    private $tpay;
+
+    public function __construct(tpay\PaymentWhiteLabel $object)
     {
         if (filter_input(INPUT_GET, ['szkwal_notification'])) {
+            $this->tpay = $object;
             $this->handleNotification();
         }
     }
 
     public function handleNotification()
     {
-
-        $tpay = new tpay\PaymentWhiteLabel();
-
-        return $tpay->handleNotification();
+        return $this->tpay->handleNotification();
     }
 
 }

@@ -1,19 +1,21 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentSzkwal.php';
+/*
+ * Created by tpay.com
+ */
 
 class Szkwal
 {
+    private $tpay;
 
-    public function __construct()
+    public function __construct(tpay\PaymentSzkwal $object)
     {
-
+        $this->tpay = $object;
+        tpay\Lang::setLang('pl');
     }
 
     public function getSzkwalHtml()
     {
-
-
         /**
          * Register new client
          */
@@ -23,14 +25,13 @@ class Szkwal
         $clientPhone = '126354789';
         $crc = '100020003000';
         $clientBankAccount = '48079682082787844636363553';
-        $tpay = new tpay\PaymentSzkwal();
-        tpay\Lang::setLang('pl');
-        $szkwalResult = $tpay->registerClient($clientName, $clientEmail, $clientPhone, $crc, $clientBankAccount);
+
+        $szkwalResult = $this->tpay->registerClient($clientName, $clientEmail, $clientPhone, $crc, $clientBankAccount);
 
         $staticFilesURL = 'http://example.pl/src/';
         $merchantData = 'Sklep ze zdrową żywnością<br>ul. Świdnicka 26, 50-345 Wrocław';
         $amount = 123.45;
-        $html = $tpay->getConfirmationBlock($szkwalResult['title'], $amount, $staticFilesURL, $merchantData);
+        $html = $this->tpay->getConfirmationBlock($szkwalResult['title'], $amount, $staticFilesURL, $merchantData);
 
         echo $html;
 
@@ -53,8 +54,7 @@ class Szkwal
 
         $clientTitle = 'KIP438010354';
         $amount = 100;
-        $tpay = new tpay\PaymentSzkwal();
-        return $tpay->registerIncome($clientTitle, $amount);
+        return $this->tpay->registerIncome($clientTitle, $amount);
 
         /*
          * string(82) " correct "
@@ -68,10 +68,9 @@ class Szkwal
         /**
          * Update notification URL
          */
-        $tpay = new tpay\PaymentSzkwal();
         $notificationURL = 'http://example.pl?szkwal_notification';
 
-        return $tpay->changeSellerData($notificationURL);
+        return $this->tpay->changeSellerData($notificationURL);
 
         /*
          * bool(true)

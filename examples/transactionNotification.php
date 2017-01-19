@@ -1,16 +1,17 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 18.01.2017
- * Time: 18:55
+/*
+ * Created by tpay.com
  */
+
 class TransactionNotification
 {
-    public function __construct()
+    private $tpay;
+
+    public function __construct(tpay\PaymentBasic $object)
     {
         if (filter_input(INPUT_GET, ['transaction_notification'])) {
+            $this->tpay = $object;
             $this->handleNotification();
         }
     }
@@ -18,8 +19,7 @@ class TransactionNotification
     public function handleNotification()
     {
 
-        $tpay = new tpay\PaymentBasic();
-        return $tpay->checkPayment();
+        return $this->tpay->checkPayment();
         /*
              * Example $paymentDetails response
             Array

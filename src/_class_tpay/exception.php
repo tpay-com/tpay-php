@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**

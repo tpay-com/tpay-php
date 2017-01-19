@@ -1,25 +1,24 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 18.01.2017
- * Time: 19:24
+/*
+ * Created by tpay.com
  */
+
 class SmsNotification
 {
-    public function __construct()
+    private $tpay;
+
+    public function __construct(tpay\PaymentSMS $object)
     {
-        if (filter_input(INPUT_POST, ['check_sms'])) {
+        if (filter_input(INPUT_GET, ['check_sms'])) {
+            $this->tpay = $object;
             $this->handleSmsNotification();
         }
     }
 
     public function handleSmsNotification()
     {
-
-        $tpay = new tpay\PaymentSMS();
-        $result = $tpay->verifyCode();
+        $result = $this->tpay->verifyCode();
 
         echo '<h1>sprawdzenie SMS</h1>';
         echo 'result: ' . (int)$result;

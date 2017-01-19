@@ -28,7 +28,6 @@ function CardPayment(url, pubkey) {
     var DINERS = /^(30|36|38)/,
         ELECTRON = /^(4026|417500|4508|4844|4913|4917)/,
         JCB = /^35(2[8-9]|[3-8])/,
-        LASER = /^6(304|706|709|771)/,
         MAESTRO = /^(50(18|20|38)|6304|67(59|6[1-3])|0604)/,
         MASTERCARD = /^5[1-5]/,
         VISA = /^40([0-1]|2[0-5]|2[7-9]|[3-9])|41([0-6]|7[0-4])|41(75(0[1-9]|[1-9])|7[6-9]|[8-9])|4[2-4]|450[0-7]|4509|45[1-9]|4[6-7]|48[0-3]|484[0-3]|484[5-9]|48[5-9]|490|491[0-2]|491[4-6]|491[8-9]|49[2-9]/;
@@ -46,7 +45,7 @@ function CardPayment(url, pubkey) {
             var cc_number = $(this).val();
             if (DINERS.test(cc_number)) {
                 type = 'diners';
-            } else if (ELECTRON.test(cc_number)) {
+            } else if (ELECTRON.test(cc_number) || (VISA.test(cc_number))){
                 type = 'visa';
             } else if (JCB.test(cc_number)) {
                 type = 'jcb';
@@ -54,10 +53,8 @@ function CardPayment(url, pubkey) {
                 type = 'maestro';
             } else if (MASTERCARD.test(cc_number)) {
                 type = 'master';
-            } else if (VISA.test(cc_number)) {
-                type = 'visa';
             }
-            if (type != '')
+            if (type !== '')
                 $('#' + type).addClass('hover');
 
         }

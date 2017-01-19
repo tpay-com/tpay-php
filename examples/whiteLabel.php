@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentWhiteLabel.php';
+/*
+ * Created by tpay.com
+ */
 
 class WhiteLabel
 {
@@ -24,7 +26,7 @@ class WhiteLabel
             string(1927) "<link rel="stylesheet" type="text/css" href="../_css/bank_instruction.css"/>
             <div id="white-label-bank-instruction">
                 <div class="bank-block">
-                    <img src="https://secure.tpay.com/_/banks/b18.png" alt=""/>
+                    <img src="https://secure.transferuj.pl/_/banks/b18.png" alt=""/>
                                 <p>
             1. Zaloguj się do banku i wybierz rachunek, w którym chcesz zdefiniować odbiorcę
             2. Przejdź do zakładki Odbiorcy zdefiniowani -> Nowy Odbiorca

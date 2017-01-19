@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -82,7 +87,8 @@ class Lang
 
             'card_number'     => 'Card number',
             'expiration_date' => 'Expiration date',
-            'signature'       => 'For MasterCard, Visa or Discover, it\'s the last three digits in the signature area on the back of your card.',
+            'signature'       => 'For MasterCard, Visa or Discover, it\'s the last three digits
+             in the signature area on the back of your card.',
             'name_on_card'    => 'Name on card',
             'name_surname'    => 'Name and surname',
             'save_card'       => 'Save my card',
@@ -102,7 +108,9 @@ class Lang
             'account_number' => 'Account number',
             'payment_title'  => 'Payment title',
             'payment_method' => 'Payment method',
-            'szkwal_info'    => 'Your title transfer is dedicated to you and very important for the identification of payment. You can create a transfer as defined in its bank to quickly and easily fund your account in the future',
+            'szkwal_info'    => 'Your title transfer is dedicated to you and very important for the identification of
+             payment. You can create a transfer as defined in its bank to
+              quickly and easily fund your account in the future',
 
             // WHITE LABEL
 
@@ -126,11 +134,13 @@ class Lang
 
             'card_number'     => 'Numer karty',
             'expiration_date' => 'Termin ważności',
-            'signature'       => 'Dla MasterCard, Visa lub Discover, są to przy ostatnie cyfry umieszczone przy podpisie karty.',
+            'signature'       => 'Dla MasterCard, Visa lub Discover, są to przy ostatnie
+             cyfry umieszczone przy podpisie karty.',
             'name_on_card'    => 'Właściciel karty',
             'name_surname'    => 'Imię i nazwisko',
             'save_card'       => 'Zapisz moją kartę',
-            'save_card_info'  => 'Zezwolenie na szybszą płatność w przyszłości. Dane karty zostaną zapisane na serwerze tpay',
+            'save_card_info'  => 'Zezwolenie na szybszą płatność w przyszłości.
+             Dane karty zostaną zapisane na serwerze tpay',
             'processing'      => 'Przetwarzanie danych, proszę czekać...',
             'card_payment'    => 'Zapłać',
             'debit'           => 'Proszę obciążyć moje konto',
@@ -146,7 +156,9 @@ class Lang
             'account_number' => 'Numer konta',
             'payment_title'  => 'Tytuł przelewu',
             'payment_method' => 'Sposób płatności',
-            'szkwal_info'    => 'Twój tytuł przelewu jest dedykowany dla Ciebie i bardzo ważny dla identyfikacji wpłaty. Możesz stworzyć przelew zdefiniowany w swoim banku, aby wygodnie i szybko zasilić swoje konto w przyszłości.',
+            'szkwal_info'    => 'Twój tytuł przelewu jest dedykowany dla Ciebie i bardzo ważny dla identyfikacji wpłaty.
+             Możesz stworzyć przelew zdefiniowany w swoim banku, aby wygodnie i szybko zasilić swoje
+              konto w przyszłości.',
 
             // WHITE LABEL
 

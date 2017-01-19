@@ -1,14 +1,19 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentBasic.php';
+/*
+ * Created by tpay.com
+ */
 
 class TpayBasic
 {
+    private $tpay;
 
-    public function __construct()
+    public function __construct(tpay\PaymentBasic $object)
     {
+        $this->tpay = $object;
         $this->getDataForTpay();
     }
+
     public function getDataForTpay()
     {
 
@@ -24,14 +29,10 @@ class TpayBasic
             'nazwisko'  => 'Kowalski',
         );
 
-        $tpay = new tpay\PaymentBasic();
-
         /*
          * This method return HTML form
          */
-        $paymentForm = $tpay->getTransactionForm($config);
-
-        echo $paymentForm;
+        echo $this->tpay->getTransactionForm($config);
 
     }
 }

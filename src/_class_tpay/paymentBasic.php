@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -11,49 +16,10 @@ namespace tpay;
 class PaymentBasic
 {
     /**
-     * Merchant id
-     * @var int
-     */
-    protected $merchantId = '[MERCHANT_ID]';
-
-    /**
-     * Merchant secret
-     * @var string
-     */
-    private $merchantSecret = '[MERCHANT_SECRET]';
-
-    /**
-     * tpay payment url
-     * @var string
-     */
-    protected $apiURL = 'https://secure.tpay.com';
-
-    /**
-     * tpay response IP
-     * @var string
-     */
-    private $secureIP = array(
-        '195.149.229.109',
-    );
-
-    /**
-     * If false library not validate tpay server IP
-     * @var bool
-     */
-    private $validateServerIP = true;
-
-    /**
-     * Path to template directory
-     * @var string
-     */
-    private $templateDir = 'common/_tpl/';
-
-    /**
      * @var string
      */
 
     const ACTIONURL = 'action_url';
-
     /**
      * @var string
      */
@@ -62,7 +28,42 @@ class PaymentBasic
      * @var string
      */
     const PAYMENTFORM = 'payment_form';
-
+    /**
+     * Merchant id
+     * @var int
+     */
+    protected $merchantId = '[MERCHANT_ID]';
+    /**
+     * tpay payment url
+     * @var string
+     */
+    protected $apiURL = 'https://secure.tpay.com';
+    /**
+     * Merchant secret
+     * @var string
+     */
+    private $merchantSecret = '[MERCHANT_SECRET]';
+    /**
+     * tpay response IP
+     * @var string
+     */
+    private $secureIP = array(
+        '195.149.229.109',
+        '148.251.96.163',
+        '178.32.201.77',
+        '46.248.167.59',
+        '46.29.19.106'
+    );
+    /**
+     * If false library not validate tpay server IP
+     * @var bool
+     */
+    private $validateServerIP = true;
+    /**
+     * Path to template directory
+     * @var string
+     */
+    private $templateDir = 'common/_tpl/';
     /**
      * URL to tpay regulations file
      * @var string
@@ -129,7 +130,7 @@ class PaymentBasic
      */
     public function checkPayment($paymentType = Validate::PAYMENT_TYPE_BASIC)
     {
-        Util::log('check basic payment', '$_POST: ' . "\n" . print_r($_POST, true));
+        Util::log('check basic payment', '$_POST' . "\n" . print_r(INPUT_POST, true));
 
         $res = Validate::getResponse($paymentType);
 
@@ -154,6 +155,41 @@ class PaymentBasic
     }
 
     /**
+     * Check md5 sum to validate tpay response.
+     * The values of variables that md5 sum includes are available only for
+     * merchant and tpay system.
+     *
+     * @param string $md5sum md5 sum received from tpay
+     * @param string $transactionId transaction id
+     * @param float $transactionAmount transaction amount
+     * @param string $crc transaction crc
+     *
+     * @return bool
+     */
+    private function checkMD5($md5sum, $transactionId, $transactionAmount, $crc)
+    {
+        if (!is_string($md5sum) || strlen($md5sum) !== 32) {
+            return false;
+        }
+
+        return ($md5sum === md5($this->merchantId . $transactionId .
+                $transactionAmount . $crc . $this->merchantSecret));
+    }
+
+    /**
+     * Check if request is called from secure tpay server
+     *
+     * @return bool
+     */
+    private function checkServer()
+    {
+        if (!filter_input(INPUT_SERVER,['REMOTE_ADDR']) || !in_array(INPUT_SERVER['REMOTE_ADDR'], $this->secureIP)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Create HTML form for EHat payment based on transaction config
      * More information about config fields @see Validate::$panelPaymentRequestFields
      *
@@ -174,6 +210,26 @@ class PaymentBasic
         );
 
         return Util::parseTemplate($this->templateDir . static::PAYMENTFORM, $data);
+    }
+
+    /**
+     * Validate passed payment config and add required elements with merchant id and md5 sum
+     * More information about config fields @see Validate::$panelPaymentRequestField
+     *
+     * @param array $config transaction config
+     *
+     * @return array
+     *
+     * @throws TException
+     */
+    private function prepareConfig($config)
+    {
+        $ready = Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC, $config);
+
+        $ready['md5sum'] = md5($this->merchantId . $ready['kwota'] . $ready['crc'] . $this->merchantSecret);
+        $ready['id'] = $this->merchantId;
+
+        return $ready;
     }
 
     /**
@@ -236,27 +292,6 @@ class PaymentBasic
     }
 
     /**
-     * Check md5 sum to validate tpay response.
-     * The values of variables that md5 sum includes are available only for
-     * merchant and tpay system.
-     *
-     * @param string $md5sum md5 sum received from tpay
-     * @param string $transactionId transaction id
-     * @param float $transactionAmount transaction amount
-     * @param string $crc transaction crc
-     *
-     * @return bool
-     */
-    private function checkMD5($md5sum, $transactionId, $transactionAmount, $crc)
-    {
-        if (!is_string($md5sum) || strlen($md5sum) !== 32) {
-            return false;
-        }
-
-        return ($md5sum === md5($this->merchantId . $transactionId . $transactionAmount . $crc . $this->merchantSecret));
-    }
-
-    /**
      * Check md5 sum to confirm value of payment amount
      *
      * @param string $md5sum md5 sum received from tpay
@@ -271,38 +306,5 @@ class PaymentBasic
         if ($md5sum !== md5($this->merchantId . $transactionId . $transactionAmount . $crc . $this->merchantSecret)) {
             throw new TException('Invalid checksum');
         }
-    }
-
-    /**
-     * Validate passed payment config and add required elements with merchant id and md5 sum
-     * More information about config fields @see Validate::$panelPaymentRequestField
-     *
-     * @param array $config transaction config
-     *
-     * @return array
-     *
-     * @throws TException
-     */
-    private function prepareConfig($config)
-    {
-        $ready = Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC, $config);
-
-        $ready['md5sum'] = md5($this->merchantId . $ready['kwota'] . $ready['crc'] . $this->merchantSecret);
-        $ready['id'] = $this->merchantId;
-
-        return $ready;
-    }
-
-    /**
-     * Check if request is called from secure tpay server
-     *
-     * @return bool
-     */
-    private function checkServer()
-    {
-        if (!isset($_SERVER['REMOTE_ADDR']) || !in_array($_SERVER['REMOTE_ADDR'], $this->secureIP)) {
-            return false;
-        }
-        return true;
     }
 }

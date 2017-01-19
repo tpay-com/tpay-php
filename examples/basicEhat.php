@@ -1,12 +1,16 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentBasic.php';
+/*
+ * Created by tpay.com
+ */
 
 class BasicEhat
 {
+    private $tpay;
 
-    public function __construct()
+    public function __construct(tpay\PaymentBasic $object)
     {
+        $this->tpay = $object;
         $this->getEhatForm();
     }
 
@@ -24,26 +28,18 @@ class BasicEhat
             'nazwisko'  => 'Kowalski',
         );
 
-        $tpay = new tpay\PaymentBasic();
-
         /*
          * This method return HTML form
          */
-        $paymentForm = $tpay->getEHatForm($config);
-
-        echo $paymentForm;
-
-        ?>
-
-        <button id="go-to-payment" type="button">Pay</button>
-
+        $paymentForm = $this->tpay->getEHatForm($config) . '<button id="go-to-payment" type="button">Pay</button>';
+        $paymentForm .= "
         <script>
             var button = document.getElementById('go-to-payment');
             button.onclick = function () {
                 document.getElementById('tpay-payment').submit();
             }
-        </script>
-        <?php
+        </script>";
+        echo $paymentForm;
     }
 }
 

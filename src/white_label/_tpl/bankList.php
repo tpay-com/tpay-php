@@ -1,4 +1,10 @@
-<?php ?>
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+?>
 <link rel="stylesheet" type="text/css" href="white_label/_css/bank_list.css"/>
 <div id="white-label-info">
     <?php foreach ($data as $bank) { ?>

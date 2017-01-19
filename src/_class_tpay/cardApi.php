@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -10,6 +15,10 @@ namespace tpay;
  */
 class CardAPI
 {
+    const PRESALE = 'presale';
+    const EMPTYCODE = 'Client auth code is empty.';
+    const INVALIDCODE = 'Client auth code is invalid.';
+
     /**
      * PaymentCardAPI class constructor
      *
@@ -37,7 +46,7 @@ class CardAPI
      * tpay payment url
      * @var string
      */
-    private $apiURL = 'https://secure.tpay.com/api/cards/';
+    private $apiURL = 'https://secure.transferuj.pl/api/cards/';
     /**
      * Card api key
      * @var string
@@ -54,7 +63,7 @@ class CardAPI
      */
     private $verificationCode;
     /**
-     * The same as chosen in merchant panel (https://secure.tpay.com/panel)
+     * The same as chosen in merchant panel (https://secure.transferuj.pl/panel)
      * In card api tab preferences
      * @var string
      */
@@ -63,7 +72,7 @@ class CardAPI
     public function __construct($cardApiKey, $cardApiPassword, $verificationCode = '', $hashAlg = 'sha1')
     {
         Validate::validateCardApiKey($cardApiKey);
-        Validate::validateCardApiPass($cardApiPassword);
+        Validate::validateCardApiPassword($cardApiPassword);
         Validate::validateCardHashAlg($hashAlg);
         if ($verificationCode !== '') {
             Validate::validateCardCode($verificationCode);
@@ -186,9 +195,7 @@ class CardAPI
 
         Util::log('Card request', print_r($params, true));
 
-        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
-
-        return $response;
+        return $this->postRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -259,7 +266,8 @@ class CardAPI
     /**
      * Method used to create new sale for payment on demand.
      * It can be called after receiving notification with cli_auth (see communication schema in register_sale method).
-     * It cannot be used if onetimer option was sent in register_sale or client has unregistered (by link in email or by API).
+     * It cannot be used if onetimer option was sent in register_sale or client has unregistered
+     * (by link in email or by API).
      *
      * @param string $clientAuthCode client auth code
      * @param string $saleDescription sale description
@@ -272,23 +280,24 @@ class CardAPI
      *
      * @throws TException
      */
-    public function presale($clientAuthCode, $saleDescription, $amount, $currency = '985', $orderID = null, $lang = 'pl')
+    public function presale($clientAuthCode, $saleDescription, $amount, $currency = '985',
+                            $orderID = null, $lang = 'pl')
     {
 
-        $params = $this->saleValidateAndPrepareParams($clientAuthCode, $saleDescription, $amount, $currency, $orderID, $lang, 'presale');
+        $params = $this->saleValidateAndPrepareParams($clientAuthCode, $saleDescription, $amount,
+            $currency, $orderID, $lang, static::PRESALE);
 
         Util::log('Presale params', print_r($params, true) . ' hash alg ' . $this->hashAlg);
 
         $amount = number_format($amount, 2, '.', '');
 
-        $params[static::SIGN] = hash($this->hashAlg, 'presale' . $clientAuthCode . $saleDescription . $amount . $currency . $orderID . $lang . $this->verificationCode);
+        $params[static::SIGN] = hash($this->hashAlg, static::PRESALE . $clientAuthCode . $saleDescription .
+            $amount . $currency . $orderID . $lang . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
         Util::log('Pre sale params with hash ', print_r($params, true) . 'req url ' . $this->apiURL . $this->apiKey);
 
-        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
-
-        return $response;
+        return $this->postRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -308,14 +317,15 @@ class CardAPI
      *
      * @throws TException
      */
-    private function saleValidateAndPrepareParams($clientAuthCode, $saleDescription, $amount, $currency, $orderID, $lang, $method, $errors = array())
+    private function saleValidateAndPrepareParams($clientAuthCode, $saleDescription,
+                                                  $amount, $currency, $orderID, $lang, $method, $errors = array())
     {
 
         if (!is_string($clientAuthCode) || strlen($clientAuthCode) === 0) {
-            $errors[] = 'Client auth code is empty.';
+            $errors[] = static::EMPTYCODE;
         } else {
             if (strlen($clientAuthCode) !== 40) {
-                $errors[] = 'Client auth code is invalid.';
+                $errors[] = static::INVALIDCODE;
             }
         }
 
@@ -335,17 +345,17 @@ class CardAPI
             $errors[] = 'XCurrency is invalid.';
         }
 
-        if (sizeof($errors) > 0) {
-            throw new TException(sprintf('%s', join(' ', $errors)));
+        if (count($errors) > 0) {
+            throw new TException(sprintf('%s', implode(' ', $errors)));
         }
 
         $amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
 
         $params = array(
-            static::METHOD => $method,
-            static::CLIAUTH     => $clientAuthCode,
-            static::DESC   => $saleDescription,
-            static::AMOUNT => $amount,
+            static::METHOD  => $method,
+            static::CLIAUTH => $clientAuthCode,
+            static::DESC    => $saleDescription,
+            static::AMOUNT  => $amount,
         );
 
         if ($currency) {
@@ -388,14 +398,14 @@ class CardAPI
     )
     {
 
-        $params = $this->saleValidateAndPrepareParams($clientAuthCode, $saleDescription, $amount, $currency, $orderID, $lang, 'presale');
+        $params = $this->saleValidateAndPrepareParams($clientAuthCode, $saleDescription,
+            $amount, $currency, $orderID, $lang, static::PRESALE);
         $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
 
         if ($response['result']) {
             $saleAuthCode = $response[static::SALEAUTH];
-            $saleResponse = $this->sale($clientAuthCode, $saleAuthCode);
+            return $this->sale($clientAuthCode, $saleAuthCode);
 
-            return $saleResponse;
         }
 
         return $response;
@@ -422,23 +432,23 @@ class CardAPI
         }
 
         $params = array(
-            static::METHOD => static::SALE,
-            static::CLIAUTH     => $clientAuthCode,
-            static::SALEAUTH    => $saleAuthCode,
+            static::METHOD   => static::SALE,
+            static::CLIAUTH  => $clientAuthCode,
+            static::SALEAUTH => $saleAuthCode,
         );
-        $params[static::SIGN] = hash($this->hashAlg, static::SALE . $clientAuthCode . $saleAuthCode . $this->verificationCode);
+        $params[static::SIGN] = hash($this->hashAlg, static::SALE .
+            $clientAuthCode . $saleAuthCode . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
-        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
-
-        return $response;
+        return $this->postRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
      * Method used to transfer money back to the client.
      * The refund can reference to chosen sale (sale_auth) or directly to client (cli_auth).
      * In both cases amount is adjustable in parameter amount.
-     * If only cli_auth is sent amount parameter is required, if sale_auth is passed amount and currency is not necessary -
+     * If only cli_auth is sent amount parameter is required,
+     * if sale_auth is passed amount and currency is not necessary -
      * system will take default values from the specified sale. With sale_auth refund can be made only once
      *
      * @param string $clientAuthCode client auth code
@@ -459,10 +469,10 @@ class CardAPI
          * 	required clientAuthCode or sale_auth, refund_desc and amount if only clientAuthCode passed
          */
         if (!is_string($clientAuthCode) || strlen($clientAuthCode) === 0) {
-            $errors[] = 'Client auth code is empty.';
+            $errors[] = static::EMPTYCODE;
         } else {
             if (strlen($clientAuthCode) !== 40) {
-                $errors[] = 'Client auth code is invalid.';
+                $errors[] = static::INVALIDCODE;
             }
         }
 
@@ -499,8 +509,8 @@ class CardAPI
             $errors[] = 'Currency is invalid.';
         }
 
-        if (sizeof($errors) > 0) {
-            throw new TException(sprintf('%s', join(' ', $errors)));
+        if (count($errors) > 0) {
+            throw new TException(sprintf('%s', implode(' ', $errors)));
         }
 
         $params[static::METHOD] = 'refund';
@@ -526,9 +536,7 @@ class CardAPI
         $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
-        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
-
-        return $response;
+        return $this->postRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -547,15 +555,15 @@ class CardAPI
         $errors = array();
 
         if (!is_string($clientAuthCode) || strlen($clientAuthCode) === 0) {
-            $errors[] = 'Client auth code is empty.';
+            $errors[] = static::EMPTYCODE;
         } else {
             if (strlen($clientAuthCode) !== 40) {
-                $errors[] = 'Client auth code is invalid.';
+                $errors[] = static::INVALIDCODE;
             }
         }
 
-        if (sizeof($errors) > 0) {
-            throw new TException(sprintf('%s', join(' ', $errors)));
+        if (count($errors) > 0) {
+            throw new TException(sprintf('%s', implode(' ', $errors)));
         }
 
         $params[static::METHOD] = 'deregister';
@@ -564,8 +572,6 @@ class CardAPI
         $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
-        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
-
-        return $response;
+        return $this->postRequest($this->apiURL . $this->apiKey, $params);
     }
 }

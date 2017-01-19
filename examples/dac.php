@@ -1,11 +1,16 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentDac.php';
+/*
+ * Created by tpay.com
+ */
 
 class Dac
 {
-    public function __construct()
+    private $tpay;
+
+    public function __construct(tpay\PaymentDAC $object)
     {
+        $this->tpay = $object;
         $this->processDacTransaction();
     }
 
@@ -22,8 +27,6 @@ class Dac
             'nazwisko' => 'Wayn',
         );
 
-        $tpay = new tpay\PaymentDAC();
-
         /*
          * This method return HTML form
          */
@@ -31,7 +34,7 @@ class Dac
         $staticFilesURL = 'http://example.pl/src/';
         $merchantData = 'Sklep ze zdrową żywnością<br>ul. Świdnicka 26, 50-345 Wrocław';
 
-        $data = $tpay->registerTransaction($config, $staticFilesURL, $merchantData);
+        $data = $this->tpay->registerTransaction($config, $staticFilesURL, $merchantData);
 
         /**
          * $data['transaction']

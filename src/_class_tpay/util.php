@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * Created by tpay.com
+ */
+
 namespace tpay;
 
 /**
@@ -17,10 +22,9 @@ class Util
     /**
      * Parse template file
      * @param string $templateFileName filename
-     * @param array $data
      * @return string
      */
-    public static function parseTemplate($templateFileName, $data = array())
+    public static function parseTemplate($templateFileName)
     {
         $templateDirectory = dirname(__FILE__) . '/../';
         $buffer = false;
@@ -54,7 +58,8 @@ class Util
     public static function checkVersionPHP()
     {
         if (version_compare(phpversion(), '5.3.0', '<')) {
-            throw new TException(sprintf('Your PHP version is too old, please upgrade to a newer version. Your version is %s, library requires %s', phpversion(), '5.3.0'));
+            throw new TException(sprintf('Your PHP version is too old, please upgrade to a newer version.
+             Your version is %s, library requires %s', phpversion(), '5.3.0'));
         }
     }
 
@@ -70,12 +75,13 @@ class Util
         $classDirectory = dirname(__FILE__) . '/../_class_tpay/';
         $filePath = $classDirectory . $name . '.php';
 
-        if (!file_exists($classDirectory))
+        if (!file_exists($classDirectory)) {
+
             throw new TException('directory not found (' . $classDirectory . ')');
-
-        if (!file_exists($filePath))
+        }
+        if (!file_exists($filePath)) {
             throw new TException('no such a file (' . $filePath . ')');
-
+        }
         require_once($filePath);
     }
 
@@ -90,7 +96,7 @@ class Util
         $text = (string)$text;
         $logFilePath = dirname(__FILE__) . '/../log';
 
-        $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '';
+        $ip = (filter_input(INPUT_SERVER,['REMOTE_ADDR'])) ? INPUT_SERVER['REMOTE_ADDR'] : '';
 
         $logText = "\n===========================";
         $logText .= "\n" . $title;
@@ -132,10 +138,10 @@ class Util
      */
     public static function post($name, $type)
     {
-        if (!isset($_POST[$name])) {
+        if (!filter_input(INPUT_POST, $name)) {
             return false;
         }
-        $val = $_POST[$name];
+        $val = INPUT_POST[$name];
 
         if ($type === 'int') {
             $val = (int)$val;

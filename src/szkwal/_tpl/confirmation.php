@@ -1,4 +1,10 @@
-<?php ?>
+<?php
+
+/*
+ * Created by tpay.com
+ */
+
+?>
 <link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>szkwal/_css/confirmation.css"/>
 
 <div id="tpay-szkwal-confirmation">
