@@ -2,16 +2,16 @@
 
 require_once dirname(dirname(__FILE__)) . '/src/_class_tpay/paymentBasic.php';
 
-class TpayBasic
+class BasicEhat
 {
 
     public function __construct()
     {
-        $this->getDataForTpay();
+        $this->getEhatForm();
     }
-    public function getDataForTpay()
-    {
 
+    public function getEhatForm()
+    {
         $config = array(
             'kwota'     => 999.99,
             'opis'      => 'Transaction description',
@@ -29,9 +29,21 @@ class TpayBasic
         /*
          * This method return HTML form
          */
-        $paymentForm = $tpay->getTransactionForm($config);
+        $paymentForm = $tpay->getEHatForm($config);
 
         echo $paymentForm;
 
+        ?>
+
+        <button id="go-to-payment" type="button">Pay</button>
+
+        <script>
+            var button = document.getElementById('go-to-payment');
+            button.onclick = function () {
+                document.getElementById('tpay-payment').submit();
+            }
+        </script>
+        <?php
     }
 }
+

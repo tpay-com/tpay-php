@@ -1,27 +1,27 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>card/_css/gate.css"/>
+<?php ?><link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>card/_css/gate.css"/>
 <form method="post" id="card_payment_form" name="card_payment_form">
     <input type="hidden" name="carddata" id="carddata" value=""/>
 
     <div id="powered_by"></div>
     <div id="card_payment">
-        <label for="card_number"><?php Transferuj\Lang::get('card_number') ?></label>
+        <label for="card_number"><?php tpay\Lang::get('card_number') ?></label>
         <input id="card_number" pattern="\d*" autocompletetype="cc-number" size="30" type="tel" autocomplete="off"
                maxlength="23" placeholder="0000 0000 0000 0000" tabindex="1" value=""/>
 
         <div id="expiry_date_wrapper">
-            <label for="transaction_card_expiry_month"><?php Transferuj\Lang::l('expiration_date') ?></label><br>
+            <label for="transaction_card_expiry_month"><?php tpay\Lang::l('expiration_date') ?></label><br>
             <input id="expiry_date" maxlength="9" type="text" placeholder="00 / 00" autocomplete="off"
                    autocompletetype="cc-exp" tabindex="2" value=""/>
         </div>
         <div id="cvc_wrapper">
             <label for="cvc">CSC</label><span class="info_button"
-                                              title="<?php Transferuj\Lang::l('signature') ?>">?</span>
+                                              title="<?php tpay\Lang::l('signature') ?>">?</span>
             <input id="cvc" maxlength="3" type="tel" autocomplete="off" autocompletetype="cc-cvc" placeholder="000"
                    tabindex="4" value=""/>
         </div>
         <br>
-        <label for="c_name"><?php Transferuj\Lang::l('name_on_card') ?></label>
-        <input type="text" id="c_name" placeholder="<?php Transferuj\Lang::l('name_surname') ?>" autocomplete="off"
+        <label for="c_name"><?php tpay\Lang::l('name_on_card') ?></label>
+        <input type="text" id="c_name" placeholder="<?php tpay\Lang::l('name_surname') ?>" autocomplete="off"
                name="client_name"
                maxlength="64" tabindex="5" value=""/>
 
@@ -31,8 +31,8 @@
 
         <div class="amPmCheckbox">
             <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
-                for="card_save"><?php Transferuj\Lang::l('save_card') ?></label> <span class="info_button"
-                                                                                       title="<?php Transferuj\Lang::l('save_card_info') ?>">?</span>
+                for="card_save"><?php tpay\Lang::l('save_card') ?></label> <span class="info_button"
+                                                                                       title="<?php tpay\Lang::l('save_card_info') ?>">?</span>
         </div>
     </div>
 
@@ -47,10 +47,10 @@
     <p id="info_msg"></p>
 
     <div id="loading_scr" style="display:none"><img src="<?php echo $data['static_files_url'] ?>common/_img/loading.gif"
-                                                    style="vertical-align: middle;"/>&nbsp;&nbsp;<?php Transferuj\Lang::l('processing') ?>
+                                                    style="vertical-align: middle;"/>&nbsp;&nbsp;<?php tpay\Lang::l('processing') ?>
     </div>
 </form>
-<button id="continue_btn">&nbsp;<?php Transferuj\Lang::l('card_payment') ?>&nbsp;</button>
+<button id="continue_btn">&nbsp;<?php tpay\Lang::l('card_payment') ?>&nbsp;</button>
 <script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/jquery.formance.min.js"></script>
 <script type="text/javascript" src="<?php echo $data['static_files_url'] ?>common/_js/cardpayment.js"></script>

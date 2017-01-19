@@ -1,6 +1,6 @@
-# Transferuj.pl
+# tpay.com
 
-Library for all payment methods available in Transferuj.pl
+Library for all payment methods available in tpay.com
 
 ## Installation
 
