@@ -23,6 +23,7 @@ class PaymentCard
     const ORDERID = 'order_id';
     const STRING = 'string';
     const SALE_AUTH = 'sale_auth';
+    const REMOTE_ADDR = 'REMOTE_ADDR';
     /**
      * Merchant id
      * @var int
@@ -197,13 +198,14 @@ class PaymentCard
             ||
             !isset($apiResponse[static::RESULT])
             ||
-            !isset($apiResponse[static::SALE_AUTH])) {
+            !isset($apiResponse[static::SALE_AUTH])
+        ) {
             throw new TException('Invalid api response code');
         }
 
         $data = array(
-            'action_url'    => $this->apiURL,
-            'merchant_id'   => $this->merchantId,
+            'action_url'      => $this->apiURL,
+            'merchant_id'     => $this->merchantId,
             static::SALE_AUTH => $apiResponse[static::SALE_AUTH],
         );
 
@@ -240,12 +242,12 @@ class PaymentCard
 
         if ($notificationType === 'sale' && $response['status'] === 'correct') {
             return array(
-                static::ORDERID => $response[static::ORDERID],
-                'sign'          => $response['sign'],
+                static::ORDERID   => $response[static::ORDERID],
+                'sign'            => $response['sign'],
                 static::SALE_AUTH => $response[static::SALE_AUTH],
-                'sale_date'     => $response['date'],
-                'test_mode'     => $response['test_mode'],
-                'card'          => $response['card']
+                'sale_date'       => $response['date'],
+                'test_mode'       => $response['test_mode'],
+                'card'            => $response['card']
             );
         } elseif ($notificationType === 'deregister') {
             return $response;
@@ -261,7 +263,9 @@ class PaymentCard
      */
     private function checkServer()
     {
-        if (!filter_input(INPUT_SERVER, ['REMOTE_ADDR']) || !in_array(INPUT_SERVER['REMOTE_ADDR'], $this->secureIP)) {
+        if (!filter_input(INPUT_SERVER, [static::REMOTE_ADDR])
+            || !in_array(filter_input(INPUT_SERVER, [static::REMOTE_ADDR]), $this->secureIP)
+        ) {
             return false;
         }
 
@@ -321,7 +325,7 @@ class PaymentCard
 
         if ((int)$resp[static::RESULT] === 1) {
             $data = array(
-                static::SALE_AUTH    => $resp[static::SALE_AUTH],
+                static::SALE_AUTH  => $resp[static::SALE_AUTH],
                 'confirmation_url' => $confirmationUrl,
                 static::ORDERID    => $orderId
             );
@@ -362,10 +366,10 @@ class PaymentCard
         $api = new CardAPI($this->apiKey, $this->apiPass, $this->code, $this->hashAlg);
 
         $tmpConfig = array(
-            'amount'   => $amount,
-            'name'     => $clientName,
-            'email'    => $clientEmail,
-            'desc'     => $orderDesc,
+            'amount'        => $amount,
+            'name'          => $clientName,
+            'email'         => $clientEmail,
+            'desc'          => $orderDesc,
             static::ORDERID => $orderID,
         );
 

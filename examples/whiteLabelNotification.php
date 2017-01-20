@@ -10,7 +10,7 @@ class WhiteLabelNotification
 
     public function __construct(tpay\PaymentWhiteLabel $object)
     {
-        if (filter_input(INPUT_GET, ['szkwal_notification'])) {
+        if (filter_input(INPUT_GET, 'szkwal_notification')) {
             $this->tpay = $object;
             $this->handleNotification();
         }

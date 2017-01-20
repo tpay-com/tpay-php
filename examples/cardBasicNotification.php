@@ -10,7 +10,7 @@ class CardBasicNotification
 
     public function __construct(tpay\PaymentCard $object)
     {
-        if (filter_input(INPUT_GET, ['card_notification'])) {
+        if (filter_input(INPUT_GET, 'card_notification')) {
             $this->tpay = $object;
             $this->handleNotification();
         }

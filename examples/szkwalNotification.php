@@ -10,7 +10,7 @@ class SzkwalNotification
 
     public function __construct(tpay\PaymentSzkwal $object)
     {
-        if (filter_input(INPUT_GET, ['szkwal_notification'])) {
+        if (filter_input(INPUT_GET, 'szkwal_notification')) {
             $this->tpay = $object;
             $this->handleNotification();
         }

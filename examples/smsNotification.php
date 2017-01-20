@@ -10,7 +10,7 @@ class SmsNotification
 
     public function __construct(tpay\PaymentSMS $object)
     {
-        if (filter_input(INPUT_GET, ['check_sms'])) {
+        if (filter_input(INPUT_GET, 'check_sms')) {
             $this->tpay = $object;
             $this->handleSmsNotification();
         }

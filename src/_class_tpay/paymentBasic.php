@@ -15,6 +15,7 @@ namespace tpay;
  */
 class PaymentBasic
 {
+    const REMOTE_ADDR = 'REMOTE_ADDR';
     /**
      * @var string
      */
@@ -183,7 +184,9 @@ class PaymentBasic
      */
     private function checkServer()
     {
-        if (!filter_input(INPUT_SERVER,['REMOTE_ADDR']) || !in_array(INPUT_SERVER['REMOTE_ADDR'], $this->secureIP)) {
+        if (!filter_input(INPUT_SERVER, [static::REMOTE_ADDR])
+            || !in_array(filter_input(INPUT_SERVER, [static::REMOTE_ADDR]), $this->secureIP)
+        ) {
             return false;
         }
         return true;

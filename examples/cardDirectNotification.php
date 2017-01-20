@@ -10,7 +10,7 @@ class CardDirectNotification
 
     public function __construct(\tpay\PaymentCard $object)
     {
-        if (filter_input(INPUT_GET, ['carddata'])) {
+        if (filter_input(INPUT_GET, 'carddata')) {
             $this->tpay = $object;
             $this->handleNotification();
         }

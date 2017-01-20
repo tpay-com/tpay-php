@@ -10,7 +10,7 @@ class TransactionNotification
 
     public function __construct(tpay\PaymentBasic $object)
     {
-        if (filter_input(INPUT_GET, ['transaction_notification'])) {
+        if (filter_input(INPUT_GET, 'transaction_notification')) {
             $this->tpay = $object;
             $this->handleNotification();
         }

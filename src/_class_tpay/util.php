@@ -19,6 +19,8 @@ namespace tpay;
  */
 class Util
 {
+    const REMOTE_ADDR = 'REMOTE_ADDR';
+
     /**
      * Parse template file
      * @param string $templateFileName filename
@@ -96,7 +98,8 @@ class Util
         $text = (string)$text;
         $logFilePath = dirname(__FILE__) . '/../log';
 
-        $ip = (filter_input(INPUT_SERVER,['REMOTE_ADDR'])) ? INPUT_SERVER['REMOTE_ADDR'] : '';
+        $ip = (filter_input(INPUT_SERVER, [static::REMOTE_ADDR]))
+            ? filter_input(INPUT_SERVER, [static::REMOTE_ADDR]) : '';
 
         $logText = "\n===========================";
         $logText .= "\n" . $title;
