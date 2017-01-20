@@ -114,7 +114,7 @@ class PaymentWhiteLabel extends PaymentSzkwal
         $data = $this->getBanks();
         return array(
             'data' => $data,
-            'html' => Util::parseTemplate('white_label/_tpl/bank_list', $data),
+            'html' => Util::parseTemplate('white_label/_tpl/bankList', $data),
         );
 
     }
@@ -149,6 +149,6 @@ class PaymentWhiteLabel extends PaymentSzkwal
             'instructions' => $instructions,
         );
 
-        return Util::parseTemplate('white_label/_tpl/bank_instruction', $data);
+        return Util::parseTemplate('white_label/_tpl/bankInstruction', $data);
     }
 }

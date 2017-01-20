@@ -4,6 +4,8 @@
  * Created by tpay.com
  */
 
+use tpay\PaymentBasic;
+
 class TpayBasicBankSelection
 {
     private $tpay;
@@ -24,9 +26,9 @@ class TpayBasicBankSelection
             'kwota'     => 999.99,
             'opis'      => 'Transaction description',
             'crc'       => '100020003000',
-            'wyn_url'   => 'http://example.pl/examples/payment_basic_bank_selection.php?transaction_confirmation',
+            'wyn_url'   => 'http://example.pl/examples/notificationBasic.php?transaction_confirmation',
             'wyn_email' => 'shop@example.com',
-            'pow_url'   => 'http://example.pl/examples/payment_basic_bank_selection.php',
+            'pow_url'   => 'http://example.pl/examples/success.html',
             'email'     => 'customer@example.com',
             'imie'      => 'Jan',
             'nazwisko'  => 'Kowalski',

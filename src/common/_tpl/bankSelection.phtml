@@ -95,7 +95,10 @@
                 checked = '';
                 class_name = ''
             }
-            str += '<div class="bank-block' + class_name + '" id="bank-' + id + '" style="background-image:url(' + channel[3] + ');' + width_style + '"><label onclick="changeBank(' + id + ')"><input type="radio" name="bank-select" value="' + id + '" ' + checked + '/></label></div>';
+            str += '<div class="bank-block' + class_name + '" id="bank-' + id +
+                '" style="background-image:url(' + channel[3] + ');' + width_style +
+                '"><label onclick="changeBank(' + id + ')"><input type="radio" name="bank-select" value="' +
+                id + '" ' + checked + '/></label></div>';
         }
         bank_selection_form.innerHTML = str;
     };

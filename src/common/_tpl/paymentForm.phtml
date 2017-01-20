@@ -9,7 +9,7 @@
     <?php foreach ($data['fields'] as $name => $value) { ?>
         <input <?php if ($name === 'kanal') {
             echo ' id="tpay-channel-input" ';
-        } else if ($name === 'akceptuje_regulamin') {
+        } if ($name === 'akceptuje_regulamin') {
             echo ' id="tpay-regulations-input" ';
         } ?> type="hidden"
              name="<?php echo $name ?>"

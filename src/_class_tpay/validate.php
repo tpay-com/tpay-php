@@ -46,27 +46,13 @@ class Validate
     const MINLENGTH_40 = 'minlength_40';
     const MAXLENGTH_40 = 'maxlength_40';
     const UNKNOWN_PAYMENT_TYPE_S = 'Unknown payment type: %s';
-
-
-    /**
-     * RegExp filter for fields validation
-     * @var array
-     */
-    private static $filters = array(
-        self::NUMBERS => '/[^0-9]/',
-        'letters'     => '/[^A-Za-z]/',
-        'mixed'       => '/[^A-Za-z0-9]/',
-        'date'        => '/[^0-9 \-:]/',
-        'text'        => '/[^\-\p{Latin}A-Za-z0-9 \.,_]/u',
-        'url'         => '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})
-        (?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})
-        (?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]
-        \d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}
-        -\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))
-        (?::\d{2,5})?(?:/[^\s]*)?$_iuS',
-        'mail'        => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
-        'name'        => '/[^\-\p{Latin} ]/u',
-        'sign'        => '/[^A-Za-z!\., _\-0-9]/'
+    const REG = array(
+        '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})',
+        '(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])',
+        '(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5]))',
+        '{2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)',
+        '*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)',
+        '*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS'
     );
 
     /**
@@ -320,7 +306,6 @@ class Validate
         'ZM' => 'ZMB',
         'ZW' => 'ZWE',
     );
-
     /**
      * List of supported request fields for basic payment
      * @var array
@@ -512,7 +497,6 @@ class Validate
             self::OPTIONS    => array(0, 1),
         ),
     );
-
     /**
      * List of fields available in response for basic payment
      * @var array
@@ -632,7 +616,6 @@ class Validate
             'type'         => self::STRING,
         ),
     );
-
     /**
      * List of supported fields for card payment request
      * @var array
@@ -682,7 +665,6 @@ class Validate
             self::OPTIONS    => array('985', '826', '840', '978', '203'),
         ),
     );
-
     /**
      * List of fields available in card payment response
      * @var array
@@ -755,7 +737,6 @@ class Validate
             self::VALIDATION => array(self::STRING, 'maxlength_8', 'minlength_8')
         ),
     );
-
     /**
      * List of supported fields for card direct payment request
      * @var array
@@ -797,7 +778,6 @@ class Validate
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_40),
         ),
     );
-
     /**
      * List of fields available in card direct payment response
      * @var array
@@ -838,7 +818,6 @@ class Validate
             self::VALIDATION => array(self::STRING, 'maxlength_128', self::MINLENGTH_40),
         ),
     );
-
     /**
      * List of supported fields for szkwal payment request
      * @var array
@@ -914,7 +893,6 @@ class Validate
             self::FILTER     => 'sign'
         ),
     );
-
     /**
      * List of fields available in szkwal payment response
      * @var array
@@ -969,7 +947,6 @@ class Validate
             self::VALIDATION => array(self::STRING, self::MAXLENGTH_40, self::MINLENGTH_40),
         ),
     );
-
     /**
      * List of supported fields for white label payment request
      * @var array
@@ -1036,6 +1013,7 @@ class Validate
             self::FILTER     => 'sign'
         ),
     );
+
 
     /**
      * Check all variables required in response
@@ -1198,14 +1176,30 @@ class Validate
             }
         }
 
+        /**
+         * RegExp filter for fields validation
+         * @var array
+         */
+        $filters = array(
+            static::NUMBERS => '/[^0-9]/',
+            'letters'     => '/[^A-Za-z]/',
+            'mixed'       => '/[^A-Za-z0-9]/',
+            'date'        => '/[^0-9 \-:]/',
+            'text'        => '/[^\-\p{Latin}A-Za-z0-9 \.,_]/u',
+            'url'         => implode("",static::REG),
+            'mail'        => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
+            'name'        => '/[^\-\p{Latin} ]/u',
+            'sign'        => '/[^A-Za-z!\., _\-0-9]/'
+        );
+
         if (isset($fieldConfig[static::FILTER])) {
             $filterName = $fieldConfig[static::FILTER];
 
             $negationFileter = in_array($filterName, array('mail', 'url'));
 
-            if ((!$negationFileter && (bool)preg_match(static::$filters[$filterName], $value))
+            if ((!$negationFileter && (bool)preg_match($filters[$filterName], $value))
                 ||
-                ($negationFileter && !(bool)preg_match(static::$filters[$filterName], $value))
+                ($negationFileter && !(bool)preg_match($filters[$filterName], $value))
             ) {
                 throw new TException(
                     sprintf('Value of field "%s" contains illegal characters', $name)
@@ -1337,7 +1331,8 @@ class Validate
     {
         if (!is_string($value)
             || (strlen($value) !== 2 && strlen($value) !== 3)
-            || (!in_array($value, static::$isoCountryCodes) && !isset(static::$isoCountryCodes[$value]))) {
+            || (!in_array($value, static::$isoCountryCodes) && !isset(static::$isoCountryCodes[$value]))
+        ) {
             throw new TException(
                 sprintf('Field "%s" has invalid country code', $name)
             );

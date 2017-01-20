@@ -26,7 +26,7 @@ class Util
      * @param string $templateFileName filename
      * @return string
      */
-    public static function parseTemplate($templateFileName)
+    public static function parseTemplate($templateFileName, $data = array())
     {
         $templateDirectory = dirname(__FILE__) . '/../';
         $buffer = false;
@@ -37,10 +37,10 @@ class Util
         }
         ob_start();
 
-        if (!file_exists($templateDirectory . $templateFileName . '.php')) {
+        if (!file_exists($templateDirectory . $templateFileName . '.phtml')) {
             return '';
         }
-        include_once $templateDirectory . $templateFileName . '.php';
+        include_once $templateDirectory . $templateFileName . '.phtml';
         $parsedHTML = ob_get_contents();
         ob_clean();
 
@@ -98,8 +98,8 @@ class Util
         $text = (string)$text;
         $logFilePath = dirname(__FILE__) . '/../log';
 
-        $ip = (filter_input(INPUT_SERVER, [static::REMOTE_ADDR]))
-            ? filter_input(INPUT_SERVER, [static::REMOTE_ADDR]) : '';
+        $ip = (filter_input(INPUT_SERVER, static::REMOTE_ADDR))
+            ? filter_input(INPUT_SERVER, static::REMOTE_ADDR) : '';
 
         $logText = "\n===========================";
         $logText .= "\n" . $title;

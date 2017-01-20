@@ -181,7 +181,7 @@ class PaymentCard
     {
         $config = Validate::validateConfig(Validate::PAYMENT_TYPE_CARD, $config);
 
-        $currency = isset($config['currency']) ? $config['currency'] : $this->currency;
+        $curr = isset($config['currency']) ? $config['currency'] : $this->currency;
 
         $api = new CardAPI($this->apiKey, $this->apiPass, $this->code, $this->hashAlg);
         $apiResponse = $api->registerSale(
@@ -189,7 +189,7 @@ class PaymentCard
             $config['email'],
             $config['desc'],
             $config['amount'],
-            $currency,
+            $curr,
             $config[static::ORDERID]
         );
 
@@ -209,7 +209,7 @@ class PaymentCard
             static::SALE_AUTH => $apiResponse[static::SALE_AUTH],
         );
 
-        return Util::parseTemplate('card/_tpl/payment_form', $data);
+        return Util::parseTemplate('card/_tpl/paymentForm', $data);
     }
 
     /**
@@ -284,14 +284,13 @@ class PaymentCard
      */
     public function getDirectCardForm($staticFilesURL = '', $paymentRedirectPath = 'index.html')
     {
-        $keyRSA = $this->keyRSA;
 
-        if (!is_string($keyRSA) || $keyRSA === '') {
+        if (!is_string($this->keyRSA) || $this->keyRSA === '') {
             throw new TException('Invalid api response code');
         }
 
         $data = array(
-            'rsa_key'               => $keyRSA,
+            'rsa_key'               => $this->keyRSA,
             'static_files_url'      => $staticFilesURL,
             'payment_redirect_path' => $paymentRedirectPath
         );
@@ -330,7 +329,7 @@ class PaymentCard
                 static::ORDERID    => $orderId
             );
 
-            return Util::parseTemplate('card/_tpl/saved_card', $data);
+            return Util::parseTemplate('card/_tpl/savedCard', $data);
         } else {
             throw new TException('Order data is invalid');
         }

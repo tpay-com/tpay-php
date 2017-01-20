@@ -4,6 +4,7 @@
  * Created by tpay.com
  */
 
+const AMOUNT = 'amount';
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>szkwal/_css/confirmation.css"/>
 
@@ -30,10 +31,10 @@
         <div class="col-l"><?php tpay\Lang::l('payment_title') ?></div>
         <div class="col-r client-title"><?php echo $data['title'] ?></div>
     </div>
-    <?php if ($data['amount'] !== false) { ?>
+    <?php if ($data[AMOUNT] !== false) { ?>
         <div class="tpay-row">
-            <div class="col-l"><?php tpay\Lang::l('amount') ?></div>
-            <div class="col-r"><?php echo $data['amount']
+            <div class="col-l"><?php tpay\Lang::l(AMOUNT) ?></div>
+            <div class="col-r"><?php echo $data[AMOUNT]
                 ?>
             </div>
         </div>

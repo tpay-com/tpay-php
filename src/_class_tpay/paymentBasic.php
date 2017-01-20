@@ -28,7 +28,7 @@ class PaymentBasic
     /**
      * @var string
      */
-    const PAYMENTFORM = 'payment_form';
+    const PAYMENTFORM = 'paymentForm';
     /**
      * Merchant id
      * @var int
@@ -131,7 +131,7 @@ class PaymentBasic
      */
     public function checkPayment($paymentType = Validate::PAYMENT_TYPE_BASIC)
     {
-        Util::log('check basic payment', '$_POST' . "\n" . print_r(INPUT_POST, true));
+        Util::log('check basic payment', '$_POST: ' . "\n" . print_r($_POST, true));
 
         $res = Validate::getResponse($paymentType);
 
@@ -255,6 +255,12 @@ class PaymentBasic
         return Util::parseTemplate($this->templateDir . static::PAYMENTFORM, $data);
     }
 
+
+    public function getTransactionFormConfig($config)
+    {
+        return $this->prepareConfig($config);
+    }
+
     /**
      * Create HTML form for payment with bank selection based on transaction config
      * More information about config fields @see Validate::$panelPaymentRequestField
@@ -287,9 +293,9 @@ class PaymentBasic
             'form'                      => $form
         );
         if ($smallList) {
-            $templateFile = 'bank_selection_list';
+            $templateFile = 'bankSelectionList';
         } else {
-            $templateFile = 'bank_selection';
+            $templateFile = 'bankSelection';
         }
         return Util::parseTemplate($this->templateDir . $templateFile, $data);
     }
