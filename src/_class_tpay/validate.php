@@ -54,6 +54,7 @@ class Validate
         '*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)',
         '*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS'
     );
+    const TYPE = 'type';
 
     /**
      * List of ISO 3166-1 country codes
@@ -507,7 +508,7 @@ class Validate
          */
         'tr_id'         => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
         ),
         /**
@@ -515,7 +516,7 @@ class Validate
          */
         'tr_date'       => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
 
         ),
@@ -524,7 +525,7 @@ class Validate
          */
         'tr_crc'        => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
         ),
         /**
@@ -532,7 +533,7 @@ class Validate
          */
         'tr_amount'     => array(
             self::REQUIRED   => true,
-            'type'           => self::FLOAT,
+            self::TYPE       => self::FLOAT,
             self::VALIDATION => array(self::FLOAT),
         ),
         /**
@@ -542,7 +543,7 @@ class Validate
          */
         'tr_paid'       => array(
             self::REQUIRED   => true,
-            'type'           => self::FLOAT,
+            self::TYPE       => self::FLOAT,
             self::VALIDATION => array(self::FLOAT),
         ),
         /**
@@ -550,7 +551,7 @@ class Validate
          */
         'tr_desc'       => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
         ),
         /**
@@ -561,7 +562,7 @@ class Validate
          */
         'tr_status'     => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::OPTIONS),
             self::OPTIONS    => array(0, 1, true, false, 'TRUE', 'FALSE'),
         ),
@@ -574,7 +575,7 @@ class Validate
          */
         'tr_error'      => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::OPTIONS),
             self::OPTIONS    => array('none', 'overpay', 'surcharge'),
         ),
@@ -583,7 +584,7 @@ class Validate
          */
         'tr_email'      => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::EMAIL_LIST),
         ),
         /**
@@ -593,7 +594,7 @@ class Validate
          */
         'md5sum'        => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, 'maxlength_32', 'minlength_32'),
         ),
         /**
@@ -603,7 +604,7 @@ class Validate
          */
         self::TEST_MODE => array(
             self::REQUIRED   => false,
-            'type'           => 'int',
+            self::TYPE       => 'int',
             self::VALIDATION => array(self::OPTIONS),
             self::OPTIONS    => array(0, 1),
         ),
@@ -613,7 +614,7 @@ class Validate
          */
         'wallet'        => array(
             self::REQUIRED => false,
-            'type'         => self::STRING,
+            self::TYPE     => self::STRING,
         ),
     );
     /**
@@ -673,9 +674,9 @@ class Validate
         /**
          * Method type
          */
-        'type'          => array(
+        self::TYPE      => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::OPTIONS),
             self::OPTIONS    => array('sale', 'refund', 'deregister'),
         ),
@@ -684,7 +685,7 @@ class Validate
          */
         self::ORDER_ID  => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_40)
         ),
         /**
@@ -692,7 +693,7 @@ class Validate
          */
         'status'        => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::OPTIONS),
             self::OPTIONS    => array('correct', 'declined'),
         ),
@@ -701,7 +702,7 @@ class Validate
          */
         'sign'          => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_128, self::MINLENGTH_40)
         ),
         /**
@@ -709,7 +710,7 @@ class Validate
          */
         'sale_auth'     => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_40)
         ),
         /**
@@ -717,7 +718,7 @@ class Validate
          */
         'date'          => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING)
         ),
         /**
@@ -725,7 +726,7 @@ class Validate
          */
         self::TEST_MODE => array(
             self::REQUIRED   => false,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, 'maxlength_1', 'minlength_1')
         ),
         /**
@@ -733,7 +734,7 @@ class Validate
          */
         'card'          => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, 'maxlength_8', 'minlength_8')
         ),
     );
@@ -789,7 +790,7 @@ class Validate
          */
         'cli_auth'      => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, self::MAXLENGTH_40, self::MINLENGTH_40),
         ),
         /**
@@ -797,7 +798,7 @@ class Validate
          */
         self::TEST_MODE => array(
             self::REQUIRED   => false,
-            'type'           => 'int',
+            self::TYPE       => 'int',
             self::VALIDATION => array('int'),
         ),
         /**
@@ -805,7 +806,7 @@ class Validate
          */
         'date'          => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
             self::FILTER     => 'date'
         ),
@@ -814,7 +815,7 @@ class Validate
          */
         'sign'          => array(
             self::REQUIRED   => true,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, 'maxlength_128', self::MINLENGTH_40),
         ),
     );
@@ -903,7 +904,7 @@ class Validate
          */
         'pay_id'     => array(
             self::REQUIRED   => false,
-            'type'           => 'int',
+            self::TYPE       => 'int',
             self::VALIDATION => array('uint'),
         ),
         /**
@@ -911,7 +912,7 @@ class Validate
          */
         'not_id'     => array(
             self::REQUIRED   => false,
-            'type'           => 'int',
+            self::TYPE       => 'int',
             self::VALIDATION => array('uint'),
         ),
         /**
@@ -919,7 +920,7 @@ class Validate
          */
         'title'      => array(
             self::REQUIRED   => false,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
         ),
         /**
@@ -927,7 +928,7 @@ class Validate
          */
         'crc'        => array(
             self::REQUIRED   => false,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING),
         ),
         /**
@@ -935,7 +936,7 @@ class Validate
          */
         self::AMOUNT => array(
             self::REQUIRED   => false,
-            'type'           => self::FLOAT,
+            self::TYPE       => self::FLOAT,
             self::VALIDATION => array(self::FLOAT),
         ),
         /**
@@ -943,7 +944,7 @@ class Validate
          */
         'hash'       => array(
             self::REQUIRED   => false,
-            'type'           => self::STRING,
+            self::TYPE       => self::STRING,
             self::VALIDATION => array(self::STRING, self::MAXLENGTH_40, self::MINLENGTH_40),
         ),
     );
@@ -1054,7 +1055,7 @@ class Validate
                 }
             } else {
                 $val = Util::post($fieldName, static::STRING);
-                switch ($field['type']) {
+                switch ($field[static::TYPE]) {
                     case static::STRING:
                         $val = (string)$val;
                         break;

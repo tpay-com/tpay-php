@@ -22,8 +22,11 @@ class TransactionAPI
     const ERR = 'err';
     const AMOUNT = 'amount';
     const RESULT_0_1_RESULT = '/<result>([0-1]*)<\/result>/';
+    const PACKID = '/<pack_id>([0-1]*)<\/pack_id>/';
     const ERR_ERR = '/<err>(.*)<\/err>/';
     const ERROR_ERROR = '/<error>(.*)<\/error>/';
+    const PACKS = 'packs';
+    const TRANSFERS = 'transfers';
     /**
      * Api key
      * @var string
@@ -434,11 +437,12 @@ class TransactionAPI
 
         $response = array(
             static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            'packs'        => Util::findSubstring('/<packs>(.*)<\/packs>/', $res),
+            static::PACKS  => sprintf('<packs>%s</packs>', Util::findSubstring('/<packs>(.*)<\/packs>/', $res)),
             static::ERR    => Util::findSubstring(static::ERROR_ERROR, $res),
         );
         $this->checkError($response);
-
+        $xml = simplexml_load_string($response[static::PACKS]);
+        $response[static::PACKS] = unserialize(serialize(json_decode(json_encode((array)$xml), 1)));
         return $response;
     }
 
@@ -462,12 +466,14 @@ class TransactionAPI
         $res = $this->requests($url, $postData);
 
         $response = array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            'transfers'    => Util::findSubstring('/<transfers>(.*)<\/transfers>/', $res),
-            static::ERR    => Util::findSubstring(static::ERROR_ERROR, $res),
+            static::RESULT  => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
+            static::TRANSFERS => sprintf('<transfers>%s</transfers>',
+                Util::findSubstring('/<transfers>(.*)<\/transfers>/', $res)),
+            static::ERR     => Util::findSubstring(static::ERROR_ERROR, $res),
         );
         $this->checkError($response);
-
+        $xml = simplexml_load_string($response[static::TRANSFERS]);
+        $response[static::TRANSFERS] = unserialize(serialize(json_decode(json_encode((array)$xml), 1)));
         return $response;
     }
 }

@@ -1,0 +1,336 @@
+
+===========================
+TException
+===========================
+2017-01-20 14:13:42
+ip: 
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1210
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1513): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 14:14:18
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1210
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1513): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 14:57:38
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1210
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1513): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 14:59:44
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1210
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1513): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:02:25
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:03:23
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:05:05
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'huj')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:05:22
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'http://tpay.com')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:05:23
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'http://tpay.com')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:05:37
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'https://tpay.co...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:05:46
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'https://www.tpa...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:05:47
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1211
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1514): tpay\Validate::validateOne('basic', 'pow_url', 'https://www.tpa...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:14:11
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1206
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1509): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:16:23
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1206
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1509): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:20:47
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1205
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1508): tpay\Validate::validateOne('basic', 'pow_url', 'https://www.tpa...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:23:18
+ip: ::1
+Value of field "email" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1205
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1508): tpay\Validate::validateOne('basic', 'email', 'customer@exampl...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:24:50
+ip: ::1
+Value of field "email" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1204
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1507): tpay\Validate::validateOne('basic', 'email', 'customer@exampl...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(36): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:25:14
+ip: ::1
+Value of field "email" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1204
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1507): tpay\Validate::validateOne('basic', 'email', 'customer@exampl...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:26:20
+ip: ::1
+Value of field "pow_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1209
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1512): tpay\Validate::validateOne('basic', 'pow_url', 'https://www.tpa...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:26:48
+ip: ::1
+Value of field "email" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1204
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1507): tpay\Validate::validateOne('basic', 'email', 'customer@exampl...')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
+
+===========================
+TException
+===========================
+2017-01-20 15:50:58
+ip: ::1
+Value of field "wyn_url" contains illegal characters in file C:\wamp64\www\tpay-php\src\_class_tpay\validate.php line: 1204
+
+#0 C:\wamp64\www\tpay-php\src\_class_tpay\validate.php(1508): tpay\Validate::validateOne('basic', 'wyn_url', 'http://example....')
+#1 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(230): tpay\Validate::validateConfig('basic', Array)
+#2 C:\wamp64\www\tpay-php\src\_class_tpay\paymentBasic.php(248): tpay\PaymentBasic->prepareConfig(Array)
+#3 C:\wamp64\www\tpay-php\examples\basic.php(35): tpay\PaymentBasic->getTransactionForm(Array)
+#4 C:\wamp64\www\tpay-php\examples\basic.php(14): TpayBasic->getDataForTpay()
+#5 C:\wamp64\www\tpay-php\test.php(7): TpayBasic->__construct(Object(tpay\PaymentBasic))
+#6 {main}
+
