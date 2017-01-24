@@ -18,7 +18,7 @@ class TransactionAPI
     const TITLE = 'title';
     const ERROR_CODE = 'error_code';
     const REPORT = 'report';
-    const PACK_ID = 'packId';
+    const PACK_ID = 'pack_id';
     const ERR = 'err';
     const AMOUNT = 'amount';
     const RESULT_0_1_RESULT = '/<result>([0-1]*)<\/result>/';
@@ -372,7 +372,7 @@ class TransactionAPI
             static::RESULT  => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
             'count'         => (int)Util::findSubstring('/<count>([0-9]*)<\/count>/', $res),
             'sum'           => (float)Util::findSubstring('/<sum>([0-9\.]*)<\/sum>/', $res),
-            static::PACK_ID => Util::findSubstring('/<packId>(.*)<\/packId>/', $res),
+            static::PACK_ID => Util::findSubstring('/<pack_id>(.*)<\/pack_id>/', $res),
             'referers'      => Util::findSubstring('/<referers>(.*)<\/referers>/', $res),
             static::ERR     => Util::findSubstring(static::ERR_ERR, $res),
         );
