@@ -144,7 +144,7 @@ class Util
         if (!filter_input(INPUT_POST, $name)) {
             return false;
         }
-        $val = INPUT_POST[$name];
+        $val = filter_input(INPUT_POST, $name);
 
         if ($type === 'int') {
             $val = (int)$val;
