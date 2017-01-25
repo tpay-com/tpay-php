@@ -184,8 +184,8 @@ class PaymentBasic
      */
     private function checkServer()
     {
-        if (!filter_input(INPUT_SERVER, [static::REMOTE_ADDR])
-            || !in_array(filter_input(INPUT_SERVER, [static::REMOTE_ADDR]), $this->secureIP)
+        if (!filter_input(INPUT_SERVER, static::REMOTE_ADDR)
+            || !in_array(filter_input(INPUT_SERVER, static::REMOTE_ADDR), $this->secureIP)
         ) {
             return false;
         }
