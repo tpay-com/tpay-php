@@ -98,8 +98,7 @@ class Util
         $text = (string)$text;
         $logFilePath = dirname(__FILE__) . '/../log';
 
-        $ip = (filter_input(INPUT_SERVER, static::REMOTE_ADDR))
-            ? filter_input(INPUT_SERVER, static::REMOTE_ADDR) : '';
+        $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '';
 
         $logText = "\n===========================";
         $logText .= "\n" . $title;
@@ -145,7 +144,6 @@ class Util
             return false;
         }
         $val = filter_input(INPUT_POST, $name);
-
         if ($type === 'int') {
             $val = (int)$val;
         } elseif ($type === 'float') {
