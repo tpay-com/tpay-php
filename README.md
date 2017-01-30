@@ -11,7 +11,7 @@ Replace all occurrences of the following codes on real data from the Merchant pa
   * [MERCHANT_ID] - merchant id ex. 14868
   * [MERCHANT_SECRET] - merchant secret ex. nd6u7duYeso4hrtc
   
-   Example of usages: [Basic](examples/basic.php) [Basic with bank selection](examples/basic_bank_selection.php) [eHat](examples/basic_ehat.php)
+   Example of usages: [Basic](examples/basic.php) [Basic with bank selection](examples/basicBankSelection.php) [eHat](examples/basicEhat.php)
   
 ### Card Basic / Card Direct
 
@@ -23,7 +23,7 @@ Replace all occurrences of the following codes on real data from the Merchant pa
   * [CARD_RSA_KEY] - card RSA key ex. S10tLS1CURdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JR2ZNQTBHQ1NxR1NJYjNEUUXCQVFVQUE0R05ERBNCaVFLQmdRQ2NLRTVZNU1Wemd5a1Z5ODNMS1NTTFlEMEVrU2xadTRVZm1STS8NCmM5L0NtMENuVDM2ekU0L2dMRzBSYzQwODRHNmIzU3l5NVpvZ1kwQXFOVU5vUEptUUZGVyswdXJacU8yNFRCQkxCcU10TTVYSllDaVQNCmVpNkx3RUIyNnpPOFZocW9SK0tiRS92K1l1GlDXNGQ0cWtHU0IzeHBhSUJncllrT2o0aFJDOXk0WXdJ11FRQUINCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ==
   * [CARD_HASH_ALG] - card hash algorithm ex. sha1
   
-  Example of usages: [Card Basic](examples/card_basic.php) [Card Direct](examples/card_direct.php)
+  Example of usages: [Card Basic](examples/cardBasic.php) [Card Direct](examples/cardDirect.php)
   
 ### Szkwal / White Label
 
@@ -35,7 +35,7 @@ Replace all occurrences of the following codes on real data from the Merchant pa
   * [SZKWAL_PARTNER_ADDRESS] - szkwal unique partner address ex. c_supershop
   * [SZKWAL_TITLE_FORMAT] - pattern of unique client title ex. KIR[0-9]{9}
   
-  Example of usages: [Szkwal](examples/szkwal.php) [White Label](examples/white_label.php)
+  Example of usages: [Szkwal](examples/szkwal.php) [White Label](examples/whiteLabel.php)
   
 ### DAC / Masspayment / Transaction API requests
 
@@ -44,7 +44,7 @@ Replace all occurrences of the following codes on real data from the Merchant pa
   * [TRANSACTION_API_KEY] - transaction API key ex. c4fb9c5482e16a848e68dbb1488ed42ddcb82311
   * [TRANSACTION_API_PASS] - transaction API secret ex. bd6u7drYesa43rtw
   
- Example of usages: [DAC](examples/dac.php) [Masspayment and Transaction API](examples/transaction_api.php)
+ Example of usages: [DAC](examples/dac.php) [Masspayment and Transaction API](examples/transactionApi.php)
  
 Library has own logging system to save all confirmations and notifications sent by Transferuj.pl server
 Be sure that file src/log is writable and add rule to htaccess to deny access to this file from browser
