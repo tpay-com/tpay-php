@@ -5,11 +5,15 @@
  */
 
 ?>
+<style>
+    <?php include_once dirname(__FILE__) . '\..\_css\style.css'; ?>
+</style>
 <form id="tpay-payment" class="tpay-form" action="<?php echo $data['action_url'] ?>" method="POST">
     <?php foreach ($data['fields'] as $name => $value) { ?>
         <input <?php if ($name === 'kanal') {
             echo ' id="tpay-channel-input" ';
-        } if ($name === 'akceptuje_regulamin') {
+        }
+        if ($name === 'akceptuje_regulamin') {
             echo ' id="tpay-regulations-input" ';
         } ?> type="hidden"
              name="<?php echo $name ?>"
@@ -17,5 +21,6 @@
         <?php
     }
     ?>
-    <input id="tpay-payment-submit" type="submit" value="<?php tpay\Lang::l('pay') ?>">
+    <input class="button" style="width: 500px ; height:50px"
+           id="tpay-payment-submit" type="submit" value="<?php tpay\Lang::l('pay') ?>">
 </form>

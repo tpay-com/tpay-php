@@ -1125,7 +1125,7 @@ class Validate
             throw new TException('Invalid field name');
         }
         if (!array_key_exists($name, $requestFields)) {
-            throw new TException('Field with this name is not supported');
+            throw new TException('Field with this name is not supported ' . $name);
         }
 
         $fieldConfig = $requestFields[$name];

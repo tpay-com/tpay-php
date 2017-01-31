@@ -8,7 +8,7 @@ if ($data['show_regulations_checkbox'] === true) { ?>
     <input id="tpay-accept-regulations-checkbox" type="checkbox" value="0">
     <label for="tpay-accept-regulations-checkbox">
         <?php tpay\Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                                 target="_blank"><?php tpay\Lang::l('regulations') ?></a>
+                                           target="_blank"><?php tpay\Lang::l('regulations') ?></a>
     </label>
 <?php } ?>
 <select name="bank_list" id="tpay-bank-list" onchange="changeBank()"></select>

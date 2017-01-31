@@ -1,0 +1,34 @@
+<?php
+
+?>
+
+    <script type="text/javascript">
+
+        function blikfocus() {
+            document.getElementById("blikcode").focus();
+        }
+
+    </script>
+    <div class="insidebg" id="blik">
+
+
+        <div id="input_container">
+            <div>
+                <input type="text" id="blikcode" name="blikcode" value="" maxlength="6" pattern=".{6,}"
+                       title="Kod blik powinien składać się z 6 cyfr!"/>
+                <img src="<?php echo $data['static_files_url'] ?>common/_img/blik.png" id="blik_img"
+                     onclick="blikfocus()">
+            </div>
+            <div style="padding-top: 342px">
+                <?php tpay\Lang::l('blik_info') ?><br/>
+                <?php tpay\Lang::l('blik_info2') ?><br/>
+                <small>
+                    <?php tpay\Lang::l('blik_accept') ?>
+                    <a href="<?php echo $data['regulation_url'] ?>"
+                       target="_blank"><?php tpay\Lang::l('regulations_url') ?></a>
+                    <?php tpay\Lang::l('regulations'); ?>
+                </small>
+            </div>
+        </div>
+    </div>
+<?php

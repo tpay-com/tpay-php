@@ -19,50 +19,7 @@ class Lang
      *
      * @var string
      */
-    private static $lang = 'en';
-
-    /**
-     * Change current language
-     *
-     * @param string $lang language code
-     *
-     * @throws TException
-     */
-    public static function setLang($lang)
-    {
-        if (isset(static::$data[$lang])) {
-            static::$lang = $lang;
-        } else {
-            throw new TException('No translation for this language');
-        }
-    }
-
-    /**
-     * Get translated string
-     *
-     * @param string $key
-     *
-     * @throws TException
-     * @return string
-     */
-    public static function get($key)
-    {
-        if (isset(static::$data[static::$lang][$key])) {
-            return static::$data[static::$lang][$key];
-        } else {
-            throw new TException('No translation for this key');
-        }
-    }
-
-    /**
-     * Get and print translated string
-     * @param $key
-     */
-    public static function l($key)
-    {
-        echo static::get($key);
-    }
-
+    private static $lang = 'pl';
     /**
      * Translation data
      *
@@ -73,14 +30,22 @@ class Lang
 
             // GLOBALS
 
-            'pay'           => 'Pay',
+            'pay'           => 'Pay with tpay.com',
             'merchant_info' => 'Merchant info',
             'amount'        => 'Amount',
 
-            // BANK SELECTION
+            // BLIK
 
-            'accept'                 => 'I accept',
-            'regulations'            => ' service tpay.com regulations',
+            'blik_info'              => 'Type in 6 digit code and press pay to commit blik payment.',
+            'blik_info2'             => 'If you want to pay with standard method, leave this field blank.',
+            'blik_accept'            => 'By using this method you confirm acceptance',
+
+            // BANK SELECTION
+            'cards_and_transfers'    => 'Credit cards and bank transfers',
+            'other_methods'          => 'Others',
+            'accept'                 => 'I accept the',
+            'regulations_url'        => 'regulations',
+            'regulations'            => 'of tpay.com service',
             'acceptance_is_required' => 'Acceptance of regulations is required before payment',
 
             // CARD
@@ -120,14 +85,22 @@ class Lang
 
             // GLOBALS
 
-            'pay'           => 'Zapłać',
+            'pay'           => 'Zapłać z tpay.com',
             'merchant_info' => 'Dane sprzedawcy',
             'amount'        => 'Kwota',
 
-            // BANK SELECTION
+            // BLIK
 
+            'blik_info'              => 'Wpisz 6 cyfrowy kod i naciśnij "Kupuję i płacę" aby powiązać transakcję blik.',
+            'blik_info2'             => 'Jeśli chcesz dokonać tradycyjnej płatności, pozostaw to pole puste.',
+            'blik_accept'            => 'Korzystając z tej metody płatności oświadczasz, że akceptujesz',
+
+            // BANK SELECTION
+            'cards_and_transfers'    => 'Karty płatnicze i przelewy',
+            'other_methods'          => 'Pozostałe',
             'accept'                 => 'Akceptuję',
-            'regulations'            => 'regulamin serwisu tpay.com',
+            'regulations_url'        => 'regulamin',
+            'regulations'            => 'serwisu tpay.com',
             'acceptance_is_required' => 'Akceptacja regulaminu jest obowiązkowa, przed rozpoczęciem płatności',
 
             // CARD
@@ -165,4 +138,46 @@ class Lang
             'go_to_bank' => 'Przejdź do banku',
         )
     );
+
+    /**
+     * Change current language
+     *
+     * @param string $lang language code
+     *
+     * @throws TException
+     */
+    public static function setLang($lang)
+    {
+        if (isset(static::$data[$lang])) {
+            static::$lang = $lang;
+        } else {
+            throw new TException('No translation for this language');
+        }
+    }
+
+    /**
+     * Get and print translated string
+     * @param $key
+     */
+    public static function l($key)
+    {
+        echo static::get($key);
+    }
+
+    /**
+     * Get translated string
+     *
+     * @param string $key
+     *
+     * @throws TException
+     * @return string
+     */
+    public static function get($key)
+    {
+        if (isset(static::$data[static::$lang][$key])) {
+            return static::$data[static::$lang][$key];
+        } else {
+            throw new TException('No translation for this key');
+        }
+    }
 }

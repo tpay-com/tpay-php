@@ -225,7 +225,7 @@ class PaymentBasic
      *
      * @throws TException
      */
-    private function prepareConfig($config)
+    public function prepareConfig($config)
     {
         $ready = Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC, $config);
 

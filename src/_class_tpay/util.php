@@ -98,7 +98,7 @@ class Util
         $text = (string)$text;
         $logFilePath = dirname(__FILE__) . '/../log';
 
-        $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '';
+        $ip = (isset($_SERVER[static::REMOTE_ADDR])) ? $_SERVER[static::REMOTE_ADDR] : '';
 
         $logText = "\n===========================";
         $logText .= "\n" . $title;
