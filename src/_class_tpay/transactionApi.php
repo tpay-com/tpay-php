@@ -203,6 +203,19 @@ class TransactionAPI
         return Curl::doCurlRequest($url, $params);
     }
 
+    public function blik($code, $title)
+    {
+        $config['code'] = $code;
+        $config['title'] = $title;
+        $url = $this->apiURL . $this->apiKey . '/transaction/blik';
+
+        $res = $this->requests($url, $config);
+        return array(
+            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
+        );
+    }
+
+
     /**
      * Get information about transaction
      *
@@ -466,10 +479,10 @@ class TransactionAPI
         $res = $this->requests($url, $postData);
 
         $response = array(
-            static::RESULT  => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
+            static::RESULT    => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
             static::TRANSFERS => sprintf('<transfers>%s</transfers>',
                 Util::findSubstring('/<transfers>(.*)<\/transfers>/', $res)),
-            static::ERR     => Util::findSubstring(static::ERROR_ERROR, $res),
+            static::ERR       => Util::findSubstring(static::ERROR_ERROR, $res),
         );
         $this->checkError($response);
         $xml = simplexml_load_string($response[static::TRANSFERS]);
