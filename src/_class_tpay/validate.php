@@ -1185,7 +1185,7 @@ class Validate
             'letters'       => '/[^A-Za-z]/',
             'mixed'         => '/[^A-Za-z0-9]/',
             'date'          => '/[^0-9 \-:]/',
-            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,_\/]/u',
+            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,_\/\!]/u',
             'url'           => static::REG,
             'mail'          => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
             'name'          => '/[^\-\p{Latin} ]/u',
