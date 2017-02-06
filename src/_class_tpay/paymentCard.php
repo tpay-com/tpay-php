@@ -146,7 +146,7 @@ class PaymentCard
         Validate::validateCardHashAlg($this->hashAlg);
         Validate::validateCardRSAKey($this->keyRSA);
 
-        Util::loadClass('card_api');
+        Util::loadClass('cardApi');
     }
 
     /**

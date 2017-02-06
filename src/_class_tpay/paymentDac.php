@@ -73,7 +73,7 @@ class PaymentDAC
         Util::loadClass('validate');
         Util::loadClass('exception');
         Util::loadClass('lang');
-        Util::loadClass('transaction_api');
+        Util::loadClass('transactionApi');
         Util::checkVersionPHP();
 
         Validate::validateMerchantId($this->merchantId);

@@ -195,4 +195,28 @@ class TransactionApi
 
     }
 
+    /**
+     * pass blikcode to created transaction
+     * channel for create method must be 64
+     */
+
+    public function blikTransaction()
+    {
+        $title = 'TR-C4Y-XXXXX';
+        $code = 123456;
+
+        try {
+            $responseBlik = $this->api->blik($code, $title);
+            if ($responseBlik->result[0] === 1) {
+                echo 'success!';
+            } else {
+                echo 'invalid code or transaction not accepted on time';
+            }
+
+        } catch (\tpay\TException $e) {
+            var_dump($e);
+        }
+
+    }
+
 }

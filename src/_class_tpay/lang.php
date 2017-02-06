@@ -13,6 +13,7 @@ namespace tpay;
  */
 class Lang
 {
+    const REGULATIONS = 'regulations';
 
     /**
      * Current language
@@ -33,7 +34,7 @@ class Lang
             'pay'           => 'Pay with tpay.com',
             'merchant_info' => 'Merchant info',
             'amount'        => 'Amount',
-
+            'order'         => 'Order',
             // BLIK
 
             'blik_info'              => 'Type in 6 digit code and press pay to commit blik payment.',
@@ -44,8 +45,8 @@ class Lang
             'cards_and_transfers'    => 'Credit cards and bank transfers',
             'other_methods'          => 'Others',
             'accept'                 => 'I accept the',
-            'regulations_url'        => 'regulations',
-            'regulations'            => 'of tpay.com service',
+            'regulations_url'        => self::REGULATIONS,
+            self::REGULATIONS        => 'of tpay.com service',
             'acceptance_is_required' => 'Acceptance of regulations is required before payment',
 
             // CARD
@@ -88,6 +89,7 @@ class Lang
             'pay'           => 'Zapłać z tpay.com',
             'merchant_info' => 'Dane sprzedawcy',
             'amount'        => 'Kwota',
+            'order'         => 'Zamówienie',
 
             // BLIK
 
@@ -100,7 +102,7 @@ class Lang
             'other_methods'          => 'Pozostałe',
             'accept'                 => 'Akceptuję',
             'regulations_url'        => 'regulamin',
-            'regulations'            => 'serwisu tpay.com',
+            self::REGULATIONS        => 'serwisu tpay.com',
             'acceptance_is_required' => 'Akceptacja regulaminu jest obowiązkowa, przed rozpoczęciem płatności',
 
             // CARD
