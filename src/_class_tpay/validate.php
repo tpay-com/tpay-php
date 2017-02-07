@@ -46,13 +46,6 @@ class Validate
     const MINLENGTH_40 = 'minlength_40';
     const MAXLENGTH_40 = 'maxlength_40';
     const UNKNOWN_PAYMENT_TYPE_S = 'Unknown payment type: %s';
-    const REG =
-        '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})' .
-        '(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])' .
-        '(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5]))' .
-        '{2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)' .
-        '*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)' .
-        '*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS';
     const TYPE = 'type';
 
     /**
@@ -1175,36 +1168,11 @@ class Validate
                 }
             }
         }
+        if (!static::filterValues($value, $fieldConfig)) {
+            throw new TException(
+                sprintf('Value of field "%s" contains illegal characters', $name)
+            );
 
-        /**
-         * RegExp filter for fields validation
-         * @var array
-         */
-        $filters = array(
-            static::NUMBERS => '/[^0-9]/',
-            'letters'       => '/[^A-Za-z]/',
-            'mixed'         => '/[^A-Za-z0-9]/',
-            'date'          => '/[^0-9 \-:]/',
-            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,_\/\!]/u',
-            'url'           => static::REG,
-            'mail'          => '/^[a-zA-Z0-9\.\-_\+]+\@[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*\.[a-z]{2,4}$/D',
-            'name'          => '/[^\-\p{Latin} ]/u',
-            'sign'          => '/[^A-Za-z!\., _\-0-9]/'
-        );
-
-        if (isset($fieldConfig[static::FILTER])) {
-            $filterName = $fieldConfig[static::FILTER];
-
-            $negationFileter = in_array($filterName, array('mail', 'url'));
-
-            if ((!$negationFileter && (bool)preg_match($filters[$filterName], $value))
-                ||
-                ($negationFileter && !(bool)preg_match($filters[$filterName], $value))
-            ) {
-                throw new TException(
-                    sprintf('Value of field "%s" contains illegal characters', $name)
-                );
-            }
         }
 
         return true;
@@ -1373,6 +1341,43 @@ class Validate
                 sprintf('Value of field "%s" is too short. Min %d characters', $name, $min)
             );
         }
+    }
+
+    /**
+     * RegExp filter for fields validation
+     * @param string $value
+     * @param array $fieldConfig
+     * @return bool
+     * @throws TException
+     */
+    private static function filterValues($value, $fieldConfig)
+    {
+        $filters = array(
+            static::NUMBERS => '/[^0-9]/',
+            'letters'       => '/[^A-Za-z]/',
+            'mixed'         => '/[^A-Za-z0-9]/',
+            'date'          => '/[^0-9 \-:]/',
+            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,_\/\!]/u',
+            'name'          => '/[^\-\p{Latin} ]/u',
+            'sign'          => '/[^A-Za-z!\., _\-0-9]/'
+        );
+
+        if (isset($fieldConfig[static::FILTER])) {
+            $filterName = $fieldConfig[static::FILTER];
+            if (array_key_exists($filterName, $filters)) {
+                if ((bool)preg_match($filters[$filterName], $value)) {
+                    return false;
+                }
+            } else {
+                if ((($filterName === 'mail') && !filter_var($value, FILTER_VALIDATE_EMAIL))
+                    ||
+                    (($filterName === 'url') && !filter_var($value, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+                ) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
