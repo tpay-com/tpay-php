@@ -140,10 +140,10 @@ class Util
      */
     public static function post($name, $type)
     {
-        if (!filter_input(INPUT_POST, $name)) {
+        if (!isset($_POST[$name])) {
             return false;
         }
-        $val = filter_input(INPUT_POST, $name);
+        $val = $_POST[$name];
         if ($type === 'int') {
             $val = (int)$val;
         } elseif ($type === 'float') {

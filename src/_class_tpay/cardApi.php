@@ -109,7 +109,8 @@ class CardAPI
         $currency = '985',
         $orderID = null,
         $onetimer = true,
-        $lang = 'pl'
+        $lang = 'pl',
+        $powUrl = true
     )
     {
         return $this->registerSaleBase(
@@ -122,7 +123,8 @@ class CardAPI
             $onetimer,
             false,
             null,
-            $lang
+            $lang,
+            $powUrl
         );
     }
 
@@ -154,7 +156,8 @@ class CardAPI
         $onetimer = true,
         $direct = false,
         $saledata = null,
-        $lang = 'pl'
+        $lang = 'pl',
+        $powUrl = false
     )
     {
         $amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
@@ -162,6 +165,15 @@ class CardAPI
         if ($direct && !empty($saledata)) {
             $params = array(
                 static::METHOD => 'directsale',
+                'card'         => $saledata,
+                static::NAME   => $clientName,
+                static::EMAIL  => $clientEmail,
+                static::DESC   => $saleDescription,
+                static::AMOUNT => $amount,
+            );
+        } elseif (!$direct && !empty($saledata)) {
+            $params = array(
+                static::METHOD => 'securesale',
                 'card'         => $saledata,
                 static::NAME   => $clientName,
                 static::EMAIL  => $clientEmail,
@@ -187,9 +199,11 @@ class CardAPI
             $params['onetimer'] = '1';
         }
         if ($lang) {
-            $params[static::LANGUAGE] = $lang;
+            $params[static::LANGUAGE] = Validate::validateCardLanguage($lang);
         }
-
+        if ($powUrl) {
+            $params['enable_pow_url'] = '1';
+        }
         $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
@@ -210,6 +224,60 @@ class CardAPI
     {
         $curlRes = Curl::doCurlRequest($url, $params);
         return json_decode($curlRes, true);
+    }
+
+    /**
+     * This method allows Merchant to host payment form on his website and perform sale without any client redirection
+     * to tpay.com system. This approach requires special security considerations.
+     * The client will be redirected if his card has 3d secure.
+     * We support secure communication by encrypting card data (card number, validity date and cvv/cvs number)
+     * on client side (javascript) with Merchant's public RSA key and send it as one parameter (card) to our API gate.
+     * A valid SSL certificate on domain is required
+     *
+     * @param string $clientName client name
+     * @param string $clientEmail client email
+     * @param string $saleDescription sale description
+     * @param float $amount amount
+     * @param string $carddata encrypted credit card data
+     * @param string $curr currency
+     * @param string|null $orderID order id
+     * @param bool $onetimer
+     * @param string $lang
+     *
+     * @return bool|mixed
+     *
+     * @throws TException
+     */
+    public function secureSale(
+        $clientName,
+        $clientEmail,
+        $saleDescription,
+        $amount,
+        $carddata,
+        $curr = '985',
+        $orderID = null,
+        $onetimer = true,
+        $lang = 'pl',
+        $powUrl = true
+    )
+    {
+        if (!is_string($carddata) || strlen($carddata) === 0) {
+            throw new TException('Card data are not set');
+        }
+
+        return $this->registerSaleBase(
+            $clientName,
+            $clientEmail,
+            $saleDescription,
+            $amount,
+            $curr,
+            $orderID,
+            $onetimer,
+            false,
+            $carddata,
+            $lang,
+            $powUrl
+        );
     }
 
     /**
@@ -241,8 +309,9 @@ class CardAPI
         $carddata,
         $curr = '985',
         $orderID = null,
-        $onetimer = true,
-        $lang = 'pl'
+        $onetimer = true
+
+
     )
     {
         if (!is_string($carddata) || strlen($carddata) === 0) {
@@ -258,8 +327,8 @@ class CardAPI
             $orderID,
             $onetimer,
             true,
-            $carddata,
-            $lang
+            $carddata
+
         );
     }
 

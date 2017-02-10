@@ -370,10 +370,12 @@ class PaymentCard
             'email'         => $clientEmail,
             'desc'          => $orderDesc,
             static::ORDERID => $orderID,
+
         );
 
-        Validate::validateConfig(Validate::PAYMENT_TYPE_CARD_DIRECT, $tmpConfig);
 
+        Validate::validateConfig(Validate::PAYMENT_TYPE_CARD_DIRECT, $tmpConfig);
+        $currency = Validate::validateCardCurrency($currency);
         $response = $api->directSale(
             $clientName,
             $clientEmail,
@@ -383,9 +385,57 @@ class PaymentCard
             $currency,
             $orderID,
             $oneTimeTransaction
+
         );
 
         Util::log('card direct sale response', print_r($response, true));
+
+        return $response;
+    }
+
+    public function secureSale($orderAmount, $orderID, $orderDesc, $currency = '985', $powUrl = false, $language = 'pl')
+    {
+        $cardData = Util::post('carddata', static::STRING);
+        $clientName = Util::post('client_name', static::STRING);
+        $clientEmail = Util::post('client_email', static::STRING);
+        $saveCard = Util::post('card_save', static::STRING);
+
+        Util::log('Card secureSale post params', print_r($_POST, true));
+
+        $oneTimeTransaction = ($saveCard !== 'on');
+        $amount = number_format(str_replace(array(',', ' '), array('.', ''), $orderAmount), 2, '.', '');
+        $amount = (float)$amount;
+
+        $api = new CardAPI($this->apiKey, $this->apiPass, $this->code, $this->hashAlg);
+
+        $tmpConfig = array(
+            'amount'         => $amount,
+            'name'           => $clientName,
+            'email'          => $clientEmail,
+            'desc'           => $orderDesc,
+            static::ORDERID  => $orderID,
+            'enable_pow_url' => $powUrl
+        );
+
+
+        Validate::validateConfig(Validate::PAYMENT_TYPE_CARD_DIRECT, $tmpConfig);
+        $currency = Validate::validateCardCurrency($currency);
+
+
+        $response = $api->secureSale(
+            $clientName,
+            $clientEmail,
+            $orderDesc,
+            $amount,
+            $cardData,
+            $currency,
+            $orderID,
+            $oneTimeTransaction,
+            $language,
+            $powUrl
+        );
+
+        Util::log('card secure sale response', print_r($response, true));
 
         return $response;
     }

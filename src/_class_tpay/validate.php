@@ -47,7 +47,30 @@ class Validate
     const MAXLENGTH_40 = 'maxlength_40';
     const UNKNOWN_PAYMENT_TYPE_S = 'Unknown payment type: %s';
     const TYPE = 'type';
-
+    const BOOLEAN = 'boolean';
+    private static $cardPaymentLanguages = array(
+        'pl' => 'polish',
+        'en' => 'english',
+        'es' => 'spanish',
+        'it' => 'italian',
+        'ru' => 'russian',
+        'fr' => 'french',
+    );
+    /**
+     * List of ISO currency codes supported on card payments
+     * @var array
+     */
+    private static $isoCurrencyCodes = array(
+        985 => 'PLN',
+        826 => 'GBP',
+        840 => 'USD',
+        978 => 'EUR',
+        203 => 'CZK',
+        578 => 'NOK',
+        208 => 'DKK',
+        752 => 'SEK',
+        756 => 'CHF',
+    );
     /**
      * List of ISO 3166-1 country codes
      * @var array
@@ -738,37 +761,51 @@ class Validate
         /**
          * Transaction amount
          */
-        self::AMOUNT   => array(
+        self::AMOUNT     => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::FLOAT),
         ),
         /**
          * Client name
          */
-        'name'         => array(
+        'name'           => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
         ),
         /**
          * Client email
          */
-        self::EMAIL    => array(
+        self::EMAIL      => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, self::EMAIL_LIST),
         ),
         /**
          * Sale description
          */
-        'desc'         => array(
+        'desc'           => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
         ),
         /**
          * Value from partner system
          */
-        self::ORDER_ID => array(
+        self::ORDER_ID   => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_40),
+        ),
+        /**
+         * 3ds return url enabled
+         */
+        'enable_pow_url' => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::BOOLEAN),
+        ),
+        /**
+         * language
+         */
+        'language'       => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING),
         ),
     );
     /**
@@ -1141,6 +1178,9 @@ class Validate
                     case static::STRING:
                         static::validateString($value, $name);
                         break;
+                    case static::BOOLEAN:
+                        static::validateBoolean($value, $name);
+                        break;
                     case static::OPIS_DODATKOWY:
                         static::validateDescription($value, $name);
                         break;
@@ -1170,7 +1210,7 @@ class Validate
         }
         if (!static::filterValues($value, $fieldConfig)) {
             throw new TException(
-                sprintf('Value of field "%s" contains illegal characters', $name)
+                sprintf('Value of field "%s" contains illegal characters. Value: ' . $value, $name)
             );
 
         }
@@ -1227,7 +1267,22 @@ class Validate
     private static function validateString($value, $name)
     {
         if (!is_string($value)) {
-            throw new TException(sprintf('Field "%s" must be a string', $name));
+            throw new TException(sprintf('Field "%s" must be a string, type given: ' . gettype($value), $name));
+        }
+    }
+
+    /**
+     * Check if variable is string
+     *
+     * @param mixed $value variable to check
+     * @param string $name field name
+     *
+     * @throws TException
+     */
+    private static function validateBoolean($value, $name)
+    {
+        if (!is_bool($value)) {
+            throw new TException(sprintf('Field "%s" must be a boolean', $name));
         }
     }
 
@@ -1372,6 +1427,8 @@ class Validate
                 if ((($filterName === 'mail') && !filter_var($value, FILTER_VALIDATE_EMAIL))
                     ||
                     (($filterName === 'url') && !filter_var($value, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+                    ||
+                    (($filterName === static::BOOLEAN) && !is_bool($value))
                 ) {
                     return false;
                 }
@@ -1482,12 +1539,57 @@ class Validate
      * @param string $currency
      *
      * @throws TException
+     * @return int
      */
     public static function validateCardCurrency($currency)
     {
-        if (!is_int($currency) && strlen($currency) != 3) {
+        if (strlen($currency) !== 3) {
             throw new TException('Currency is invalid.');
         }
+
+        switch (gettype($currency)) {
+            case 'string':
+                if (in_array($currency, static::$isoCurrencyCodes)) {
+                    $currency = array_search($currency, static::$isoCurrencyCodes);
+                } elseif (array_key_exists((int)$currency, static::$isoCurrencyCodes)) {
+                    $currency = (int)$currency;
+                } else {
+                    throw new TException('Currency is not supported.');
+                }
+
+                break;
+            case 'integer':
+                if (!array_key_exists($currency, static::$isoCurrencyCodes)) {
+                    throw new TException('Currency is not supported.');
+                }
+                break;
+            default:
+                throw new TException('Currency variable type not supported.');
+        }
+        return $currency;
+
+    }
+
+    /**
+     * Validate card payment language
+     *
+     * @param string $language
+     *
+     * @throws TException
+     * @return string
+     */
+    public static function validateCardLanguage($language)
+    {
+        if (!is_string($language)) {
+            throw new TException('Invalid language value type.');
+        }
+        if (in_array($language, static::$cardPaymentLanguages)) {
+            $language = array_search($language, static::$cardPaymentLanguages);
+        } elseif (!array_key_exists($language, static::$cardPaymentLanguages)) {
+            $language = 'en';
+        }
+        return $language;
+
     }
 
     /**
