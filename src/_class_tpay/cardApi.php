@@ -147,48 +147,73 @@ class CardAPI
      * @throws TException
      */
     private function registerSaleBase(
-        $clientName,
-        $clientEmail,
-        $saleDescription,
-        $amount,
-        $currency = '985',
-        $orderID = null,
-        $onetimer = true,
-        $direct = false,
-        $saledata = null,
-        $lang = 'pl',
-        $powUrl = false
+        $clientName, $clientEmail, $saleDescription, $amount, $currency = '985', $orderID = null,
+        $onetimer = true, $direct = false, $saledata = null, $lang = 'pl', $powUrl = false
     )
     {
         $amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
+
+        $params = $this->recogniseMethod($direct, $saledata);
+
+        $params = array_merge($params, array(
+            static::NAME   => $clientName,
+            static::EMAIL  => $clientEmail,
+            static::DESC   => $saleDescription,
+            static::AMOUNT => $amount,
+        ));
+        $params = array_merge($params, $this->prepeareSecondaryParams($currency, $orderID, $onetimer, $lang, $powUrl));
+
+        $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
+        $params[static::APIPASS] = $this->apiPass;
+
+        Util::log('Card request', print_r($params, true));
+        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+    }
+
+    /**
+     * Prepare for register sale @see $this->registerSale
+     *
+     * @param string $saledata
+     * @param bool $direct
+     * @return array
+     *
+     */
+    private function recogniseMethod($direct = false, $saledata = null)
+    {
 
         if ($direct && !empty($saledata)) {
             $params = array(
                 static::METHOD => 'directsale',
                 'card'         => $saledata,
-                static::NAME   => $clientName,
-                static::EMAIL  => $clientEmail,
-                static::DESC   => $saleDescription,
-                static::AMOUNT => $amount,
             );
         } elseif (!$direct && !empty($saledata)) {
             $params = array(
                 static::METHOD => 'securesale',
                 'card'         => $saledata,
-                static::NAME   => $clientName,
-                static::EMAIL  => $clientEmail,
-                static::DESC   => $saleDescription,
-                static::AMOUNT => $amount,
             );
         } else {
             $params = array(
                 static::METHOD => 'register_sale',
-                static::NAME   => $clientName,
-                static::EMAIL  => $clientEmail,
-                static::DESC   => $saleDescription,
-                static::AMOUNT => $amount,
             );
         }
+        return $params;
+    }
+
+    /**
+     * Prepare for register sale @see $this->registerSale
+     *
+     * @param string $currency currency
+     * @param string|null $orderID order id
+     * @param bool $onetimer
+     * @param string $lang
+     * @param bool $powUrl
+     * @return array
+     *
+     */
+    private function prepeareSecondaryParams($currency = '985', $orderID = '',
+                                             $onetimer = true, $lang = 'pl', $powUrl = false)
+    {
+        $params = array();
         if ($currency) {
             $params[static::CURRENCY] = $currency;
         }
@@ -204,12 +229,7 @@ class CardAPI
         if ($powUrl) {
             $params['enable_pow_url'] = '1';
         }
-        $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
-        $params[static::APIPASS] = $this->apiPass;
-
-        Util::log('Card request', print_r($params, true));
-
-        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+        return $params;
     }
 
     /**
@@ -295,7 +315,6 @@ class CardAPI
      * @param string $curr currency
      * @param string|null $orderID order id
      * @param bool $onetimer
-     * @param string $lang
      *
      * @return bool|mixed
      *
