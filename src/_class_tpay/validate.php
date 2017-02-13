@@ -25,6 +25,7 @@ class Validate
     const PAYMENT_TYPE_SMS = 'sms';
     const CARD_DEREGISTER = 'deregister';
     const NUMBERS = 'numbers';
+    const PHONE = 'phone';
     const REQUIRED = 'required';
     const VALIDATION = 'validation';
     const FLOAT = 'float';
@@ -61,15 +62,125 @@ class Validate
      * @var array
      */
     private static $isoCurrencyCodes = array(
-        985 => 'PLN',
-        826 => 'GBP',
-        840 => 'USD',
-        978 => 'EUR',
-        203 => 'CZK',
-        578 => 'NOK',
-        208 => 'DKK',
-        752 => 'SEK',
+        784 => 'AED',
+        41  => 'AMD',
+        532 => 'ANG',
+        973 => 'AOA',
+        26  => 'ARS',
+        30  => 'AUD',
+        533 => 'AWG',
+        944 => 'AZN',
+        977 => 'BAM',
+        42  => 'BBD',
+        40  => 'BDT',
+        975 => 'BGN',
+        4   => 'BHD',
+        108 => 'BIF',
+        48  => 'BMD',
+        6   => 'BOB',
+        986 => 'BRL',
+        36  => 'BSD',
+        58  => 'BWP',
+        933 => 'BYN',
+        124 => 'CAD',
+        976 => 'CDF',
         756 => 'CHF',
+        152 => 'CLP',
+        156 => 'CNY',
+        170 => 'COP',
+        188 => 'CRC',
+        132 => 'CVE',
+        203 => 'CZK',
+        208 => 'DKK',
+        214 => 'DOP',
+        10  => 'DZD',
+        818 => 'EGP',
+        230 => 'ETB',
+        978 => 'EUR',
+        242 => 'FJD',
+        826 => 'GBP',
+        981 => 'GEL',
+        936 => 'GHS',
+        270 => 'GMD',
+        320 => 'GTQ',
+        328 => 'GYD',
+        344 => 'HKD',
+        340 => 'HNL',
+        191 => 'HRK',
+        332 => 'HTG',
+        348 => 'HUF',
+        360 => 'IDR',
+        376 => 'ILS',
+        356 => 'INR',
+        364 => 'IRR',
+        352 => 'ISK',
+        388 => 'JMD',
+        400 => 'JOD',
+        392 => 'JPY',
+        404 => 'KES',
+        417 => 'KGS',
+        116 => 'KHR',
+        410 => 'KRW',
+        414 => 'KWD',
+        136 => 'KYD',
+        398 => 'KZT',
+        422 => 'LBP',
+        144 => 'LKR',
+        434 => 'LYD',
+        504 => 'MAD',
+        498 => 'MDL',
+        969 => 'MGA',
+        807 => 'MKD',
+        104 => 'MMK',
+        496 => 'MNT',
+        446 => 'MOP',
+        480 => 'MUR',
+        454 => 'MWK',
+        484 => 'MXN',
+        458 => 'MYR',
+        516 => 'NAD',
+        566 => 'NGN',
+        558 => 'NIO',
+        578 => 'NOK',
+        524 => 'NPR',
+        554 => 'NZD',
+        512 => 'OMR',
+        590 => 'PAB',
+        604 => 'PEN',
+        598 => 'PGK',
+        608 => 'PHP',
+        586 => 'PKR',
+        985 => 'PLN',
+        600 => 'PYG',
+        634 => 'QAR',
+        946 => 'RON',
+        941 => 'RSD',
+        643 => 'RUB',
+        646 => 'RWF',
+        682 => 'SAR',
+        690 => 'SCR',
+        752 => 'SEK',
+        702 => 'SGD',
+        760 => 'SYP',
+        764 => 'THB',
+        788 => 'TND',
+        949 => 'TRY',
+        780 => 'TTD',
+        901 => 'TWD',
+        834 => 'TZS',
+        980 => 'UAH',
+        840 => 'USD',
+        858 => 'UYU',
+        860 => 'UZS',
+        704 => 'VND',
+        882 => 'WST',
+        950 => 'XAF',
+        951 => 'XCD',
+        952 => 'XOF',
+        953 => 'XPF',
+        886 => 'YER',
+        710 => 'ZAR',
+        967 => 'ZMW',
     );
     /**
      * List of ISO 3166-1 country codes
@@ -502,7 +613,7 @@ class Validate
         'telefon'             => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, 'maxlenght_16'),
-            self::FILTER     => self::NUMBERS
+            self::FILTER     => self::PHONE
         ),
         /**
          * The parameter indicating acceptance of Terms tpay if it is available on the payee.
@@ -889,7 +1000,7 @@ class Validate
         'cli_phone'    => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, 'maxlength_32'),
-            self::FILTER     => self::NUMBERS
+            self::FILTER     => self::PHONE
         ),
         /**
          * Title the client will be paying with; according to agreed format;
@@ -1018,7 +1129,7 @@ class Validate
         'cli_phone'    => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::MAXLENGHT_32),
-            self::FILTER     => self::NUMBERS
+            self::FILTER     => self::PHONE
         ),
         /**
          * Order id (payment title) the customer will be paying with; according to agreed format;
@@ -1408,6 +1519,7 @@ class Validate
     private static function filterValues($value, $fieldConfig)
     {
         $filters = array(
+            static::PHONE   => '/[^0-9]\+ /',
             static::NUMBERS => '/[^0-9]/',
             'letters'       => '/[^A-Za-z]/',
             'mixed'         => '/[^A-Za-z0-9]/',
