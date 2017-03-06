@@ -482,13 +482,11 @@ class Validate
             self::VALIDATION => array('uint'),
         ),
         /**
-         * Blocking the channel selection of payment - only works together with the parameter channel.
-         * Customer will be presented only the selected channel.
+         * Customer will be presented only the selected group.
          */
-        'zablokuj'            => array(
+        'grupa'            => array(
             self::REQUIRED   => false,
-            self::VALIDATION => array(self::OPTIONS),
-            self::OPTIONS    => array(0, 1),
+            self::VALIDATION => array('unit'),
         ),
         /**
          * The resulting URL return address that will send the result of a transaction in the form POST parameters.
