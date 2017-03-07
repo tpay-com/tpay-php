@@ -1,0 +1,32 @@
+{
+  "name": "tpay-com/tpay-php",
+  "type": "library",
+  
+  "description": "tpay.com PHP library",
+  "version": "1.0.0",
+  "extra": [
+    {
+      "engine": "PHP SDK"
+    }
+  ],
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "tpay.com",
+      "homepage": "https://tpay.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "ext-curl": "*",
+    "ext-hash": "*"
+  },
+  "support": {
+    "issues": "https://github.com/tpay-com/tpay-php/issues"
+  },
+  "autoload": {
+    "classmap": [
+      "lib/"
+    ]
+  }
+}
