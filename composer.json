@@ -1,15 +1,15 @@
 {
   "name": "tpay-com/tpay-php",
   "type": "library",
-  "minimum-stability": "dev",
-  "repositories": [
-    {
-        "type": "vcs",
-    	"url": "https://github.com/tpay-com/tpay-php"
-	}
-  ],
-  "description": "tpay.com PHP library",
+  
+  "description": "tpay.com library",
   "version": "1.0.0",
+  "extra": [
+    {
+      "engine": "PHP SDK"
+    }
+  ],
+  "minimum-stability": "stable",
   "authors": [
     {
       "name": "tpay.com",
@@ -17,11 +17,19 @@
     }
   ],
   "require": {
-    "php": ">=5.6.0",
-    "ext-curl": "*",
-    "tpay-com/tpay-php": "dev-master"
+    "php": ">=5.3.0",
+    "ext-curl": "*"
+    
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.3"
   },
   "support": {
     "issues": "https://github.com/tpay-com/tpay-php/issues"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
   }
 }
