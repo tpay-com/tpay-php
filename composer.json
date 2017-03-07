@@ -1,7 +1,12 @@
 {
   "name": "tpay-com/tpay-php",
   "type": "library",
-  
+  "repositories": [
+    {
+        "type": "vcs",
+    	"url": "https://github.com/tpay-com/tpay-php"
+	}
+  ],
   "description": "tpay.com PHP library",
   "version": "1.0.0",
   "extra": [
