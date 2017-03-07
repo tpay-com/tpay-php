@@ -20,7 +20,7 @@ class Lang
      *
      * @var string
      */
-    private static $lang = 'pl';
+    private static $lang = 'en';
     /**
      * Translation data
      *
@@ -30,7 +30,7 @@ class Lang
         'en' => array(
 
             // GLOBALS
-
+            'fee_info' => 'Fee for using this payment method: ',
             'pay'           => 'Pay with tpay.com',
             'merchant_info' => 'Merchant info',
             'amount'        => 'Amount',
@@ -85,6 +85,7 @@ class Lang
         'pl' => array(
 
             // GLOBALS
+            'fee_info' => 'Za korzystanie z płatności online sprzedawca dolicza: ',
 
             'pay'           => 'Zapłać z tpay.com',
             'merchant_info' => 'Dane sprzedawcy',

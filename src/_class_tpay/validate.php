@@ -461,7 +461,6 @@ class Validate
         'crc'                 => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
-            self::FILTER     => 'sign'
         ),
         /**
          * Allow only online payment.
