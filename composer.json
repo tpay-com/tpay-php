@@ -9,7 +9,6 @@
       "engine": "PHP SDK"
     }
   ],
-  "minimum-stability": "stable",
   "authors": [
     {
       "name": "tpay.com",
