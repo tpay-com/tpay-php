@@ -4,6 +4,24 @@ Library for all payment methods available in tpay.com
 
 ## Installation
 
+Install via composer:
+```php
+composer require tpay-com/tpay-php
+```
+Install via git over ssh:
+```php
+git clone git@github.com:tpay-com/tpay-php.git
+```
+
+Install via git over https:
+```php
+git clone https://github.com/tpay-com/tpay-php.git
+```
+manual download:
+https://github.com/tpay-com/tpay-php/archive/master.zip
+
+## Configuration
+
 Replace all occurrences of the following codes on real data from the Merchant panel (https://secure.transferuj.pl/panel):
 
 ### Basic / Basic with bank selection / eHat 
