@@ -55,7 +55,7 @@ class TransactionAPI
      * tpay api url
      * @var string
      */
-    private $apiURL = 'https://secure.transferuj.pl/api/gw/';
+    private $apiURL = 'https://secure.tpay.com/api/gw/';
 
     /**
      * List of errors
@@ -289,11 +289,11 @@ class TransactionAPI
     {
         $url = $this->apiURL . $this->apiKey . '/transaction/report';
         $postData = array(
-            'fromDate' => $fromDate
+            'from_date' => $fromDate
         );
 
         if ($toDate !== false) {
-            $postData['toDate'] = $toDate;
+            $postData['to_date'] = $toDate;
         }
 
         $res = $this->requests($url, $postData);
@@ -302,6 +302,7 @@ class TransactionAPI
             static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
             static::REPORT => Util::findSubstring('/<report>(.*)<\/report>/', $res),
         );
+
         $this->checkError($response);
         $response[static::REPORT] = base64_decode($response[static::REPORT]);
         return $response;
