@@ -22,7 +22,7 @@ https://github.com/tpay-com/tpay-php/archive/master.zip
 
 ## Configuration
 
-Replace all occurrences of the following codes on real data from the Merchant panel (https://secure.transferuj.pl/panel):
+Replace all occurrences of the following codes on real data from the Merchant panel (https://secure.tpay.com/panel):
 
 ### Basic / Basic with bank selection / eHat 
 
@@ -69,7 +69,7 @@ Be sure that file src/log is writable and add rule to htaccess to deny access to
 
 ## Requirements
 
-  * PHP > 5.3.0
+  * PHP > 5.4.0
 
 ## Language
 
@@ -77,11 +77,11 @@ For this moment library supports two languages (EN, PL). Default language is eng
 Change language example:
 
 ```php
-//All Transferuj class constructors load Lang class
-$transferuj = new Transferuj\PaymentSzkwal();
+//All Tpay class constructors load Lang class
+$tpay = new tpay\PaymentSzkwal();
 
 //After this line all static messages (input labels, buttons titles) will be displayed in Polish
-Transferuj\Lang::setLang('pl');
+tpay\Lang::setLang('pl');
 ```
 
 ## License
