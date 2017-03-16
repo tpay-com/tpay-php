@@ -148,7 +148,8 @@ class CardAPI
      */
     private function registerSaleBase(
         $clientName, $clientEmail, $saleDescription, $amount, $currency = '985', $orderID = null,
-        $onetimer = true, $direct = false, $saledata = null, $lang = 'pl', $powUrl = false
+        $onetimer = true, $direct = false, $saledata = null, $lang = 'pl', $enablePowUrl = false, $powUrl = '',
+        $powUrlBlad = ''
     )
     {
         $amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
@@ -161,10 +162,13 @@ class CardAPI
             static::DESC   => $saleDescription,
             static::AMOUNT => $amount,
         ));
-        $params = array_merge($params, $this->prepeareSecondaryParams($currency, $orderID, $onetimer, $lang, $powUrl));
+        $params = array_merge($params, $this->prepareSecondaryParams($currency, $orderID, $onetimer, $lang,
+            $enablePowUrl));
 
         $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
+
+        $params = array_merge($params, $this->checkReturnUrls($powUrl, $powUrlBlad));
 
         Util::log('Card request', print_r($params, true));
         return $this->postRequest($this->apiURL . $this->apiKey, $params);
@@ -206,12 +210,12 @@ class CardAPI
      * @param string|null $orderID order id
      * @param bool $onetimer
      * @param string $lang
-     * @param bool $powUrl
+     * @param bool $enablePowUrl
      * @return array
      *
      */
-    private function prepeareSecondaryParams($currency = '985', $orderID = '',
-                                             $onetimer = true, $lang = 'pl', $powUrl = false)
+    private function prepareSecondaryParams($currency = '985', $orderID = '',
+                                            $onetimer = true, $lang = 'pl', $enablePowUrl = false)
     {
         $params = array();
         if ($currency) {
@@ -226,9 +230,10 @@ class CardAPI
         if ($lang) {
             $params[static::LANGUAGE] = Validate::validateCardLanguage($lang);
         }
-        if ($powUrl) {
+        if ($enablePowUrl) {
             $params['enable_pow_url'] = '1';
         }
+
         return $params;
     }
 
@@ -278,7 +283,9 @@ class CardAPI
         $orderID = null,
         $onetimer = true,
         $lang = 'pl',
-        $powUrl = true
+        $enablePowUrl = true,
+        $powUrl = '',
+        $powUrlBlad = ''
     )
     {
         if (!is_string($carddata) || strlen($carddata) === 0) {
@@ -296,7 +303,9 @@ class CardAPI
             false,
             $carddata,
             $lang,
-            $powUrl
+            $enablePowUrl,
+            $powUrl,
+            $powUrlBlad
         );
     }
 
@@ -661,5 +670,17 @@ class CardAPI
         $params[static::APIPASS] = $this->apiPass;
 
         return $this->postRequest($this->apiURL . $this->apiKey, $params);
+    }
+
+    private function checkReturnUrls($powUrl = '', $powUrlBlad = '')
+    {
+        $params = array();
+        if (filter_var($powUrl, FILTER_VALIDATE_URL)) {
+            $params['pow_url'] = $powUrl;
+        }
+        if (filter_var($powUrlBlad, FILTER_VALIDATE_URL)) {
+            $params['pow_url_blad'] = $powUrlBlad;
+        }
+        return $params;
     }
 }

@@ -50,12 +50,12 @@ class Validate
     const TYPE = 'type';
     const BOOLEAN = 'boolean';
     private static $cardPaymentLanguages = array(
-        'pl' => 'polish',
-        'en' => 'english',
-        'es' => 'spanish',
-        'it' => 'italian',
-        'ru' => 'russian',
-        'fr' => 'french',
+        'pl' => 'pl_PL',
+        'en' => 'en_EN',
+        'es' => 'sp_SP',
+        'it' => 'it_IT',
+        'ru' => 'ru_RU',
+        'fr' => 'fr_FR',
     );
     /**
      * List of ISO currency codes supported on card payments
@@ -777,7 +777,7 @@ class Validate
          * Value from partner system
          */
         self::ORDER_ID => array(
-            self::REQUIRED   => true,
+            self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_40),
         ),
         /**
@@ -907,6 +907,20 @@ class Validate
         'enable_pow_url' => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::BOOLEAN),
+        ),
+        /**
+         * 3ds success return url
+         */
+        'pow_url' => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING),
+        ),
+        /**
+         * 3ds failure return url
+         */
+        'pow_url_blad' => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array(self::STRING),
         ),
         /**
          * language
@@ -1521,7 +1535,7 @@ class Validate
             'letters'       => '/[^A-Za-z]/',
             'mixed'         => '/[^A-Za-z0-9]/',
             'date'          => '/[^0-9 \-:]/',
-            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,_\/\!]/u',
+            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,#_\/\!]/u',
             'name'          => '/[^\-\p{Latin} ]/u',
             'sign'          => '/[^A-Za-z!\., _\-0-9]/'
         );

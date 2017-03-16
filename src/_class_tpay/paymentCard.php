@@ -393,7 +393,8 @@ class PaymentCard
         return $response;
     }
 
-    public function secureSale($orderAmount, $orderID, $orderDesc, $currency = '985', $powUrl = false, $language = 'pl')
+    public function secureSale($orderAmount, $orderID, $orderDesc, $currency = '985', $enablePowUrl = false,
+                               $language = 'pl', $powUrl = '', $powUrlBlad = '')
     {
         $cardData = Util::post('carddata', static::STRING);
         $clientName = Util::post('client_name', static::STRING);
@@ -414,7 +415,9 @@ class PaymentCard
             'email'          => $clientEmail,
             'desc'           => $orderDesc,
             static::ORDERID  => $orderID,
-            'enable_pow_url' => $powUrl
+            'enable_pow_url' => $enablePowUrl,
+            'pow_url'        => $powUrl,
+            'pow_url_blad'   => $powUrlBlad
         );
 
 
@@ -432,7 +435,9 @@ class PaymentCard
             $orderID,
             $oneTimeTransaction,
             $language,
-            $powUrl
+            $enablePowUrl,
+            $powUrl,
+            $powUrlBlad
         );
 
         Util::log('card secure sale response', print_r($response, true));
