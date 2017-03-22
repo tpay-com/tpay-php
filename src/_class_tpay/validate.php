@@ -1549,7 +1549,7 @@ class Validate
             } else {
                 if ((($filterName === 'mail') && !filter_var($value, FILTER_VALIDATE_EMAIL))
                     ||
-                    (($filterName === 'url') && !filter_var($value, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED))
+                    (($filterName === 'url') && !((preg_match('/http:/', $value)) || preg_match('/https:/', $value)))
                     ||
                     (($filterName === static::BOOLEAN) && !is_bool($value))
                 ) {
