@@ -488,6 +488,13 @@ class Validate
             self::VALIDATION => array('unit'),
         ),
         /**
+         * Customer will be redirected to bank login page.
+         */
+        'direct'            => array(
+            self::REQUIRED   => false,
+            self::VALIDATION => array('unit'),
+        ),
+        /**
          * The resulting URL return address that will send the result of a transaction in the form POST parameters.
          */
         'wyn_url'             => array(
