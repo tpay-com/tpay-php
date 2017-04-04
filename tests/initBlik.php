@@ -24,7 +24,7 @@ class OneClick
         
         $this->tpayApi = new \tpay\TransactionAPI (
             '158ae0714578f5ab76bf6c0374cb1508b98ece5d',
-            'nvidia8800',
+            'testtpay123',
             25223,
             'testtpay'
         );
@@ -61,10 +61,10 @@ class OneClick
         $config = array(
             'opis'                => 'transakcja testowa api',
             'kwota'               => 1.00,
-            'crc'                 => 'piotr',
+            'crc'                 => 'test',
             'kanal'               => 64,
             'nazwisko'            => 'kowalski',
-            'email'               => 'piotr123.jozwiak@tpay.com',
+            'email'               => 'test@tpay.com',
             'akceptuje_regulamin' => 1,
         );
         $params['title'] = $this->tpayApi->create($config)['title'];

@@ -10,7 +10,13 @@ function showT6() {
     document.getElementById("alias").style.visibility = "hidden";
 }
 function checkRegister() {
-    register = document.getElementById("register").value;
+    var checkbox = document.getElementById("register");
+    if (checkbox.checked = true) {
+        checkbox.value = 1;
+    } else {
+        checkbox.value = 0;
+    }
+    register = checkbox.value;
 }
 function showAliases() {
     var x = document.getElementById("blikSwitch");
@@ -51,7 +57,6 @@ function blikHandler() {
     } else if (attempt === 1) {
         var e = document.getElementById("blikSwitch");
         var key = e.options[e.selectedIndex].value;
-        alert(key);
         ajax('aliasKey=' + key + '&title=' + title);
         setTimeout(function () {
             checkResponse();
