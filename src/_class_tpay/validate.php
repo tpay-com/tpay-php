@@ -23,6 +23,11 @@ class Validate
     const PAYMENT_TYPE_WHITE_LABEL = 'whiteLabel';
     const PAYMENT_TYPE_EHAT = 'ehat';
     const PAYMENT_TYPE_SMS = 'sms';
+    const PAYMENT_TYPE_BLIK_T6STANDARD = 'T6Standard';
+    const PAYMENT_TYPE_BLIK_T6REGISTER = 'T6Register';
+    const ALIAS = 'alias';
+    const PAYMENT_TYPE_BLIK_ALIAS = 'blikAlias';
+    const ALIAS_BLIK = 'aliasNotification';
     const CARD_DEREGISTER = 'deregister';
     const NUMBERS = 'numbers';
     const PHONE = 'phone';
@@ -31,6 +36,7 @@ class Validate
     const FLOAT = 'float';
     const FILTER = 'filter';
     const STRING = 'string';
+    const ARRAY = 'array';
     const MAXLENGHT_128 = 'maxlenght_128';
     const OPTIONS = 'options';
     const KANAL = 'kanal';
@@ -49,6 +55,7 @@ class Validate
     const UNKNOWN_PAYMENT_TYPE_S = 'Unknown payment type: %s';
     const TYPE = 'type';
     const BOOLEAN = 'boolean';
+    const TEXT = 'text';
     private static $cardPaymentLanguages = array(
         'pl' => 'pl_PL',
         'en' => 'en_EN',
@@ -434,11 +441,34 @@ class Validate
         'ZW' => 'ZWE',
     );
     /**
+     * List of supported request fields for blik payment
+     * @var array
+     */
+    private static $blikPaymentRequestFields = array(
+        /**
+         * Transaction amount with dot as decimal separator.
+         */
+        'code'  => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::FLOAT, 'maxlenght_6', 'minlenght_6'),
+            self::FILTER     => self::NUMBERS
+        ),
+        'title' => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::STRING),
+            self::FILTER     => self::TEXT
+        ),
+        'alias' => array(
+            self::REQUIRED   => true,
+            self::VALIDATION => array(self::ARRAY),
+        ),
+    );
+    /**
      * List of supported request fields for basic payment
      * @var array
      */
     private static $panelPaymentRequestFields = array(
-
+        
         /**
          * Transaction amount with dot as decimal separator.
          */
@@ -452,7 +482,7 @@ class Validate
         'opis'                => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
-            self::FILTER     => 'text'
+            self::FILTER     => self::TEXT
         ),
         /**
          * The secondary parameter to the transaction identification.
@@ -483,7 +513,7 @@ class Validate
         /**
          * Customer will be presented only the selected group.
          */
-        'grupa'            => array(
+        'grupa'               => array(
             self::REQUIRED   => false,
             self::VALIDATION => array('unit'),
         ),
@@ -515,7 +545,7 @@ class Validate
         'opis_sprzed'         => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_128),
-            self::FILTER     => 'text'
+            self::FILTER     => self::TEXT
         ),
         /**
          * Optional field used during card transactions processed through Elavon.
@@ -585,7 +615,7 @@ class Validate
         'adres'               => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, self::MAXLENGHT_64),
-            self::FILTER     => 'text'
+            self::FILTER     => self::TEXT
         ),
         /**
          * Customer city.
@@ -601,7 +631,7 @@ class Validate
         'kod'                 => array(
             self::REQUIRED   => false,
             self::VALIDATION => array(self::STRING, 'maxlenght_10'),
-            self::FILTER     => 'text'
+            self::FILTER     => self::TEXT
         ),
         /**
          * Country code.
@@ -629,10 +659,39 @@ class Validate
         ),
     );
     /**
+     * List of fields available in response for blik payment
+     * @var array
+     */
+    private static $blikAliasResponseFields = array(
+        'id'        => array(
+            self::REQUIRED   => true,
+            self::TYPE       => self::FLOAT,
+            self::VALIDATION => array(self::FLOAT),
+        ),
+        'event'     => array(
+            self::REQUIRED   => true,
+            self::TYPE       => self::STRING,
+            self::VALIDATION => array(self::STRING),
+        ),
+        'msg_value' => array(
+            self::REQUIRED   => true,
+            self::TYPE       => self::ARRAY,
+            self::VALIDATION => array(self::ARRAY),
+        ),
+    );
+    /**
      * List of fields available in response for basic payment
      * @var array
      */
     private static $panelPaymentResponseFields = array(
+        /**
+         * The merchant ID assigned by the system tpay
+         */
+        'id'            => array(
+            self::REQUIRED   => true,
+            self::TYPE       => self::FLOAT,
+            self::VALIDATION => array(self::FLOAT),
+        ),
         /**
          * The transaction ID assigned by the system tpay
          */
@@ -1033,7 +1092,7 @@ class Validate
         'crc'          => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, 'maxlength_64'),
-            self::FILTER     => 'text'
+            self::FILTER     => self::TEXT
         ),
         /**
          * Client account number
@@ -1131,7 +1190,7 @@ class Validate
         'cli_name'     => array(
             self::REQUIRED   => true,
             self::VALIDATION => array(self::STRING, 'maxlenght_96'),
-            self::FILTER     => 'text'
+            self::FILTER     => self::TEXT
         ),
         /**
          * Client email
@@ -1223,6 +1282,9 @@ class Validate
                     case static::FLOAT:
                         $val = (float)$val;
                         break;
+                    case static::ARRAY:
+                        $val = (array)$val;
+                        break;
                     default:
                         throw new TException(sprintf('unknown field type in getResponse - field name= %s', $fieldName));
                 }
@@ -1276,10 +1338,25 @@ class Validate
             case static::PAYMENT_TYPE_WHITE_LABEL:
                 $requestFields = static::$whiteLabelRequestFields;
                 break;
+            case static::PAYMENT_TYPE_BLIK_T6STANDARD:
+                $requestFields = static::$blikPaymentRequestFields;
+                $requestFields['alias'][static::REQUIRED] = false;
+                break;
+            case static::PAYMENT_TYPE_BLIK_T6REGISTER:
+                $requestFields = static::$blikPaymentRequestFields;
+                break;
+            case static::PAYMENT_TYPE_BLIK_ALIAS:
+                $requestFields = static::$blikPaymentRequestFields;
+                $requestFields['code'][static::REQUIRED] = false;
+                break;
+            case static::ALIAS_BLIK:
+                $requestFields = static::$blikAliasResponseFields;
+                break;
             default:
                 throw new TException(sprintf(static::UNKNOWN_PAYMENT_TYPE_S, $paymentType));
         }
-
+        $requestFields['json'][static::REQUIRED] = false;
+        $requestFields['json'][self::VALIDATION] = array(self::BOOLEAN);
         if (!is_string($name)) {
             throw new TException('Invalid field name');
         }
@@ -1321,6 +1398,9 @@ class Validate
                         break;
                     case 'country_code':
                         static::validateCountryCode($value, $name);
+                        break;
+                    case static::ARRAY:
+                        static::validateArray($value, $name);
                         break;
                     default:
                         break;
@@ -1365,7 +1445,24 @@ class Validate
             }
         }
     }
-
+    /**
+     * Check if variable is array
+     *
+     * @param mixed $value variable to check
+     * @param string $name field name
+     *
+     * @throws TException
+     */
+    private static function validateArray($value, $name)
+    {
+        if (!is_array($value)) {
+            throw new TException(sprintf('Field "%s" must be an array', $name));
+        } else {
+            if (count($value) <= 0) {
+                throw new TException(sprintf('Array "%s" must not be empty', $name));
+            }
+        }
+    }
     /**
      * Check if variable is float
      *
@@ -1542,7 +1639,7 @@ class Validate
             'letters'       => '/[^A-Za-z]/',
             'mixed'         => '/[^A-Za-z0-9]/',
             'date'          => '/[^0-9 \-:]/',
-            'text'          => '/[^\-\p{Latin}A-Za-z0-9 \.,#_\/\!]/u',
+            self::TEXT      => '/[^\-\p{Latin}A-Za-z0-9 \.,#_\/\!]/u',
             'name'          => '/[^\-\p{Latin} ]/u',
             'sign'          => '/[^A-Za-z!\., _\-0-9]/'
         );
@@ -1783,6 +1880,20 @@ class Validate
                 break;
             case static::PAYMENT_TYPE_WHITE_LABEL:
                 $requestFields = static::$whiteLabelRequestFields;
+                break;
+            case static::PAYMENT_TYPE_BLIK_T6STANDARD:
+                $requestFields = static::$blikPaymentRequestFields;
+                $requestFields['alias'][static::REQUIRED] = false;
+                break;
+            case static::PAYMENT_TYPE_BLIK_T6REGISTER:
+                $requestFields = static::$blikPaymentRequestFields;
+                break;
+            case static::PAYMENT_TYPE_BLIK_ALIAS:
+                $requestFields = static::$blikPaymentRequestFields;
+                $requestFields['code'][static::REQUIRED] = false;
+                break;
+            case static::ALIAS_BLIK:
+                $requestFields = static::$blikAliasResponseFields;
                 break;
             default:
                 throw new TException(sprintf(static::UNKNOWN_PAYMENT_TYPE_S, $paymentType));

@@ -67,7 +67,7 @@ class PaymentWhiteLabel extends PaymentSzkwal
         $this->checkError($res);
 
         Util::log('White label server resp', print_r($res, true));
-        if (strpos($res, '<result>correct</result>') !== -1) {
+        if (strpos($res, 'correct') !== -1) {
             return $title;
         } else {
             throw new TException('Invalid server response');
@@ -137,7 +137,7 @@ class PaymentWhiteLabel extends PaymentSzkwal
         );
         $res = $this->request('GetBankInstr', $postData);
 
-        preg_match_all('/<bank_instr>(.*)<\/bank_instr>/', $res, $matches);
+        preg_match_all('/(.*)/', $res, $matches);
         if (isset($matches[1]) && isset($matches[1][0])) {
             $instructions = json_decode($matches[1][0], true);
         } else {

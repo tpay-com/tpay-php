@@ -25,8 +25,11 @@ class TransactionAPI
     const PACKID = '/<pack_id>([0-1]*)<\/pack_id>/';
     const ERR_ERR = '/<err>(.*)<\/err>/';
     const ERROR_ERROR = '/<error>(.*)<\/error>/';
+    const USER_APPS = '/<availableUserApps>(.*)<\/availableUserApps>/';
     const PACKS = 'packs';
     const TRANSFERS = 'transfers';
+    const ALIAS = 'alias';
+    const CODE = 'code';
     /**
      * Api key
      * @var string
@@ -151,18 +154,8 @@ class TransactionAPI
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC_API, $config);
         $config = $this->prepareConfig($config);
-        $res = $this->requests($url, $config);
-
-        $response = array(
-            static::RESULT   => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::TITLE    => Util::findSubstring('/<title>(.*)<\/title>/', $res),
-            static::AMOUNT   => (float)Util::findSubstring('/<amount>([0-9\.]*)<\/amount>/', $res),
-            'account_number' => Util::findSubstring('/<account_number>([0-9]*)<\/account_number>/', $res),
-            'online'         => (int)Util::findSubstring('/<online>([0-1]*)<\/online>/', $res),
-            'url'            => Util::findSubstring('/<url>(.*)<\/url>/', $res),
-            'desc'           => Util::findSubstring('/<desc>(.*)<\/desc>/', $res),
-        );
-
+        $response = $this->requests($url, $config);
+        
         if ($response[static::RESULT] !== 1) {
             throw new TException(sprintf('Error in %s', $response['desc']));
         }
@@ -202,17 +195,80 @@ class TransactionAPI
 
         return Curl::doCurlRequest($url, $params);
     }
-
-    public function blik($code, $title)
+    
+    public function handleBlikPayment($params)
     {
-        $config['code'] = $code;
+        if (!is_array($params) || count($params) <= 0) {
+            throw new TException('Invalid or empty input parameters');
+        }
+        if (isset($params['code']) && !isset($params['alias'])) {
+            $params['code'] = (int)$params['code'];
+            $response = $this->handleBlik(Validate::PAYMENT_TYPE_BLIK_T6STANDARD, $params);
+        } elseif (isset($params['code']) && isset($params['alias'])) {
+            $params['code'] = (int)$params['code'];
+            $response = $this->handleBlik(Validate::PAYMENT_TYPE_BLIK_T6REGISTER, $params);
+        } else {
+            $response = $this->handleBlik(Validate::PAYMENT_TYPE_BLIK_ALIAS, $params);
+        }
+        
+        switch ($response['result']) {
+            case 1:
+                $success = true;
+                break;
+            case 0:
+                if (isset($response[static::ERR]) && $response[static::ERR] === 'ERR82') {
+                    $apps = array();
+                    foreach ($response['availableUserApps'] as $key => $value) {
+                        $apps[]=get_object_vars($value);
+                    }
+                    return $apps;
+                } else {
+                    $success = false;
+                }
+                break;
+            default:
+                $success = false;
+                break;
+        }
+        return $success;
+    }
+    
+    public function handleBlik($type, $params)
+    {
+        $params = Validate::validateConfig($type, $params);
+        
+        switch ($type) {
+            case Validate::PAYMENT_TYPE_BLIK_T6STANDARD:
+                $response = $this->blik($params[self::CODE], $params[static::TITLE]);
+                break;
+            case Validate::PAYMENT_TYPE_BLIK_T6REGISTER:
+                $response = $this->blik($params[self::CODE], $params[static::TITLE], $params[static::ALIAS]);
+                break;
+            case Validate::PAYMENT_TYPE_BLIK_ALIAS:
+                $response = $this->blik('', $params[static::TITLE], $params[static::ALIAS]);
+                break;
+            default:
+                throw new TException('Undefined transaction type!');
+        }
+        return $response;
+    }
+    
+    public function blik($code = '', $title, $alias = '')
+    {
+        if (empty($title) || !is_string($title)) {
+            throw new TException('Transaction title is empty or invalid');
+        }
         $config['title'] = $title;
+        if (!empty($code)) {
+            $config[self::CODE] = $code;
+        }
+        if (!empty($alias)) {
+            $config[self::ALIAS] = $alias;
+        }
+        
         $url = $this->apiURL . $this->apiKey . '/transaction/blik';
-
-        $res = $this->requests($url, $config);
-        return array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-        );
+       
+        return $this->requests($url, $config);
     }
 
 
@@ -228,29 +284,9 @@ class TransactionAPI
     public function get($transactionId)
     {
         $url = $this->apiURL . $this->apiKey . '/transaction/get';
-
-        $res = $this->requests($url, array(static::TITLE => $transactionId));
-
-        $response = array(
-            static::RESULT     => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            'status'           => Util::findSubstring('/<status>(.*)<\/status>/', $res),
-            static::ERROR_CODE => Util::findSubstring('/<error_code>(.*)<\/error_code>/', $res),
-            static::ERR        => Util::findSubstring(static::ERR_ERR, $res),
-            'start_time'       => Util::findSubstring('/<start_time>(.*)<\/start_time>/', $res),
-            'payment_time'     => Util::findSubstring('/<payment_time>(.*)<\/payment_time>/', $res),
-            'chargeback_time'  => Util::findSubstring('/<chargeback_time>(.*)<\/chargeback_time>/', $res),
-            'channel'          => (int)Util::findSubstring('/<channel>([0-9]*)<\/channel>/', $res),
-            'test_mode'        => (int)Util::findSubstring('/<test_mode>([0-1]*)<\/test_mode>/', $res),
-            static::AMOUNT     => (float)Util::findSubstring('/<amount>([0-9\.]*)<\/amount>/', $res),
-            'amount_paid'      => (float)Util::findSubstring('/<amount_paid>([0-9\.]*)<\/amount_paid>/', $res),
-            'name'             => Util::findSubstring('/<name>(.*)<\/name>/', $res),
-            'address'          => Util::findSubstring('/<address>(.*)<\/address>/', $res),
-            'code'             => Util::findSubstring('/<code>(.*)<\/code>/', $res),
-            'city'             => Util::findSubstring('/<city>(.*)<\/city>/', $res),
-            'email'            => Util::findSubstring('/<email>(.*)<\/email>/', $res),
-            'country'          => Util::findSubstring('/<country>(.*)<\/country>/', $res),
-        );
-
+        
+        $response = $this->requests($url, array(static::TITLE => $transactionId));
+        
         $this->checkError($response);
         return $response;
     }
@@ -295,20 +331,14 @@ class TransactionAPI
         if ($toDate !== false) {
             $postData['to_date'] = $toDate;
         }
-
-        $res = $this->requests($url, $postData);
-
-        $response = array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::REPORT => Util::findSubstring('/<report>(.*)<\/report>/', $res),
-        );
-
+        
+        $response = $this->requests($url, $postData);
+        
         $this->checkError($response);
         $response[static::REPORT] = base64_decode($response[static::REPORT]);
         return $response;
     }
-
-
+    
     /**
      * Refund all amount to customer
      *
@@ -321,13 +351,9 @@ class TransactionAPI
     public function refund($transactionId)
     {
         $url = $this->apiURL . $this->apiKey . '/chargeback/transaction';
-
-        $res = $this->requests($url, array(static::TITLE => $transactionId));
-
-        $response = array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::ERR    => Util::findSubstring(static::ERR_ERR, $res),
-        );
+        
+        $response = $this->requests($url, array(static::TITLE => $transactionId));
+        
         $this->checkError($response);
 
         return true;
@@ -351,12 +377,8 @@ class TransactionAPI
             static::TITLE       => $transactionId,
             'chargeback_amount' => $amount,
         );
-        $res = $this->requests($url, $postData);
-
-        $response = array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::ERR    => Util::findSubstring(static::ERR_ERR, $res),
-        );
+        $response = $this->requests($url, $postData);
+        
         $this->checkError($response);
 
         return true;
@@ -380,16 +402,8 @@ class TransactionAPI
             'csv'  => $csvEncode,
             'sign' => sha1($this->merchantId . $csv . $this->merchantSecret),
         );
-        $res = $this->requests($url, $postData);
-
-        $response = array(
-            static::RESULT  => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            'count'         => (int)Util::findSubstring('/<count>([0-9]*)<\/count>/', $res),
-            'sum'           => (float)Util::findSubstring('/<sum>([0-9\.]*)<\/sum>/', $res),
-            static::PACK_ID => Util::findSubstring('/<pack_id>(.*)<\/pack_id>/', $res),
-            'referers'      => Util::findSubstring('/<referers>(.*)<\/referers>/', $res),
-            static::ERR     => Util::findSubstring(static::ERR_ERR, $res),
-        );
+        $response = $this->requests($url, $postData);
+        
         $this->checkError($response);
 
         return $response;
@@ -410,12 +424,8 @@ class TransactionAPI
         $postData = array(
             static::PACK_ID => $packId,
         );
-        $res = $this->requests($url, $postData);
-
-        $response = array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::ERR    => Util::findSubstring(static::ERROR_ERROR, $res),
-        );
+        $response = $this->requests($url, $postData);
+        
         $this->checkError($response);
 
         return $response;
@@ -446,14 +456,9 @@ class TransactionAPI
         if ($toDate !== false) {
             $postData['toDate'] = $toDate;
         }
-
-        $res = $this->requests($url, $postData);
-
-        $response = array(
-            static::RESULT => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::PACKS  => sprintf('<packs>%s</packs>', Util::findSubstring('/<packs>(.*)<\/packs>/', $res)),
-            static::ERR    => Util::findSubstring(static::ERROR_ERROR, $res),
-        );
+        
+        $response = $this->requests($url, $postData);
+        
         $this->checkError($response);
         $xml = simplexml_load_string($response[static::PACKS]);
         $response[static::PACKS] = unserialize(serialize(json_decode(json_encode((array)$xml), 1)));
@@ -477,17 +482,12 @@ class TransactionAPI
             static::PACK_ID => $packId,
             'trId'          => $trId,
         );
-        $res = $this->requests($url, $postData);
-
-        $response = array(
-            static::RESULT    => (int)Util::findSubstring(static::RESULT_0_1_RESULT, $res),
-            static::TRANSFERS => sprintf('<transfers>%s</transfers>',
-                Util::findSubstring('/<transfers>(.*)<\/transfers>/', $res)),
-            static::ERR       => Util::findSubstring(static::ERROR_ERROR, $res),
-        );
+        $response = $this->requests($url, $postData);
+        
         $this->checkError($response);
         $xml = simplexml_load_string($response[static::TRANSFERS]);
         $response[static::TRANSFERS] = unserialize(serialize(json_decode(json_encode((array)$xml), 1)));
         return $response;
     }
+    
 }

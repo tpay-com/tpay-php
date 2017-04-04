@@ -46,7 +46,7 @@ class CardAPI
      * tpay payment url
      * @var string
      */
-    private $apiURL = 'https://secure.transferuj.pl/api/cards/';
+    private $apiURL = 'https://secure.tpay.com/api/cards/';
     /**
      * Card api key
      * @var string
@@ -63,7 +63,7 @@ class CardAPI
      */
     private $verificationCode;
     /**
-     * The same as chosen in merchant panel (https://secure.transferuj.pl/panel)
+     * The same as chosen in merchant panel (https://secure.tpay.com/panel)
      * In card api tab preferences
      * @var string
      */

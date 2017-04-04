@@ -76,7 +76,7 @@ class PaymentCard
      * tpay payment url
      * @var string
      */
-    private $apiURL = 'https://secure.transferuj.pl/cards/';
+    private $apiURL = 'https://secure.tpay.com/cards/';
 
     /**
      * tpay response IP

@@ -164,7 +164,7 @@ class PaymentSzkwal
         $res = $this->request('RegisterClient', $postData);
 
         $this->checkError($res);
-        preg_match_all('/<cli_id>([0-9]*)<\/cli_id>/', $res, $matchesCliId);
+        preg_match_all('/([0-9]*)/', $res, $matchesCliId);
 
         if (isset($matchesCliId[1]) && isset($matchesCliId[1][0])) {
             $clientID = (int)$matchesCliId[1][0];
@@ -213,7 +213,7 @@ class PaymentSzkwal
      */
     protected function checkError($response)
     {
-        preg_match_all('/<error_code>(ERR[0-9]*)<\/error_code>/', $response, $matchesError);
+        preg_match_all('/(ERR[0-9]*)/', $response, $matchesError);
         if (isset($matchesError[1]) && isset($matchesError[1][0])) {
             $errorCode = $matchesError[1][0];
             throw new TException($this->errorCodes[$errorCode]);
@@ -261,7 +261,7 @@ class PaymentSzkwal
         $res = $this->request('GetBanksData', $postData);
         $this->checkError($res);
 
-        preg_match_all('/<bank_list>(.*)<\/bank_list>/', $res, $matches);
+        preg_match_all('/(.*)/', $res, $matches);
         if (isset($matches[1]) && isset($matches[1][0])) {
             $data = json_decode($matches[1][0], true);
             foreach ($data as &$d) {
@@ -295,7 +295,7 @@ class PaymentSzkwal
         $res = $this->request('ChangeSellerData', $postData);
         $this->checkError($res);
 
-        if (strpos($res, '<result>correct</result>') !== -1) {
+        if (strpos($res, 'correct') !== -1) {
             return true;
         } else {
             throw new TException(static::INVALIDRESPONSE);

@@ -150,6 +150,8 @@ class Util
             $val = (float)$val;
         } elseif ($type === 'string') {
             $val = (string)$val;
+        } elseif ($type === 'array') {
+            $val = (array)$val;
         } else {
             throw new TException('Undefined $_POST variable type');
         }

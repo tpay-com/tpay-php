@@ -176,7 +176,7 @@ class PaymentBasic
         return ($md5sum === md5($this->merchantId . $transactionId .
                 $transactionAmount . $crc . $this->merchantSecret));
     }
-
+    
     /**
      * Check if request is called from secure tpay server
      *
@@ -191,7 +191,33 @@ class PaymentBasic
         }
         return true;
     }
-
+    
+    /**
+     * Check cURL request from tpay server after payment.
+     * This method check server ip sent by payment server.
+     * Display information to prevent sending repeated notifications.
+     *
+     * @param string $paymentType optional payment type default is 'basic'
+     *
+     * @throws TException
+     *
+     * @return array
+     */
+    public function checkAliasNotification($paymentType = Validate::ALIAS_BLIK)
+    {
+        Util::log('check blik notification', '$_POST: ' . "\n" . print_r($_POST, true));
+        
+        $res = Validate::getResponse($paymentType);
+        
+        if ($this->validateServerIP === true && $this->checkServer() === false) {
+            throw new TException('Request is not from secure server');
+        }
+        
+        echo 'TRUE';
+        
+        return $res;
+    }
+    
     /**
      * Create HTML form for EHat payment based on transaction config
      * More information about config fields @see Validate::$panelPaymentRequestFields
@@ -263,7 +289,7 @@ class PaymentBasic
 
     /**
      * Create HTML form for payment with bank selection based on transaction config
-     * More information about config fields @see Validate::$panelPaymentRequestField
+     * More information about config fields @see Validate::$panelPaymentRequestFields
      *
      * @param array $config transaction config
      * @param bool $smallList type of bank selection list big icons or small form with select
@@ -299,7 +325,26 @@ class PaymentBasic
         }
         return Util::parseTemplate($this->templateDir . $templateFile, $data);
     }
-
+    
+    /**
+     * Create HTML form for payment with blik selection based on transaction config
+     * More information about config fields @see Validate::$blikPaymentRequestFields
+     *
+     * @param string $alias alias of registered user for One Click transactions
+     *
+     * @return string
+     *
+     * @throws TException
+     */
+    public function getBlikSelectionForm()
+    {
+        $data = array(
+            'regulation_url' => $this->regulationURL,
+        );
+        
+        return Util::parseTemplate($this->templateDir . 'blikForm', $data);
+    }
+    
     /**
      * Check md5 sum to confirm value of payment amount
      *
