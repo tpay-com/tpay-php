@@ -12,6 +12,16 @@ ini_set('display_errors', 1);
 class OneClick
 {
     
+    const TITLE = 'title';
+    
+    const ALIAS_KEY = 'aliasKey';
+    
+    const CODE = 'code';
+    
+    const REGISTER = 'register';
+    
+    const ALIAS = 'alias';
+    
     public function __construct()
     {
         include_once '../src/_class_tpay/transactionApi.php';
@@ -35,12 +45,14 @@ class OneClick
         if (empty($_GET)) {
             $this->getForm();
         }
-        if (isset($_GET['tryOneClick'])) {
-            $params = $this->create();
+        if (isset($_GET['tryOneClick']) && isset($_GET['title'])) {
+            $params['title'] = $_GET['title'];
             $this->pushBlik($params);
         }
-        
-        if (isset($_GET['code']) || isset($_GET['title']) || isset($_GET['aliasKey'])) {
+        if (isset($_GET['getTitle'])) {
+            $this->create();
+        }
+        if (isset($_GET[static::CODE]) || isset($_GET[static::TITLE]) || isset($_GET[static::ALIAS_KEY])) {
             $params = array();
             foreach ($_GET as $key => $value) {
                 $params[$key] = $value;
@@ -60,30 +72,30 @@ class OneClick
     {
         $config = array(
             'opis'                => 'transakcja testowa api',
-            'kwota'               => 1.00,
+            'kwota'               => 0.10,
             'crc'                 => 'test',
             'kanal'               => 64,
             'nazwisko'            => 'kowalski',
             'email'               => 'test@tpay.com',
             'akceptuje_regulamin' => 1,
         );
-        $params['title'] = $this->tpayApi->create($config)['title'];
-        echo $params['title'] . ",";
+        $params[static::TITLE] = $this->tpayApi->create($config)[static::TITLE];
+        echo $params[static::TITLE] . ",";
         return $params;
         
     }
     
     public function pushBlik($data)
     {
-        $params['title'] = $data['title'];
-        if (!isset($data['register']) || (isset($data['register']) && $data['register'] !== '0')) {
-            $params['alias'][0] = $this->getAlias();
-            if (isset($data['aliasKey'])) {
-                $params['alias'][0]['key'] = $data['aliasKey'];
+        $params[static::TITLE] = $data[static::TITLE];
+        if (!isset($data[static::REGISTER]) || (isset($data[static::REGISTER]) && $data[static::REGISTER] !== '0')) {
+            $params[static::ALIAS][0] = $this->getAlias();
+            if (isset($data[static::ALIAS_KEY])) {
+                $params[static::ALIAS][0]['key'] = $data[static::ALIAS_KEY];
             }
         }
-        if (isset($data['code'])) {
-            $params['code'] = $data['code'];
+        if (isset($data[static::CODE])) {
+            $params[static::CODE] = $data[static::CODE];
         }
        
         $res = $this->tpayApi->handleBlikPayment($params);

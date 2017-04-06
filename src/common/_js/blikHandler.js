@@ -5,17 +5,23 @@
 var blikResult, button, register = 0, attempt = 0, title;
 var buttonDiv = document.getElementById('tpayBlikButton');
 var loaderGif = '<img src="https://tpay.com/wp-content/themes/corpress/assets/images/loading.gif">';
+var code = document.getElementById("blikcode");
+
+function showHide(ID, bool) {
+    document.getElementById(ID).style.visibility = bool ? "visible" : "hidden";
+}
+
 function showT6() {
-    document.getElementById("code").style.visibility = "visible";
-    document.getElementById("alias").style.visibility = "hidden";
+    showHide("codeFields", true);
+    showHide("alias", false);
+    showHide("t6InputMsg", false);
+    if (code.value !== '') {
+        attempt = 2;
+    }
 }
 function checkRegister() {
     var checkbox = document.getElementById("register");
-    if (checkbox.checked = true) {
-        checkbox.value = 1;
-    } else {
-        checkbox.value = 0;
-    }
+    checkbox.value = checkbox.checked ? 1 : 0;
     register = checkbox.value;
 }
 function showAliases() {
@@ -27,7 +33,7 @@ function showAliases() {
         x.add(option);
         i = i + 2
     }
-    document.getElementById("alias").style.visibility = "visible";
+    showHide("alias", true);
 }
 function ajax(data) {
 
@@ -42,6 +48,13 @@ function ajax(data) {
     xhr.open("GET", "initBlik.php?" + data, true);
     xhr.send();
 }
+$( document ).ready(function() {
+    ajax(('getTitle'));
+    setTimeout(function () {
+        title = blikResult[0];
+    }, 5000);
+});
+
 
 function blikHandler() {
     // call first function and pass in a callback function which
@@ -49,10 +62,9 @@ function blikHandler() {
     button = buttonDiv.innerHTML;
     buttonDiv.innerHTML = loaderGif;
     if (attempt === 0) {
-        ajax('tryOneClick');
+        ajax('tryOneClick&title=' + title);
         setTimeout(function () {
             checkResponse();
-            title = blikResult[0];
         }, 5000);
     } else if (attempt === 1) {
         var e = document.getElementById("blikSwitch");
@@ -62,8 +74,7 @@ function blikHandler() {
             checkResponse();
         }, 5000);
     } else {
-        var code = document.getElementById("blikcode").value;
-        ajax('code=' + code + '&title=' + title + '&register=' + register);
+        ajax('code=' + code.value + '&title=' + title + '&register=' + register);
         setTimeout(function () {
             checkResponse();
         }, 5000);
@@ -76,7 +87,7 @@ function checkResponse() {
     }
 
     if (blikResult[i] === '1') {
-        alert('sukces!');
+        document.getElementById("blikOneClickForm").innerHTML = "<p>SUKCES!</p>";
     } else if (blikResult[i] === '0') {
         showT6();
         attempt = 2;

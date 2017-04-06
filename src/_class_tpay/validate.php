@@ -1473,7 +1473,7 @@ class Validate
      */
     private static function validateFloat($value, $name)
     {
-        if (!is_float($value) && !is_int($value)) {
+        if (!is_numeric($value) && !is_int($value)) {
             throw new TException(sprintf('Field "%s" must be a float|int number', $name));
         } else {
             if ($value < 0) {
@@ -1639,7 +1639,7 @@ class Validate
             'letters'       => '/[^A-Za-z]/',
             'mixed'         => '/[^A-Za-z0-9]/',
             'date'          => '/[^0-9 \-:]/',
-            self::TEXT      => '/[^\-\p{Latin}A-Za-z0-9 \.,#_\/\!]/u',
+            self::TEXT      => '/[^\-\p{Latin}A-Za-z0-9 \.,#_()\/\!]/u',
             'name'          => '/[^\-\p{Latin} ]/u',
             'sign'          => '/[^A-Za-z!\., _\-0-9]/'
         );

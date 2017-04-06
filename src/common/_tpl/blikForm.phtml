@@ -1,11 +1,11 @@
 <?php
 
 ?>
-    
-    <div class="insidebg" id="blik">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <div class="insidebg" id="blikOneClickForm">
         <img src="https://secure.tpay.com/_/banks/b64.png"/><br>
-        <div id="code" style="visibility: hidden">
-            
+        <div id="codeFields" style="visibility: hidden">
+
             <label for="blikcode" class="form_input_label">Wpisz kod blik:</label>
             <input type="text" id="blikcode" name="blikcode" value="" maxlength="6" pattern=".{6,}"
                    title="Kod blik powinien składać się z 6 cyfr!"/>
@@ -23,6 +23,11 @@
         <div id="tpayBlikButton">
             <input type="button" value="<?php echo tpay\Lang::l('pay') ?>" onclick="blikHandler()"
                    id="tpayBlikButton">
+        </div>
+        <div id="t6InputMsg">
+            <small>
+                <a href="#" onclick="showT6()">Chcę wprowadzić kod blik</a>
+            </small>
         </div>
         <div>
             <br/>
