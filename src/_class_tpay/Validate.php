@@ -1646,6 +1646,9 @@ class Validate
 
         if (isset($fieldConfig[static::FILTER])) {
             $filterName = $fieldConfig[static::FILTER];
+            if ($fieldConfig[static::FILTER] === 'name') {
+                $value = preg_replace('/[^a-z]/i','',$value);
+            }
             if (array_key_exists($filterName, $filters)) {
                 if ((bool)preg_match($filters[$filterName], $value)) {
                     return false;

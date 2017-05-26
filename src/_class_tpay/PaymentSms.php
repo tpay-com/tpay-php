@@ -26,7 +26,7 @@ class PaymentSMS
     {
         require_once(dirname(__FILE__) . '/Util.php');
         Util::checkVersionPHP();
-        Util::loadClass('curl');
+        Util::loadClass('Curl');
     }
 
     /**

@@ -5,10 +5,17 @@
  */
 
 ?>
+<script type="text/javascript">
+    function redirect() {
+        document.getElementById('tpay-payment').submit();
+    }
+</script>
 <style>
     <?php include_once dirname(__FILE__) . '/../_css/style.css'; ?>
 </style>
-<form id="tpay-payment" class="tpay-form" action="<?php echo $data['action_url'] ?>" method="POST">
+<body onload="redirect()">
+<form id="tpay-payment" class="tpay-form" action="<?php echo $data['action_url'] ?>" method="POST"
+      accept-charset="UTF-8">
     <?php foreach ($data['fields'] as $name => $value) { ?>
         <input <?php if ($name === 'kanal') {
             echo ' id="tpay-channel-input" ';
@@ -24,3 +31,4 @@
     <input class="button" style="width: 500px ; height:50px"
            id="tpay-payment-submit" type="submit" value="<?php tpay\Lang::l('pay') ?>">
 </form>
+</body>

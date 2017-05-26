@@ -70,10 +70,10 @@ class PaymentDAC
 
         require_once(dirname(__FILE__) . '/Util.php');
 
-        Util::loadClass('validate');
-        Util::loadClass('exception');
-        Util::loadClass('lang');
-        Util::loadClass('transactionApi');
+        Util::loadClass('Validate');
+        Util::loadClass('Exception');
+        Util::loadClass('Lang');
+        Util::loadClass('TransactionApi');
         Util::checkVersionPHP();
 
         Validate::validateMerchantId($this->merchantId);

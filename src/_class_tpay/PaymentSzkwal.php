@@ -108,10 +108,10 @@ class PaymentSzkwal
 
         require_once(dirname(__FILE__) . '/util.php');
 
-        Util::loadClass('curl');
-        Util::loadClass('exception');
-        Util::loadClass('validate');
-        Util::loadClass('lang');
+        Util::loadClass('Curl');
+        Util::loadClass('Exception');
+        Util::loadClass('Validate');
+        Util::loadClass('Lang');
         Util::checkVersionPHP();
     }
 

@@ -117,9 +117,9 @@ class PaymentCard
         }
 
         require_once(dirname(__FILE__) . '/Util.php');
-        Util::loadClass('validate');
-        Util::loadClass('exception');
-        Util::loadClass('lang');
+        Util::loadClass('Validate');
+        Util::loadClass('Exception');
+        Util::loadClass('Lang');
         Util::checkVersionPHP();
 
         Validate::validateCardApiKey($this->apiKey);
@@ -128,7 +128,7 @@ class PaymentCard
         Validate::validateCardHashAlg($this->hashAlg);
         Validate::validateCardRSAKey($this->keyRSA);
 
-        Util::loadClass('cardApi');
+        Util::loadClass('CardApi');
     }
 
     /**

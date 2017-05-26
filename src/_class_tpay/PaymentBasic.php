@@ -91,10 +91,10 @@ class PaymentBasic
 
         require_once(dirname(__FILE__) . '/Util.php');
 
-        Util::loadClass('curl');
-        Util::loadClass('validate');
-        Util::loadClass('exception');
-        Util::loadClass('lang');
+        Util::loadClass('Curl');
+        Util::loadClass('Validate');
+        Util::loadClass('Exception');
+        Util::loadClass('Lang');
         Util::checkVersionPHP();
         Validate::validateMerchantId($this->merchantId);
         Validate::validateMerchantSecret($this->merchantSecret);
