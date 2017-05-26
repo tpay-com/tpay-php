@@ -171,7 +171,7 @@ class CardAPI
         $params = array_merge($params, $this->checkReturnUrls($powUrl, $powUrlBlad));
 
         Util::log('Card request', print_r($params, true));
-        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+        return Curl::doCurlRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -235,20 +235,6 @@ class CardAPI
         }
 
         return $params;
-    }
-
-    /**
-     * Execute post request to card API
-     *
-     * @param string $url url
-     * @param array $params
-     *
-     * @return bool|mixed
-     */
-    private function postRequest($url, $params = array())
-    {
-        $curlRes = Curl::doCurlRequest($url, $params);
-        return json_decode($curlRes, true);
     }
 
     /**
@@ -394,7 +380,7 @@ class CardAPI
 
         Util::log('Pre sale params with hash ', print_r($params, true) . 'req url ' . $this->apiURL . $this->apiKey);
 
-        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+        return Curl::doCurlRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -497,7 +483,7 @@ class CardAPI
 
         $params = $this->saleValidateAndPrepareParams($clientAuthCode, $saleDescription,
             $amount, $currency, $orderID, $lang, static::PRESALE);
-        $response = $this->postRequest($this->apiURL . $this->apiKey, $params);
+        $response = Curl::doCurlRequest($this->apiURL . $this->apiKey, $params);
 
         if ($response['result']) {
             $saleAuthCode = $response[static::SALEAUTH];
@@ -537,7 +523,7 @@ class CardAPI
             $clientAuthCode . $saleAuthCode . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
-        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+        return Curl::doCurlRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -633,7 +619,7 @@ class CardAPI
         $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
-        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+        return Curl::doCurlRequest($this->apiURL . $this->apiKey, $params);
     }
 
     /**
@@ -669,7 +655,7 @@ class CardAPI
         $params[static::SIGN] = hash($this->hashAlg, implode('', $params) . $this->verificationCode);
         $params[static::APIPASS] = $this->apiPass;
 
-        return $this->postRequest($this->apiURL . $this->apiKey, $params);
+        return Curl::doCurlRequest($this->apiURL . $this->apiKey, $params);
     }
 
     private function checkReturnUrls($powUrl = '', $powUrlBlad = '')

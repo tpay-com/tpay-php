@@ -24,13 +24,13 @@ class OneClick
     
     public function __construct()
     {
-        include_once '../src/_class_tpay/transactionApi.php';
-        include_once '../src/_class_tpay/validate.php';
-        include_once '../src/_class_tpay/curl.php';
-        include_once '../src/_class_tpay/util.php';
-        include_once '../src/_class_tpay/lang.php';
-        include_once '../src/_class_tpay/exception.php';
-        include_once '../src/_class_tpay/paymentBasic.php';
+        include_once '../src/_class_tpay/TransactionApi.php';
+        include_once '../src/_class_tpay/Validate.php';
+        include_once '../src/_class_tpay/Curl.php';
+        include_once '../src/_class_tpay/Util.php';
+        include_once '../src/_class_tpay/Lang.php';
+        include_once '../src/_class_tpay/Exception.php';
+        include_once '../src/_class_tpay/PaymentBasic.php';
         
         $this->tpayApi = new \tpay\TransactionAPI (
             '158ae0714578f5ab76bf6c0374cb1508b98ece5d',

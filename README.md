@@ -31,10 +31,8 @@ Replace all occurrences of the following codes on real data from the Merchant pa
   
    Example of usages: [Basic](examples/basic.php) [Basic with bank selection](examples/basicBankSelection.php) [eHat](examples/basicEhat.php)
   
-### Card Basic / Card Direct
+### Card Basic / Card SecureSale
 
-  * [MERCHANT_ID] - merchant id ex. 14868
-  * [MERCHANT_SECRET] - merchant secret ex. nd6u7duYeso4hrtc
   * [CARD_API_KEY] - card API key ex. 455ue12b1c26a9570vb852b31680ce6k3f706p9
   * [CARD_API_PASSWORD] - card API key ex. od0ufdrYap343r0
   * [CARD_API_CODE] - card API code ex. i2128h0e6b17a78fn3c1adaod262o120
@@ -69,7 +67,7 @@ Be sure that file src/log is writable and add rule to htaccess to deny access to
 
 ## Requirements
 
-  * PHP > 5.4.0
+  * PHP > 5.3.0
 
 ## Language
 

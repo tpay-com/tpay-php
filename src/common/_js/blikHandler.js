@@ -45,7 +45,7 @@ function ajax(data) {
         }
     };
 
-    xhr.open("GET", "initBlik.php?" + data, true);
+    xhr.open("GET", "OneClick.php?" + data, true);
     xhr.send();
 }
 $( document ).ready(function() {

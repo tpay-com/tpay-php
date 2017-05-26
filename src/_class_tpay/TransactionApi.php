@@ -21,11 +21,6 @@ class TransactionAPI
     const PACK_ID = 'pack_id';
     const ERR = 'err';
     const AMOUNT = 'amount';
-    const RESULT_0_1_RESULT = '/<result>([0-1]*)<\/result>/';
-    const PACKID = '/<pack_id>([0-1]*)<\/pack_id>/';
-    const ERR_ERR = '/<err>(.*)<\/err>/';
-    const ERROR_ERROR = '/<error>(.*)<\/error>/';
-    const USER_APPS = '/<availableUserApps>(.*)<\/availableUserApps>/';
     const PACKS = 'packs';
     const TRANSFERS = 'transfers';
     const ALIAS = 'alias';
