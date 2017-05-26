@@ -83,7 +83,7 @@ class CardAPI
         $this->hashAlg = $hashAlg;
         $this->verificationCode = $verificationCode;
 
-        Util::loadClass('curl');
+        Util::loadClass('Curl');
     }
 
     /**
@@ -99,6 +99,7 @@ class CardAPI
      * @param bool $onetimer
      * @param string $lang
      *
+     * @param bool $powUrl
      * @return bool|mixed
      */
     public function registerSale(
@@ -142,9 +143,10 @@ class CardAPI
      * @param string|null $saledata encrypted credit card data
      * @param string $lang
      *
+     * @param bool $enablePowUrl
+     * @param string $powUrl
+     * @param string $powUrlBlad
      * @return bool|mixed
-     *
-     * @throws TException
      */
     private function registerSaleBase(
         $clientName, $clientEmail, $saleDescription, $amount, $currency = '985', $orderID = null,
@@ -255,8 +257,10 @@ class CardAPI
      * @param bool $onetimer
      * @param string $lang
      *
+     * @param bool $enablePowUrl
+     * @param string $powUrl
+     * @param string $powUrlBlad
      * @return bool|mixed
-     *
      * @throws TException
      */
     public function secureSale(
