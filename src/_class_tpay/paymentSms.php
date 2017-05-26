@@ -24,7 +24,7 @@ class PaymentSMS
      */
     public function __construct()
     {
-        require_once(dirname(__FILE__) . '/util.php');
+        require_once(dirname(__FILE__) . '/Util.php');
         Util::checkVersionPHP();
         Util::loadClass('curl');
     }

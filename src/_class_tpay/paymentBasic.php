@@ -89,7 +89,7 @@ class PaymentBasic
             $this->merchantSecret = $merchantSecret;
         }
 
-        require_once(dirname(__FILE__) . '/util.php');
+        require_once(dirname(__FILE__) . '/Util.php');
 
         Util::loadClass('curl');
         Util::loadClass('validate');
@@ -187,7 +187,11 @@ class PaymentBasic
         if (!isset($_SERVER[static::REMOTE_ADDR])
             || !in_array($_SERVER[static::REMOTE_ADDR], $this->secureIP)
         ) {
-            return false;
+            if (!isset($_SERVER['HTTP_X_FORWARDED_FOR'])
+                || !in_array($_SERVER['HTTP_X_FORWARDED_FOR'], $this->secureIP)
+            ) {
+                return false;
+            }
         }
         return true;
     }

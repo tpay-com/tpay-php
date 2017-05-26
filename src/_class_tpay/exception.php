@@ -19,7 +19,7 @@ class TException extends \Exception
      */
     public function __construct($message, $code = 0)
     {
-        require_once(dirname(__FILE__) . '/util.php');
+        require_once(dirname(__FILE__) . '/Util.php');
 
         $message .= ' in file ' . $this->getFile() . ' line: ' . $this->getLine();
         Util::log('TException', $message . "\n\n" . $this->getTraceAsString());

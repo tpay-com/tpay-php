@@ -5,6 +5,7 @@
  */
 
 const STATIC_FILES_URL = 'static_files_url';
+const CARD_SAVE_ALLOWED = 'card_save_allowed';
 ?>
 <link rel="stylesheet" type="text/css" href="<?php
 echo $data[STATIC_FILES_URL] ?>card/_css/gate.css"/>
@@ -19,7 +20,7 @@ echo $data[STATIC_FILES_URL] ?>card/_css/gate.css"/>
 
         <div id="expiry_date_wrapper">
             <label for="transaction_card_expiry_month"><?php tpay\Lang::l('expiration_date') ?></label><br>
-            <input id="expiry_date" maxlength="9" type="text" placeholder="00 / 00" autocomplete="off"
+            <input id="expiry_date" maxlength="9" type="tel" placeholder="00 / 00" autocomplete="off"
                    autocompletetype="cc-exp" tabindex="2" value=""/>
         </div>
         <div id="cvc_wrapper">
@@ -30,19 +31,19 @@ echo $data[STATIC_FILES_URL] ?>card/_css/gate.css"/>
         </div>
         <br>
         <label for="c_name"><?php tpay\Lang::l('name_on_card') ?></label>
-        <input type="text" id="c_name" placeholder="<?php tpay\Lang::l('name_surname') ?>" autocomplete="off"
+        <input type="tel" id="c_name" placeholder="<?php tpay\Lang::l('name_surname') ?>" autocomplete="off"
                name="client_name"
                maxlength="64" tabindex="5" value=""/>
 
         <label for="c_email">E-mail</label>
-        <input type="text" id="c_email" data-formance_algorithm="complex" autocomplete="off" placeholder="E-mail"
+        <input type="tel" id="c_email" data-formance_algorithm="complex" autocomplete="off" placeholder="E-mail"
                name="client_email" value="" maxlength="64" tabindex="6">
-
+        <?php if ($data[CARD_SAVE_ALLOWED]){ ?>
         <div class="amPmCheckbox">
             <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
                 for="card_save"><?php tpay\Lang::l('save_card') ?></label>
             <span class="info_button" title="<?php tpay\Lang::l('save_card_info') ?>">?</span>
-        </div>
+        </div><?php } ?>
     </div>
 
     <div id="card_icons">

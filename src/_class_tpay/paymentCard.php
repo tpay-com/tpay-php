@@ -24,17 +24,6 @@ class PaymentCard
     const STRING = 'string';
     const SALE_AUTH = 'sale_auth';
     const REMOTE_ADDR = 'REMOTE_ADDR';
-    /**
-     * Merchant id
-     * @var int
-     */
-    protected $merchantId = '[MERCHANT_ID]';
-
-    /**
-     * Merchant secret
-     * @var string
-     */
-    private $merchantSecret = '[MERCHANT_SECRET]';
 
     /**
      * Card API key
@@ -98,23 +87,19 @@ class PaymentCard
      * - card direct sale
      * - for saved cards
      *
-     * @param string|bool $merchantId merchant id
-     * @param string|bool $merchantSecret merchant secret
      * @param string|bool $apiKey card api key
      * @param string|bool $apiPass card API password
      * @param string|bool $code card API code
      * @param string|bool $hashAlg card hash algorithm
      * @param string|bool $keyRSA card RSA key
      */
-    public function __construct($merchantId = false, $merchantSecret = false, $apiKey = false,
-                                $apiPass = false, $code = false, $hashAlg = false, $keyRSA = false)
-    {
-        if ($merchantId !== false) {
-            $this->merchantId = $merchantId;
-        }
-        if ($merchantSecret !== false) {
-            $this->merchantSecret = $merchantSecret;
-        }
+    public function __construct(
+        $apiKey = false,
+        $apiPass = false,
+        $code = false,
+        $hashAlg = false,
+        $keyRSA = false
+    ) {
         if ($apiKey !== false) {
             $this->apiKey = $apiKey;
         }
@@ -131,14 +116,11 @@ class PaymentCard
             $this->keyRSA = $keyRSA;
         }
 
-        require_once(dirname(__FILE__) . '/util.php');
+        require_once(dirname(__FILE__) . '/Util.php');
         Util::loadClass('validate');
         Util::loadClass('exception');
         Util::loadClass('lang');
         Util::checkVersionPHP();
-
-        Validate::validateMerchantId($this->merchantId);
-        Validate::validateMerchantSecret($this->merchantSecret);
 
         Validate::validateCardApiKey($this->apiKey);
         Validate::validateCardApiPassword($this->apiPass);
@@ -205,7 +187,6 @@ class PaymentCard
 
         $data = array(
             'action_url'      => $this->apiURL,
-            'merchant_id'     => $this->merchantId,
             static::SALE_AUTH => $apiResponse[static::SALE_AUTH],
         );
 
@@ -223,7 +204,7 @@ class PaymentCard
      */
     public function handleNotification()
     {
-        Util::log('card handle notification', print_r(INPUT_POST, true));
+        Util::log('card handle notification', print_r($_POST, true));
 
         $notificationType = Util::post('type', static::STRING);
         if ($notificationType === 'sale') {
@@ -241,14 +222,18 @@ class PaymentCard
         echo json_encode(array(static::RESULT => '1'));
 
         if ($notificationType === 'sale' && $response['status'] === 'correct') {
-            return array(
+            $resp = array(
                 static::ORDERID   => $response[static::ORDERID],
                 'sign'            => $response['sign'],
                 static::SALE_AUTH => $response[static::SALE_AUTH],
-                'sale_date'       => $response['date'],
-                'test_mode'       => $response['test_mode'],
+                'date'            => $response['date'],
                 'card'            => $response['card']
             );
+            if (isset($response['test_mode'])) {
+
+                $resp['test_mode'] = $response['test_mode'];
+            }
+            return $resp;
         } elseif ($notificationType === 'deregister') {
             return $response;
         } else {
@@ -278,12 +263,15 @@ class PaymentCard
      * @param string $staticFilesURL path to library static files
      * @param string $paymentRedirectPath payment redirect path
      *
+     * @param bool $cardSaveAllowed
      * @return string
-     *
      * @throws TException
      */
-    public function getDirectCardForm($staticFilesURL = '', $paymentRedirectPath = 'index.html')
-    {
+    public function getDirectCardForm(
+        $staticFilesURL = '',
+        $paymentRedirectPath = 'index.html',
+        $cardSaveAllowed = true
+    ) {
 
         if (!is_string($this->keyRSA) || $this->keyRSA === '') {
             throw new TException('Invalid api response code');
@@ -292,7 +280,8 @@ class PaymentCard
         $data = array(
             'rsa_key'               => $this->keyRSA,
             'static_files_url'      => $staticFilesURL,
-            'payment_redirect_path' => $paymentRedirectPath
+            'payment_redirect_path' => $paymentRedirectPath,
+            'card_save_allowed'     => $cardSaveAllowed
         );
 
         return Util::parseTemplate('card/_tpl/gate', $data);
@@ -313,9 +302,15 @@ class PaymentCard
      *
      * @throws TException
      */
-    public function getCardSavedForm($cliAuth, $desc, $amount, $confirmationUrl,
-                                     $orderId = '', $language = 'pl', $currency = '985')
-    {
+    public function getCardSavedForm(
+        $cliAuth,
+        $desc,
+        $amount,
+        $confirmationUrl,
+        $orderId = '',
+        $language = 'pl',
+        $currency = '985'
+    ) {
         $api = new CardAPI($this->apiKey, $this->apiPass, $this->code, $this->hashAlg);
 
         $resp = $api->presale($cliAuth, $desc, $amount, $currency, $orderId, $language);
@@ -393,9 +388,16 @@ class PaymentCard
         return $response;
     }
 
-    public function secureSale($orderAmount, $orderID, $orderDesc, $currency = '985', $enablePowUrl = false,
-                               $language = 'pl', $powUrl = '', $powUrlBlad = '')
-    {
+    public function secureSale(
+        $orderAmount,
+        $orderID,
+        $orderDesc,
+        $currency = '985',
+        $enablePowUrl = false,
+        $language = 'pl',
+        $powUrl = '',
+        $powUrlBlad = ''
+    ) {
         $cardData = Util::post('carddata', static::STRING);
         $clientName = Util::post('client_name', static::STRING);
         $clientEmail = Util::post('client_email', static::STRING);
@@ -423,7 +425,6 @@ class PaymentCard
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_CARD_DIRECT, $tmpConfig);
         $currency = Validate::validateCardCurrency($currency);
-
 
         $response = $api->secureSale(
             $clientName,
@@ -476,12 +477,26 @@ class PaymentCard
      *
      * @throws TException
      */
-    public function validateSign($sign, $testMode, $saleAuth, $orderId, $card, $amount, $saleDate, $currency = '985')
-    {
-        if ($sign !== hash($this->hashAlg, 'sale' . $testMode . $saleAuth . $orderId . $card .
-                $currency . $amount . $saleDate . 'correct' . $this->code)
-        ) {
+    public function validateSign(
+        $sign,
+        $saleAuth,
+        $card,
+        $amount,
+        $saleDate,
+        $status,
+        $currency = '985',
+        $testMode = '',
+        $orderId = '',
+        $sale = 'sale',
+        $cliAuth = '',
+        $reason = ''
+    ) {
+        $hash = hash($this->hashAlg, $sale . $testMode . $saleAuth . $orderId . $cliAuth . $card .
+            $currency . $amount . $saleDate . $status . $reason . $this->code);
+
+        if ($sign !== $hash) {
             throw new TException('Card payment - invalid checksum');
         }
     }
+
 }

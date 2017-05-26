@@ -25,7 +25,7 @@
         <div class="regulations" style="padding-top: 20px; margin-bottom: 20px">
             <?php if ($data['show_regulations_checkbox'] === true) { ?>
                 <p>
-                    <input id="tpay-accept-regulations-checkbox" type="checkbox" value="0">
+                    <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
 
                     <?php tpay\Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
                                                        target="_blank"><?php tpay\Lang::l('regulations_url') ?></a>
