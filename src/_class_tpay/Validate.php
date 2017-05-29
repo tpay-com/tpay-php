@@ -36,7 +36,7 @@ class Validate
     const FLOAT = 'float';
     const FILTER = 'filter';
     const STRING = 'string';
-    const ARRAY = 'array';
+    const ARR = 'array';
     const MAXLENGHT_128 = 'maxlenght_128';
     const OPTIONS = 'options';
     const KANAL = 'kanal';
@@ -460,7 +460,7 @@ class Validate
         ),
         'alias' => array(
             self::REQUIRED   => true,
-            self::VALIDATION => array(self::ARRAY),
+            self::VALIDATION => array(self::ARR),
         ),
     );
     /**
@@ -468,7 +468,7 @@ class Validate
      * @var array
      */
     private static $panelPaymentRequestFields = array(
-        
+
         /**
          * Transaction amount with dot as decimal separator.
          */
@@ -675,8 +675,8 @@ class Validate
         ),
         'msg_value' => array(
             self::REQUIRED   => true,
-            self::TYPE       => self::ARRAY,
-            self::VALIDATION => array(self::ARRAY),
+            self::TYPE       => self::ARR,
+            self::VALIDATION => array(self::ARR),
         ),
     );
     /**
@@ -1282,7 +1282,7 @@ class Validate
                     case static::FLOAT:
                         $val = (float)$val;
                         break;
-                    case static::ARRAY:
+                    case static::ARR:
                         $val = (array)$val;
                         break;
                     default:
@@ -1399,7 +1399,7 @@ class Validate
                     case 'country_code':
                         static::validateCountryCode($value, $name);
                         break;
-                    case static::ARRAY:
+                    case static::ARR:
                         static::validateArray($value, $name);
                         break;
                     default:

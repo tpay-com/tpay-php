@@ -86,7 +86,7 @@
 
 }
 #blikcode {
-    position:absolute;
+    position: absolute;
     background-color: transparent;
     border-color: transparent;
     top:180px;
@@ -182,7 +182,7 @@ textarea:-moz-placeholder {
     max-width: 25em;
     height: 3em;
     margin: 10px;
-    background: url(../_img/powered_by_elavon.png);
+    background: url(../_img/powered_by_tpay.png);
     background-size: 170px 33px;
     background-repeat: no-repeat;
     margin-bottom: 1em;

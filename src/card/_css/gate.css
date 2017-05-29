@@ -47,7 +47,7 @@ textarea:-moz-placeholder {
     max-width: 25em;
     height: 3em;
     margin: 10px;
-    background: url(../../common/_img/powered_by_elavon.png);
+    background: url(../../common/_img/powered_by_tpay.png);
     background-size: 170px 33px;
     background-repeat: no-repeat;
     margin-bottom: 1em;
@@ -207,37 +207,26 @@ textarea:-moz-placeholder {
 }
 
 #continue_btn {
-    font-size: 1.0em;
-    margin: 10px;
-    padding: 5px;
-    background: #42bf2c;
-    background: -moz-linear-gradient(top, #42bf2c 0%, #217719 100%);
-    background: -webkit-linear-gradient(top, #42bf2c 0%, #217719 100%);
-    background: -o-linear-gradient(top, #42bf2c 0%, #217719 100%);
-    background: -ms-linear-gradient(top, #42bf2c 0%, #217719 100%);
-    background: linear-gradient(to bottom, #42bf2c 0%, #217719 100%);
-    color: #1b4c11;
-    text-shadow: 0px 1px 2px #8bd278;
+    background-color: #3787cc;
+    box-shadow: 0px 5px 0px 0px #3875c9;
+    border-radius: 5px;
+    padding: 15px 25px;
+    font-size: 22px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
 }
 
 #continue_btn:hover {
-    background: #5ad145;
-    background: -moz-linear-gradient(top, #5ad145 0%, #217719 100%);
-    background: -webkit-linear-gradient(top, #5ad145 0%, #217719 100%);
-    background: -o-linear-gradient(top, #5ad145 0%, #217719 100%);
-    background: -ms-linear-gradient(top, #5ad145 0%, #217719 100%);
-    background: linear-gradient(to bottom, #5ad145 0%, #217719 100%);
-    text-shadow: 0px 1px 2px #b2e1a5;
+    background-color: #3787cc;
 }
 
-#continue_btn active {
-    background: #3ab42e;
-    background: -moz-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
-    background: -webkit-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
-    background: -o-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
-    background: -ms-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
-    background: linear-gradient(to bottom, #3ab42e 0%, #4fc13b 100%);
-    text-shadow: 0px -1px 2px #b2e1a5;
+#continue_btn:active {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    box-shadow: 0px 1px 0px 0px;
 }
 
 @media screen and (max-width: 760px) and (max-width: 480px) {
