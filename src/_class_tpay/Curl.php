@@ -76,7 +76,7 @@ class Curl
         static::checkResponse();
 
         curl_close($ch);
-        Util::log('Request response', print_r($curlRes, true));
+
         return (array)(json_decode($curlRes));
     }
 

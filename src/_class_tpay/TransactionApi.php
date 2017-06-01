@@ -149,8 +149,9 @@ class TransactionAPI
 
         Validate::validateConfig(Validate::PAYMENT_TYPE_BASIC_API, $config);
         $config = $this->prepareConfig($config);
+        Util::log('Transaction create request params', print_r($config, true));
         $response = $this->requests($url, $config);
-        
+        Util::log('Transaction create response', print_r($response, true));
         if ($response[static::RESULT] !== 1) {
             throw new TException(sprintf('Error in %s', $response['desc']));
         }
@@ -190,7 +191,7 @@ class TransactionAPI
 
         return Curl::doCurlRequest($url, $params);
     }
-    
+
     public function handleBlikPayment($params)
     {
         if (!is_array($params) || count($params) <= 0) {
@@ -205,7 +206,7 @@ class TransactionAPI
         } else {
             $response = $this->handleBlik(Validate::PAYMENT_TYPE_BLIK_ALIAS, $params);
         }
-        
+
         switch ($response['result']) {
             case 1:
                 $success = true;
@@ -214,7 +215,7 @@ class TransactionAPI
                 if (isset($response[static::ERR]) && $response[static::ERR] === 'ERR82') {
                     $apps = array();
                     foreach ($response['availableUserApps'] as $key => $value) {
-                        $apps[]=get_object_vars($value);
+                        $apps[] = get_object_vars($value);
                     }
                     return $apps;
                 } else {
@@ -227,11 +228,11 @@ class TransactionAPI
         }
         return $success;
     }
-    
+
     public function handleBlik($type, $params)
     {
         $params = Validate::validateConfig($type, $params);
-        
+
         switch ($type) {
             case Validate::PAYMENT_TYPE_BLIK_T6STANDARD:
                 $response = $this->blik($params[self::CODE], $params[static::TITLE]);
@@ -247,7 +248,7 @@ class TransactionAPI
         }
         return $response;
     }
-    
+
     public function blik($code = '', $title, $alias = '')
     {
         if (empty($title) || !is_string($title)) {
@@ -260,10 +261,11 @@ class TransactionAPI
         if (!empty($alias)) {
             $config[self::ALIAS] = $alias;
         }
-        
+        Util::log('Blik request params', print_r($config, true));
         $url = $this->apiURL . $this->apiKey . '/transaction/blik';
-       
-        return $this->requests($url, $config);
+        $response = $this->requests($url, $config);
+        Util::log('Blik response', print_r($response, true));
+        return $response;
     }
 
 
@@ -279,9 +281,9 @@ class TransactionAPI
     public function get($transactionId)
     {
         $url = $this->apiURL . $this->apiKey . '/transaction/get';
-        
+
         $response = $this->requests($url, array(static::TITLE => $transactionId));
-        
+
         $this->checkError($response);
         return $response;
     }
@@ -326,14 +328,14 @@ class TransactionAPI
         if ($toDate !== false) {
             $postData['to_date'] = $toDate;
         }
-        
+
         $response = $this->requests($url, $postData);
-        
+
         $this->checkError($response);
         $response[static::REPORT] = base64_decode($response[static::REPORT]);
         return $response;
     }
-    
+
     /**
      * Refund all amount to customer
      *
@@ -346,9 +348,9 @@ class TransactionAPI
     public function refund($transactionId)
     {
         $url = $this->apiURL . $this->apiKey . '/chargeback/transaction';
-        
+
         $response = $this->requests($url, array(static::TITLE => $transactionId));
-        
+
         $this->checkError($response);
 
         return true;
@@ -373,7 +375,7 @@ class TransactionAPI
             'chargeback_amount' => $amount,
         );
         $response = $this->requests($url, $postData);
-        
+
         $this->checkError($response);
 
         return true;
@@ -398,7 +400,7 @@ class TransactionAPI
             'sign' => sha1($this->merchantId . $csv . $this->merchantSecret),
         );
         $response = $this->requests($url, $postData);
-        
+
         $this->checkError($response);
 
         return $response;
@@ -420,7 +422,7 @@ class TransactionAPI
             static::PACK_ID => $packId,
         );
         $response = $this->requests($url, $postData);
-        
+
         $this->checkError($response);
 
         return $response;
@@ -451,9 +453,9 @@ class TransactionAPI
         if ($toDate !== false) {
             $postData['toDate'] = $toDate;
         }
-        
+
         $response = $this->requests($url, $postData);
-        
+
         $this->checkError($response);
         $xml = simplexml_load_string($response[static::PACKS]);
         $response[static::PACKS] = unserialize(serialize(json_decode(json_encode((array)$xml), 1)));
@@ -478,11 +480,11 @@ class TransactionAPI
             'trId'          => $trId,
         );
         $response = $this->requests($url, $postData);
-        
+
         $this->checkError($response);
         $xml = simplexml_load_string($response[static::TRANSFERS]);
         $response[static::TRANSFERS] = unserialize(serialize(json_decode(json_encode((array)$xml), 1)));
         return $response;
     }
-    
+
 }
