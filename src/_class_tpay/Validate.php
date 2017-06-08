@@ -450,7 +450,7 @@ class Validate
          */
         'code'  => array(
             self::REQUIRED   => true,
-            self::VALIDATION => array(self::FLOAT, 'maxlenght_6', 'minlenght_6'),
+            self::VALIDATION => array('maxlenght_6', 'minlenght_6'),
             self::FILTER     => self::NUMBERS
         ),
         'title' => array(
