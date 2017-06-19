@@ -188,7 +188,7 @@ class TransactionApi
         );
         try {
             $res = $this->api->create($config);
-            echo '<a href="' . $res['url'] . '">go to payment</a>';
+            echo '<a href='https://secure.tpay.com/?gtitle=' . $res['title']>go to payment</a>';
         } catch (\tpay\TException $e) {
             var_dump($e);
         }
