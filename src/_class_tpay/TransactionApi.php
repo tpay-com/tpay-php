@@ -121,7 +121,7 @@ class TransactionAPI
         $this->apiKey = $apiKey;
         $this->apiPass = $apiPass;
 
-        require_once(dirname(__FILE__) . '/util.php');
+        require_once(dirname(__FILE__) . '/Util.php');
 
         Util::loadClass('Curl');
         Util::loadClass('Exception');
