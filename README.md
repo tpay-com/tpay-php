@@ -22,56 +22,38 @@ https://github.com/tpay-com/tpay-php/archive/master.zip
 
 ## Configuration
 
-Replace all occurrences of the following codes on real data from the Merchant panel (https://secure.tpay.com/panel)
-or declare them dynamically (see examples):
+The only thing you need to do is to set your API access data via $this-> ([see examples](tpayLibs/examples))
+You can generate access keys in tpay merchant panel (https://secure.tpay.com/panel)
 
-### Basic / Basic with bank selection / eHat 
+The [loader.php](tpayLibs/examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing
+(remember to configure your current working path correctly).
 
-  * [MERCHANT_ID] - merchant id ex. 1010
-  * [MERCHANT_SECRET] - merchant secret ex. demo
+All methods described in [tpay documentations](https://tpay.com/en/documentation) can be easily executed by extending required class in main [src](tpayLibs/src) folder ([see examples](tpayLibs/examples))
   
-   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php) [Basic with bank selection](tpayLibs/examples/BankSelection.php) [eHat](tpayLibs/examples/BasicEhatForm.php)
+###Example configuration data should look like this:
+
+  merchantId - merchant id ex. 1010
+  merchantSecret - merchant secret ex. demo
+
+##### Basic Payments and bank selection forms: 
   
-### Transaction API / create, get, refund, report 
+   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php), [Bank selection form](tpayLibs/examples/BankSelection.php), [eHat form](tpayLibs/examples/BasicEhatForm.php)
   
-   * [MERCHANT_ID] - merchant id ex. 14868
-   * [MERCHANT_SECRET] - merchant secret ex. nd6u7duYeso4hrtc
-   * [TR_API_KEY] - api merchantSecret ex. 
-   * [TR_API_PASS] - api password ex. nd6u7duYeso4hrtc
+##### Transaction API / create, get, refund, report 
     
-   Example of usages: [Create transaction](tpayLibs/examples/TransactionApiExample.php) [Refund Transaction](tpayLibs/examples/TransactionRefund.php)
-    
+   Example of usages: [Create transaction](tpayLibs/examples/TransactionApiExample.php), [Refund Transaction](tpayLibs/examples/TransactionRefund.php)
   
-### Card Basic / Card On-Site
+##### Card Basic / Card On-Site
 
-  * [CARD_API_KEY] - card API merchantSecret ex. 455ue12b1c26a9570vb852b31680ce6k3f706p9
-  * [CARD_API_PASSWORD] - card API merchantSecret ex. od0ufdrYap343r0
-  * [CARD_API_CODE] - card API code ex. i2128h0e6b17a78fn3c1adaod262o120
-  * [CARD_RSA_KEY] - card RSA merchantSecret ex. S10tLS1CURdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JR2ZNQTBHQ1NxR1NJYjNEUUXCQVFVQUE0R05ERBNCaVFLQmdRQ2NLRTVZNU1Wemd5a1Z5ODNMS1NTTFlEMEVrU2xadTRVZm1STS8NCmM5L0NtMENuVDM2ekU0L2dMRzBSYzQwODRHNmIzU3l5NVpvZ1kwQXFOVU5vUEptUUZGVyswdXJacU8yNFRCQkxCcU10TTVYSllDaVQNCmVpNkx3RUIyNnpPOFZocW9SK0tiRS92K1l1GlDXNGQ0cWtHU0IzeHBhSUJncllrT2o0aFJDOXk0WXdJ11FRQUINCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ==
-  * [CARD_HASH_ALG] - card hash algorithm ex. sha1
+  Example of usages: [Card basic form](tpayLibs/examples/CardBasicForm.php), [Card On-site Gateway](tpayLibs/examples/CardGate.php)
   
-  Example of usages: [Card Basic Form](tpayLibs/examples/CardBasicForm.php) [Card On-site Gateway](tpayLibs/examples/CardGate.php)
-  
-### Szkwal / White Label
+##### Szkwal / White Label
 
-  * [MERCHANT_ID] - merchant id ex. 14868
-  * [MERCHANT_SECRET] - merchant secret ex. nd6u7duYeso4hrtc
-  * [SZKWAL_LOGIN] - szkwal API login ex. supershop
-  * [SZKWAL_API_PASSWORD] - szkwal API password ex. igtht7i7m08tdsg4wsztrrgRDSHA
-  * [SZKWAL_API_HASH] - szkwal API hash ex. fjk8IGjnh92TEcvfpo3usdZ
-  * [SZKWAL_PARTNER_ADDRESS] - szkwal unique partner address ex. c_supershop
-  * [SZKWAL_TITLE_FORMAT] - pattern of unique client title ex. KIR[0-9]{9}
+  Example of usages: [Szkwal](tpayLibs/examples/Szkwal.php), [White Label](tpayLibs/examples/WhiteLabel.php)
   
-  Example of usages: [Szkwal](tpayLibs/examples/Szkwal.php) [White Label](tpayLibs/examples/WhiteLabel.php)
-  
-### DAC / Masspayment / Transaction API requests
+##### DAC / Masspayment / Transaction API requests
 
-  * [MERCHANT_ID] - merchant id ex. 14868
-  * [MERCHANT_SECRET] - merchant secret ex. nd6u7duYeso4hrtc
-  * [TRANSACTION_API_KEY] - transaction API merchantSecret ex. c4fb9c5482e16a848e68dbb1488ed42ddcb82311
-  * [TRANSACTION_API_PASS] - transaction API secret ex. bd6u7drYesa43rtw
-  
- Example of usages: [DAC](tpayLibs/examples/Dac.php) [Masspayment and Transaction API](tpayLibs/examples/MassPayment.php)
+ Example of usages: [DAC](tpayLibs/examples/Dac.php), [Masspayment and Transaction API](tpayLibs/examples/MassPayment.php)
  
 Library has own logging system to save all confirmations and notifications sent by Tpay.com server
 Be sure that file src/log is writable and add rule to htaccess to deny access to this file from browser
