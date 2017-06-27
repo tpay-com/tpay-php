@@ -1,0 +1,65 @@
+<?php
+
+/*
+ * Created by tpay.com
+ */
+?>
+
+<style>
+    <?php use tpayLibs\src\_class_tpay\Utilities\Lang;
+    include_once dirname(__FILE__) . '/../_css/style.css'; ?>
+</style>
+<?php
+if ($data['show_regulations_checkbox'] === true) { ?>
+<div class="insidebg" id="main-payment">
+    <div id="kanaly_v">
+        <select name="bank_list" id="tpay-bank-list" onchange="changeBank()"></select>
+        <p>
+            <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
+
+            <?php Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
+                                               target="_blank"><?php Lang::l('regulations') ?></a>
+        </p>
+        <?php } ?>
+    </div>
+</div>
+<?php echo $data['form'] ?>
+<script>
+    var s = document.createElement('script'),
+        submit_form_input = document.getElementById('tpay-payment-submit'),
+        regulations_form_input = document.getElementById('tpay-regulations-input'),
+        regulation_checkbox = document.getElementById('tpay-accept-regulations-checkbox'),
+        changeBank = function () {
+            document.getElementById('tpay-channel-input').value = document.getElementById('tpay-bank-list').value;
+        };
+    s.src = 'https://secure.tpay.com/channels-<?php echo $data['merchant_id'] ?>1.js';
+    s.onload = function () {
+        var str = '', i;
+        for (i in tr_channels) {
+            var channel = tr_channels[i],
+                id = channel[0],
+                name = channel[1];
+            str += '<option value="' + id + '" >' + name + '</option>';
+        }
+        document.getElementById('tpay-bank-list').innerHTML = str;
+        changeBank();
+    };
+    document.getElementsByTagName('head')[0].appendChild(s);
+
+    <?php if ($data['show_regulations_checkbox'] === true){ ?>
+
+    submit_form_input.onclick = function () {
+        if (regulations_form_input.value == 0) {
+            alert('<?php Lang::l('acceptance_is_required') ?>');
+            return false;
+        }
+        return true;
+    };
+
+    regulation_checkbox.onchange = function () {
+        regulations_form_input.value = (this.checked) ? 1 : 0;
+    };
+
+    <?php } ?>
+
+</script>

@@ -1,0 +1,45 @@
+<?php
+use tpayLibs\src\_class_tpay\Utilities\Lang;
+?>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <div class="insidebg" id="blikOneClickForm">
+        <img src="https://secure.tpay.com/_/banks/b64.png"/><br>
+        <div id="codeFields" style="visibility: hidden">
+
+            <label for="blikcode" class="form_input_label">Wpisz kod blik:</label>
+            <input type="text" id="blikcode" name="blikcode" value="" maxlength="6" pattern=".{6,}"
+                   title="Kod blik powinien składać się z 6 cyfr!"/>
+            <label for="register" class="form_input_label">Chcę zapamiętać to
+                urządzenie:</label>
+            <input type="checkbox" value="0" id="register" onchange="checkRegister()">
+        </div>
+        <div id="alias" style="visibility: hidden">
+            <p>
+                <label for="blikSwitch" class="form_input_label">Wybierz alias:</label>
+                <select name="blikSwitch" id="blikSwitch" class="form_input"></select>
+            </p>
+        
+        </div>
+        <div id="tpayBlikButton">
+            <input type="button" value="<?php
+            echo Lang::l('pay') ?>" onclick="blikHandler()"
+                   id="tpayBlikButton">
+        </div>
+        <div id="t6InputMsg">
+            <small>
+                <a href="#" onclick="showT6()">Chcę wprowadzić kod blik</a>
+            </small>
+        </div>
+        <div>
+            <br/>
+            <small>
+                <?php Lang::l('blik_accept') ?>
+                <a href="<?php echo $data['regulation_url'] ?>"
+                   target="_blank"><?php Lang::l('regulations_url') ?></a>
+                <?php Lang::l('regulations'); ?>
+            </small>
+        </div>
+    </div>
+    <script src="../src/common/_js/blikHandler.js"></script>
+
+<?php
