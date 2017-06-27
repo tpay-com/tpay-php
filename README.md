@@ -33,6 +33,7 @@ All methods described in [tpay documentations](https://tpay.com/en/documentation
 ###Example configuration data should look like this:
 
   merchantId - merchant id ex. 1010
+  
   merchantSecret - merchant secret ex. demo
 
 ##### Basic Payments and bank selection forms: 
