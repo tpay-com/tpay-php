@@ -26,9 +26,6 @@ class CardOptions extends ObjectsHelper
         $this->isNotEmptyString($this->cardApiPass, 'Card API password');
         $this->validateCardHashAlg($this->cardHashAlg);
         $this->validateCardCode($this->cardVerificationCode);
-        $this->secureIP = array(
-            '176.119.38.175',
-        );
 
     }
 

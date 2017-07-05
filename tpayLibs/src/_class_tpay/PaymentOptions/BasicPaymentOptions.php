@@ -31,13 +31,6 @@ class BasicPaymentOptions extends ObjectsHelper
     {
         $this->validateMerchantId($this->merchantId);
         $this->isNotEmptyString($this->merchantSecret, 'Merchant Secret');
-        $this->secureIP = array(
-            '195.149.229.109',
-            '148.251.96.163',
-            '178.32.201.77',
-            '46.248.167.59',
-            '46.29.19.106'
-        );
     }
 
     public function setTransactionID($transactionID)

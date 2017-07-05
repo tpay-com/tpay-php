@@ -10,6 +10,7 @@ namespace tpayLibs\src\_class_tpay\Utilities;
 
 use tpayLibs\src\_class_tpay\Curl\Curl;
 use tpayLibs\src\_class_tpay\Validators\FieldsConfigValidator;
+use tpayLibs\src\Dictionaries\NotificationsIP;
 
 class ObjectsHelper
 {
@@ -95,7 +96,7 @@ class ObjectsHelper
      */
     protected $szkwalTitleFormat = '[SZKWAL_TITLE_FORMAT]';
 
-    protected $secureIP;
+    protected $secureIP = NotificationsIP::SECURE_IPS;
     protected $validateServerIP = true;
     protected $transactionApi;
     protected $cardsApi;
