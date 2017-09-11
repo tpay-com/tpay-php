@@ -18,7 +18,7 @@ class TransactionNotification extends BasicNotificationHandler
         $this->merchantSecret = 'demo';
         $this->merchantId = 1010;
         parent::__construct();
-        return $this->checkPayment();
+
     }
 
         /*
@@ -40,4 +40,4 @@ class TransactionNotification extends BasicNotificationHandler
             )
              */
 }
-new TransactionNotification();
+return (new TransactionNotification())->checkPayment();
