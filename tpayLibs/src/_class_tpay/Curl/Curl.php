@@ -170,15 +170,25 @@ class Curl extends CurlOptions
     private function checkResponse()
     {
         $responseCode = $this->curlInfo['http_code'];
-        if ($responseCode !== 200 && array_key_exists($responseCode, HttpCodesDictionary::HTTP_CODES)) {
-            $codeDescription = sprintf('tpay.com server return %s',
-                HttpCodesDictionary::HTTP_CODES[$responseCode]);
-            throw new TException($codeDescription);
-        } elseif ($responseCode !== 200) {
-            throw new TException(sprintf('Unexpected response from tpay server %s', $responseCode));
-        } else {
-            return true;
-        }
+        $successCall = ($responseCode >= 200 && $responseCode <= 299) ? true : false;
 
+        return $successCall ? true : $this->getResponseCode($responseCode);
+
+    }
+
+    /**
+     * Check cURL response and throw exception
+     *
+     * @param int $code
+     * @throws TException
+     */
+    private function getResponseCode($code)
+    {
+        if (array_key_exists($code, HttpCodesDictionary::HTTP_CODES)) {
+            $codeDescription = sprintf('tpay.com server return %s', HttpCodesDictionary::HTTP_CODES[$code]);
+            throw new TException($codeDescription);
+        } else {
+            throw new TException(sprintf('Unexpected response from tpay server %s', $code));
+        }
     }
 }

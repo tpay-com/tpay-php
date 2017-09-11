@@ -17,6 +17,8 @@ class HttpCodesDictionary
      * @var array
      */
     const HTTP_CODES = array(
+        401 => '401: Unauthorized access',
+        404 => '404: Resource not found on server',
         500 => '500: Internal Server Error',
         501 => '501: Not Implemented',
         502 => '502: Bad Gateway',
