@@ -46,7 +46,7 @@ class BlikFieldsDictionary
     const REQUEST_FIELDS = [
         'code'  => [
             FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT, 'maxlength_6', 'minlenght_6'),
+            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT, 'maxlength_6', 'minlength_6'),
             FieldsConfigDictionary::FILTER     => FieldsConfigDictionary::NUMBERS
         ],
         'title' => [

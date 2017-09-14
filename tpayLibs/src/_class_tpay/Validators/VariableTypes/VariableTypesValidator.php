@@ -44,8 +44,6 @@ class VariableTypesValidator
                     $value2->validateType($value, $name);
                 }
             }
-        } else {
-            throw new TException('This field type does not have validator ' . $type);
         }
     }
 }

@@ -15,9 +15,9 @@ class FieldsConfigDictionary
     const PHONE = 'phone';
     const REQUIRED = 'required';
     const VALIDATION = 'validation';
-    const FLOAT = 'Float';
+    const FLOAT = 'float';
     const FILTER = 'filter';
-    const STRING = 'String';
+    const STRING = 'string';
     const ARR = 'array';
     const MAXLENGTH_128 = 'maxlength_128';
     const OPTIONS = 'options';
@@ -26,8 +26,10 @@ class FieldsConfigDictionary
     const EMAIL_LIST = 'EmailList';
     const OPIS_DODATKOWY = 'opis_dodatkowy';
     const MAXLENGTH_32 = 'maxlength_32';
+    const MINLENGTH_32 = 'minlength_32';
     const EMAIL = 'email';
     const MAXLENGTH_64 = 'maxlength_64';
+    const MINLENGTH_64 = 'minlength_64';
     const TEST_MODE = 'test_mode';
     const AMOUNT = 'amount';
     const ORDER_ID = 'order_id';

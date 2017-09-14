@@ -76,7 +76,7 @@ class SzkwalFieldsDictionary
          */
         'cli_account'  => array(
             FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING, 'minlenght_26', 'maxlength_26'),
+            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING, 'minlength_26', 'maxlength_26'),
             FieldsConfigDictionary::FILTER     => FieldsConfigDictionary::NUMBERS
         ),
         /**
