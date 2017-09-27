@@ -56,7 +56,7 @@ echo $data[STATIC_FILES_URL] ?>card/_css/gate.css"/>
         <div class="card_icon" id="amex"></div>
     </div>
 
-    <p id="info_msg"></p>
+    <p id="info_msg" style="visibility: hidden"><?php Lang::l('not_supported_card') ?></p>
 
     <div id="loading_scr" style="display:none">
         <img src="<?php echo $data[STATIC_FILES_URL] ?>common/_img/loading.gif"

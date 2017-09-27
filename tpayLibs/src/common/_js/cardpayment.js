@@ -42,7 +42,7 @@ function CardPayment(url, pubkey) {
             goon = false;
         } else {
             $(this).removeClass('wrong');
-            document.getElementById('info_msg').innerText = '';
+            $('#info_msg').css('visibility', 'hidden');
             goon = true;
             var type = '',
                 supported = ['master', 'visa', ''];
@@ -63,7 +63,8 @@ function CardPayment(url, pubkey) {
             }
 
             if (supported.indexOf(type) < 0) {
-                document.getElementById('info_msg').innerText = 'Sorry, your credit card type is currently not supported. Please try another payment method.';
+                $('#info_msg').css('visibility', 'visible');
+                goon = false;
             }
             if (type !== '') {
                 $('#' + type).addClass('hover');

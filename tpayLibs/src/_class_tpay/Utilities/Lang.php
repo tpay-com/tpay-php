@@ -62,6 +62,7 @@ class Lang
             'processing'      => 'Processing data, please wait...',
             'card_payment'    => 'Payment',
             'debit'           => 'Please debit my account',
+            'not_supported_card' => 'Sorry, your credit card type is currently not supported. Please try another payment method.',
 
             // DAC
 
@@ -120,6 +121,7 @@ class Lang
             'processing'      => 'Przetwarzanie danych, proszę czekać...',
             'card_payment'    => 'Zapłać',
             'debit'           => 'Proszę obciążyć moje konto',
+            'not_supported_card' => 'Przepraszamy, Twój typ karty nie jest obecnie obsługiwany. Prosimy opłacić zamówienie inną metodą.',
 
             // DAC
 
