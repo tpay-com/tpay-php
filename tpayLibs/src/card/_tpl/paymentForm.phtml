@@ -3,9 +3,9 @@
 /*
  * Created by tpay.com
  */
-use tpayLibs\src\_class_tpay\Utilities\Lang;
-?><form id="tpay-payment" class="tpay-form" action="<?php
+?>
+<form id="tpay-payment" class="tpay-form" action="<?php
 echo $data['action_url'] ?>" method="POST">
     <input type="hidden" name="sale_auth" value="<?php echo $data['sale_auth'] ?>"/>
-    <input id="tpay-payment-submit" type="submit" value="<?php Lang::l('pay') ?>">
+    <input id="tpay-payment-submit" type="submit" value="<?php $lang->l('pay') ?>">
 </form>

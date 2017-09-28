@@ -73,7 +73,7 @@ Change language example:
 $tpay = new PaymentSzkwal();
 
 //After this line all static messages (input labels, buttons titles) will be displayed in Polish
-Lang::setLang('pl');
+(new Util())->setLanguage('pl');
 ```
 
 ## License

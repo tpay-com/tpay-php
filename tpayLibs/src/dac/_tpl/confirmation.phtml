@@ -3,15 +3,14 @@
 /*
  * Created by tpay.com
  */
-use tpayLibs\src\_class_tpay\Utilities\Lang;
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>dac/_css/confirmation.css"/>
 
 <div id="tpay-dac-confirmation">
-    <div class="tpay-row tpay-header"><?php Lang::l('transfer_details') ?></div>
+    <div class="tpay-row tpay-header"><?php $lang->l('transfer_details') ?></div>
     <div class="tpay-row">
         <div class="col-l">
-            <?php Lang::l('merchant_info') ?>:
+            <?php $lang->l('merchant_info') ?>:
         </div>
         <div class="col-r">
             <?php echo $data['merchant_data'] ?>
@@ -19,7 +18,7 @@ use tpayLibs\src\_class_tpay\Utilities\Lang;
     </div>
     <div class="tpay-row">
         <div class="col-l">
-            <?php Lang::l('payment_amount') ?>:
+            <?php $lang->l('payment_amount') ?>:
         </div>
         <div class="col-r">
             <?php echo $data['transaction']['amount'] ?>
@@ -27,7 +26,7 @@ use tpayLibs\src\_class_tpay\Utilities\Lang;
     </div>
     <div class="tpay-row">
         <div class="col-l">
-            <?php Lang::l('disposable_account') ?>:
+            <?php $lang->l('disposable_account') ?>:
         </div>
         <div class="col-r">
             <?php echo $data['transaction']['account_number'] ?>

@@ -7,16 +7,15 @@
 ?>
 
 <style>
-    <?php use tpayLibs\src\_class_tpay\Utilities\Lang;
-    include_once dirname(__FILE__) . '/../_css/style.css'; ?>
+    <?php include_once dirname(__FILE__) . '/../_css/style.css'; ?>
 </style>
 <div class="insidebg" id="main-payment">
     <img src="https://tpay.com/img/logo/tpaycom.png" height="145" width="250"/>
     <div id="kanaly_v">
-        <div class="separator"><span><p class="font"><br/><?php Lang::l('cards_and_transfers') ?></p></span></div>
+        <div class="separator"><span><p class="font"><br/><?php $lang->l('cards_and_transfers') ?></p></span></div>
         <center>
             <div id="bank-selection-form"></div>
-            <div class="separator"><span><p class="font"><br/><?php Lang::l('other_methods') ?></p></span></div>
+            <div class="separator"><span><p class="font"><br/><?php $lang->l('other_methods') ?></p></span></div>
             <div id="bank-selection-form2"></div>
             <br/>
 
@@ -28,9 +27,9 @@
                 <p>
                     <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
 
-                    <?php Lang::l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                                       target="_blank"><?php Lang::l('regulations_url') ?></a>
-                    <?php Lang::l('regulations'); ?>
+                    <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
+                                                       target="_blank"><?php $lang->l('regulations_url') ?></a>
+                    <?php $lang->l('regulations'); ?>
                 </p>
 
             <?php } ?>
@@ -112,7 +111,7 @@
 
     submit_form_input.onclick = function () {
         if (regulations_form_input.value == 0) {
-            alert('<?php Lang::l('acceptance_is_required') ?>');
+            alert('<?php $lang->l('acceptance_is_required') ?>');
             return false;
         }
         return true;

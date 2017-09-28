@@ -20,6 +20,12 @@ class Util
 {
     const REMOTE_ADDR = 'REMOTE_ADDRESS';
 
+    static $lang = 'en';
+
+    public function setLanguage($lang){
+        static::$lang = $lang;
+    }
+
     /**
      * Parse template file
      * @param string $templateFileName filename
@@ -39,6 +45,8 @@ class Util
         if (!file_exists($templateDirectory . $templateFileName . '.phtml')) {
             return '';
         }
+        $lang = new Lang();
+        $lang->setLang(static::$lang);
         include_once $templateDirectory . $templateFileName . '.phtml';
         $parsedHTML = ob_get_contents();
         ob_clean();
