@@ -5,7 +5,7 @@
  */
 namespace tpayLibs\src\_class_tpay;
 
-use tpayLibs\src\_class_tpay\PaymentOptions\BasicPaymentOptions;
+use tpayLibs\src\_class_tpay\PaymentForms\PaymentBasicForms;
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\Dictionaries\ErrorCodes\TransactionApiErrors;
@@ -17,7 +17,7 @@ use tpayLibs\src\Dictionaries\ErrorCodes\TransactionApiErrors;
  *
  * @package tpay
  */
-class TransactionApi extends BasicPaymentOptions
+class TransactionApi extends PaymentBasicForms
 {
     const RESULT = 'result';
     const TITLE = 'title';

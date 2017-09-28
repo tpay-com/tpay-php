@@ -57,13 +57,12 @@ class PaymentCardForms extends PaymentCard
             CardDictionary::SALE_AUTH => $apiResponse[CardDictionary::SALE_AUTH],
         );
 
-        return Util::parseTemplate('card/_tpl/paymentForm', $data);
+        return Util::parseTemplate('cardPaymentForm', $data);
     }
 
     /**
      * Get HTML form for direct sale gate. Using for payment in merchant shop
      *
-     * @param string $staticFilesURL path to library static files
      * @param string $paymentRedirectPath payment redirect path
      *
      * @param bool $cardSaveAllowed
@@ -72,18 +71,16 @@ class PaymentCardForms extends PaymentCard
      */
 
     public function getOnSiteCardForm(
-        $staticFilesURL = '',
         $paymentRedirectPath = 'index.html',
         $cardSaveAllowed = true
     ) {
         $data = array(
             'rsa_key'               => $this->cardKeyRSA,
-            'static_files_url'      => $staticFilesURL,
             'payment_redirect_path' => $paymentRedirectPath,
             'card_save_allowed'     => $cardSaveAllowed
         );
 
-        return Util::parseTemplate('card/_tpl/gate', $data);
+        return Util::parseTemplate('gate', $data);
     }
 
     /**
@@ -123,7 +120,7 @@ class PaymentCardForms extends PaymentCard
                 CardDictionary::ORDERID   => $orderId
             );
 
-            return Util::parseTemplate('card/_tpl/savedCard', $data);
+            return Util::parseTemplate('savedCard', $data);
         } else {
             throw new TException('Order data is invalid');
         }

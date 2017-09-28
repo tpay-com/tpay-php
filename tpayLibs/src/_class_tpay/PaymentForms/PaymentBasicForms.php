@@ -23,12 +23,9 @@ class PaymentBasicForms extends BasicPaymentOptions
      * @var string
      */
     const PAYMENT_FORM = 'paymentForm';
+
     protected $panelURL = 'https://secure.tpay.com';
-    /**
-     * Path to template directory
-     * @var string
-     */
-    private $templateDir = 'common/_tpl/';
+
     /**
      * URL to tpay regulations file
      * @var string
@@ -55,7 +52,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             static::FIELDS     => $config,
         );
 
-        return Util::parseTemplate($this->templateDir . static::PAYMENT_FORM, $data);
+        return Util::parseTemplate(static::PAYMENT_FORM, $data);
     }
 
     /**
@@ -75,7 +72,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             static::FIELDS     => $config,
         );
 
-        return Util::parseTemplate($this->templateDir . static::PAYMENT_FORM, $data);
+        return Util::parseTemplate(static::PAYMENT_FORM, $data);
     }
 
     /**
@@ -91,7 +88,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             'regulation_url' => $this->regulationURL,
         );
 
-        return Util::parseTemplate($this->templateDir . 'blikForm', $data);
+        return Util::parseTemplate('blikForm', $data);
     }
 
     /**
@@ -117,7 +114,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             static::FIELDS     => $config,
         );
 
-        $form = Util::parseTemplate($this->templateDir . static::PAYMENT_FORM, $data);
+        $form = Util::parseTemplate(static::PAYMENT_FORM, $data);
 
         $data = array(
             'merchant_id'               => $this->merchantId,
@@ -130,6 +127,6 @@ class PaymentBasicForms extends BasicPaymentOptions
         } else {
             $templateFile = 'bankSelection';
         }
-        return Util::parseTemplate($this->templateDir . $templateFile, $data);
+        return Util::parseTemplate($templateFile, $data);
     }
 }

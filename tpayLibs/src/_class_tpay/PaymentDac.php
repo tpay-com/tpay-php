@@ -31,19 +31,18 @@ class PaymentDac extends TransactionApi
      * about transaction and merchant data
      *
      * @param array $config transaction config
-     * @param string $staticFilesURL static files url
      * @param string $merchantData merchant data
      *
      * @return array
      */
-    public function registerTransaction($config, $staticFilesURL = '', $merchantData = '')
+    public function registerTransaction($config, $merchantData = '')
     {
         $config['kanal'] = $this->channelDAC;
         $transactionData = $this->create($config);
         $transactionData['crc'] = $config['crc'];
 
         return array(
-            'html' => $this->getConfirmationBlock($transactionData, $staticFilesURL, $merchantData),
+            'html' => $this->getConfirmationBlock($transactionData, $merchantData),
             'data' => $transactionData
         );
     }
@@ -52,19 +51,17 @@ class PaymentDac extends TransactionApi
      * Get HTML string with confirmation block
      *
      * @param array $transactionData registered transaction data from tpay server
-     * @param string $staticFilesURL browser url to library
      * @param string $merchantData merchant data to
      *
      * @return string
      */
-    private function getConfirmationBlock($transactionData, $staticFilesURL, $merchantData)
+    private function getConfirmationBlock($transactionData, $merchantData)
     {
         $data = array(
-            'static_files_url' => $staticFilesURL,
             'merchant_data'    => $merchantData,
             'transaction'      => $transactionData
         );
 
-        return Util::parseTemplate('dac/_tpl/confirmation', $data);
+        return Util::parseTemplate('dacConfirmation', $data);
     }
 }

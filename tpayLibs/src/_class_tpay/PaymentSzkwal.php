@@ -168,17 +168,16 @@ class PaymentSzkwal extends ObjectsHelper
      *
      * @throws TException
      */
-    public function getConfirmationBlock($title, $amount = false, $staticFilesURL = '', $merchantData = '')
+    public function getConfirmationBlock($title, $amount = false, $merchantData = '')
     {
         $data = array(
             static::TITLE      => $title,
             'banks'            => $this->getBanks(),
             static::AMOUNT     => $amount,
-            'static_files_url' => $staticFilesURL,
             'merchant_data'    => $merchantData
         );
 
-        return Util::parseTemplate('szkwal/_tpl/confirmation', $data);
+        return Util::parseTemplate('confirmation', $data);
     }
 
     /**

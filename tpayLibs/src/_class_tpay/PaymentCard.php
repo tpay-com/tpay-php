@@ -84,11 +84,13 @@ class PaymentCard extends CardApi
      * merchant and tpay system.
      *
      * @param string $sign
-     * @param string $testMode
      * @param string $saleAuth
      * @param string $card
      * @param string $saleDate
-     *
+     * @param string $status
+     * @param string $testMode
+     * @param string $sale
+     * @param string $reason
      * @throws TException
      */
     public function validateCardSign(

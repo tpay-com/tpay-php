@@ -26,7 +26,7 @@ function checkRegister() {
 }
 function showAliases() {
     var x = document.getElementById("blikSwitch");
-    for (var i = 1; i < blikResult.length - 1;) {
+    for (var i = 0; i < blikResult.length - 1;) {
         var option = document.createElement("option");
         option.text = blikResult[i];
         option.value = blikResult[i + 1];
@@ -82,9 +82,6 @@ function blikHandler() {
 }
 function checkResponse() {
     var i = 0;
-    if (attempt === 0) {
-        i = 1;
-    }
 
     if (blikResult[i] === '1') {
         document.getElementById("blikOneClickForm").innerHTML = "<p>SUKCES!</p>";

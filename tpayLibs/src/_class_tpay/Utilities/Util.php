@@ -33,7 +33,9 @@ class Util
      */
     public static function parseTemplate($templateFileName, $data = array())
     {
-        $templateDirectory = dirname(__FILE__) . '/../../';
+        $data['static_files_url'] = $_SERVER['REQUEST_URI'].'/../../src/';
+
+        $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
         $buffer = false;
 
         if (ob_get_length() > 0) {

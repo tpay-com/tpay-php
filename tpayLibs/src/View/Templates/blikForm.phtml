@@ -26,7 +26,7 @@
     </div>
     <div id="tpayBlikButton">
         <input type="button" value="<?php
-        echo $lang->l('pay') ?>" onclick="blikHandler()"
+        $lang->l('pay') ?>" onclick="blikHandler()"
                id="tpayBlikButton">
     </div>
     <div id="t6InputMsg">
@@ -44,6 +44,7 @@
         </small>
     </div>
 </div>
-<script src="../src/common/_js/blikHandler.js"></script>
+
+<script src="<?php echo $data['static_files_url'] ?>View/JS/blikHandler.js"></script>
 
 <?php

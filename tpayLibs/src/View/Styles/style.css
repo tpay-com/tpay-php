@@ -182,7 +182,7 @@ textarea:-moz-placeholder {
     max-width: 25em;
     height: 3em;
     margin: 10px;
-    background: url(../_img/powered_by_tpay.png);
+    background: url(../../View/Images/powered_by_tpay.png);
     background-size: 170px 33px;
     background-repeat: no-repeat;
     margin-bottom: 1em;
@@ -200,7 +200,7 @@ textarea:-moz-placeholder {
     height: 30px;
     margin: 0 3px;
     opacity: 0.6;
-    background-image: url(../_img/cards.png);
+    background-image: url(../../View/Images/cards.png);
     background-size: 320px;
 }
 
@@ -321,14 +321,14 @@ textarea:-moz-placeholder {
 }
 
 #card_payment_form .amPmCheckbox input[type="checkbox"] + label {
-    background: url(../_img/checkbox.png) no-repeat scroll left top transparent;
+    background: url(../../View/Images/checkbox.png) no-repeat scroll left top transparent;
     height: 21px;
     width: 22px;
     padding-left: 30px;
 }
 
 #card_payment_form .amPmCheckbox input[type="checkbox"]:checked + label {
-    background: url(../_img/checkbox.png) no-repeat scroll left bottom transparent;
+    background: url(../../View/Images/checkbox.png) no-repeat scroll left bottom transparent;
     height: 21px;
     width: 22px;
 }
