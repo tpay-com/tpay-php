@@ -70,10 +70,15 @@ Change language example:
 
 ```php
 //All Tpay class constructors load Lang class
-$tpay = new PaymentSzkwal();
+$tpay = new BankSelectionExample();
 
 //After this line all static messages (input labels, buttons titles) will be displayed in Polish
 (new Util())->setLanguage('pl');
+
+If you want to access translations manually, use:
+$language = new Lang()
+$language->setLang('pl'); for setting language
+$language->l('pay'); to echo translated key
 ```
 
 ## License
