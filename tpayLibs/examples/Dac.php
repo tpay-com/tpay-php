@@ -18,8 +18,8 @@ class DacExample extends PaymentDac
     {
         $this->merchantSecret = 'demo';
         $this->merchantId = 1010;
-        $this->trApiKey = '';
-        $this->trApiPass = '';
+        $this->trApiKey = '75f86137a6635df826e3efe2e66f7c9a946fdde1';
+        $this->trApiPass = 'p@$$w0rd#@!';
         parent::__construct();
     }
 
@@ -40,10 +40,9 @@ class DacExample extends PaymentDac
          * This method return HTML form
          */
 
-        $staticFilesURL = 'http://example.pl/src/';
         $merchantData = 'Sklep ze zdrową żywnością<br>ul. Świdnicka 26, 50-345 Wrocław';
 
-        $data = $this->registerTransaction($config, $staticFilesURL, $merchantData);
+        $data = $this->registerTransaction($config, $merchantData);
 
         /**
          * $data['transaction']

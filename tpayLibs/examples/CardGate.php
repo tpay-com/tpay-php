@@ -6,7 +6,6 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\Utilities\Lang;
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
 
 include_once 'config.php';
@@ -26,12 +25,9 @@ class CardGate extends PaymentCardForms
 
     public function getCardDirectHtml()
     {
-        Lang::setLang('pl');
-
-        $staticFilesURL = $_SERVER['REQUEST_URI'].'/../../src/';
         $handleFormURL = $_SERVER['REQUEST_URI'].'/../SecureSalePayment.php';
 
-        $cardGateHTML = $this->getOnSiteCardForm($staticFilesURL, $handleFormURL);
+        $cardGateHTML = $this->getOnSiteCardForm($handleFormURL);
 
         $exampleCardData = array(
             'number' => '4532823576358083',

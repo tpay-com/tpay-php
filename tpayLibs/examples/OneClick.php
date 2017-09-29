@@ -28,8 +28,8 @@ class OneClick extends PaymentBlik
     {
         $this->merchantSecret = 'demo';
         $this->merchantId = 1010;
-        $this->trApiKey = '';
-        $this->trApiPass = '';
+        $this->trApiKey = '75f86137a6635df826e3efe2e66f7c9a946fdde1';
+        $this->trApiPass = 'p@$$w0rd#@!';
         parent::__construct();
 
         if (empty($_GET)) {
@@ -38,11 +38,9 @@ class OneClick extends PaymentBlik
         if (isset($_GET['tryOneClick']) && isset($_GET[static::TITLE])) {
             $params[static::TITLE] = $_GET[static::TITLE];
             $this->pushBlik($params);
-        }
-        if (isset($_GET['getTitle'])) {
+        } else if (isset($_GET['getTitle'])) {
             $this->createTransaction();
-        }
-        if (isset($_GET[static::CODE]) || isset($_GET[static::TITLE]) || isset($_GET[static::ALIAS_KEY])) {
+        } else if (isset($_GET[static::CODE]) || isset($_GET[static::TITLE]) || isset($_GET[static::ALIAS_KEY])) {
             $params = array();
             foreach ($_GET as $key => $value) {
                 $params[$key] = $value;
@@ -98,7 +96,7 @@ class OneClick extends PaymentBlik
     {
         $config = array(
             'opis'                => 'transakcja testowa api',
-            'kwota'               => 0.10,
+            'kwota'               => 1.10,
             'crc'                 => 'test',
             'kanal'               => 64,
             'nazwisko'            => 'kowalski',

@@ -6,7 +6,6 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\Utilities\Lang;
 use tpayLibs\src\_class_tpay\PaymentSzkwal;
 
 include_once 'config.php';
@@ -21,7 +20,6 @@ class SzkwalExample extends PaymentSzkwal
         $this->szkwalApiHash = '';
         $this->szkwalPartnerUniqueAddress = '';
         $this->szkwalTitleFormat = '';
-        Lang::setLang('pl');
         parent::__construct();
     }
 
@@ -39,10 +37,9 @@ class SzkwalExample extends PaymentSzkwal
 
         $szkwalResult = $this->registerClient($clientName, $clientEmail, $clientPhone, $crc, $clientBankAccount);
 
-        $staticFilesURL = 'http://example.pl/src/';
         $merchantData = 'Sklep ze zdrową żywnością<br>ul. Świdnicka 26, 50-345 Wrocław';
         $amount = 123.45;
-        $html = $this->getConfirmationBlock($szkwalResult['title'], $amount, $staticFilesURL, $merchantData);
+        $html = $this->getConfirmationBlock($szkwalResult['title'], $amount, $merchantData);
 
         echo $html;
 
