@@ -15,7 +15,6 @@ use tpayLibs\src\Dictionaries\NotificationsIP;
 class ObjectsHelper
 {
     use FieldsConfigValidator;
-    const REMOTE_ADDRESS = 'REMOTE_ADDR';
 
     /**
      * Api key
@@ -98,6 +97,7 @@ class ObjectsHelper
 
     protected $secureIP = NotificationsIP::SECURE_IPS;
     protected $validateServerIP = true;
+    protected $validateForwardedIP = false;
     protected $transactionApi;
     protected $cardsApi;
     protected $basicClient;
@@ -122,6 +122,7 @@ class ObjectsHelper
     public function disableValidationServerIP()
     {
         $this->validateServerIP = false;
+        return $this;
     }
 
     /**
@@ -130,6 +131,26 @@ class ObjectsHelper
     public function enableValidationServerIP()
     {
         $this->validateServerIP = true;
+        return $this;
+    }
+
+    /**
+     * CloudFlare protected servers will be validated like all others
+     * It is default behavior
+     */
+    public function disableForwardedIPValidation()
+    {
+        $this->validateForwardedIP = false;
+        return $this;
+    }
+
+    /**
+     * Enabling validation for CloudFlare protected servers
+     */
+    public function enableForwardedIPValidation()
+    {
+        $this->validateForwardedIP = true;
+        return $this;
     }
 
     /**
@@ -139,10 +160,11 @@ class ObjectsHelper
      */
     public function isTpayServer()
     {
-        if (!isset($_SERVER[static::REMOTE_ADDRESS]) && !isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return false;
-        }
-        return (in_array($_SERVER[static::REMOTE_ADDRESS], $this->secureIP)
-            || in_array($_SERVER['HTTP_X_FORWARDED_FOR'], $this->secureIP));
+        return (new ServerValidator(
+            $this->validateServerIP,
+            $this->validateForwardedIP,
+            $this->secureIP)
+        )->isValid();
     }
+
 }
