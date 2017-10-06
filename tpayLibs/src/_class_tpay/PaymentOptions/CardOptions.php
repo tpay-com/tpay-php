@@ -9,7 +9,7 @@ class CardOptions extends ObjectsHelper
 {
     public $cardsApiURL = 'https://secure.tpay.com/api/cards/';
     protected $currency = 985;
-    protected $orderID = ' ';
+    protected $orderID = '';
     protected $oneTimer = true;
     protected $lang = 'pl';
     protected $enablePowUrl = false;
@@ -17,7 +17,7 @@ class CardOptions extends ObjectsHelper
     protected $powUrlBlad = '';
     protected $cardData = null;
     protected $method = 'register_sale';
-    protected $clientAuthCode;
+    protected $clientAuthCode = '';
     protected $amount;
 
     public function __construct()

@@ -61,15 +61,17 @@ class PaymentBasicForms extends BasicPaymentOptions
      *
      * @param array $config transaction config
      *
+     * @param bool $redirect redirect automatically
      * @return string
      */
-    public function getTransactionForm($config)
+    public function getTransactionForm($config, $redirect = false)
     {
         $config = $this->prepareConfig($config);
 
         $data = array(
             static::ACTION_URL => $this->panelURL,
             static::FIELDS     => $config,
+            'redirect'         => $redirect,
         );
 
         return Util::parseTemplate(static::PAYMENT_FORM, $data);

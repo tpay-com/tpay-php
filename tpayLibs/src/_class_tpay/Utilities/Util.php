@@ -22,18 +22,17 @@ class Util
 
     static $lang = 'en';
 
-    public function setLanguage($lang){
-        static::$lang = $lang;
-    }
+    static $path = null;
 
     /**
      * Parse template file
      * @param string $templateFileName filename
+     * @param array $data
      * @return string
      */
     public static function parseTemplate($templateFileName, $data = array())
     {
-        $data['static_files_url'] = $_SERVER['REQUEST_URI'].'/../../src/';
+        $data['static_files_url'] = is_null(static::$path) ? $_SERVER['REQUEST_URI'] . '/../../src/' : static::$path;
 
         $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
         $buffer = false;
@@ -133,4 +132,21 @@ class Util
         return $val;
     }
 
+    public function setLanguage($lang)
+    {
+        static::$lang = $lang;
+        return $this;
+    }
+
+    /**
+     * Set custom library path
+     *
+     * @param string $path
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        static::$path = $path;
+        return $this;
+    }
 }
