@@ -20,7 +20,7 @@ class EmailListType implements VariableTypesInterface
         }
         $emails = explode(',', $value);
         foreach ($emails as $email) {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false && strlen($email) > 0) {
                 throw new TException(
                     sprintf('Field "%s" contains invalid email address', $name)
                 );
