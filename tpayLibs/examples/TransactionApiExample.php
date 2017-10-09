@@ -48,7 +48,6 @@ class TransactionApiExample extends TransactionApi
          * Create new transaction
          */
 
-
         $config = array(
             'kwota'               => 999.99,
             'opis'                => 'Transaction description',
@@ -59,8 +58,7 @@ class TransactionApiExample extends TransactionApi
             'email'               => 'customer@example.com',
             'imie'                => 'Jan123',
             'nazwisko'            => 'Kowalski',
-            'kanal'               => 21,
-            'wybor'               => 1,
+            'grupa'               => isset($_POST['grupa']) ? (int)$_POST['grupa'] : 150,
             'akceptuje_regulamin' => 1,
         );
         try {

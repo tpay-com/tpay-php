@@ -33,29 +33,6 @@ class PaymentBasicForms extends BasicPaymentOptions
     private $regulationURL = 'https://secure.tpay.com/regulamin.pdf';
 
     /**
-     * Create HTML form for EHat payment based on transaction config
-     * More information about config fields @see FieldsConfigValidator::$panelPaymentRequestFields
-     *
-     * @param array $config transaction config
-     *
-     * @return string
-     */
-    public function getEHatForm($config)
-    {
-        $config = $this->prepareConfig($config);
-
-        $config['kanal'] = 58;
-        $config['akceptuje_regulamin'] = 1;
-
-        $data = array(
-            static::ACTION_URL => $this->panelURL,
-            static::FIELDS     => $config,
-        );
-
-        return Util::parseTemplate(static::PAYMENT_FORM, $data);
-    }
-
-    /**
      * Create HTML form for basic panel payment based on transaction config
      * More information about config fields @see FieldsConfigValidator::$panelPaymentRequestFields
      *
@@ -101,19 +78,23 @@ class PaymentBasicForms extends BasicPaymentOptions
      * @param bool $smallList type of bank selection list big icons or small form with select
      * @param bool $showRegulations show accept regulations input
      *
+     * @param string $actionURL sets non default action URL of form
+     * @param bool $hasConfig sets if validate config at this point
      * @return string
-     *
-     * @throws TException
      */
-    public function getBankSelectionForm($config, $smallList = false, $showRegulations = true)
+    public function getBankSelectionForm($config = array(), $smallList = false, $showRegulations = true,
+        $actionURL = null)
     {
-        $config = $this->prepareConfig($config);
-        $config['kanal'] = 0;
+        if (!empty($config)) {
+            $config = $this->prepareConfig($config);
+        }
+        $config['grupa'] = 0;
         $config['akceptuje_regulamin'] = ($showRegulations) ? 0 : 1;
 
         $data = array(
-            static::ACTION_URL => $this->panelURL,
+            static::ACTION_URL => is_null($actionURL) ? $this->panelURL : (string)$actionURL,
             static::FIELDS     => $config,
+            'redirect'         => false,
         );
 
         $form = Util::parseTemplate(static::PAYMENT_FORM, $data);

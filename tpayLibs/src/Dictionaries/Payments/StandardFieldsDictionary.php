@@ -60,12 +60,6 @@ class StandardFieldsDictionary
          * Imposing the customer the pre-payment channel.
          * Could be changed manually by customer.
          * Required for register transaction by transaction API
-         */
-        'kanal'               => [
-            FieldsConfigDictionary::REQUIRED   => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
-        ],
-        /**
          * Customer will be presented only the selected group.
          */
         'grupa'               => [

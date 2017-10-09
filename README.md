@@ -38,7 +38,7 @@ All methods described in [tpay documentations](https://tpay.com/en/documentation
 
 ##### Basic Payments and bank selection forms: 
   
-   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php), [Bank selection form](tpayLibs/examples/BankSelection.php), [eHat form](tpayLibs/examples/BasicEhatForm.php)
+   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php), [Bank selection html form](tpayLibs/examples/BankSelection.php), [Bank selection API form](tpayLibs/examples/BankSelectionAPI.php)
   
 ##### Transaction API / create, get, refund, report 
     

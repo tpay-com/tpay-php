@@ -98,7 +98,7 @@ class OneClick extends PaymentBlik
             'opis'                => 'transakcja testowa api',
             'kwota'               => 1.10,
             'crc'                 => 'test',
-            'kanal'               => 64,
+            'grupa'               => 150,
             'nazwisko'            => 'kowalski',
             'email'               => 'test@tpay.com',
             'akceptuje_regulamin' => 1,

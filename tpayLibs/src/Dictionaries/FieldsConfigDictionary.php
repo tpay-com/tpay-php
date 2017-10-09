@@ -21,7 +21,7 @@ class FieldsConfigDictionary
     const ARR = 'array';
     const MAXLENGTH_128 = 'maxlength_128';
     const OPTIONS = 'options';
-    const KANAL = 'kanal';
+    const GROUP = 'grupa';
     const MAXLENGTH_512 = 'maxlength_512';
     const EMAIL_LIST = 'EmailList';
     const OPIS_DODATKOWY = 'opis_dodatkowy';

@@ -17,7 +17,7 @@ class PaymentTypeBasicApi implements PaymentTypesInterface
     public function getRequestFields()
     {
         $fields = StandardFieldsDictionary::REQUEST_FIELDS;
-        $fields[FieldsConfigDictionary::KANAL][FieldsConfigDictionary::REQUIRED] = true;
+        $fields[FieldsConfigDictionary::GROUP][FieldsConfigDictionary::REQUIRED] = true;
         return $fields;
     }
 

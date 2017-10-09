@@ -25,9 +25,7 @@ class CardGate extends PaymentCardForms
 
     public function getCardDirectHtml()
     {
-        $handleFormURL = $_SERVER['REQUEST_URI'].'/../SecureSalePayment.php';
-
-        $cardGateHTML = $this->getOnSiteCardForm($handleFormURL);
+        $cardGateHTML = $this->getOnSiteCardForm('SecureSalePayment.php');
 
         $exampleCardData = array(
             'number' => '4532823576358083',
