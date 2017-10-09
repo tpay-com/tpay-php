@@ -41,5 +41,6 @@ class FieldsConfigDictionary
     const CURRENCY = 'currency';
     const LANGUAGE = 'language';
     const CODE = 'code';
+    const NAME = 'nazwisko';
 
 }

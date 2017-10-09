@@ -64,7 +64,7 @@ class TransactionApi extends PaymentBasicForms
     {
         $url = $this->apiURL . $this->trApiKey . '/transaction/create';
 
-        $config = $this->prepareConfig($config);
+        $config = $this->prepareConfig($config, true);
         Util::log('Transaction create request params', print_r($config, true));
         $response = $this->requests($url, $config);
         Util::log('Transaction create response', print_r($response, true));

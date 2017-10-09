@@ -25,7 +25,7 @@ class BlikExample extends PaymentBlik
 
     /**
      * pass blikcode to created transaction
-     * channel for create method must be 64
+     * channel for create method must be 150
      */
 
     public function blikTransaction()

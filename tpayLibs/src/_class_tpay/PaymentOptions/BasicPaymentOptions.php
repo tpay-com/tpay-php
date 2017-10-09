@@ -9,6 +9,7 @@ namespace tpayLibs\src\_class_tpay\PaymentOptions;
 use tpayLibs\src\_class_tpay\Utilities\ObjectsHelper;
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasic;
+use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasicApi;
 
 /**
  * Class BasicPaymentOptions
@@ -48,13 +49,13 @@ class BasicPaymentOptions extends ObjectsHelper
      *
      * @param array $config transaction config
      *
+     * @param bool $isApi set to get config fields for transaction API
      * @return array
-     *
-     * @throws TException
      */
-    public function prepareConfig($config)
+    public function prepareConfig($config, $isApi = false)
     {
-        $ready = $this->validateConfig(new PaymentTypeBasic(), $config);
+        $ready = $isApi ? $this->validateConfig(new PaymentTypeBasicApi(), $config) :
+            $this->validateConfig(new PaymentTypeBasic(), $config);
 
         $ready['md5sum'] = md5($this->merchantId . $ready['kwota'] . $ready['crc'] . $this->merchantSecret);
         $ready['id'] = $this->merchantId;
