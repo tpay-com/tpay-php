@@ -5,16 +5,17 @@
  */
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
-<?php
-if ($data['show_regulations_checkbox'] === true) { ?>
+
+
 <div class="insidebg" id="main-payment">
     <div id="groups_v">
         <select name="bank_list" id="tpay-bank-list" onchange="changeBank()"></select>
         <p>
+            <?php if ($data['show_regulations_checkbox'] === true) { ?>
             <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
 
             <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                               target="_blank"><?php $lang->l('regulations') ?></a>
+                                           target="_blank"><?php $lang->l('regulations') ?></a>
         </p>
         <?php } ?>
     </div>
@@ -28,13 +29,13 @@ if ($data['show_regulations_checkbox'] === true) { ?>
         changeBank = function () {
             document.getElementById('tpay-channel-input').value = document.getElementById('tpay-bank-list').value;
         };
-    s.src = 'https://secure.tpay.com/channels-<?php echo $data['merchant_id'] ?>1.js';
+    s.src = 'https://secure.tpay.com/groups-<?php echo $data['merchant_id'] ?>1.js';
     s.onload = function () {
         var str = '', i;
-        for (i in tr_channels) {
-            var channel = tr_channels[i],
-                id = channel[0],
-                name = channel[1];
+        for (i in tr_groups) {
+            var group = tr_groups[i],
+                id = group[0],
+                name = group[1];
             str += '<option value="' + id + '" >' + name + '</option>';
         }
         document.getElementById('tpay-bank-list').innerHTML = str;
