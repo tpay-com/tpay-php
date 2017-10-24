@@ -188,6 +188,17 @@ class CardFieldsDictionary
             )
         ),
         /**
+         * Created client token
+         */
+        'cli_auth'                       => array(
+            FieldsConfigDictionary::REQUIRED   => false,
+            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+            FieldsConfigDictionary::VALIDATION => array(
+                FieldsConfigDictionary::STRING,
+                FieldsConfigDictionary::MAXLENGTH_40
+            )
+        ),
+        /**
          * Date of accounting/deregistering
          */
         'date'                            => array(

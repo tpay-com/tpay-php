@@ -54,8 +54,11 @@ class CardNotificationHandler extends PaymentCard
                 'card'                    => $response['card']
             );
             if (isset($response[CardDictionary::TEST_MODE])) {
-
                 $resp[CardDictionary::TEST_MODE] = $response[CardDictionary::TEST_MODE];
+            }
+            if (isset($response[CardDictionary::CLIAUTH])) {
+                $resp[CardDictionary::CLIAUTH] = $response[CardDictionary::CLIAUTH];
+                $this->setClientToken($resp[CardDictionary::CLIAUTH]);
             }
             return $resp;
         } elseif ($notificationType === CardDictionary::DEREGISTER) {
