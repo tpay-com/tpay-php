@@ -35,7 +35,7 @@ class BlikExample extends PaymentBlik
 
         try {
             $responseBlik = $this->blik($title, $code);
-            if ($responseBlik->result[0] === 1) {
+            if ((int)$responseBlik['result'] === 1) {
                 echo 'success!';
             } else {
                 echo 'invalid code or transaction not accepted on time';
