@@ -8,18 +8,18 @@
 namespace tpayLibs\src\_class_tpay\Validators\PaymentTypes;
 
 use tpayLibs\src\_class_tpay\Validators\PaymentTypesInterface;
-use tpayLibs\src\Dictionaries\Payments\StandardFieldsDictionary;
+use tpayLibs\src\Dictionaries\Payments\BasicFieldsDictionary;
 
 class PaymentTypeBasic implements PaymentTypesInterface
 {
 
     public function getRequestFields()
     {
-        return StandardFieldsDictionary::REQUEST_FIELDS;
+        return BasicFieldsDictionary::REQUEST_FIELDS;
     }
 
     public function getResponseFields()
     {
-        return StandardFieldsDictionary::RESPONSE_FIELDS;
+        return BasicFieldsDictionary::RESPONSE_FIELDS;
     }
 }

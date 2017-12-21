@@ -157,8 +157,8 @@ class WhiteLabelExample extends PaymentWhiteLabel
          * Register new order
          */
 
-        $clientName = 'Jan Kowalski';
-        $clientEmail = 'jan.kowalski@example.com';
+        $clientName = 'John Doe';
+        $clientEmail = 'customer@example.com';
         $clientPhone = '126354789';
         $amount = 999.99;
 

@@ -27,13 +27,12 @@ class DacExample extends PaymentDac
     {
 
         $config = array(
-            'kwota'    => 200.99,
-            'opis'     => 'Transaction description',
-            'crc'      => '100020003006',
-            'wyn_url'  => 'http://example.pl/examples/paymentBasic.php?transaction_confirmation',
-            'email'    => 'customer34@example.com',
-            'imie'     => 'John',
-            'nazwisko' => 'Wayn',
+            'amount' => 200.99,
+            'description' => 'Transaction description',
+            'crc' => '100020003006',
+            'result_url' => 'http://example.pl/examples/paymentBasic.php?transaction_confirmation',
+            'email' => 'customer@example.com',
+            'name' => 'John Doe',
         );
 
         /*
@@ -64,4 +63,5 @@ class DacExample extends PaymentDac
 
     }
 }
+
 (new DacExample())->processDacTransaction();

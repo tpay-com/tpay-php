@@ -27,15 +27,14 @@ class BankSelectionExample extends PaymentBasicForms
     {
 
         $config = array(
-            'kwota'     => 999.99,
-            'opis'      => 'Transaction description',
-            'crc'       => '100020003000',
-            'wyn_url'   => 'http://example.pl/examples/notificationBasic.php?transaction_confirmation',
-            'wyn_email' => 'shop@example.com',
-            'pow_url'   => 'http://example.pl/examples/success.html',
-            'email'     => 'customer@example.com',
-            'imie'      => 'Jan',
-            'nazwisko'  => 'Kowalski',
+            'amount' => 999.99,
+            'description' => 'Transaction description',
+            'crc' => '100020003000',
+            'result_url' => 'http://example.pl/examples/notificationBasic.php?transaction_confirmation',
+            'result_email' => 'shop@example.com',
+            'return_url' => 'http://example.pl/examples/success.html',
+            'email' => 'customer@example.com',
+            'name' => 'John Doe',
         );
 
         $form = $this->getBankSelectionForm($config, false, true);

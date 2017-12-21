@@ -29,9 +29,9 @@ class CardBasicForm extends PaymentCardForms
     {
         try {
             $config = array(
-                'name'  => 'Jan Kowalski',
-                'email' => 'jan.kowalski@example.com',
-                'desc'  => 'Transaction description',
+                'name' => 'John Doe',
+                'email' => 'customer@example.com',
+                'desc' => 'Transaction description',
             );
             $this->setAmount(99.15);
 

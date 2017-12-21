@@ -77,9 +77,7 @@ class PaymentBasicForms extends BasicPaymentOptions
      * @param array $config transaction config
      * @param bool $smallList type of bank selection list big icons or small form with select
      * @param bool $showRegulations show accept regulations input
-     *
      * @param string $actionURL sets non default action URL of form
-     * @param bool $hasConfig sets if validate config at this point
      * @return string
      */
     public function getBankSelectionForm($config = array(), $smallList = false, $showRegulations = true,
@@ -88,8 +86,8 @@ class PaymentBasicForms extends BasicPaymentOptions
         if (!empty($config)) {
             $config = $this->prepareConfig($config);
         }
-        $config['grupa'] = 0;
-        $config['akceptuje_regulamin'] = ($showRegulations) ? 0 : 1;
+        $config['group'] = 0;
+        $config['accept_tos'] = ($showRegulations) ? 0 : 1;
 
         $data = array(
             static::ACTION_URL => is_null($actionURL) ? $this->panelURL : (string)$actionURL,

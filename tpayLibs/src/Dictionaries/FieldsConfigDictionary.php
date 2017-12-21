@@ -21,10 +21,10 @@ class FieldsConfigDictionary
     const ARR = 'array';
     const MAXLENGTH_128 = 'maxlength_128';
     const OPTIONS = 'options';
-    const GROUP = 'grupa';
+    const GROUP = 'group';
     const MAXLENGTH_512 = 'maxlength_512';
     const EMAIL_LIST = 'EmailList';
-    const OPIS_DODATKOWY = 'opis_dodatkowy';
+    const CUSTOM_DESCRIPTION = 'custom_description';
     const MAXLENGTH_32 = 'maxlength_32';
     const MINLENGTH_32 = 'minlength_32';
     const EMAIL = 'email';
@@ -41,6 +41,6 @@ class FieldsConfigDictionary
     const CURRENCY = 'currency';
     const LANGUAGE = 'language';
     const CODE = 'code';
-    const NAME = 'nazwisko';
+    const NAME = 'name';
 
 }

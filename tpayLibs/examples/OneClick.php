@@ -88,20 +88,20 @@ class OneClick extends PaymentBlik
     {
         return array(
             'value' => 'TPAY_NONUNIQUE_ALIAS',
-            'type'  => 'UID',
+            'type' => 'UID',
         );
     }
 
     public function createTransaction()
     {
         $config = array(
-            'opis'                => 'transakcja testowa api',
-            'kwota'               => 1.10,
-            'crc'                 => 'test',
-            'grupa'               => 150,
-            'nazwisko'            => 'kowalski',
-            'email'               => 'test@tpay.com',
-            'akceptuje_regulamin' => 1,
+            'description' => 'Test API transaction',
+            'amount' => 1.10,
+            'crc' => 'test',
+            'group' => 150,
+            'name' => 'John Doe',
+            'email' => 'customer@example.com',
+            'accept_tos' => 1,
         );
         $params[static::TITLE] = $this->create($config)[static::TITLE];
         echo $params[static::TITLE] . ",";

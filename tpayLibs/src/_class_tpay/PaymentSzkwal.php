@@ -161,7 +161,6 @@ class PaymentSzkwal extends ObjectsHelper
      *
      * @param string $title transaction title
      * @param bool|float $amount transaction amount
-     * @param string $staticFilesURL static file URL
      * @param string $merchantData merchant data to display
      *
      * @return string

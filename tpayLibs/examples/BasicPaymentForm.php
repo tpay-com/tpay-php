@@ -25,15 +25,14 @@ class TpayBasicExample extends PaymentBasicForms
     {
 
         $config = array(
-            'kwota'     => 999.99,
-            'opis'      => 'Transaction description',
-            'crc'       => '100020003000',
-            'pow_url'   => 'https://www.tpay.com',
-            'wyn_url'   => 'http://example.pl/examples/paymentBasic.php?transaction_confirmation',
-            'wyn_email' => 'shop@example.com',
-            'email'     => 'customer@example.com',
-            'imie'      => 'Jan',
-            'nazwisko'  => 'Kowalski',
+            'amount' => 999.99,
+            'description' => 'Transaction description',
+            'crc' => '100020003000',
+            'return_url' => 'https://www.tpay.com',
+            'result_url' => 'http://example.pl/examples/paymentBasic.php?transaction_confirmation',
+            'result_email' => 'shop@example.com',
+            'email' => 'customer@example.com',
+            'name' => 'John Doe',
         );
 
         /*

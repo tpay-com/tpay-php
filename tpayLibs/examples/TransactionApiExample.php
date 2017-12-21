@@ -49,17 +49,16 @@ class TransactionApiExample extends TransactionApi
          */
 
         $config = array(
-            'kwota'               => 999.99,
-            'opis'                => 'Transaction description',
-            'crc'                 => '100020003000',
-            'wyn_url'             => 'http://example.pl/examples/TransactionApiExample.php?transaction_confirmation',
-            'wyn_email'           => 'shop@example.com',
-            'pow_url'             => 'http://example.pl/examples/TransactionApiExample.php',
-            'email'               => 'customer@example.com',
-            'imie'                => 'Jan123',
-            'nazwisko'            => 'Kowalski',
-            'grupa'               => isset($_POST['grupa']) ? (int)$_POST['grupa'] : 150,
-            'akceptuje_regulamin' => 1,
+            'amount' => 999.99,
+            'description' => 'Transaction description',
+            'crc' => '100020003000',
+            'result_url' => 'http://example.pl/examples/TransactionApiExample.php?transaction_confirmation',
+            'result_email' => 'shop@example.com',
+            'return_url' => 'http://example.pl/examples/TransactionApiExample.php',
+            'email' => 'customer@example.com',
+            'name' => 'John Doe',
+            'group' => isset($_POST['group']) ? (int)$_POST['group'] : 150,
+            'accept_tos' => 1,
         );
         try {
             $res = $this->create($config);

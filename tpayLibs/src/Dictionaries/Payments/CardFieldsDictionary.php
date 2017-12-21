@@ -21,15 +21,15 @@ class CardFieldsDictionary
         /**
          * Transaction amount
          */
-        FieldsConfigDictionary::AMOUNT   => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        FieldsConfigDictionary::AMOUNT => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT),
         ),
         /**
          * Client name
          */
-        'name'                           => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        'name' => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_64
@@ -38,8 +38,8 @@ class CardFieldsDictionary
         /**
          * Client email
          */
-        FieldsConfigDictionary::EMAIL    => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        FieldsConfigDictionary::EMAIL => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::EMAIL_LIST
@@ -48,8 +48,8 @@ class CardFieldsDictionary
         /**
          * Sale description
          */
-        'desc'                           => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        'desc' => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_128
@@ -59,7 +59,7 @@ class CardFieldsDictionary
          * Value from partner system
          */
         FieldsConfigDictionary::ORDER_ID => array(
-            FieldsConfigDictionary::REQUIRED   => false,
+            FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40
@@ -68,66 +68,76 @@ class CardFieldsDictionary
         /**
          * 3ds return url enabled
          */
-        'enable_pow_url'                 => array(
-            FieldsConfigDictionary::REQUIRED   => false,
+        'enable_pow_url' => array(
+            FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
         ),
         /**
          * 3ds success return url
          */
-        'pow_url'                        => array(
-            FieldsConfigDictionary::REQUIRED   => false,
+        'pow_url' => array(
+            FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
 
-        'card'                        => array(
-            FieldsConfigDictionary::REQUIRED   => false,
+        'card' => array(
+            FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
-        'method'                        => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        'method' => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
-        'sign'                        => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        'sign' => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
-        'api_password'                        => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        'api_password' => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
         /**
          * 3ds failure return url
          */
-        'pow_url_blad'                   => array(
-            FieldsConfigDictionary::REQUIRED   => false,
+        'pow_url_blad' => array(
+            FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
         /**
          * language
          */
-        'language'                       => array(
-            FieldsConfigDictionary::REQUIRED   => false,
+        'language' => array(
+            FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
         /**
          * Sale description
          */
-        'currency'                       => array(
-            FieldsConfigDictionary::REQUIRED   => true,
+        'currency' => array(
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::INT,
                 'maxlength_3'
             ),
         ),
         /**
-         * carry value of 1 if account has test mode, otherwise parameter not sent
+         * If this parameter is present, card token will not be generated
          */
-        'onetimer'                       => array(
-            FieldsConfigDictionary::REQUIRED   => false,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::BOOLEAN,
+        'onetimer' => array(
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::BOOLEAN,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::BOOLEAN),
         ),
+        /**
+         * Module/integration name. Used for statistics.
+         */
+        'module' => [
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::VALIDATION => array(
+                FieldsConfigDictionary::STRING,
+                FieldsConfigDictionary::MAXLENGTH_32
+            ),
+        ],
     );
 
     /**
@@ -138,18 +148,18 @@ class CardFieldsDictionary
         /**
          * Method type
          */
-        FieldsConfigDictionary::TYPE      => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        FieldsConfigDictionary::TYPE => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS    => array('sale', 'refund', 'deregister'),
+            FieldsConfigDictionary::OPTIONS => array('sale', 'refund', 'deregister'),
         ),
         /**
          * Merchant optional value
          */
-        FieldsConfigDictionary::ORDER_ID  => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        FieldsConfigDictionary::ORDER_ID => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40
@@ -158,18 +168,18 @@ class CardFieldsDictionary
         /**
          * Payment status
          */
-        'status'                          => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'status' => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS    => array('correct', 'declined', 'done'),
+            FieldsConfigDictionary::OPTIONS => array('correct', 'declined', 'done'),
         ),
         /**
          * Message checksum
          */
-        'sign'                            => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'sign' => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_128,
@@ -179,9 +189,9 @@ class CardFieldsDictionary
         /**
          * Created sale/refund id
          */
-        'sale_auth'                       => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'sale_auth' => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40
@@ -190,9 +200,9 @@ class CardFieldsDictionary
         /**
          * Created client token
          */
-        'cli_auth'                       => array(
-            FieldsConfigDictionary::REQUIRED   => false,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'cli_auth' => array(
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40
@@ -201,47 +211,47 @@ class CardFieldsDictionary
         /**
          * Date of accounting/deregistering
          */
-        'date'                            => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'date' => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING)
         ),
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
         FieldsConfigDictionary::TEST_MODE => array(
-            FieldsConfigDictionary::REQUIRED   => false,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::INT,
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::INT,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
-            FieldsConfigDictionary::OPTIONS    => array(0, 1),
+            FieldsConfigDictionary::OPTIONS => array(0, 1),
         ),
         /**
          * shortcut for client card number, eg ****5678
          */
-        'card'                            => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'card' => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING, 'maxlength_8', 'minlength_8')
         ),
         /**
          * shortcut for client card number, eg ****5678
          */
-        'amount'                          => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::FLOAT,
+        'amount' => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::FLOAT,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT)
         ),
         /**
          * payment currency
          */
-        FieldsConfigDictionary::CURRENCY  => array(
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::INT,
+        FieldsConfigDictionary::CURRENCY => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::INT,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT, 'maxlength_3', 'minlength_3')
         ),
-        'reason'                          => array(
-            FieldsConfigDictionary::REQUIRED   => false,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'reason' => array(
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING)
         ),
     );

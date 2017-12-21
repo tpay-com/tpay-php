@@ -29,10 +29,10 @@ class CardGate extends PaymentCardForms
 
         $exampleCardData = array(
             'number' => '4532823576358083',
-            'csc'    => '976',
-            'exp'    => '03 / 18',
-            'name'   => 'Jan Kowalsky',
-            'email'  => 'kowalsky@wp.pl',
+            'csc' => '976',
+            'exp' => '03 / 18',
+            'name' => 'John Doe',
+            'email' => 'customer@example.com',
         );
 
         echo '<!doctype html>
@@ -50,4 +50,5 @@ class CardGate extends PaymentCardForms
 
     }
 }
+
 (new CardGate())->getCardDirectHtml();

@@ -18,24 +18,24 @@ class BlikFieldsDictionary
      * @var array
      */
     const ALIAS_RESPONSE_FIELDS = [
-        'id'        => [
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::INT,
+        'id' => [
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::INT,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
         ],
-        'event'     => [
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'event' => [
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ],
         'msg_value' => [
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::ARR,
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::ARR,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::ARR),
         ],
-        'md5sum'    => [
-            FieldsConfigDictionary::REQUIRED   => true,
-            FieldsConfigDictionary::TYPE       => FieldsConfigDictionary::STRING,
+        'md5sum' => [
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ],
     ];
@@ -44,18 +44,18 @@ class BlikFieldsDictionary
      * List of supported request fields for blik payment
      */
     const REQUEST_FIELDS = [
-        'code'  => [
-            FieldsConfigDictionary::REQUIRED   => true,
+        'code' => [
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT, 'maxlength_6', 'minlength_6'),
-            FieldsConfigDictionary::FILTER     => FieldsConfigDictionary::NUMBERS
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::NUMBERS
         ],
         'title' => [
-            FieldsConfigDictionary::REQUIRED   => true,
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
-            FieldsConfigDictionary::FILTER     => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
         ],
         'alias' => [
-            FieldsConfigDictionary::REQUIRED   => true,
+            FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::ARR),
         ]
     ];

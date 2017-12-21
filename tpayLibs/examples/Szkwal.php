@@ -29,8 +29,8 @@ class SzkwalExample extends PaymentSzkwal
          * Register new client
          */
 
-        $clientName = 'Jan Kowalski';
-        $clientEmail = 'jan.kowalski@example.com';
+        $clientName = 'John Doe';
+        $clientEmail = 'customer@example.com';
         $clientPhone = '126354789';
         $crc = '100020003000';
         $clientBankAccount = '48079682082787844636363553';

@@ -35,7 +35,7 @@ class VariableTypesValidator
             FieldsConfigDictionary::EMAIL_LIST     => new EmailListType(),
             FieldsConfigDictionary::ARR            => new ArrayType(),
             FieldsConfigDictionary::BOOLEAN        => new BooleanType(),
-            FieldsConfigDictionary::OPIS_DODATKOWY => new DescriptionType(),
+            FieldsConfigDictionary::CUSTOM_DESCRIPTION => new DescriptionType(),
             'CountryCode'                          => new CountryCodeType(),
         ];
         if (array_key_exists($type, $a)) {

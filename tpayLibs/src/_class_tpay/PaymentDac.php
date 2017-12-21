@@ -37,7 +37,7 @@ class PaymentDac extends TransactionApi
      */
     public function registerTransaction($config, $merchantData = '')
     {
-        $config['grupa'] = $this->channelDAC;
+        $config['group'] = $this->channelDAC;
         $transactionData = $this->create($config);
         $transactionData['crc'] = $config['crc'];
 
