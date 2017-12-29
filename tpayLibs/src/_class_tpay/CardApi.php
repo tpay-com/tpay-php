@@ -49,6 +49,9 @@ class CardApi extends CardOptions
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('', $params) . $this->cardVerificationCode);
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         $params = array_merge($params, $this->checkReturnUrls());
+        if (!is_null($this->moduleName)) {
+            $params['module'] = $this->moduleName;
+        }
         $this->validateConfig(new PaymentTypeCard(), $params);
         Util::log('Card request', print_r($params, true));
 

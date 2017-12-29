@@ -131,13 +131,7 @@ class CardFieldsDictionary
         /**
          * Module/integration name. Used for statistics.
          */
-        'module' => [
-            FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
-                FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_32
-            ),
-        ],
+        'module' => BasicFieldsDictionary::REQUEST_FIELDS['module'],
     );
 
     /**

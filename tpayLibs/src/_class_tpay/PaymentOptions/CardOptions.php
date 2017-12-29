@@ -4,6 +4,7 @@ namespace tpayLibs\src\_class_tpay\PaymentOptions;
 
 use tpayLibs\src\_class_tpay\Utilities\ObjectsHelper;
 use tpayLibs\src\_class_tpay\Utilities\TException;
+use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
 
 class CardOptions extends ObjectsHelper
 {
@@ -19,6 +20,7 @@ class CardOptions extends ObjectsHelper
     protected $method = 'register_sale';
     protected $clientAuthCode = '';
     protected $amount;
+    protected $moduleName = null;
 
     public function __construct()
     {
@@ -91,6 +93,13 @@ class CardOptions extends ObjectsHelper
     public function setAmount($amount)
     {
         $this->amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
+        return $this;
+    }
+
+    public function setModuleName($name)
+    {
+        $this->validateMaxLength($name, FieldsConfigDictionary::MAXLENGTH_32, 'module');
+        $this->moduleName = $name;
         return $this;
     }
 }
