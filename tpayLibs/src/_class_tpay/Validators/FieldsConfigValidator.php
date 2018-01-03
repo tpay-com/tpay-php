@@ -42,8 +42,10 @@ trait FieldsConfigValidator
         }
         $this->dirPath = $_SERVER["DOCUMENT_ROOT"] . '/' . str_replace("\\", '/', __NAMESPACE__);
         $ready = array();
+        $this->setPaymentFields($paymentType);
+        $config = $this->checkDeprecatedFields($paymentType, $config);
         foreach ($config as $key => $value) {
-            $ready[$key] = $this->hasValidFields($paymentType, $key, $value);
+            $ready[$key] = $this->isValidField($key, $value);
         }
         $this->isSetRequiredPaymentFields($ready);
 
@@ -51,27 +53,54 @@ trait FieldsConfigValidator
     }
 
     /**
-     * Check one field form
-     *
+     * Check and rename deprecated parameters
      * @param object $paymentType payment type
-     * @param string $name field name
-     * @param mixed $value field value
-     * @param bool $notResp is it not response value
-     *
-     * @return bool
+     * @param array $config
+     * @return array $config
      */
-    private function hasValidFields($paymentType, $name, $value, $notResp = true)
+
+    private function checkDeprecatedFields($paymentType, $config)
+    {
+        if (method_exists($paymentType, 'getOldRequestFields')) {
+            $deprecatedList = $paymentType->getOldRequestFields();
+            foreach ($config as $key => $value) {
+                if (array_key_exists($key, $deprecatedList)) {
+                    trigger_error('Use of deprecated parameter: ' . $key, E_USER_DEPRECATED);
+                    unset($config[$key]);
+                    $config[$deprecatedList[$key]] = $value;
+                }
+            }
+        }
+        return $config;
+    }
+
+    /**
+     * Set payment fields dictionary for validation
+     * @param object $paymentType payment type
+     * @param bool $notResp is it not response value
+     */
+
+    public function setPaymentFields($paymentType, $notResp = true)
     {
         $this->requestFields = $notResp ? $paymentType->getRequestFields() : $paymentType->getResponseFields();
         $this->requestFields['json'][FieldsConfigDictionary::REQUIRED] = false;
         $this->requestFields['json'][FieldsConfigDictionary::VALIDATION] = array(FieldsConfigDictionary::BOOLEAN);
+    }
+
+    /**
+     * Check one field form
+     * @param string $name field name
+     * @param mixed $value field value
+     * @return bool
+     */
+
+    private function isValidField($name, $value)
+    {
         $this->checkFieldName($name, $this->requestFields);
         $fieldConfig = $this->requestFields[$name];
-
-        if ($fieldConfig[FieldsConfigDictionary::REQUIRED] === false && ($value === '' || $value === false)) {
+        if ($fieldConfig[FieldsConfigDictionary::REQUIRED] === false && (is_null($value) || $value === false)) {
             return true;
         }
-
         $this->validateFields($name, $value, $fieldConfig);
         return (isset($fieldConfig[FieldsConfigDictionary::FILTER])) ? $this->filterValues($value, $fieldConfig, $name)
             : $value;

@@ -22,4 +22,9 @@ class PaymentTypeBasic implements PaymentTypesInterface
     {
         return BasicFieldsDictionary::RESPONSE_FIELDS;
     }
+
+    public function getOldRequestFields()
+    {
+        return BasicFieldsDictionary::OLD_REQUEST_FIELDS;
+    }
 }

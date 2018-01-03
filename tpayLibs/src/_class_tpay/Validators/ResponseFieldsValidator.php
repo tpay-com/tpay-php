@@ -61,9 +61,9 @@ trait ResponseFieldsValidator
         if (count($missed) > 0) {
             throw new TException(sprintf('Missing fields in tpay response: %s', implode(',', $missed)));
         }
-
+        $this->setPaymentFields($paymentType, false);
         foreach ($ready as $fieldName => $fieldVal) {
-            $this->hasValidFields($paymentType, $fieldName, $fieldVal, false);
+            $this->isValidField($fieldName, $fieldVal);
         }
 
         return $ready;

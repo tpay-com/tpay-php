@@ -70,7 +70,7 @@ class BasicFieldsDictionary
          * If this parameter is set, the payer will always be redirected to step 2 in tpay.com panel
          * @deprecated
          */
-        'wybor' => [
+        'choice' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
             FieldsConfigDictionary::OPTIONS => array(0, 1),
@@ -266,6 +266,30 @@ class BasicFieldsDictionary
             ),
         ],
     ];
+
+    /**
+     * List of deprecated parameters
+     */
+    const OLD_REQUEST_FIELDS = array(
+        'kwota' => 'amount',
+        'opis' => 'description',
+        'grupa' => 'group',
+        'wybor' => 'choice',
+        'wyn_url' => 'result_url',
+        'wyn_email' => 'result_email',
+        'opis_sprzed' => 'merchant_description',
+        'opis_dodatkowy' => 'custom_description',
+        'pow_url' => 'return_url',
+        'pow_url_blad' => 'return_error_url',
+        'jezyk' => 'language',
+        'nazwisko' => 'name',
+        'adres' => 'address',
+        'miasto' => 'city',
+        'kod' => 'zip',
+        'kraj' => 'country',
+        'telefon' => 'phone',
+        'akceptuje_regulamin' => 'accept_tos',
+    );
 
     const RESPONSE_FIELDS = array(
         /**
