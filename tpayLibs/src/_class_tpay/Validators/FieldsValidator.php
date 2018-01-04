@@ -134,4 +134,18 @@ trait FieldsValidator
         }
     }
 
+    /**
+     * Check if giver parameter is number
+     * @param $number
+     * @return bool
+     * @throws TException
+     */
+    protected function validateNumeric($number)
+    {
+        if (is_numeric($number)) {
+            return true;
+        }
+        throw new TException(sprintf('Value "%s" is not numeric.', $number));
+    }
+
 }

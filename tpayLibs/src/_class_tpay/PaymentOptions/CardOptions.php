@@ -92,7 +92,8 @@ class CardOptions extends ObjectsHelper
 
     public function setAmount($amount)
     {
-        $this->amount = number_format(str_replace(array(',', ' '), array('.', ''), $amount), 2, '.', '');
+        $this->validateNumeric($amount);
+        $this->amount = $amount;
         return $this;
     }
 
