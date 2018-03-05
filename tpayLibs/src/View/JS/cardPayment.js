@@ -8,7 +8,7 @@ function CardPayment(url, pubkey) {
 
     function SubmitPayment() {
 
-        $("#continue_btn").fadeOut();
+        $("#card_continue_btn").fadeOut();
         $("#loading_scr").fadeIn();
 
         var cd = $('#card_number').val() + '|' + $('#expiry_date').val() + '|' + $('#cvc').val() + '|' + document.location.origin;
@@ -128,7 +128,7 @@ function CardPayment(url, pubkey) {
             $(this).removeClass('wrong');
     });
 
-    $('#continue_btn').click(function () {
+    $('#card_continue_btn').click(function () {
         $('input').each(function () {
             $(this).trigger('keyup');
         });
@@ -139,4 +139,3 @@ function CardPayment(url, pubkey) {
     });
 
 }
-

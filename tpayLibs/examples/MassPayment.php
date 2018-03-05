@@ -101,4 +101,5 @@ class MassPaymentExample extends MassPayments
     }
 
 }
+
 (new MassPaymentExample())->listMassPayment();

@@ -87,14 +87,6 @@ class CardDeregisterFieldsDictionary
         /**
          * Message checksum
          */
-        'sign' => array(
-            FieldsConfigDictionary::REQUIRED => true,
-            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(
-                FieldsConfigDictionary::STRING,
-                'maxlength_128',
-                FieldsConfigDictionary::MINLENGTH_40
-            ),
-        ),
+        self::REQUEST_FIELDS['sign'],
     );
 }

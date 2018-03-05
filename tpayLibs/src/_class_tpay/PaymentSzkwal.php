@@ -118,7 +118,6 @@ class PaymentSzkwal extends ObjectsHelper
      * Generate new unique title
      *
      * @return string
-     * @todo
      */
     public static function generateTitle()
     {

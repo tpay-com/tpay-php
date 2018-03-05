@@ -15,14 +15,14 @@
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
-    background-color:white;
+    background-color: white;
     border: 1px solid #b2b2b2;
     border-radius: 0.2em;
     display: inline-block;
     width: 130px;
-    height:63px;
-    margin: 10px 13px 0px 0;
-    text-align:center;
+    height: 63px;
+    margin: 10px 13px 0 0;
+    text-align: center;
 }
 
 .bank-block label {
@@ -33,6 +33,7 @@
     height: 100%;
     cursor: pointer;
 }
+
 .insidebg {
 
     background: #fbfbfb;
@@ -40,19 +41,16 @@
     padding: 20px 20px 20px 20px;
 }
 
-#button_tpay {
-
-}
-
 .button_tpay {
     background: #54DB39;
     background: -moz-linear-gradient(top, #42bf2c 0%, #217719 100%);
     background: -webkit-linear-gradient(top, #42bf2c 0%, #217719 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #42bf2c), color-stop(100%, #217719));
     background: -o-linear-gradient(top, #42bf2c 0%, #217719 100%);
     background: -ms-linear-gradient(top, #42bf2c 0%, #217719 100%);
     background: linear-gradient(to bottom, #42bf2c 0%, #217719 100%);
     color: #fff;
-    text-shadow: 0px 1px 2px #8bd278;
+    text-shadow: 0 1px 2px #8bd278;
     font-size: 1em;
     position: relative;
 }
@@ -79,32 +77,36 @@
     box-shadow: 0 0 10px #ccc;
     background: #4e7f9c;
 }
+
 #input_container {
-    position:relative;
-    margin:0;
-    height:440px;
+    position: relative;
+    margin: 0;
+    height: 440px;
 
 }
+
 #blikcode {
     position: absolute;
     background-color: transparent;
     border-color: transparent;
-    top:180px;
-    height:60px;
-    margin-top:50px;
+    top: 180px;
+    height: 60px;
+    margin-top: 50px;
     left: 200px;
-    width:190px;
-    font-family:sans-serif;
+    width: 190px;
+    font-family: sans-serif;
     font-size: 18px;
     letter-spacing: 16px;
 }
+
 #blik_img {
 
-    top:20px;
-    bottom:8px;
-    left:10px;
+    top: 20px;
+    bottom: 8px;
+    left: 10px;
 
 }
+
 .separator span {
     color: #a9a9a9;
     display: inline-block;
@@ -209,7 +211,7 @@ textarea:-moz-placeholder {
 }
 
 #card_icons #visa {
-    background-position: 0px center;
+    background-position: 0 center;
 }
 
 #card_icons #visaele {
@@ -244,10 +246,11 @@ textarea:-moz-placeholder {
     background: -o-linear-gradient(top, #3787cc 0%, #3875c9 100%);
     background: -ms-linear-gradient(top, #3787cc 0%, #3875c9 100%);
     background: linear-gradient(to bottom, #3787cc 0%, #3875c9 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3787cc), color-stop(100%, #3875c9));
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.6em;
     padding: 1em;
-    box-shadow: 0px 5px 10px #a2a2a2;
+    box-shadow: 0 5px 10px #a2a2a2;
     margin-bottom: 2em;
 }
 
@@ -255,8 +258,7 @@ textarea:-moz-placeholder {
     color: #f6f6f6;
     font-size: 1.2em;
     margin-top: 8px;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.21);
-    display: block;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.21);
     font-weight: 400;
 }
 
@@ -266,7 +268,7 @@ textarea:-moz-placeholder {
     padding: 0.5em 0 0.5em 0;
     margin: 0;
     color: #f6f6f6;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.21);
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.21);
 }
 
 #card_payment_form #expiry_date_wrapper {
@@ -320,17 +322,15 @@ textarea:-moz-placeholder {
     display: none;
 }
 
-#card_payment_form .amPmCheckbox input[type="checkbox"] + label {
-    background: url(../../View/Images/checkbox.png) no-repeat scroll left top transparent;
-    height: 21px;
-    width: 22px;
-    padding-left: 30px;
-}
-
+#card_payment_form .amPmCheckbox input[type="checkbox"] + label,
 #card_payment_form .amPmCheckbox input[type="checkbox"]:checked + label {
     background: url(../../View/Images/checkbox.png) no-repeat scroll left bottom transparent;
     height: 21px;
     width: 22px;
+}
+
+#card_payment_form .amPmCheckbox input[type="checkbox"] + label {
+    padding-left: 30px;
 }
 
 #card_payment_form input.wrong, form select.wrong {
@@ -353,8 +353,9 @@ textarea:-moz-placeholder {
     background: -o-linear-gradient(top, #42bf2c 0%, #217719 100%);
     background: -ms-linear-gradient(top, #42bf2c 0%, #217719 100%);
     background: linear-gradient(to bottom, #42bf2c 0%, #217719 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #42bf2c), color-stop(100%, #217719));
     color: #1b4c11;
-    text-shadow: 0px 1px 2px #8bd278;
+    text-shadow: 0 1px 2px #8bd278;
 }
 
 #continue_btn:hover {
@@ -364,17 +365,45 @@ textarea:-moz-placeholder {
     background: -o-linear-gradient(top, #5ad145 0%, #217719 100%);
     background: -ms-linear-gradient(top, #5ad145 0%, #217719 100%);
     background: linear-gradient(to bottom, #5ad145 0%, #217719 100%);
-    text-shadow: 0px 1px 2px #b2e1a5;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5ad145), color-stop(100%, #217719));
+    text-shadow: 0 1px 2px #b2e1a5;
 }
 
-#continue_btn active {
+#continue_btn:active {
     background: #3ab42e;
     background: -moz-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
     background: -webkit-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
     background: -o-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
     background: -ms-linear-gradient(top, #3ab42e 0%, #4fc13b 100%);
     background: linear-gradient(to bottom, #3ab42e 0%, #4fc13b 100%);
-    text-shadow: 0px -1px 2px #b2e1a5;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3ab42e), color-stop(100%, #4fc13b));
+    text-shadow: 0 -1px 2px #b2e1a5;
+}
+
+#card_continue_btn {
+    background-color: #3787cc;
+    box-shadow: 0 5px 0 0 #3875c9;
+    border-radius: 5px;
+    padding: 15px 25px;
+    font-size: 22px;
+    text-decoration: none;
+    margin: 20px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+}
+
+#card_continue_btn:hover {
+    background-color: #3787cc;
+}
+
+#card_continue_btn:active {
+    -webkit-transform: translate(0px, 5px);
+    transform: translate(0px, 5px);
+    -moz-transform: translate(0px, 5px);
+    -ms-transform: translate(0px, 5px);
+    -o-transform: translate(0px, 5px);
+    box-shadow: 0 1px 0 0;
 }
 
 @media screen and (max-width: 760px) and (max-width: 480px) {

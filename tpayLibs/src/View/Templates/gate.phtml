@@ -8,7 +8,7 @@ const STATIC_FILES_URL = 'static_files_url';
 const CARD_SAVE_ALLOWED = 'card_save_allowed';
 ?>
 <link rel="stylesheet" type="text/css" href="<?php
-echo $data[STATIC_FILES_URL] ?>View/Styles/gate.css"/>
+echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
 <form method="post" id="card_payment_form" name="card_payment_form">
     <input type="hidden" name="carddata" id="carddata" value=""/>
 
@@ -62,7 +62,7 @@ echo $data[STATIC_FILES_URL] ?>View/Styles/gate.css"/>
              style="vertical-align: middle;"/>&nbsp;&nbsp;<?php $lang->l('processing') ?>
     </div>
 </form>
-<button id="continue_btn">&nbsp;<?php $lang->l('card_payment') ?>&nbsp;</button>
+<button id="card_continue_btn">&nbsp;<?php $lang->l('card_payment') ?>&nbsp;</button>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.formance.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/cardPayment.js"></script>
