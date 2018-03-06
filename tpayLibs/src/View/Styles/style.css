@@ -322,15 +322,23 @@ textarea:-moz-placeholder {
     display: none;
 }
 
-#card_payment_form .amPmCheckbox input[type="checkbox"] + label,
+#card_payment_form .amPmCheckbox input[type="checkbox"] + label {
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAqCAYAAAC3DKvtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAtxJREFUSEvtlktrGlEUx1OblG5KklJKddOuSx9CVv0AXRShDxcNxHRXoRRKQxepEDfxBUEtIrGtkk0XErrS7KJ+BDclfoNAEqPmRWKMj3B6/oMzmZneMWNsdrnwQx3v/Xnu6xyHwuHwQFgsFiGizg+YiT54yLDLWHyf+Z5IJGhpack0yWSSIpEI8di3QvHCwsKP1dVV2tzcpGq1Sjs7O7S7u2sIvke/ra0tKhaLFI1GIb+pF9+Nx+OSFIOOjo7o+PiYGo2GIfge/fb29qhcLlM6nSYO7o1GHAwGn6ZSKSmCw8NDajab1Ol0zqXValG9Xpeiz2QyFAqFPmnEPp/PDjE6IBIMMtNOT0/p5OREijqbzZLf7/8sFGMZMM1+xfv7+1fiK3G3mRZf2jke9Ob9I56dnbVdNFdgGZArlpeXaX5+/p1GzG8sHPWvXC43UHZzOByjGjFwu92P5ubmfl80H3s8nvcIEFKgiPnDMDPqdDqfuVyuV1NTU6/PA/0mJyefj42N3eGxI7IUDPHmXgrCh/8DJXQZXpZh5gkjKpxG2B5//EOMWMwdPmAjcKZFG2VEVyqjFbN0PBaL0dramnQua7Wa8JipwZHTSWXOxFwIv+Babm9vS4ceN0p0MdQIhAqKmAthJJ/PS5HgVrXbbeE1lhHJ1ChirtTRQqEgRYvEggRj1EQiNdzOliIQCHyD+ODgQEpCEKs6Kk0tEMG3d5xfjcX6AWak2PyeYv0AM+AU9RTrB5gBm60W8+QGF+OEmBL3sxRofYlFm6dHbqbF6nMsEgJ1gxi3tKdYdPP0UjxTg9mhACMVCMVcYT0rKyvCXCFL1XkCIABIkYzW19elEjUzMzOiEU9PT9vwi6VSqa/sVqlUaGNjQ/pfwQX5p+xTxMwwT+PrRfLx4uIieb3etN1uvy0SgxtWq/UeF8oX+sJpBM/0JZf9CR57i7kuu/RicI1BxUbVNQP6QohxXYdl6C8fJkvN184E5wAAAABJRU5ErkJggg==') no-repeat scroll left top transparent;
+    height: 21px;
+    width: 22px;
+    padding-left: 30px;
+}
+
 #card_payment_form .amPmCheckbox input[type="checkbox"]:checked + label {
-    background: url(../../View/Images/checkbox.png) no-repeat scroll left bottom transparent;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAqCAYAAAC3DKvtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAtxJREFUSEvtlktrGlEUx1OblG5KklJKddOuSx9CVv0AXRShDxcNxHRXoRRKQxepEDfxBUEtIrGtkk0XErrS7KJ+BDclfoNAEqPmRWKMj3B6/oMzmZneMWNsdrnwQx3v/Xnu6xyHwuHwQFgsFiGizg+YiT54yLDLWHyf+Z5IJGhpack0yWSSIpEI8di3QvHCwsKP1dVV2tzcpGq1Sjs7O7S7u2sIvke/ra0tKhaLFI1GIb+pF9+Nx+OSFIOOjo7o+PiYGo2GIfge/fb29qhcLlM6nSYO7o1GHAwGn6ZSKSmCw8NDajab1Ol0zqXValG9Xpeiz2QyFAqFPmnEPp/PDjE6IBIMMtNOT0/p5OREijqbzZLf7/8sFGMZMM1+xfv7+1fiK3G3mRZf2jke9Ob9I56dnbVdNFdgGZArlpeXaX5+/p1GzG8sHPWvXC43UHZzOByjGjFwu92P5ubmfl80H3s8nvcIEFKgiPnDMDPqdDqfuVyuV1NTU6/PA/0mJyefj42N3eGxI7IUDPHmXgrCh/8DJXQZXpZh5gkjKpxG2B5//EOMWMwdPmAjcKZFG2VEVyqjFbN0PBaL0dramnQua7Wa8JipwZHTSWXOxFwIv+Babm9vS4ceN0p0MdQIhAqKmAthJJ/PS5HgVrXbbeE1lhHJ1ChirtTRQqEgRYvEggRj1EQiNdzOliIQCHyD+ODgQEpCEKs6Kk0tEMG3d5xfjcX6AWak2PyeYv0AM+AU9RTrB5gBm60W8+QGF+OEmBL3sxRofYlFm6dHbqbF6nMsEgJ1gxi3tKdYdPP0UjxTg9mhACMVCMVcYT0rKyvCXCFL1XkCIABIkYzW19elEjUzMzOiEU9PT9vwi6VSqa/sVqlUaGNjQ/pfwQX5p+xTxMwwT+PrRfLx4uIieb3etN1uvy0SgxtWq/UeF8oX+sJpBM/0JZf9CR57i7kuu/RicI1BxUbVNQP6QohxXYdl6C8fJkvN184E5wAAAABJRU5ErkJggg==') no-repeat scroll left bottom transparent;
     height: 21px;
     width: 22px;
 }
 
-#card_payment_form .amPmCheckbox input[type="checkbox"] + label {
-    padding-left: 30px;
+#card_payment_form input.wrong, form select.wrong {
+    border: 2px solid #ff9696;
+    box-shadow: 0 1px 3px #dcdcdc;
+    background: #ffeeee;
 }
 
 #card_payment_form input.wrong, form select.wrong {
