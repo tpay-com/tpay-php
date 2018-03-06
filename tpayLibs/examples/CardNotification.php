@@ -25,15 +25,52 @@ class CardNotification extends CardNotificationHandler
         parent::__construct();
     }
 
-    public function getTpayNotification()
+    public function init()
     {
-        if (filter_input(INPUT_GET, 'card_notification')) {
-            $notification = $this->handleNotification();
-            //response contains array of data https://docs.tpay.com/#!/Tpay/tpay_elavon_notifications
-            var_dump($notification);
+        //response contains array of data https://docs.tpay.com/#!/Tpay/tpay_elavon_notifications
+        $notification = $this->getTpayNotification();
+        if (isset($notification['status']) && $notification['status'] === 'correct') {
+            $this->setOrderAsConfirmed($notification);
         }
+    }
+
+    private function getTpayNotification()
+    {
+        //If you want to disable server IP validation, run this command (not recommended):
+        $this->disableValidationServerIP();
+        //If you use proxy communication and want to check for Tpay server IP at HTTP_X_FORWARDED_FOR, fun this command:
+        $this->enableForwardedIPValidation();
+        //Check Tpay server IP and validate parameters
+        $notification =  $this->handleNotification();
+        //Get order details from your DB
+        $shopOrderData = $this->getOrderDetailsFromDatabase($notification['order_id']);
+        //Validate notification sign correctness
+        $this
+            ->setAmount($shopOrderData['amount'])
+            ->setCurrency($shopOrderData['currency'])
+            ->setOrderID($notification['order_id']);
+        $this->validateCardSign($notification['sign'], $notification['sale_auth'], $notification['card'],
+            $notification['date'], $notification['status']);
+
+        return $notification;
+    }
+
+    private function setOrderAsConfirmed($params)
+    {
+        //update your order status
+        //save transaction ID (sale_auth) and if exists, client token (cli_auth) for later use
+    }
+
+    private function getOrderDetailsFromDatabase($orderId)
+    {
+        //Code getting order amount and currency from your DB
+        //This is an example of returned values
+        return [
+            'amount' => 123.00,
+            'currency' => 985,
+        ];
     }
 
 }
 
-(new CardNotification())->getTpayNotification();
+(new CardNotification())->init();
