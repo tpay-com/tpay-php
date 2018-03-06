@@ -13,7 +13,7 @@ include_once 'loader.php';
 
 class RecurrentPayment extends PaymentCard
 {
-    private $saleDescription;
+    private $transactionId = null;
 
     public function __construct()
     {
@@ -26,35 +26,49 @@ class RecurrentPayment extends PaymentCard
         parent::__construct();
     }
 
-    public function payBySavedCreditCard(
-        $clientToken,
+    public function init(
         $saleDescription,
+        $clientToken,
         $amount,
-        $currency,
         $orderId = null,
+        $currency = 985,
         $language = 'pl'
     ) {
+        //Prepare transaction data
         $this
             ->setAmount($amount)
             ->setCurrency($currency)
-            ->setClientToken($clientToken)
             ->setOrderID($orderId)
-            ->setLanguage($language);
-        $this->saleDescription = $saleDescription;
+            ->setLanguage($language)
+            ->setClientToken($clientToken);
+        //Prepare unpaid transaction
+        $transaction = $this->presaleMethod($saleDescription);
+        $this->transactionId = $transaction['sale_auth'];
 
-        $transaction = $this->prepareTransaction();
-        $transactionId = $transaction['sale_auth'];
-        $saleResult = $this->sale($transactionId, $this->clientAuthCode);
-        //In test mode this method has 50% probability of success
-        var_dump($saleResult);
+        return $this;
     }
 
-    private function prepareTransaction()
+    public function payBySavedCreditCard()
     {
-        return $this->presale($this->saleDescription, $this->clientAuthCode);
+        //Try to execute payment
+        //In test mode this method has 50% probability of success
+        $result = $this->saleMethod($this->transactionId);
+        if (isset($result['status']) && $result['status'] === 'correct') {
+            return $this->setOrderAsConfirmed();
+        } else {
+            //Log rejection code
+            return $result['reason'];
+        }
+    }
+
+    private function setOrderAsConfirmed()
+    {
+        //Code updating order ($this->orderID) status as paid at your DB
+        //Save transaction ID for later use
     }
 
 }
 
-(new RecurrentPayment())->payBySavedCreditCard('t5a96d292cd0a5c63a14c30adeae55cb200df087', 'payment for order xyz',
-    12.50, 985, 'order_123456', 'pl');
+(new RecurrentPayment())
+    ->init('payment for order xyz', 't5a96d292cd0a5c63a14c30adeae55cb200df087', 12.50, 'order_123456', 985, 'pl')
+    ->payBySavedCreditCard();
