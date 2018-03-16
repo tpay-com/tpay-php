@@ -18,11 +18,10 @@ class BasicReports extends TransactionApi
      * @param string $fromDate start date in format YYYY-MM-DD
      * @param string|bool $toDate end date in format YYYY-MM-DD
      *
+     * @param bool $raw decide if return raw CSV format or array formatted report
      * @return array
-     *
-     * @throws TException
      */
-    public function report($fromDate, $toDate = false)
+    public function report($fromDate, $toDate = false, $raw = true)
     {
         $url = $this->apiURL . $this->trApiKey . '/transaction/report';
         $postData = array(
@@ -37,6 +36,35 @@ class BasicReports extends TransactionApi
 
         $this->checkError($response);
         $response[static::REPORT] = base64_decode($response[static::REPORT]);
+        if ($raw === false) {
+            $response = $this->associateReportArray($response);
+        }
+
         return $response;
     }
+
+    private function associateReportArray($response)
+    {
+        $report = explode(';', $response['report']);
+        if (count($report) < 24) {
+            return null;
+        }
+        $reportDefinition = array_slice($report, 1, 22);
+        $j = 0;
+        $k = 0;
+        $reportArray = [];
+        for ($i = 23; $i < count($report); $i++) {
+            $reportArray[$j][$reportDefinition[$k]] = $report[$i];
+            if ($i % 22 === 0) {
+                $j++;
+            }
+            ++$k;
+            if ($k === count($reportDefinition)) {
+                $k = 0;
+            }
+        }
+
+        return $reportArray;
+    }
+
 }
