@@ -45,7 +45,7 @@ class BasicReports extends TransactionApi
 
     private function associateReportArray($response)
     {
-        $report = explode(';', $response['report']);
+        $report = explode(';', preg_replace('/[\n]+[0-9]+/', '', $response['report']));
         if (count($report) < 24) {
             return null;
         }
@@ -54,7 +54,7 @@ class BasicReports extends TransactionApi
         $k = 0;
         $reportArray = [];
         for ($i = 23; $i < count($report); $i++) {
-            $reportArray[$j][$reportDefinition[$k]] = $report[$i];
+            $reportArray[$j][$reportDefinition[$k]] = trim(preg_replace('/\s\s+/', ' ', str_replace('"', '', $report[$i])));
             if ($i % 22 === 0) {
                 $j++;
             }
