@@ -23,15 +23,19 @@ class TransactionReportsApi extends BasicReports
         parent::__construct();
     }
 
-    public function getReportTransaction()
+    /**
+     * @param string $dateStart 'report date start range'
+     * @param bool|string $dateEnd 'report date end range - false if to current date'
+     * @param bool $csv 'decide if return report in csv format or table associated'
+     */
+    public function getReportTransaction($dateStart, $dateEnd = false, $csv = false)
     {
         /**
          * Get report
          */
-        $from = '2017-01-01';
         try {
             //Change $raw report method parameter to get RAW CSV formatted report
-            $result = $this->report($from, false, false);
+            $result = $this->report($dateStart, $dateEnd, $csv);
             if (is_null($result)) {
                 echo 'Report is empty for this time range.';
             } else {
@@ -45,4 +49,4 @@ class TransactionReportsApi extends BasicReports
 
 }
 
-(new TransactionReportsApi())->getReportTransaction();
+(new TransactionReportsApi())->getReportTransaction('2017-01-01');
