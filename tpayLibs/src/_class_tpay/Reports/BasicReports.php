@@ -43,6 +43,21 @@ class BasicReports extends TransactionApi
         return $response;
     }
 
+    public function transactionRefundStatus()
+    {
+        $url = $this->apiURL . $this->trApiKey . '/chargeback/status';
+        if (!is_string($this->transactionID)) {
+            throw new TException('Assign transaction title first!');
+        }
+        $postData = [
+            'title' => $this->transactionID,
+        ];
+        $response = $this->requests($url, $postData);
+        $this->checkError($response);
+
+        return $response;
+    }
+
     private function associateReportArray($response)
     {
         $report = explode(';', preg_replace('/[\n]+[0-9]+/', '', $response['report']));

@@ -21,7 +21,7 @@ class TransactionApi extends PaymentBasicForms
 {
     const RESULT = 'result';
     const TITLE = 'title';
-    const ERROR_CODE = 'error_code';
+    const ERROR_CODE = 'err_code';
     const REPORT = 'report';
     const PACK_ID = 'pack_id';
     const ERR = 'err';
