@@ -46,13 +46,12 @@ class CardRefunds extends CardApi
 
         $this->setMethod(CardDictionary::REFUND);
         $params[CardDictionary::METHOD] = CardDictionary::REFUND;
-        $params[CardDictionary::DESC] = $refundDesc;
-
         if (!empty($this->clientAuthCode)) {
             $params[CardDictionary::CLIAUTH] = $this->clientAuthCode;
         } else {
             $params[CardDictionary::SALE_AUTH] = $saleAuthCode;
         }
+        $params[CardDictionary::DESC] = $refundDesc;
         if (!empty($this->amount)) {
             $params[CardDictionary::AMOUNT] = $this->amount;
         }
