@@ -45,7 +45,7 @@ class Polish
         'processing'         => 'Przetwarzanie danych, proszę czekać...',
         'card_payment'       => 'Zapłać',
         'debit'              => 'Proszę obciążyć moje konto',
-        'not_supported_card' => 'Przepraszamy, Twój typ karty nie jest obecnie obsługiwany. Prosimy opłacić zamówienie inną metodą.',
+        'not_supported_card' => 'Przepraszamy, wprowadzony numer karty jest niepoprawny lub ten typ karty nie jest obecnie obsługiwany. Prosimy skorzystać z innej karty lub wybrać inną metodę płatności.',
 
         // DAC
 

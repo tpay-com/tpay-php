@@ -45,7 +45,7 @@ class English
         'processing'         => 'Processing data, please wait...',
         'card_payment'       => 'Payment',
         'debit'              => 'Please debit my account',
-        'not_supported_card' => 'Sorry, your credit card type is currently not supported. Please try another payment method.',
+        'not_supported_card' => 'Sorry, your credit card number is invalid or this type is currently not supported. Please try another payment card or payment method.',
 
         // DAC
 

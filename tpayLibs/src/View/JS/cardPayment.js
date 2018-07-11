@@ -41,13 +41,14 @@ function CardPayment(url, pubkey) {
         var cc_number = $(this).val().replace(/\s/g, ''),
             supported = ['master', 'visa'],
             type = getCreditCardType(cc_number);
-        if (supported.indexOf(type) > -1 && cc_number.length === 16) {
+        if (supported.indexOf(type) > -1 && cc_number.length > 11) {
             $(this).removeClass('wrong');
             $('#info_msg').css('visibility', 'hidden');
             goon = true;
-        } else if (cc_number.length !== 16) {
+        } else if (cc_number.length < 12) {
             goon = false;
             $(this).addClass('wrong');
+            $('#info_msg').css('visibility', 'hidden');
         } else {
             $('#info_msg').css('visibility', 'visible');
             goon = false;
