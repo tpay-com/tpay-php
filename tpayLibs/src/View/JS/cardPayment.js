@@ -31,44 +31,30 @@ function CardPayment(url, pubkey) {
         MAESTRO = /^(50(18|20|38)|6304|67(59|6[1-3])|0604)$/,
         AMERICAN = /^(?:3[47][0-9]{13})$/,
         // DISCOVER = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/,
-        MASTERCARD = /^(?:5[1-5][0-9]{14})$/,
-        VISA = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+        MASTERCARD = /^5[1-5]\d{14}$|^2(?:2(?:2[1-9]|[3-9]\d)|[3-6]\d\d|7(?:[01]\d|20))\d{12}$/,
+        VISA = /^40([0-1]|2[0-5]|2[7-9]|[3-9])|41([0-6]|7[0-4])|41(75(0[1-9]|[1-9])|7[6-9]|[8-9])|4[2-4]|450[0-7]|4509|45[1-9]|4[6-7]|48[0-3]|484[0-3]|484[5-9]|48[5-9]|490|491[0-2]|491[4-6]|491[8-9]|49[2-9]/;
     var goon = false;
 
     $('input#card_number').formance('format_credit_card_number').on('keyup change blur', function (event) {
         $('div.card_icon').removeClass('hover');
-        if (!$(this).formance('validate_credit_card_number')) {
-            $(this).addClass('wrong');
-            goon = false;
-        } else {
+        goon = false;
+        var cc_number = $(this).val().replace(/\s/g, ''),
+            supported = ['master', 'visa'],
+            type = getCreditCardType(cc_number);
+        if (supported.indexOf(type) > -1 && cc_number.length === 16) {
             $(this).removeClass('wrong');
             $('#info_msg').css('visibility', 'hidden');
             goon = true;
-            var type = '',
-                supported = ['master', 'visa', ''];
-            var cc_number = $(this).val().replace(/\s/g, '');
-
-            if ((VISA.exec(cc_number))) {
-                type = 'visa';
-            } else if (JCB.exec(cc_number)) {
-                type = 'jcb';
-            } else if (DINERS.exec(cc_number)) {
-                type = 'diners';
-            } else if (MAESTRO.exec(cc_number)) {
-                type = 'maestro';
-            } else if (AMERICAN.exec(cc_number)) {
-                type = 'amex';
-            } else if (MASTERCARD.exec(cc_number)) {
-                type = 'master';
-            }
-
-            if (supported.indexOf(type) < 0) {
-                $('#info_msg').css('visibility', 'visible');
-                goon = false;
-            }
-            if (type !== '') {
-                $('#' + type).addClass('hover');
-            }
+        } else if (cc_number.length !== 16) {
+            goon = false;
+            $(this).addClass('wrong');
+        } else {
+            $('#info_msg').css('visibility', 'visible');
+            goon = false;
+            $(this).addClass('wrong');
+        }
+        if (type !== '') {
+            $('#' + type).addClass('hover');
         }
     });
     $('input#cvc').formance('format_credit_card_cvc').on('keyup change blur', function (event) {
@@ -78,6 +64,25 @@ function CardPayment(url, pubkey) {
         } else
             $(this).removeClass('wrong');
     });
+
+    function getCreditCardType(cc_number) {
+        var type = '';
+        if (MASTERCARD.exec(cc_number)) {
+            type = 'master';
+        } else if (JCB.exec(cc_number)) {
+            type = 'jcb';
+        } else if (DINERS.exec(cc_number)) {
+            type = 'diners';
+        } else if (MAESTRO.exec(cc_number)) {
+            type = 'maestro';
+        } else if (AMERICAN.exec(cc_number)) {
+            type = 'amex';
+        } else if (VISA.exec(cc_number)) {
+            type = 'visa';
+        }
+
+        return type;
+    }
 
     function validationExpired(mm, yy) {
         var today = new Date();
