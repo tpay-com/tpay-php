@@ -23,10 +23,8 @@ class PaymentBlik extends TransactionApi
             throw new TException('Invalid or empty input parameters');
         }
         if (isset($params[FieldsConfigDictionary::CODE]) && !isset($params[static::ALIAS])) {
-            $params[FieldsConfigDictionary::CODE] = (int)$params[FieldsConfigDictionary::CODE];
             $response = $this->handleBlik(new PaymentTypeT6Standard(), $params);
         } elseif (isset($params[FieldsConfigDictionary::CODE]) && isset($params[static::ALIAS])) {
-            $params[FieldsConfigDictionary::CODE] = (int)$params[FieldsConfigDictionary::CODE];
             $response = $this->handleBlik(new PaymentTypeT6Register(), $params);
         } else {
             $response = $this->handleBlik(new PaymentTypeBlikAlias(), $params);
@@ -39,8 +37,8 @@ class PaymentBlik extends TransactionApi
             case 0:
                 if (isset($response[static::ERR]) && $response[static::ERR] === 'ERR82') {
                     $apps = array();
-                    foreach ($response['availableUserApps'] as $key => $value) {
-                        $apps[] = get_object_vars($value);
+                    foreach ($response['availableUserApps'] as $userApp) {
+                        $apps[] = get_object_vars($userApp);
                     }
                     return $apps;
                 } else {
@@ -59,14 +57,14 @@ class PaymentBlik extends TransactionApi
         $params = $this->validateConfig($type, $params);
 
         switch ($type) {
-            case new PaymentTypeT6Standard():
+            case $type instanceof PaymentTypeT6Standard:
                 $response = $this->blik($params[static::TITLE], $params[FieldsConfigDictionary::CODE]);
                 break;
-            case new PaymentTypeT6Register():
+            case $type instanceof PaymentTypeT6Register:
                 $response = $this->blik($params[static::TITLE], $params[FieldsConfigDictionary::CODE],
                     $params[static::ALIAS]);
                 break;
-            case new PaymentTypeBlikAlias():
+            case $type instanceof PaymentTypeBlikAlias:
                 $response = $this->blik($params[static::TITLE], '', $params[static::ALIAS]);
                 break;
             default:
@@ -85,7 +83,7 @@ class PaymentBlik extends TransactionApi
             $config[FieldsConfigDictionary::CODE] = $code;
         }
         if (!empty($alias)) {
-            $config[static::ALIAS] = $alias;
+            $config[static::ALIAS][] = $alias;
         }
 
         $url = $this->apiURL . $this->trApiKey . '/transaction/blik';
