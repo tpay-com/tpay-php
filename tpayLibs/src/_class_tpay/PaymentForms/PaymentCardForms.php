@@ -8,7 +8,6 @@
 
 namespace tpayLibs\src\_class_tpay\PaymentForms;
 
-
 use tpayLibs\src\_class_tpay\PaymentCard;
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
@@ -16,7 +15,6 @@ use tpayLibs\src\Dictionaries\CardDictionary;
 
 class PaymentCardForms extends PaymentCard
 {
-
     /**
      * tpay payment url
      * @var string
@@ -35,7 +33,6 @@ class PaymentCardForms extends PaymentCard
      */
     public function getTransactionForm($config)
     {
-
         $apiResponse = $this->registerSale(
             $config['name'],
             $config['email'],
@@ -70,10 +67,7 @@ class PaymentCardForms extends PaymentCard
      * @throws TException
      */
 
-    public function getOnSiteCardForm(
-        $paymentRedirectPath = 'index.html',
-        $cardSaveAllowed = true
-    ) {
+    public function getOnSiteCardForm($paymentRedirectPath = 'index.html', $cardSaveAllowed = true) {
         $data = array(
             'rsa_key'               => $this->cardKeyRSA,
             'payment_redirect_path' => $paymentRedirectPath,
@@ -81,49 +75,6 @@ class PaymentCardForms extends PaymentCard
         );
 
         return Util::parseTemplate('gate', $data);
-    }
-
-    /**
-     * Get HTML form for saved card transaction. Using for payment in merchant shop
-     *
-     * @param string $cliAuth client auth sign form prev payment
-     * @param string $desc transaction description
-     * @param float $amount amount
-     * @param string $confirmationUrl url to send confirmation
-     * @param string $orderId order id
-     * @param string $language language
-     * @param string $currency currency
-     *
-     * @return string
-     *
-     * @throws TException
-     */
-    public function getCardSavedForm(
-        $cliAuth,
-        $desc,
-        $amount,
-        $confirmationUrl,
-        $orderId = '',
-        $language = 'pl',
-        $currency = '985'
-    ) {
-        $this->setAmount($amount)->setCurrency($currency)->setOrderID($orderId)->setLanguage($language);
-
-        $resp = $this->presale($cliAuth, $desc);
-
-        Util::log('Card saved presale response', print_r($resp, true));
-
-        if ((int)$resp[CardDictionary::RESULT] === 1) {
-            $data = array(
-                CardDictionary::SALE_AUTH => $resp[CardDictionary::SALE_AUTH],
-                'confirmation_url'        => $confirmationUrl,
-                CardDictionary::ORDERID   => $orderId
-            );
-
-            return Util::parseTemplate('savedCard', $data);
-        } else {
-            throw new TException('Order data is invalid');
-        }
     }
 
 }

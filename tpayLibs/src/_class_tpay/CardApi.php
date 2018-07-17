@@ -84,9 +84,7 @@ class CardApi extends CardOptions
      *
      * @throws TException
      */
-    public function presaleMethod(
-        $saleDescription
-    ) {
+    public function presaleMethod($saleDescription) {
         $params = array(
             CardDictionary::AMOUNT   => $this->amount,
             CardDictionary::METHOD   => CardDictionary::PRESALE,
@@ -118,9 +116,7 @@ class CardApi extends CardOptions
      * @return bool|mixed
      * @throws TException
      */
-    public function saleMethod(
-        $saleAuthCode
-    ) {
+    public function saleMethod($saleAuthCode) {
         if (strlen($saleAuthCode) !== 40) {
             throw new TException('invalid sale_auth code');
         }
