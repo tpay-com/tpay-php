@@ -13,7 +13,6 @@ include_once 'loader.php';
 
 class CardNotification extends CardNotificationHandler
 {
-
     public function __construct()
     {
         //This is pre-configured sandbox access. You should use your own data in production mode.
@@ -44,13 +43,14 @@ class CardNotification extends CardNotificationHandler
         $notification =  $this->handleNotification();
         //Get order details from your DB
         $shopOrderData = $this->getOrderDetailsFromDatabase($notification['order_id']);
+        $testMode = isset($notification['test_mode']) ? $notification['test_mode'] : '';
         //Validate notification sign correctness
         $this
             ->setAmount($shopOrderData['amount'])
             ->setCurrency($shopOrderData['currency'])
             ->setOrderID($notification['order_id']);
         $this->validateCardSign($notification['sign'], $notification['sale_auth'], $notification['card'],
-            $notification['date'], $notification['status']);
+            $notification['date'], $notification['status'], $testMode);
 
         return $notification;
     }
@@ -59,6 +59,9 @@ class CardNotification extends CardNotificationHandler
     {
         //update your order status
         //save transaction ID (sale_auth) and if exists, client token (cli_auth) for later use
+
+        //if the transaction was processed only to register customer card, you can make automatic refund:
+        $this->refundPayment($params['sale_auth'], 'Transaction refund');
     }
 
     private function getOrderDetailsFromDatabase($orderId)
@@ -69,6 +72,12 @@ class CardNotification extends CardNotificationHandler
             'amount' => 123.00,
             'currency' => 985,
         ];
+    }
+
+    private function refundPayment($transactionId, $refundDescription)
+    {
+        $RefundClass = new CardRefundExample();
+        $RefundClass->refund($transactionId, $refundDescription);
     }
 
 }
