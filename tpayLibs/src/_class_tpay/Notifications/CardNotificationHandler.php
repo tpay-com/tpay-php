@@ -29,7 +29,6 @@ class CardNotificationHandler extends PaymentCard
     public function handleNotification()
     {
         Util::log('Card notification', "POST params: \n" . print_r($_POST, true));
-
         $notificationType = Util::post('type', CardDictionary::STRING);
         if ($notificationType === CardDictionary::SALE) {
             $response = $this->getResponse(new PaymentTypeCard());
@@ -38,33 +37,23 @@ class CardNotificationHandler extends PaymentCard
         } else {
             throw new TException('Unknown notification type');
         }
-
         if ($this->validateServerIP === true && $this->isTpayServer() === false) {
             throw new TException('Request is not from secure server');
         }
 
-        echo json_encode(array(CardDictionary::RESULT => '1'));
+        echo json_encode([CardDictionary::RESULT => '1']);
 
-        if ($notificationType === CardDictionary::SALE && $response['status'] === 'correct') {
-            $resp = array(
-                CardDictionary::ORDERID   => $response[CardDictionary::ORDERID],
-                CardDictionary::SIGN      => $response[CardDictionary::SIGN],
-                CardDictionary::SALE_AUTH => $response[CardDictionary::SALE_AUTH],
-                'date'                    => $response['date'],
-                'card'                    => $response['card']
-            );
-            if (isset($response[CardDictionary::TEST_MODE])) {
-                $resp[CardDictionary::TEST_MODE] = $response[CardDictionary::TEST_MODE];
-            }
+        if (($notificationType === CardDictionary::SALE && $response['status'] === 'correct')
+            || $notificationType === CardDictionary::DEREGISTER
+        ) {
             if (isset($response[CardDictionary::CLIAUTH])) {
-                $resp[CardDictionary::CLIAUTH] = $response[CardDictionary::CLIAUTH];
-                $this->setClientToken($resp[CardDictionary::CLIAUTH]);
+                $this->setClientToken($response[CardDictionary::CLIAUTH]);
             }
-            return $resp;
-        } elseif ($notificationType === CardDictionary::DEREGISTER) {
-            return $response;
         } else {
             throw new TException('Incorrect payment');
         }
+
+        return $response;
     }
+
 }
