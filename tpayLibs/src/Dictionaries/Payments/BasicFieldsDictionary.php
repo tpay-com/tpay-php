@@ -359,7 +359,8 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
         ),
         /**
-         * Transaction status: TRUE in the case of the correct result or FALSE in the case of an error.
+         * Transaction status: TRUE after successful payment, CHARGEBACK after refund.
+         * FALSE and PAID statuses may be obtained in two-step payment acceptance mode.
          * Note: Depending on the settings, the transaction may be correct status,
          * even if the amount paid is different from the amount of the transaction!
          * Eg. If the Seller accepts the overpayment or underpayment threshold is set.
@@ -368,7 +369,7 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array(0, 1, true, false, 'TRUE', 'FALSE'),
+            FieldsConfigDictionary::OPTIONS => array(0, 1, true, false, 'TRUE', 'FALSE', 'PAID', 'CHARGEBACK'),
         ),
         /**
          * Transaction error status.
