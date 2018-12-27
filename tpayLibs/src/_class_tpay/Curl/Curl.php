@@ -31,11 +31,14 @@ class Curl extends CurlOptions
      * Last executed cURL errno
      * @var string
      */
-
     private $curlErrorNumber = '';
+
     private $url = '';
+
     private $postData = array();
+
     private $json = false;
+
     private $result;
 
     public function __construct()
@@ -43,7 +46,6 @@ class Curl extends CurlOptions
         if (!function_exists('curl_init') || !function_exists('curl_exec')) {
             throw new TException('cURL function not available');
         }
-
     }
 
     /**
@@ -84,6 +86,7 @@ class Curl extends CurlOptions
     public function setRequestUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -95,12 +98,13 @@ class Curl extends CurlOptions
      */
     public function setPostData($postData)
     {
-        if (!is_array($postData) && !is_array((array)json_decode($postData))) {
+        if (!is_array($postData) && !is_array(json_decode($postData, true))) {
             throw new TException('Parameters are not php or json array');
         }
         foreach ($postData as $key => $value) {
             $this->postData[$key] = $value;
         }
+
         return $this;
     }
 
@@ -112,6 +116,7 @@ class Curl extends CurlOptions
     {
         $this->json = true;
         $this->postData['json'] = true;
+
         return $this;
     }
 
@@ -122,10 +127,11 @@ class Curl extends CurlOptions
      */
     public function getResult()
     {
-        $response = $this->json ? (array)(json_decode($this->result)) : $this->result;
+        $response = $this->json ? json_decode($this->result, true) : $this->result;
         if ($response === null) {
             throw new TException("Error decoding response to JSON");
         }
+
         return $response;
     }
 
@@ -143,6 +149,7 @@ class Curl extends CurlOptions
         $this->checkResponse();
         curl_close($ch);
         $this->result = $curlRes;
+
         return $this;
     }
 
@@ -158,8 +165,8 @@ class Curl extends CurlOptions
         }
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->postData));
         curl_setopt($ch, CURLOPT_URL, $this->url);
-        return $ch;
 
+        return $ch;
     }
 
     /**
@@ -170,7 +177,7 @@ class Curl extends CurlOptions
     private function checkResponse()
     {
         $responseCode = $this->curlInfo['http_code'];
-        $successCall = ($responseCode >= 200 && $responseCode <= 299) ? true : false;
+        $successCall = ($responseCode >= 200 && $responseCode <= 299);
 
         return $successCall ? true : $this->getResponseCode($responseCode);
 

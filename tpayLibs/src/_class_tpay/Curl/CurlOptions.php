@@ -122,7 +122,7 @@ class CurlOptions
      */
     public function enableVerifyPeer()
     {
-        $this->verifyPeer = false;
+        $this->verifyPeer = true;
         return $this;
     }
 
@@ -132,7 +132,7 @@ class CurlOptions
      */
     public function enableVerbose()
     {
-        $this->verbose = false;
+        $this->verbose = true;
         return $this;
     }
 
@@ -142,7 +142,7 @@ class CurlOptions
      */
     public function enablePost()
     {
-        $this->post = false;
+        $this->post = true;
         return $this;
     }
 
@@ -152,7 +152,7 @@ class CurlOptions
      */
     public function enableReturnTransfer()
     {
-        $this->returnTransfer = false;
+        $this->returnTransfer = true;
         return $this;
     }
 
@@ -162,7 +162,7 @@ class CurlOptions
      */
     public function enableFailOnError()
     {
-        $this->failOnError = false;
+        $this->failOnError = true;
         return $this;
     }
 
@@ -172,7 +172,7 @@ class CurlOptions
      */
     public function enableFollowLocation()
     {
-        $this->followLocation = false;
+        $this->followLocation = true;
         return $this;
     }
 
