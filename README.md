@@ -81,6 +81,9 @@ $language->setLang('pl'); for setting language
 $language->l('pay'); to echo translated key
 ```
 
+##Logs
+This library provides automatic logging mechanism. The log files are created for each day separately under 'Logs' directory.
+
 ## License
 
 This library is released under the [MIT License](http://www.opensource.org/licenses/MIT)
