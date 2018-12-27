@@ -1,1 +1,3 @@
 .idea/
+tpayLibs/src/Logs/*
+!tpayLibs/src/Logs/.gitkeep

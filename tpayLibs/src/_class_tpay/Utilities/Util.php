@@ -1,10 +1,7 @@
 <?php
-
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay\Utilities;
+
+use Exception;
 
 /**
  * Class Util
@@ -69,22 +66,19 @@ class Util
     public static function log($title, $text)
     {
         $text = (string)$text;
-        $logFilePath = dirname(__FILE__) . '/../../log';
-
+        $logFilePath = self::getLogPath();
         $ip = (isset($_SERVER[static::REMOTE_ADDR])) ? $_SERVER[static::REMOTE_ADDR] : '';
 
-        $logText = "\n===========================";
-        $logText .= "\n" . $title;
-        $logText .= "\n===========================";
-        $logText .= "\n" . date('Y-m-d H:i:s');
-        $logText .= "\nip: " . $ip;
-        $logText .= "\n";
+        $logText = PHP_EOL . '===========================';
+        $logText .= PHP_EOL . $title;
+        $logText .= PHP_EOL . '===========================';
+        $logText .= PHP_EOL . date('Y-m-d H:i:s');
+        $logText .= PHP_EOL . 'ip: ' . $ip;
+        $logText .= PHP_EOL;
         $logText .= $text;
-        $logText .= "\n\n";
+        $logText .= PHP_EOL . PHP_EOL;
 
-        if (file_exists($logFilePath) && is_writable($logFilePath)) {
-            file_put_contents($logFilePath, $logText, FILE_APPEND);
-        }
+        file_put_contents($logFilePath, $logText, FILE_APPEND);
     }
 
     /**
@@ -95,10 +89,8 @@ class Util
     public static function logLine($text)
     {
         $text = (string)$text;
-        $logFilePath = dirname(__FILE__) . '/../../log';
-        if (file_exists($logFilePath) && is_writable($logFilePath)) {
-            file_put_contents($logFilePath, "\n" . $text, FILE_APPEND);
-        }
+        $logFilePath = self::getLogPath();
+        file_put_contents($logFilePath, PHP_EOL . $text, FILE_APPEND);
     }
 
     /**
@@ -149,4 +141,20 @@ class Util
         static::$path = $path;
         return $this;
     }
+
+    private static function getLogPath()
+    {
+        $logFileName = 'log_' . date('Y-m-d') . '.php';
+        $logPath = dirname(__FILE__) . '/../../Logs/' . $logFileName;
+        if (!file_exists($logPath)) {
+            file_put_contents($logPath, '<?php exit; ?> ' . PHP_EOL);
+            chmod($logPath, 0644);
+        }
+        if (!file_exists($logPath) || !is_writable($logPath)) {
+            throw new Exception('Unable to create or write the log file');
+        }
+
+        return $logPath;
+    }
+
 }
