@@ -15,17 +15,16 @@ use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasic;
 
 class BasicNotificationHandler extends BasicPaymentOptions
 {
-
     /**
      * Check cURL request from tpay server after payment.
      * This method check server ip, required fields and md5 checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
+     * @param string $response Print response to Tpay server (enum: 'TRUE', 'FALSE').
+     * If empty, there you have to print it somewhere else to avoid rescheduling notifications
      * @return array
      * @throws TException
-     * @internal param string $paymentType optional payment type default is 'basic'
-     *
      */
-    public function checkPayment()
+    public function checkPayment($response = 'TRUE')
     {
         Util::log('Basic payment notification', "POST params: \n" . print_r($_POST, true));
         $res = $this->getResponse(new PaymentTypeBasic());
@@ -42,7 +41,9 @@ class BasicNotificationHandler extends BasicPaymentOptions
         if ($checkMD5 === false) {
             throw new TException('MD5 checksum is invalid');
         }
-        echo 'TRUE';
+        if (!empty($response) && is_string($response)) {
+            echo $response;
+        }
 
         return $res;
     }
