@@ -53,11 +53,23 @@ All methods described in [tpay documentations](https://tpay.com/en/documentation
   Example of usages: [Szkwal](tpayLibs/examples/Szkwal.php), [White Label](tpayLibs/examples/WhiteLabel.php)
   
 ##### DAC / Masspayment / Transaction API requests
+## Logs
+Library has own logging system to save all confirmations and notifications sent by Tpay.com server, outgoing requests and exceptions.
+Be sure that file src/Logs directory is writable and add rule to Apache htaccess or NGINX to deny access to this area from browser.
+The log files are created for each day separately under 'Logs' directory.
 
- Example of usages: [DAC](tpayLibs/examples/Dac.php), [Masspayment and Transaction API](tpayLibs/examples/MassPayment.php)
+The logging is enabled by default but you can switch this feature by command:
  
-Library has own logging system to save all confirmations and notifications sent by Tpay.com server
-Be sure that file src/log is writable and add rule to htaccess to deny access to this file from browser
+ ```php
+Util::$loggingEnabled = false;
+ ```
+
+You can also set your own logging path by this command:
+
+ ```php
+Util::$customLogPatch = '/my/own/path/Logs/';
+ ```
+ The logs file names will be assigned automatically.
 
 ## Requirements
 
