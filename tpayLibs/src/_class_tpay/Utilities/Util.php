@@ -19,7 +19,11 @@ class Util
 
     static $lang = 'en';
 
-    static $path = null;
+    static $libraryPath = null;
+
+    static $loggingEnabled = true;
+
+    static $customLogPatch;
 
     /**
      * Parse template file
@@ -29,8 +33,11 @@ class Util
      */
     public static function parseTemplate($templateFileName, $data = array())
     {
-        $data['static_files_url'] = is_null(static::$path) ? $_SERVER['REQUEST_URI'] . '/../../src/' : static::$path;
-
+        if (is_null(static::$libraryPath)) {
+            $data['static_files_url'] = $_SERVER['REQUEST_URI'] . '/../../src/';
+        } else {
+            $data['static_files_url'] =  static::$libraryPath;
+        }
         $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
         $buffer = false;
 
@@ -39,7 +46,6 @@ class Util
             ob_clean();
         }
         ob_start();
-
         if (!file_exists($templateDirectory . $templateFileName . '.phtml')) {
             return '';
         }
@@ -78,7 +84,9 @@ class Util
         $logText .= $text;
         $logText .= PHP_EOL . PHP_EOL;
 
-        file_put_contents($logFilePath, $logText, FILE_APPEND);
+        if (static::$loggingEnabled === true) {
+            file_put_contents($logFilePath, $logText, FILE_APPEND);
+        }
     }
 
     /**
@@ -90,7 +98,9 @@ class Util
     {
         $text = (string)$text;
         $logFilePath = self::getLogPath();
-        file_put_contents($logFilePath, PHP_EOL . $text, FILE_APPEND);
+        if (static::$loggingEnabled === true) {
+            file_put_contents($logFilePath, PHP_EOL.$text, FILE_APPEND);
+        }
     }
 
     /**
@@ -127,6 +137,7 @@ class Util
     public function setLanguage($lang)
     {
         static::$lang = $lang;
+
         return $this;
     }
 
@@ -138,14 +149,22 @@ class Util
      */
     public function setPath($path)
     {
-        static::$path = $path;
+        static::$libraryPath = $path;
+
         return $this;
     }
 
     private static function getLogPath()
     {
+        if (static::$loggingEnabled === false) {
+            return null;
+        }
         $logFileName = 'log_' . date('Y-m-d') . '.php';
-        $logPath = dirname(__FILE__) . '/../../Logs/' . $logFileName;
+        if (!empty(static::$customLogPatch)) {
+            $logPath = static::$customLogPatch . $logFileName;
+        } else {
+            $logPath = dirname(__FILE__) . '/../../Logs/' . $logFileName;
+        }
         if (!file_exists($logPath)) {
             file_put_contents($logPath, '<?php exit; ?> ' . PHP_EOL);
             chmod($logPath, 0644);
