@@ -67,7 +67,8 @@ class PaymentCardForms extends PaymentCard
      * @throws TException
      */
 
-    public function getOnSiteCardForm($paymentRedirectPath = 'index.html', $cardSaveAllowed = true) {
+    public function getOnSiteCardForm($paymentRedirectPath = 'index.html', $cardSaveAllowed = true)
+    {
         $data = array(
             'rsa_key'               => $this->cardKeyRSA,
             'payment_redirect_path' => $paymentRedirectPath,
@@ -75,6 +76,15 @@ class PaymentCardForms extends PaymentCard
         );
 
         return Util::parseTemplate('gate', $data);
+    }
+
+    /**
+     * @param array $data
+     * @return string HTML input form
+     */
+    public function getCardPaymentLinkBuilderForm($data)
+    {
+        return Util::parseTemplate('cardLinkBuilder', $data);
     }
 
 }

@@ -25,7 +25,7 @@ trait FieldsValidator
      */
     public function validateCardCurrency($currency)
     {
-        if (strlen($currency) !== 3) {
+        if (strlen($currency) > 3 || strlen($currency) < 2) {
             throw new TException('Currency is invalid.');
         }
 
