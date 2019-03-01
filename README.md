@@ -28,7 +28,7 @@ You can generate access keys in tpay merchant panel (https://secure.tpay.com/pan
 The [loader.php](tpayLibs/examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing
 (remember to configure your current working path correctly).
 
-All methods described in [tpay documentations](https://tpay.com/en/documentation) can be easily executed by extending required class in main [src](tpayLibs/src) folder ([see examples](tpayLibs/examples))
+All methods described in [tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [src](tpayLibs/src) folder ([see examples](tpayLibs/examples))
   
 ###Example configuration data should look like this:
 
@@ -46,13 +46,8 @@ All methods described in [tpay documentations](https://tpay.com/en/documentation
   
 ##### Card Basic / Card On-Site
 
-  Example of usages: [Card basic form](tpayLibs/examples/CardBasicForm.php), [Card On-site Gateway](tpayLibs/examples/CardGate.php)
-  
-##### Szkwal / White Label
+  Example of usages: [Card basic form](tpayLibs/examples/CardBasicForm.php), [Card On-site Gateway](tpayLibs/examples/CardGate.php), [Card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php)
 
-  Example of usages: [Szkwal](tpayLibs/examples/Szkwal.php), [White Label](tpayLibs/examples/WhiteLabel.php)
-  
-##### DAC / Masspayment / Transaction API requests
 ## Logs
 Library has own logging system to save all confirmations and notifications sent by Tpay.com server, outgoing requests and exceptions.
 Be sure that file src/Logs directory is writable and add rule to Apache htaccess or NGINX to deny access to this area from browser.
