@@ -26,18 +26,18 @@ echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
         <div id="cvc_wrapper">
             <label for="cvc">CVC</label><span class="info_button"
                                               title="<?php $lang->l('signature') ?>">?</span>
-            <input id="cvc" maxlength="3" type="tel" autocomplete="off" autocompletetype="cc-cvc" placeholder="000"
-                   tabindex="4" value=""/>
+            <input id="cvc" maxlength="4" type="tel" autocomplete="off" autocompletetype="cc-cvc" placeholder="000"
+                   tabindex="3" value=""/>
         </div>
         <br>
         <label for="c_name"><?php $lang->l('name_on_card') ?></label>
         <input type="text" id="c_name" placeholder="<?php $lang->l('name_surname') ?>" autocomplete="off"
                name="client_name"
-               maxlength="64" tabindex="5" value=""/>
+               maxlength="64" tabindex="4" value=""/>
 
         <label for="c_email">E-mail</label>
         <input type="text" id="c_email" data-formance_algorithm="complex" autocomplete="off" placeholder="E-mail"
-               name="client_email" value="" maxlength="64" tabindex="6">
+               name="client_email" value="" maxlength="64" tabindex="5">
         <?php if ($data[CARD_SAVE_ALLOWED]){ ?>
         <div class="amPmCheckbox">
             <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
@@ -48,7 +48,7 @@ echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
 
     <div id="card_icons">
         <div class="card_icon" id="visa"></div>
-        <div class="card_icon" id="master"></div>
+        <div class="card_icon" id="mastercard"></div>
         <div class="card_icon" id="maestro"></div>
         <div class="card_icon" id="diners"></div>
         <div class="card_icon" id="jcb"></div>
@@ -65,9 +65,10 @@ echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
 <button id="card_continue_btn">&nbsp;<?php $lang->l('card_payment') ?>&nbsp;</button>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.formance.min.js"></script>
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/cardPayment.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/string_routines.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.payment.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/cardPayment.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
