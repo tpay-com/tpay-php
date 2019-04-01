@@ -44,7 +44,10 @@ class PaymentCard extends CardApi
         $cardData = null
     ) {
         if (!is_null($cardData)) {
-            $this->setEnablePowUrl(true)->setMethod(CardDictionary::SECURESALE)->setCardData($cardData);
+            $this->setCardData($cardData);
+        }
+        if (!is_null($this->cardData)) {
+            $this->setEnablePowUrl(true)->setMethod(CardDictionary::SECURESALE);
         } else {
             $this->setEnablePowUrl(false)->setMethod(CardDictionary::REGISERSALE);
         }
@@ -54,7 +57,7 @@ class PaymentCard extends CardApi
             $clientEmail,
             $orderDesc
         );
-        Util::log('card ' . !is_null($cardData) ? 'secure sale response' : 'register sale response',
+        Util::log('card ' . !is_null($this->cardData) ? 'secure sale response' : 'register sale response',
             print_r($response, true));
 
         return $response;
