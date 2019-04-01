@@ -61,18 +61,19 @@ class PaymentCardForms extends PaymentCard
      * Get HTML form for direct sale gate. Using for payment in merchant shop
      *
      * @param string $paymentRedirectPath payment redirect path
-     *
-     * @param bool $cardSaveAllowed
+     * @param bool $cardSaveAllowed set true if your want to display the save card checkbox
+     * @param bool $payerFields set true if you want to display the name and email fields in card form.
+     * Otherwise you will need to get those values from your DataBase.
      * @return string
-     * @throws TException
      */
 
-    public function getOnSiteCardForm($paymentRedirectPath = 'index.html', $cardSaveAllowed = true)
+    public function getOnSiteCardForm($paymentRedirectPath = 'index.html', $cardSaveAllowed = true, $payerFields = true)
     {
         $data = array(
             'rsa_key'               => $this->cardKeyRSA,
             'payment_redirect_path' => $paymentRedirectPath,
-            'card_save_allowed'     => $cardSaveAllowed
+            'card_save_allowed'     => $cardSaveAllowed,
+            'showPayerFields'       => $payerFields,
         );
 
         return Util::parseTemplate('gate', $data);

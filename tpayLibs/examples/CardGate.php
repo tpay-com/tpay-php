@@ -30,7 +30,7 @@ class CardGate extends PaymentCardForms
     {
         if (empty($_POST)) {
             //Show new payment form
-            echo $this->getOnSiteCardForm('CardGate.php');
+            echo $this->getOnSiteCardForm('CardGate.php', true, true);
         } else {
             //Try to sale with provided card data
             $response = $this->makeCardPayment();

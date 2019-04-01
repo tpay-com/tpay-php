@@ -29,15 +29,16 @@ echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
             <input id="cvc" maxlength="4" type="tel" autocomplete="off" autocompletetype="cc-cvc" placeholder="000"
                    tabindex="3" value=""/>
         </div>
+        <?php if($data['showPayerFields']) { ?>
         <br>
         <label for="c_name"><?php $lang->l('name_on_card') ?></label>
         <input type="text" id="c_name" placeholder="<?php $lang->l('name_surname') ?>" autocomplete="off"
                name="client_name"
                maxlength="64" tabindex="4" value=""/>
-
         <label for="c_email">E-mail</label>
         <input type="text" id="c_email" data-formance_algorithm="complex" autocomplete="off" placeholder="E-mail"
                name="client_email" value="" maxlength="64" tabindex="5">
+        <?php } ?>
         <?php if ($data[CARD_SAVE_ALLOWED]){ ?>
         <div class="amPmCheckbox">
             <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
