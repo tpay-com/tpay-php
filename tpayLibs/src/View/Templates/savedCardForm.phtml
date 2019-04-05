@@ -8,7 +8,7 @@
                 <input type="radio" name="savedId" id="cardN<?php echo $card['cardId'] ?>"
                        value="<?php echo $card['cardId'] ?>"/>
                 <label for="cardN<?php echo $card['cardId'] ?>"><?php $lang->l('saved_card_label');
-                    echo $card['shortCode'] ?><img id="saved_icon" class="<?php echo $card['vendor'] ?>"/></label>
+                    echo $card['shortCode']; if (isset($card['vendor'])) {?><img id="saved_icon" class="<?php echo $card['vendor'] ?>"/></label><?php } ?>
                 <br/>
             <?php } ?>
             <input type="radio" name="savedId" id="newCard" value="new"><label
