@@ -10,7 +10,8 @@ function CardPayment(url, pubkey) {
     const TRIGGER_EVENTS = 'input change blur';
 
     function SubmitPayment() {
-        var cd = numberInput.val().replace(/\s/g, '') + '|' + expiryInput.val().replace(/\s/g, '') + '|' + cvcInput.val().replace(/\s/g, '') + '|' + document.location.origin,
+        var cardNumber = numberInput.val().replace(/\s/g, ''),
+            cd = cardNumber + '|' + expiryInput.val().replace(/\s/g, '') + '|' + cvcInput.val().replace(/\s/g, '') + '|' + document.location.origin,
             encrypt = new JSEncrypt(),
             decoded = Base64.decode(pubkey),
             encrypted;
@@ -19,6 +20,7 @@ function CardPayment(url, pubkey) {
         encrypt.setPublicKey(decoded);
         encrypted = encrypt.encrypt(cd);
         $("#carddata").val(encrypted);
+        $("#card_vendor").val($.payment.cardType(cardNumber));
         numberInput.val('');
         expiryInput.val('');
         cvcInput.val('');
@@ -35,27 +37,44 @@ function CardPayment(url, pubkey) {
 
     function validateCcNumber($elem) {
         var isValid = false,
-            ccNumber = $elem.val().replace(/\s/g, ''),
+            ccNumber = $.payment.formatCardNumber($elem.val()),
             supported = ['mastercard', 'maestro', 'visa'],
-            type = $.payment.cardType(ccNumber);
+            type = $.payment.cardType(ccNumber),
+            notValidNote = $('#info_msg_not_valid'),
+            notSupportedNote = $('#info_msg_not_supported');
         $elem.val($.payment.formatCardNumber($elem.val()));
         $('div.card_icon').removeClass('hover');
-        if (supported.indexOf(type) > -1 && $.payment.validateCardNumber(ccNumber)) {
+        if (supported.indexOf(type) < 0 && type !== null && ccNumber.length > 1) {
+            showElem(notSupportedNote);
+            hideElem(notValidNote);
+            setWrong($elem);
+        } else if (supported.indexOf(type) > -1 && $.payment.validateCardNumber(ccNumber)) {
             setValid($elem);
-            $('#info_msg').css('visibility', 'hidden');
+            hideElem(notSupportedNote);
+            hideElem(notValidNote);
             isValid = true;
-        } else if (ccNumber.length < 12) {
+        } else if (ccNumber.length < 4) {
+            hideElem(notSupportedNote);
+            hideElem(notValidNote);
             setWrong($elem);
-            $('#info_msg').css('visibility', 'hidden');
         } else {
-            $('#info_msg').css('visibility', 'visible');
             setWrong($elem);
+            showElem(notValidNote);
+            hideElem(notSupportedNote);
         }
         if (type !== '') {
             $('#' + type).addClass('hover');
         }
 
         return isValid;
+    }
+
+    function hideElem($elem) {
+        $elem.css('display', 'none');
+    }
+
+    function showElem($elem) {
+        $elem.css('display', 'block');
     }
 
     function validateExpiryDate($elem) {
@@ -140,8 +159,12 @@ function CardPayment(url, pubkey) {
     }
 
     $('#card_continue_btn').click(function () {
-        if (checkForm()) {
+        var savedId = $('input[name=savedId]:checked').val();
+        if ((savedId === 'new' || !$('input[name=savedId]').length)  && checkForm()) {
             SubmitPayment();
+        }
+        if ($.isNumeric(savedId)) {
+            $('#saved_card_payment_form').submit();
         }
     });
     numberInput.on(TRIGGER_EVENTS, function () {
@@ -160,4 +183,32 @@ function CardPayment(url, pubkey) {
         validateEmail($(this));
     });
 
+}
+
+$('document').ready(function () {
+    $('input[name=savedId]').first().prop('checked', "checked");
+    handleForm();
+});
+
+function handleForm() {
+    $('input[name=savedId]').each(function () {
+        $(this).click(function () {
+            if ($(this).is(":checked")) {
+                if ($(this).val() !== 'new') {
+                    $('#card_form').css({opacity: 1.0}).animate({opacity: 0.0}, 500);
+                    setTimeout(
+                        function () {
+                            $('#card_form').css({display: "none"})
+                        }, 500
+                    );
+                }
+            }
+
+        });
+    });
+    $('#newCard').click(function () {
+        if ($(this).is(":checked")) {
+            $('#card_form').css({opacity: 0.0, display: "block"}).animate({opacity: 1.0}, 500);
+        }
+    });
 }

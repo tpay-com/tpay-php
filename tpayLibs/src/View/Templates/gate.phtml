@@ -1,9 +1,4 @@
 <?php
-
-/*
- * Created by tpay.com
- */
-
 const STATIC_FILES_URL = 'static_files_url';
 const CARD_SAVE_ALLOWED = 'card_save_allowed';
 ?>
@@ -11,13 +6,12 @@ const CARD_SAVE_ALLOWED = 'card_save_allowed';
 echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
 <form method="post" id="card_payment_form" name="card_payment_form">
     <input type="hidden" name="carddata" id="carddata" value=""/>
-
+    <input type="hidden" name="card_vendor" id="card_vendor" value=""/>
     <div id="powered_by"></div>
     <div id="card_payment">
         <label for="card_number"><?php $lang->l('card_number') ?></label>
         <input id="card_number" pattern="\d*" autocompletetype="cc-number" size="30" type="tel" autocomplete="off"
                maxlength="23" placeholder="0000 0000 0000 0000" tabindex="1" value=""/>
-
         <div id="expiry_date_wrapper">
             <label for="transaction_card_expiry_month"><?php $lang->l('expiration_date') ?></label><br>
             <input id="expiry_date" maxlength="9" type="tel" placeholder="00 / 00" autocomplete="off"
@@ -41,36 +35,33 @@ echo $data[STATIC_FILES_URL] ?>View/Styles/style.css"/>
         <?php } ?>
         <?php if ($data[CARD_SAVE_ALLOWED]){ ?>
         <div class="amPmCheckbox">
-            <input type="checkbox" id="card_save" name="card_save"/>&nbsp;&nbsp;&nbsp;<label
-                for="card_save"><?php $lang->l('save_card') ?></label>
+            <input type="checkbox" id="card_save" name="card_save"/>
+            <label for="card_save"><?php $lang->l('save_card') ?></label>
             <span class="info_button" title="<?php $lang->l('save_card_info') ?>">?</span>
         </div><?php } ?>
     </div>
-
     <div id="card_icons">
         <div class="card_icon" id="visa"></div>
         <div class="card_icon" id="mastercard"></div>
         <div class="card_icon" id="maestro"></div>
-        <div class="card_icon" id="diners"></div>
+        <div class="card_icon" id="dinersclub"></div>
         <div class="card_icon" id="jcb"></div>
         <div class="card_icon" id="amex"></div>
     </div>
-
-    <p id="info_msg" style="visibility: hidden"><?php $lang->l('not_supported_card') ?></p>
-
+    <p id="info_msg_not_supported" style="display: none"><?php $lang->l('not_supported_card') ?></p>
+    <p id="info_msg_not_valid" style="display: none"><?php $lang->l('not_valid_card') ?></p>
     <div id="loading_scr" style="display:none">
         <img src="<?php echo $data[STATIC_FILES_URL] ?>View/Images/loading.gif"
              style="vertical-align: middle;"/>&nbsp;&nbsp;<?php $lang->l('processing') ?>
     </div>
 </form>
-<button id="card_continue_btn">&nbsp;<?php $lang->l('card_payment') ?>&nbsp;</button>
+
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.formance.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jsencrypt.min.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/string_routines.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.payment.js"></script>
 <script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/cardPayment.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function () {
         new CardPayment('<?php echo $data['payment_redirect_path'] ?>', "<?php echo $data['rsa_key'] ?>");

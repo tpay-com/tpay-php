@@ -45,7 +45,10 @@ class Polish
         'processing'         => 'Przetwarzanie danych, proszę czekać...',
         'card_payment'       => 'Zapłać',
         'debit'              => 'Proszę obciążyć moje konto',
-        'not_supported_card' => 'Przepraszamy, wprowadzony numer karty jest niepoprawny lub ten typ karty nie jest obecnie obsługiwany. Prosimy skorzystać z innej karty lub wybrać inną metodę płatności.',
+        'not_supported_card' => 'Przepraszamy, ten typ karty nie jest obecnie obsługiwany. Prosimy skorzystać z innej karty lub wybrać inną metodę płatności.',
+        'not_valid_card' => 'Przepraszamy, wprowadzony numer karty jest niepoprawny. Prosimy wprowadzić prawidłowy numer.',
+        'saved_card_label' => 'Zapłać zapisaną kartą ',
+        'new_card_label' => 'Zapłać nową kartą',
 
         // DAC
 

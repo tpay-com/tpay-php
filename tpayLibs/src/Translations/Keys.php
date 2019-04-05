@@ -46,6 +46,9 @@ class Keys
         'card_payment',
         'debit',
         'not_supported_card',
+        'not_valid_card',
+        'saved_card_label',
+        'new_card_label',
 
         // DAC
         'transfer_details',

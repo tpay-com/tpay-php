@@ -15,7 +15,7 @@ use Exception;
  */
 class Util
 {
-    const REMOTE_ADDR = 'REMOTE_ADDRESS';
+    const REMOTE_ADDR = 'REMOTE_ADDR';
 
     static $lang = 'en';
 

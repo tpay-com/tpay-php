@@ -64,19 +64,27 @@ class PaymentCardForms extends PaymentCard
      * @param bool $cardSaveAllowed set true if your want to display the save card checkbox
      * @param bool $payerFields set true if you want to display the name and email fields in card form.
      * Otherwise you will need to get those values from your DataBase.
+     * @param array $savedCards list of user saved cards. Must contain id, shortCode and vendor parameters
      * @return string
      */
 
-    public function getOnSiteCardForm($paymentRedirectPath = 'index.html', $cardSaveAllowed = true, $payerFields = true)
+    public function getOnSiteCardForm(
+        $paymentRedirectPath = 'index.html',
+        $cardSaveAllowed = true,
+        $payerFields = true,
+        $savedCards = []
+    )
     {
         $data = array(
             'rsa_key'               => $this->cardKeyRSA,
             'payment_redirect_path' => $paymentRedirectPath,
             'card_save_allowed'     => $cardSaveAllowed,
             'showPayerFields'       => $payerFields,
+            'userCards'             => $savedCards,
         );
+        $data['new_card_form'] = Util::parseTemplate('gate', $data);
 
-        return Util::parseTemplate('gate', $data);
+        return Util::parseTemplate('savedCardForm', $data);
     }
 
     /**

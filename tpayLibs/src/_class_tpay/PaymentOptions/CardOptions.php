@@ -28,7 +28,6 @@ class CardOptions extends ObjectsHelper
         $this->isNotEmptyString($this->cardApiPass, 'Card API password');
         $this->validateCardHashAlg($this->cardHashAlg);
         $this->validateCardCode($this->cardVerificationCode);
-
     }
 
     public function setClientToken($token)

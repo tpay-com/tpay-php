@@ -57,8 +57,7 @@ class PaymentCard extends CardApi
             $clientEmail,
             $orderDesc
         );
-        Util::log('card ' . !is_null($this->cardData) ? 'secure sale response' : 'register sale response',
-            print_r($response, true));
+        Util::log($this->method.' response', print_r($response, true));
 
         return $response;
     }

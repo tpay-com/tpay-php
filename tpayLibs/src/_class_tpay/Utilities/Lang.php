@@ -29,8 +29,13 @@ class Lang extends Keys
         if (array_key_exists($lang, $this->translations)) {
             $this->currentLanguage = $lang;
         } else {
-            throw new TException('This language is not supported.');
+            throw new TException('This language is not supported: '. print_r($lang, true));
         }
+    }
+
+    public function getLang()
+    {
+        return $this->currentLanguage;
     }
 
     /**
@@ -50,7 +55,7 @@ class Lang extends Keys
      * @return string
      */
 
-    private function get($key)
+    public function get($key)
     {
         return $this->translations[$this->currentLanguage][$key];
     }
