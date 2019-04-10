@@ -110,4 +110,22 @@ class PaymentBasicForms extends BasicPaymentOptions
         }
         return Util::parseTemplate($templateFile, $data);
     }
+    /**
+     * Returns the bank choice form without any payment buttons. Useful for gathering bank choice information.
+     * @param bool $onlineOnly show only banks booking online
+     * @param bool $showRegulations show Tpay terms and conditions checkbox
+     * @return string
+     */
+    public function getSimpleBankList($onlineOnly = false, $showRegulations = true)
+    {
+        $data = [
+            'merchant_id' => $this->merchantId,
+            'online_only' => (int)$onlineOnly,
+            'show_regulations_checkbox' => $showRegulations,
+            'regulation_url' => $this->regulationURL,
+        ];
+
+        return Util::parseTemplate('bankSelectionSimple', $data);
+    }
+
 }

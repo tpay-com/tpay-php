@@ -1,0 +1,100 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<div class="insidebg" id="main-payment">
+    <img src="https://tpay.com/img/logo/tpaycom.png" height="145" width="250"/>
+    <div id="groups_v">
+        <div class="separator"><span><p class="font"><br/><?php $lang->l('cards_and_transfers') ?></p></span></div>
+        <center>
+            <div id="bank-selection-form"></div>
+            <div class="separator"><span><p class="font"><br/><?php $lang->l('other_methods') ?></p></span></div>
+            <div id="bank-selection-form2"></div>
+            <br/>
+        </center>
+    </div>
+    <input type="hidden" name="tpay-selected-group" id="tpay-selected-group">
+    <div class="regulations" style="padding-top: 20px; margin-bottom: 20px">
+        <?php if ($data['show_regulations_checkbox'] === true) { ?>
+            <p>
+                <input id="tpay-accept-tos-checkbox" type="checkbox" name="tpay-tos" value="0">
+
+                <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
+                                               target="_blank"><?php $lang->l('regulations_url') ?></a>
+                <?php $lang->l('regulations'); ?>
+            </p>
+
+        <?php } ?>
+    </div>
+</div>
+
+<script>
+    var s = document.createElement('script'),
+        bank_selection_form = document.getElementById('bank-selection-form'),
+        bank_selection_form2 = document.getElementById('bank-selection-form2'),
+        changeBank = function (bank_id) {
+            var input = document.getElementById('tpay-selected-group'),
+                bank_block = document.getElementById('bank-' + bank_id),
+                active_bank_blocks = document.getElementsByClassName('bank-active'),
+                class_name = 'bank-active', cn;
+
+            input.value = bank_id;
+
+            if (active_bank_blocks.length > 0) {
+                cn = active_bank_blocks[0].className;
+                cn = cn.replace(new RegExp("\\s?\\b" + class_name + "\\b", "g"), '');
+                active_bank_blocks[0].className = cn;
+            }
+
+            if (bank_block !== null) {
+                bank_block.className = bank_block.className + ' bank-active';
+            }
+        };
+    s.src = 'https://secure.tpay.com/groups-<?php echo $data['merchant_id'].$data['online_only']; ?>.js';
+    s.onload = function () {
+        var str = '', first = true, i, str2 = '', temp;
+        var others = [157, 106, 109, 148, 104];
+
+        for (i in tr_groups) {
+            var group = tr_groups[i],
+                id = group[0],
+                width_style = (group[0] == 103) ? 'width:273px' : '',
+                checked, class_name;
+
+            if (first) {
+                checked = ' checked';
+                class_name = ' bank-active';
+                first = false;
+                changeBank(id);
+            } else {
+                checked = '';
+                class_name = ''
+            }
+            temp = '<div class="bank-block' + class_name + '" id="bank-' + id +
+                '" style="background-image:url(' + group[3] + ');' + width_style +
+                '"><label onclick="changeBank(' + id + ')"><input type="radio" name="bank-select" value="' +
+                id + '" ' + checked + ' style="visibility: hidden" /></label></div>';
+
+            if (inArray(id, others) === false) {
+                str += temp;
+            } else {
+                str2 += temp;
+            }
+        }
+        bank_selection_form.innerHTML = str;
+        bank_selection_form2.innerHTML = str2;
+    };
+    if (document.getElementById('tpay-accept-tos-checkbox')) {
+        var regulation_checkbox = document.getElementById('tpay-accept-tos-checkbox');
+        regulation_checkbox.onchange = function () {
+            regulation_checkbox.value = (this.checked) ? 1 : 0;
+        };
+    }
+
+    function inArray(needle, haystack) {
+        var length = haystack.length;
+        for (var i = 0; i < length; i++) {
+            if (haystack[i] == needle) return true;
+        }
+        return false;
+    }
+
+    document.getElementsByTagName('head')[0].appendChild(s);
+</script>
