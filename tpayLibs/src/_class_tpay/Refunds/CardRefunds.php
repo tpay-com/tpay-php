@@ -1,14 +1,9 @@
 <?php
-
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 15:50
- */
 namespace tpayLibs\src\_class_tpay\Refunds;
 
 use tpayLibs\src\_class_tpay\CardApi;
 use tpayLibs\src\_class_tpay\Utilities\TException;
+use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\Dictionaries\CardDictionary;
 
 class CardRefunds extends CardApi
@@ -19,21 +14,15 @@ class CardRefunds extends CardApi
      * In both cases amount is adjustable in parameter amount.
      * If only cli_auth is sent amount parameter is required,
      * if sale_auth is passed amount and currency is not necessary -
-     * system will take default values from the specified sale. With sale_auth refund can be made only once
+     * system will take default values from the specified sale.
      *
-     * @param string|bool $saleAuthCode sale auth code
+     * @param string $saleAuthCode optional sale auth code
      * @param string $refundDesc refund description
-     *
-     * @return bool|mixed
-     *
+     * @return array
      * @throws TException
      */
     public function refund($saleAuthCode, $refundDesc)
     {
-        /*
-         * 	required clientAuthCode or sale_auth, refund_desc and amount if only clientAuthCode passed
-         */
-
         if (empty($this->clientAuthCode) && empty($saleAuthCode)) {
             throw new TException ('Empty Token or sale auth');
         }
@@ -59,8 +48,11 @@ class CardRefunds extends CardApi
         $params[CardDictionary::LANGUAGE] = $this->lang;
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('', $params) . $this->cardVerificationCode);
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
+        Util::log('Card refund', print_r($params, true));
+        $result = $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
+        Util::log('Card refund result', print_r($result, true));
 
-        return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
+        return $result;
     }
 
 }
