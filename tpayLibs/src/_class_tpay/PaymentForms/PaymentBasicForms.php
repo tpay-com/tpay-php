@@ -87,7 +87,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             $config = $this->prepareConfig($config);
         }
         $config['group'] = 0;
-        $config['accept_tos'] = ($showRegulations) ? 0 : 1;
+        $config['accept_tos'] = 0;
 
         $data = array(
             static::ACTION_URL => is_null($actionURL) ? $this->panelURL : (string)$actionURL,
