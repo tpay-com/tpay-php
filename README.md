@@ -1,6 +1,6 @@
-# tpay.com
+# Tpay
 
-Library for all payment methods available in tpay.com
+Library for all payment methods available in Tpay
 
 ## Installation
 
