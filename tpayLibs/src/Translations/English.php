@@ -49,25 +49,6 @@ class English
         'not_valid_card' => 'Sorry, your credit card number is invalid. Please enter the valid card number',
         'saved_card_label' => 'Pay by saved card ',
         'new_card_label' => 'Pay by a new card',
-
-        // DAC
-
-        'transfer_details'   => 'Bank transfer details',
-        'payment_amount'     => 'The amount of the payment',
-        'disposable_account' => 'Disposable account number for the payment',
-
-        // SZKWAL
-
-        'account_number' => 'Account number',
-        'payment_title'  => 'Payment title',
-        'payment_method' => 'Payment method',
-        'szkwal_info'    => 'Your title transfer is dedicated to you and very important for the identification of
-             payment. You can create a transfer as defined in its bank to
-              quickly and easily fund your account in the future',
-
-        // WHITE LABEL
-
-        'go_to_bank' => 'Go to bank',
     ];
 
 }

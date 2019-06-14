@@ -20,80 +20,55 @@ class ObjectsHelper
      * Api key
      * @var string
      */
-    protected $trApiKey = '[TR_API_KEY]';
+    protected $trApiKey;
 
     /**
      * Api pass
      * @var string
      */
-    protected $trApiPass = '[TR_API_PASS]';
+    protected $trApiPass;
 
     /**
      * Merchant id
      * @var int
      */
-    protected $merchantId = '[MERCHANT_ID]';
+    protected $merchantId;
 
     /**
      * Merchant secret
      * @var string
      */
-    protected $merchantSecret = '[MERCHANT_SECRET]';
+    protected $merchantSecret;
 
     /**
      * Card API key
      * @var string
      */
-    protected $cardApiKey = '[CARD_API_KEY]';
+    protected $cardApiKey;
 
     /**
      * Card API password
      * @var string
      */
-    protected $cardApiPass = '[CARD_API_PASSWORD]';
+    protected $cardApiPass;
 
     /**
      * Card API code
      * @var string
      */
-    protected $cardVerificationCode = '[CARD_API_CODE]';
+    protected $cardVerificationCode;
 
     /**
      * Card RSA key
      * @var string
      */
-    protected $cardKeyRSA = '[CARD_RSA_KEY]';
+    protected $cardKeyRSA;
 
     /**
      * Card hash algorithm
      * @var string
      */
-    protected $cardHashAlg = '[CARD_HASH_ALG]';
-    /**
-     * API login
-     * @var string
-     */
-    protected $szkwalApiLogin = '[SZKWAL_LOGIN]';
-    /**
-     * API password
-     * @var string
-     */
-    protected $szkwalApiPass = '[SZKWAL_API_PASSWORD]';
-    /**
-     * API hash
-     * @var string
-     */
-    protected $szkwalApiHash = '[SZKWAL_API_HASH]';
-    /**
-     * API partner unique address
-     * @var string
-     */
-    protected $szkwalPartnerUniqueAddress = '[SZKWAL_PARTNER_ADDRESS]';
-    /**
-     * API title format
-     * @var string
-     */
-    protected $szkwalTitleFormat = '[SZKWAL_TITLE_FORMAT]';
+    protected $cardHashAlg = 'sha1';
 
     protected $secureIP = NotificationsIP::SECURE_IPS;
     protected $validateServerIP = true;

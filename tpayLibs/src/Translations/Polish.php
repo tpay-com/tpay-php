@@ -49,25 +49,6 @@ class Polish
         'not_valid_card' => 'Przepraszamy, wprowadzony numer karty jest niepoprawny. Prosimy wprowadzić prawidłowy numer.',
         'saved_card_label' => 'Zapłać zapisaną kartą ',
         'new_card_label' => 'Zapłać nową kartą',
-
-        // DAC
-
-        'transfer_details'   => 'Szczegóły przelewu',
-        'payment_amount'     => 'Kwota przelewu',
-        'disposable_account' => 'Jednorazowy numer konta dla tej transakcji',
-
-        // SZKWAL
-
-        'account_number' => 'Numer konta',
-        'payment_title'  => 'Tytuł przelewu',
-        'payment_method' => 'Sposób płatności',
-        'szkwal_info'    => 'Twój tytuł przelewu jest dedykowany dla Ciebie i bardzo ważny dla identyfikacji wpłaty.
-             Możesz stworzyć przelew zdefiniowany w swoim banku, aby wygodnie i szybko zasilić swoje
-              konto w przyszłości.',
-
-        // WHITE LABEL
-
-        'go_to_bank' => 'Przejdź do banku',
     ];
 
 }

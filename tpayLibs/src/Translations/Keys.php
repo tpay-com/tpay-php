@@ -49,19 +49,6 @@ class Keys
         'not_valid_card',
         'saved_card_label',
         'new_card_label',
-
-        // DAC
-        'transfer_details',
-        'payment_amount',
-        'disposable_account',
-        // SZKWAL
-        'account_number',
-        'payment_title',
-        'payment_method',
-        'szkwal_info',
-
-        // WHITE LABEL
-        'go_to_bank',
     ];
 
     public function __construct()
