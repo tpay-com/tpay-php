@@ -36,20 +36,20 @@ trait FieldsValidator
                 } elseif (array_key_exists((int)$currency, CurrencyCodesDictionary::CODES)) {
                     $currency = (int)$currency;
                 } else {
-                    throw new TException('Currency is not supported.');
+                    throw new TException(sprintf('Currency %s is not supported or invalid.', $currency));
                 }
 
                 break;
             case 'integer':
                 if (!array_key_exists($currency, CurrencyCodesDictionary::CODES)) {
-                    throw new TException('Currency is not supported.');
+                    throw new TException(sprintf('Currency %s is not supported or invalid.', $currency));
                 }
                 break;
             default:
-                throw new TException('Currency variable type not supported.');
+                throw new TException(sprintf('Currency variable type %s not supported.', gettype($currency)));
         }
-        return $currency;
 
+        return $currency;
     }
 
     /**

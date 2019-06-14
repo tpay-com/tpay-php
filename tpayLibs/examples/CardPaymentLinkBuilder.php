@@ -29,6 +29,13 @@ class CardPaymentLinkBuilder extends PaymentCardForms
         '756' => 'CHF',
         '980' => 'UAH',
         '643' => 'RUB',
+        '36' => 'AUD',
+        '348' => 'HUF',
+        '554' => 'NZD',
+        '702' => 'SGD',
+        '682' => 'SAR',
+        '124' => 'CAD',
+        '344' => 'HKD',
     ];
 
     const ALLOWED_LANGUAGES = [
