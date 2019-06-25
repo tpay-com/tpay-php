@@ -1,24 +1,42 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
-
-<?php if (!empty($data['userCards'])) { ?>
-    <form method="post" id="saved_card_payment_form" name="saved_card_payment_form" action="<?php echo $data['payment_redirect_path'] ?>">
-        <div id="saved_card_payment" style="visibility: visible">
-            <?php
-            foreach ($data['userCards'] as $card) { ?>
-                <input type="radio" name="savedId" id="cardN<?php echo $card['cardId'] ?>"
-                       value="<?php echo $card['cardId'] ?>"/>
-                <label for="cardN<?php echo $card['cardId'] ?>"><?php $lang->l('saved_card_label');
-                    echo $card['shortCode']; if (isset($card['vendor'])) {?><img id="saved_icon" class="<?php echo $card['vendor'] ?>"/></label><?php } ?>
-                <br/>
+<div class="tpay-insidebg" id="main-payment">
+    <div class="tpay-panel-inside-content">
+        <div class="tpay-powered_by"></div>
+        <?php if (!empty($data['userCards'])) { ?>
+        <form method="post"
+              id="saved_card_payment_form"
+              name="saved_card_payment_form"
+              class="tpay-cards-choice"
+              action="<?php echo $data['payment_redirect_path'] ?>"
+        >
+            <div id="saved_card_payment" style="visibility: visible">
+                <?php
+                foreach ($data['userCards'] as $card) { ?>
+                <div>
+                    <input type="radio" name="savedId"
+                           id="cardN<?php echo $card['cardId'] ?>"
+                           value="<?php echo $card['cardId'] ?>"/>
+                    <label for="cardN<?php echo $card['cardId'] ?>"><?php $lang->l('saved_card_label');
+                        echo $card['shortCode'];
+                        if (isset($card['vendor'])) { ?></label>
+                    <div id="saved_icon" class="tpay-<?php echo $card['vendor'] ?>-icon"/>
+                </div>
+            </div>
             <?php } ?>
-            <input type="radio" name="savedId" id="newCard" value="new"><label
-                for="newCard"> <?php $lang->l('new_card_label'); ?></label>
-        </div>
-    </form>
+            <?php } ?>
+            <div class="tpay-new-card-section">
+                <input type="radio" name="savedId" id="newCard" value="new"/>
+                <label for="newCard"> <?php $lang->l('new_card_label'); ?></label>
+            </div>
+        </form>
+    </div>
     <div id="card_form" style="display: none">
         <?php echo $data['new_card_form']; ?>
     </div>
-<?php } else {
-    echo $data['new_card_form'];
-} ?>
-<button id="card_continue_btn"><?php $lang->l('card_payment') ?>&nbsp;</button>
+    <?php } else {
+        echo $data['new_card_form'];
+    } ?>
+</div>
+<div class="tpay-buttons-holder">
+    <input class="tpay-pay-button" id="card_continue_btn" type="submit" value="<?php $lang->l('pay') ?>"/>
+</div>

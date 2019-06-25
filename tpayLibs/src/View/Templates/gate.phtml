@@ -2,55 +2,116 @@
 const STATIC_FILES_URL = 'static_files_url';
 const CARD_SAVE_ALLOWED = 'card_save_allowed';
 ?>
-<form method="post" id="card_payment_form" name="card_payment_form">
+
+<form method="post" id="card_payment_form" name="card_payment_form"
+      class="tpay-groups-wrapper">
     <input type="hidden" name="carddata" id="carddata" value=""/>
     <input type="hidden" name="card_vendor" id="card_vendor" value=""/>
-    <div id="powered_by"></div>
-    <div id="card_payment">
-        <label for="card_number"><?php $lang->l('card_number') ?></label>
-        <input id="card_number" pattern="\d*" autocompletetype="cc-number" size="30" type="tel" autocomplete="off"
-               maxlength="23" placeholder="0000 0000 0000 0000" tabindex="1" value=""/>
-        <div id="expiry_date_wrapper">
-            <label for="transaction_card_expiry_month"><?php $lang->l('expiration_date') ?></label><br>
-            <input id="expiry_date" maxlength="9" type="tel" placeholder="00 / 00" autocomplete="off"
-                   autocompletetype="cc-exp" tabindex="2" value=""/>
+    <div class="tpay-channel-form-wrapper tpay-content-wrapper-class">
+        <div id="card_payment" class="tpay-input-wrapper">
+            <div class="tpay-col">
+                <div class="tpay-row">
+                    <div class="tpay-input-wrapper">
+                        <div class="tpay-input-credit-card-number">
+                            <div class="tpay-input-label"><?php $lang->l('card_number') ?></div>
+                            <input id="card_number"
+                                   pattern="\d*"
+                                   autocompletetype="cc-number"
+                                   size="30"
+                                   type="tel"
+                                   autocomplete="off"
+                                   maxlength="23"
+                                   placeholder="XXXX XXXX XXXX XXXX"
+                                   tabindex="1"
+                                   value=""
+                                   class="tpay-input-value"
+                            />
+                            <div class="tpay-card-icon "></div>
+                        </div>
+                    </div>
+
+                    <?php if ($data['showPayerFields']) { ?>
+                        <div class="tpay-input-wrapper">
+                            <div class="tpay-input-label"><?php $lang->l('name_on_card') ?></div>
+                            <input type="text"
+                                   id="c_name"
+                                   placeholder="<?php $lang->l('name_surname') ?>"
+                                   autocomplete="off"
+                                   name="client_name"
+                                   maxlength="64"
+                                   tabindex="4"
+                                   value=""
+                                   class="tpay-input-value"
+                            />
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="tpay-col">
+                <div class="tpay-row">
+                    <div class="tpay-expiration-date-input tpay-input-wrapper">
+                        <div class="tpay-input-label"><?php $lang->l('expiration_date') ?></div>
+                        <input id="expiry_date"
+                               maxlength="9"
+                               type="tel"
+                               placeholder="01 / 2020"
+                               autocomplete="off"
+                               autocompletetype="cc-exp"
+                               tabindex="2"
+                               value=""
+                               class="tpay-input-value"
+                        />
+                    </div>
+                    <div class="tpay-cvv-input tpay-input-wrapper">
+                        <div class="tpay-input-label tpay-input-cvc" title="<?php $lang->l('signature') ?>">CVC</div>
+                        <input id="cvc"
+                               maxlength="4"
+                               type="tel"
+                               autocomplete="off"
+                               autocompletetype="cc-cvc"
+                               placeholder="XXX"
+                               tabindex="3"
+                               value=""
+                               class="tpay-input-value"
+                        />
+                    </div>
+                    <?php if ($data['showPayerFields']) { ?>
+                    <div class="tpay-input-wrapper">
+                        <div class="tpay-input-label">E-mail</div>
+                        <input type="text"
+                               id="c_email"
+                               data-formance_algorithm="complex"
+                               autocomplete="off"
+                               placeholder="E-mail"
+                               name="client_email"
+                               value=""
+                               maxlength="64"
+                               tabindex="5"
+                               class="tpay-input-value"
+                        />
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
         </div>
-        <div id="cvc_wrapper">
-            <label for="cvc">CVC</label><span class="info_button"
-                                              title="<?php $lang->l('signature') ?>">?</span>
-            <input id="cvc" maxlength="4" type="tel" autocomplete="off" autocompletetype="cc-cvc" placeholder="000"
-                   tabindex="3" value=""/>
+    </div>
+    <?php if ($data[CARD_SAVE_ALLOWED]) { ?>
+        <div class="tpay-row" style="width: 10px; height: 10px;"></div>
+        <div class="tpay-row">
+            <div class="tpay-amPmCheckbox">
+                <input type="checkbox" id="card_save" name="card_save"/>
+                <label for="card_save"
+                       class="tpay-info-label"
+                       title="<?php $lang->l('save_card_info') ?>"><?php $lang->l('save_card') ?>
+                </label>
+            </div>
         </div>
-        <?php if($data['showPayerFields']) { ?>
-        <br>
-        <label for="c_name"><?php $lang->l('name_on_card') ?></label>
-        <input type="text" id="c_name" placeholder="<?php $lang->l('name_surname') ?>" autocomplete="off"
-               name="client_name"
-               maxlength="64" tabindex="4" value=""/>
-        <label for="c_email">E-mail</label>
-        <input type="text" id="c_email" data-formance_algorithm="complex" autocomplete="off" placeholder="E-mail"
-               name="client_email" value="" maxlength="64" tabindex="5">
-        <?php } ?>
-        <?php if ($data[CARD_SAVE_ALLOWED]){ ?>
-        <div class="amPmCheckbox">
-            <input type="checkbox" id="card_save" name="card_save"/>
-            <label for="card_save"><?php $lang->l('save_card') ?></label>
-            <span class="info_button" title="<?php $lang->l('save_card_info') ?>">?</span>
-        </div><?php } ?>
-    </div>
-    <div id="card_icons">
-        <div class="card_icon" id="visa"></div>
-        <div class="card_icon" id="mastercard"></div>
-        <div class="card_icon" id="maestro"></div>
-        <div class="card_icon" id="dinersclub"></div>
-        <div class="card_icon" id="jcb"></div>
-        <div class="card_icon" id="amex"></div>
-    </div>
+    <?php } ?>
     <p id="info_msg_not_supported" style="display: none"><?php $lang->l('not_supported_card') ?></p>
     <p id="info_msg_not_valid" style="display: none"><?php $lang->l('not_valid_card') ?></p>
     <div id="loading_scr" style="display:none">
         <img src="<?php echo $data[STATIC_FILES_URL] ?>View/Images/loading.gif"
-             style="vertical-align: middle;"/>&nbsp;&nbsp;<?php $lang->l('processing') ?>
+             style="vertical-align: middle;"/><?php $lang->l('processing') ?>
     </div>
 </form>
 

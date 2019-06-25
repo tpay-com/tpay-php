@@ -28,11 +28,11 @@ function CardPayment(url, pubkey) {
     }
 
     function setWrong($elem) {
-        $elem.addClass('wrong');
+        $elem.addClass('wrong').removeClass('valid');
     }
 
     function setValid($elem) {
-        $elem.removeClass('wrong');
+        $elem.addClass('valid').removeClass('wrong');
     }
 
     function validateCcNumber($elem) {
@@ -41,9 +41,10 @@ function CardPayment(url, pubkey) {
             supported = ['mastercard', 'maestro', 'visa'],
             type = $.payment.cardType(ccNumber),
             notValidNote = $('#info_msg_not_valid'),
+            cardTypeHolder = $('.tpay-card-icon'),
             notSupportedNote = $('#info_msg_not_supported');
         $elem.val($.payment.formatCardNumber($elem.val()));
-        $('div.card_icon').removeClass('hover');
+        cardTypeHolder.attr('class', 'tpay-card-icon');
         if (supported.indexOf(type) < 0 && type !== null && ccNumber.length > 1) {
             showElem(notSupportedNote);
             hideElem(notValidNote);
@@ -63,7 +64,7 @@ function CardPayment(url, pubkey) {
             hideElem(notSupportedNote);
         }
         if (type !== '') {
-            $('#' + type).addClass('hover');
+            cardTypeHolder.addClass('tpay-' + type + '-icon');
         }
 
         return isValid;
@@ -160,7 +161,7 @@ function CardPayment(url, pubkey) {
 
     $('#card_continue_btn').click(function () {
         var savedId = $('input[name=savedId]:checked').val();
-        if ((savedId === 'new' || !$('input[name=savedId]').length)  && checkForm()) {
+        if ((savedId === 'new' || !$('input[name=savedId]').length) && checkForm()) {
             SubmitPayment();
         }
         if ($.isNumeric(savedId)) {

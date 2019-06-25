@@ -90,8 +90,8 @@ class PaymentBlik extends TransactionApi
         Util::log('Blik request params', print_r($config, true));
         $res = $this->requests($url, $config);
         Util::log('Blik response', print_r($res, true));
-        return $res;
 
+        return $res;
     }
 
 }

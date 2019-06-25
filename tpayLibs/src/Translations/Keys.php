@@ -12,19 +12,28 @@ use tpayLibs\src\_class_tpay\Utilities\TException;
 
 class Keys
 {
-
     protected $translations;
+
     private $keys = [
         // GLOBALS
         'fee_info',
         'pay',
         'merchant_info',
         'amount',
+        'name',
+        'address',
+        'city',
+        'zip',
+        'country',
+        'phone',
+        'email',
         'order',
         // BLIK
+        'blik_code_error',
         'blik_info',
         'blik_info2',
         'blik_accept',
+        'codeInputText',
 
         // BANK SELECTION
         'cards_and_transfers',
@@ -43,7 +52,6 @@ class Keys
         'save_card',
         'save_card_info',
         'processing',
-        'card_payment',
         'debit',
         'not_supported_card',
         'not_valid_card',

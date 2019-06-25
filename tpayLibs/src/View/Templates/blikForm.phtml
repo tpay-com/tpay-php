@@ -1,50 +1,67 @@
-<?php
-
-/*
- * Created by tpay.com
- */
-
-?>
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<div class="insidebg" id="blikOneClickForm">
-    <img src="https://secure.tpay.com/_/banks/b64.png"/><br>
-    <div id="codeFields" style="visibility: hidden">
-
-        <label for="blikcode" class="form_input_label">Wpisz kod blik:</label>
-        <input type="text" id="blikcode" name="blikcode" value="" maxlength="6" pattern=".{6,}"
-               title="Kod blik powinien składać się z 6 cyfr!"/>
-        <label for="register" class="form_input_label">Chcę zapamiętać to
-            urządzenie:</label>
-        <input type="checkbox" value="0" id="register" onchange="checkRegister()">
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<div class="tpay-insidebg" id="main-payment">
+    <div class="tpay-header-wrapper">
+        <div class="tpay-header-logo">
+            <img class="tpay-logo" src="https://tpay.com/img/banners/tpay_logo_white.svg"/>
+        </div>
+        <div class="tpay-header-belt"></div>
     </div>
-    <div id="alias" style="visibility: hidden">
-        <p>
-            <label for="blikSwitch" class="form_input_label">Wybierz alias:</label>
-            <select name="blikSwitch" id="blikSwitch" class="form_input"></select>
-        </p>
-
-    </div>
-    <div id="tpayBlikButton">
-        <input type="button" value="<?php
-        $lang->l('pay') ?>" onclick="blikHandler()"
-               id="tpayBlikButton">
-    </div>
-    <div id="t6InputMsg">
-        <small>
-            <a href="#" onclick="showT6()">Chcę wprowadzić kod blik</a>
-        </small>
-    </div>
-    <div>
-        <br/>
-        <small>
-            <?php $lang->l('blik_accept') ?>
-            <a href="<?php echo $data['regulation_url'] ?>"
-               target="_blank"><?php $lang->l('regulations_url') ?></a>
-            <?php $lang->l('regulations'); ?>
-        </small>
+    <div class="tpay-panel-inside-content">
+        <div class="tpay-channel-form-wrapper tpay-content-wrapper-class">
+            <img src="https://secure.tpay.com/_/banks/b64.png"/>
+            <form action="<?php echo $data['action_url'] ?>" method="post" id="tpay-blik-form">
+                <div class="tpay-row">
+                    <div class="tpay-input-blik-code">
+                        <div class="tpay-input-wrapper">
+                            <div class="tpay-input-label"
+                                 title="<?php $lang->l('blik_info') ?>"><?php $lang->l('codeInputText') ?></div>
+                            <input id="blik_code"
+                                   name="blik_code"
+                                   pattern="\d*"
+                                   type="tel"
+                                   autocomplete="off"
+                                   maxlength="6"
+                                   minlength="6"
+                                   placeholder="000000"
+                                   tabindex="1"
+                                   value=""
+                                   class="tpay-input-value tpay-blik-input"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="tpay-amPmCheckbox">
+                    <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
+                    <label for="tpay-accept-regulations-checkbox" class="tpay-info-label">
+                        <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
+                                                       target="_blank"><?php $lang->l('regulations_url') ?></a>
+                        <?php $lang->l('regulations'); ?>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="tpay-buttons-holder">
+            <input class="tpay-pay-button" id="tpay-payment-submit" type="submit" value="<?php $lang->l('pay') ?>">
+        </div>
     </div>
 </div>
-
-<script src="<?php echo $data['static_files_url'] ?>View/JS/blikHandler.js"></script>
-
-<?php
+<script type="text/javascript">
+    var regulation_checkbox = document.getElementById('tpay-accept-regulations-checkbox'),
+        submit_form_input = document.getElementById('tpay-payment-submit'),
+        blik_code_input = document.getElementById('blik_code');
+    submit_form_input.onclick = function () {
+        if (regulation_checkbox.value == 0) {
+            alert('<?php $lang->l('acceptance_is_required') ?>');
+            return false;
+        }
+        if (blik_code_input.value.length !== 6 || /^\d+$/.test(blik_code_input.value) === false) {
+            alert('<?php $lang->l('blik_code_error') ?>');
+            return false;
+        }
+        document.getElementById('tpay-blik-form').submit();
+        return true;
+    };
+    regulation_checkbox.onchange = function () {
+        regulation_checkbox.value = (this.checked) ? 1 : 0;
+    };
+</script>

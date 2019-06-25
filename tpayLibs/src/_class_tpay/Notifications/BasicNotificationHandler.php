@@ -20,7 +20,7 @@ class BasicNotificationHandler extends BasicPaymentOptions
      * This method check server ip, required fields and md5 checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
      * @param string $response Print response to Tpay server (enum: 'TRUE', 'FALSE').
-     * If empty, there you have to print it somewhere else to avoid rescheduling notifications
+     * If empty, then you have to print it somewhere else to avoid rescheduling notifications
      * @return array
      * @throws TException
      */
