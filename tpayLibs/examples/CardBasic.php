@@ -53,7 +53,7 @@ class CardBasic extends PaymentCardForms
             $this
                 ->setAmount(99.15)
                 ->setCurrency(985)
-                ->setOrderID(123)
+                ->setOrderID('123')
                 ->setReturnUrls('https://shop.com/success', 'https://shop.com/error');
             $transaction =  $this->registerSale($config['name'], $config['email'], $config['desc']);
             if (isset($transaction['sale_auth']) === false) {

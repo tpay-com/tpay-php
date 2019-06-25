@@ -27,11 +27,9 @@ class MassPaymentExample extends MassPayments
 
     public function listMassPayment()
     {
-
         /**
          * Masspayment list packs
          */
-
         $packId = false;
         $from = '2016-01-01';
         $to = '2017-01-01';
@@ -42,27 +40,21 @@ class MassPaymentExample extends MassPayments
         } catch (TException $e) {
             var_dump($e);
         }
-
-
     }
-
 
     public function transferMassPayment()
     {
         /**
          * Masspayment transfer
          */
-
         $packId = '123123';
         $transactionId = static::TRID;
-
         try {
             $result = $this->massPaymentTransfers($packId, $transactionId);
             print_r($result);
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
     public function authorizeMassPayment()
@@ -70,16 +62,13 @@ class MassPaymentExample extends MassPayments
         /**
          * Masspayment Authorizee
          */
-
         $packId = '123123123';
-
         try {
             $result = $this->massPaymentAuthorize($packId);
             print_r($result);
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
     public function createMassPayment()
@@ -87,17 +76,13 @@ class MassPaymentExample extends MassPayments
         /**
          * Masspayment create
          */
-
-
         $csv = file_get_contents('masspayment.csv');
-
         try {
             $result = $this->massPaymentCreate($csv);
             print_r($result);
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
 }

@@ -24,17 +24,15 @@ class TransactionReportsApi extends BasicReports
     }
 
     /**
+     * Get transactions report
      * @param string $dateStart 'report date start range'
      * @param bool|string $dateEnd 'report date end range - false if to current date'
      * @param bool $csv 'decide if return report in csv format or table associated'
      */
     public function getReportTransaction($dateStart, $dateEnd = false, $csv = false)
     {
-        /**
-         * Get report
-         */
         try {
-            //Change $raw report method parameter to get RAW CSV formatted report
+            //Set $csv parameter value to bool true, to get RAW CSV formatted report
             $result = $this->report($dateStart, $dateEnd, $csv);
             if (is_null($result)) {
                 echo 'Report is empty for this time range.';

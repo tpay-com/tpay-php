@@ -38,15 +38,15 @@ All methods described in [tpay documentation](https://docs.tpay.com) can be easi
 
 ##### Basic Payments and bank selection forms: 
   
-   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php), [Bank selection html form](tpayLibs/examples/BankSelection.php), [Bank selection API form](tpayLibs/examples/BankSelectionAPI.php)
+   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php), [Bank selection html form](tpayLibs/examples/BankSelection.php), [Bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [Blik form](tpayLibs/examples/BlikTransactionExample.php)
   
 ##### Transaction API / create, get, refund, report 
     
-   Example of usages: [Create transaction](tpayLibs/examples/TransactionApiExample.php), [Refund Transaction](tpayLibs/examples/TransactionRefund.php)
+   Example of usages: [Create transaction](tpayLibs/examples/TransactionApiExample.php), [Refund Transaction](tpayLibs/examples/TransactionRefund.php), [Refund Transaction Status](tpayLibs/examples/TransactionRefundStatus.php)
   
 ##### Card Basic / Card On-Site
 
-  Example of usages: [Card basic form](tpayLibs/examples/CardBasicForm.php), [Card On-site Gateway](tpayLibs/examples/CardGate.php), [Card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php)
+  Example of usages: [Card basic form](tpayLibs/examples/CardBasic.php), [Card On-site Gateway](tpayLibs/examples/CardGate.php), [Card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php), [Card On-site Gateway with saved cards](tpayLibs/examples/CardGateExtended.php)
 
 ## Logs
 Library has own logging system to save all confirmations and notifications sent by Tpay.com server, outgoing requests and exceptions.
