@@ -23,13 +23,9 @@ class PaymentBasicForms extends BasicPaymentOptions
      */
     const PAYMENT_FORM = 'paymentForm';
 
-    protected $panelURL = 'https://secure.tpay.com';
+    const TPAY_TERMS_OF_SERVICE_URL = 'https://secure.tpay.com/regulamin.pdf';
 
-    /**
-     * URL to tpay regulations file
-     * @var string
-     */
-    private $regulationURL = 'https://secure.tpay.com/regulamin.pdf';
+    protected $panelURL = 'https://secure.tpay.com';
 
     /**
      * Create HTML form for basic panel payment based on transaction config
@@ -50,7 +46,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             static::FIELDS => $config,
             'redirect' => $redirect,
             'show_regulations_checkbox' => $showRegulations,
-            'regulation_url' => $this->regulationURL,
+            'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
         );
 
         return Util::parseTemplate(static::PAYMENT_FORM, $data);
@@ -66,7 +62,7 @@ class PaymentBasicForms extends BasicPaymentOptions
     public function getBlikSelectionForm($formActionUrl)
     {
         $data = array(
-            'regulation_url' => $this->regulationURL,
+            'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
             'action_url' => $formActionUrl,
         );
 
@@ -103,7 +99,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             static::FIELDS => $config,
             'redirect' => false,
             'show_regulations_checkbox' => $showRegulations,
-            'regulation_url'  => $this->regulationURL,
+            'regulation_url'  => static::TPAY_TERMS_OF_SERVICE_URL,
         );
 
         $form = Util::parseTemplate(static::PAYMENT_FORM, $data);
@@ -130,7 +126,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             'merchant_id' => $this->merchantId,
             'online_only' => (int)$onlineOnly,
             'show_regulations_checkbox' => $showRegulations,
-            'regulation_url' => $this->regulationURL,
+            'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
         ];
 
         return Util::parseTemplate('bankSelectionSimple', $data);

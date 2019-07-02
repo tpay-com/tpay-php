@@ -6,7 +6,8 @@ function CardPayment(url, pubkey) {
         expiryInput = $('#expiry_date'),
         cvcInput = $('#cvc'),
         nameInput = $('#c_name'),
-        emailInput = $('#c_email');
+        emailInput = $('#c_email'),
+        termsOfServiceInput = $('#tpay-cards-accept-regulations-checkbox');
     const TRIGGER_EVENTS = 'input change blur';
 
     function SubmitPayment() {
@@ -144,6 +145,18 @@ function CardPayment(url, pubkey) {
         return true;
     }
 
+    function validateTos($elem) {
+        if ($elem.is(':checked')) {
+            setValid($elem);
+
+            return true;
+        } else {
+            setWrong($elem);
+
+            return false;
+        }
+    }
+
     function checkForm() {
         var isValidForm = false;
         if (
@@ -152,6 +165,7 @@ function CardPayment(url, pubkey) {
             && validateCvc(cvcInput)
             && checkName()
             && checkEmail()
+            && validateTos(termsOfServiceInput)
         ) {
             isValidForm = true;
         }
@@ -164,7 +178,7 @@ function CardPayment(url, pubkey) {
         if ((savedId === 'new' || !$('input[name=savedId]').length) && checkForm()) {
             SubmitPayment();
         }
-        if ($.isNumeric(savedId)) {
+        if ($.isNumeric(savedId) && validateTos(termsOfServiceInput)) {
             $('#saved_card_payment_form').submit();
         }
     });
@@ -182,6 +196,9 @@ function CardPayment(url, pubkey) {
     });
     emailInput.on(TRIGGER_EVENTS, function () {
         validateEmail($(this));
+    });
+    termsOfServiceInput.on(TRIGGER_EVENTS, function () {
+        validateTos($(this));
     });
 
 }

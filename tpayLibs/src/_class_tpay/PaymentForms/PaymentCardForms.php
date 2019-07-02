@@ -15,6 +15,8 @@ use tpayLibs\src\Dictionaries\CardDictionary;
 
 class PaymentCardForms extends PaymentCard
 {
+    const TPAY_TERMS_OF_SERVICE_URL = 'https://secure.tpay.com/regulamin.pdf';
+
     /**
      * tpay payment url
      * @var string
@@ -73,15 +75,15 @@ class PaymentCardForms extends PaymentCard
         $cardSaveAllowed = true,
         $payerFields = true,
         $savedCards = []
-    )
-    {
-        $data = array(
-            'rsa_key'               => $this->cardKeyRSA,
+    ) {
+        $data = [
+            'rsa_key' => $this->cardKeyRSA,
             'payment_redirect_path' => $paymentRedirectPath,
-            'card_save_allowed'     => $cardSaveAllowed,
-            'showPayerFields'       => $payerFields,
-            'userCards'             => $savedCards,
-        );
+            'card_save_allowed' => $cardSaveAllowed,
+            'showPayerFields' => $payerFields,
+            'userCards' => $savedCards,
+            'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
+        ];
         $data['new_card_form'] = Util::parseTemplate('gate', $data);
 
         return Util::parseTemplate('savedCardForm', $data);
