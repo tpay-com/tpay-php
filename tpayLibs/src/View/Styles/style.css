@@ -4,6 +4,7 @@
     margin: 0 auto;
     box-sizing: border-box;
     background: #F7F7FA;
+    padding-bottom: 3px;
 }
 
 #blik_img {
@@ -290,7 +291,7 @@ form select.wrong
 
 .tpay-groups-wrapper .tpay-content-wrapper-class {
     background: #FFF;
-    width: 100%;
+    width: 95%;
     padding: 0 20px 0 20px;
     box-sizing: border-box;
     overflow: hidden;
@@ -370,6 +371,9 @@ form select.wrong
 .tpay-panel-inside-content {
     margin: 30px;
     text-align: center;
+    padding-bottom: 20px;
+    background: #FFF;
+    border-radius: 7px;
 }
 
 .tpay-buttons-holder {
