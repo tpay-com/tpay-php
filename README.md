@@ -2,6 +2,10 @@
 
 Library for all payment methods available in Tpay
 
+## Requirements
+
+  * PHP > 5.6.0
+
 ## Installation
 
 Install via composer:
@@ -66,9 +70,13 @@ Util::$customLogPatch = '/my/own/path/Logs/';
  ```
  The logs file names will be assigned automatically.
 
-## Requirements
+## Custom templates path
 
-  * PHP > 5.6.0
+You can set your own templates path so you can copy and modify the phtml template files from this library.
+
+ ```php
+Util::$customTemplateDirectory = '/my/own/templates/path/';
+ ```
 
 ## Language
 
