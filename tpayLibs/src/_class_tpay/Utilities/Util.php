@@ -19,11 +19,16 @@ class Util
 
     static $lang = 'en';
 
-    static $libraryPath = null;
+    static $libraryPath;
 
     static $loggingEnabled = true;
 
     static $customLogPatch;
+
+    /**
+     * Override to set your own templates directory. You can modify the library templates copied to your custom path
+     */
+    static $customTemplateDirectory;
 
     /**
      * Parse template file
@@ -38,7 +43,11 @@ class Util
         } else {
             $data['static_files_url'] =  static::$libraryPath;
         }
-        $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
+        if (is_null(static::$libraryPath)) {
+            $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
+        } else {
+            $templateDirectory =  static::$customTemplateDirectory;
+        }
         $buffer = false;
 
         if (ob_get_length() > 0) {
