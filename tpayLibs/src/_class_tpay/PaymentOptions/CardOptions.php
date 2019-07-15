@@ -60,7 +60,7 @@ class CardOptions extends ObjectsHelper
 
     public function setLanguage($lang)
     {
-        $this->lang = $this->validateCardLanguage($lang);
+        $this->lang = strtolower($this->validateCardLanguage($lang));
         return $this;
     }
 
