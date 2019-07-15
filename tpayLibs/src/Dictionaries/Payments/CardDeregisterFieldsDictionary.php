@@ -55,6 +55,15 @@ class CardDeregisterFieldsDictionary
 
     const RESPONSE_FIELDS = array(
         /**
+         * Method type
+         */
+        FieldsConfigDictionary::TYPE => array(
+            FieldsConfigDictionary::REQUIRED => true,
+            FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
+            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
+            FieldsConfigDictionary::OPTIONS => array('deregister'),
+        ),
+        /**
          * client authorization ID, sent if oneTimer option is not set
          * when creating client and client has not been deregistered (himFieldsConfigDictionary or by api)
          */
@@ -87,6 +96,6 @@ class CardDeregisterFieldsDictionary
         /**
          * Message checksum
          */
-        self::REQUEST_FIELDS['sign'],
+        'sign' => self::REQUEST_FIELDS['sign'],
     );
 }

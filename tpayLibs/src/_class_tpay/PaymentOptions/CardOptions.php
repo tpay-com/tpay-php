@@ -9,7 +9,7 @@ use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
 class CardOptions extends ObjectsHelper
 {
     public $cardsApiURL = 'https://secure.tpay.com/api/cards/';
-    protected $currency = 985;
+    public $currency = 985;
     protected $orderID = '';
     protected $oneTimer = true;
     protected $lang = 'pl';
