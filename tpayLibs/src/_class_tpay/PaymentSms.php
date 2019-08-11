@@ -42,8 +42,8 @@ class PaymentSMS extends ObjectsHelper
             'tfCodeToCheck' => $codeToCheck,
             'tfHash'        => $hash,
         );
-        $this->isValidCode($this->requests($this->secureURL, $postData));
 
+        return $this->isValidCode($this->requests($this->secureURL, $postData));
     }
 
     /**
