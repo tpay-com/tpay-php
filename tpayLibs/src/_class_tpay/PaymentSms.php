@@ -1,11 +1,7 @@
 <?php
-
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay;
 
+use tpayLibs\src\_class_tpay\Curl\Curl;
 use tpayLibs\src\_class_tpay\Utilities\ObjectsHelper;
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
@@ -21,7 +17,7 @@ class PaymentSMS extends ObjectsHelper
      * Url to verify SMS code
      * @var string
      */
-    private $secureURL = 'http://sms.tpay.com/widget/verifyCode.php';
+    private $secureURL = 'https://sms.tpay.com/widget/verifyCode.php';
 
     /**
      * Get code sent by from tpay SMS widget.
@@ -42,8 +38,22 @@ class PaymentSMS extends ObjectsHelper
             'tfCodeToCheck' => $codeToCheck,
             'tfHash'        => $hash,
         );
+        Util::log('Sms verification request', json_encode($postData));
+        $response = $this->requests($this->secureURL, $postData);
+        Util::log('Sms verification response', print_r($response, true));
 
-        return $this->isValidCode($this->requests($this->secureURL, $postData));
+        return $this->isValidCode($response);
+    }
+
+    public function requests($url, $params)
+    {
+        $this->curl = new Curl();
+
+        return $this->curl
+            ->setRequestUrl($url)
+            ->setPostData($params)
+            ->doRequest()
+            ->getResult();
     }
 
     /**
