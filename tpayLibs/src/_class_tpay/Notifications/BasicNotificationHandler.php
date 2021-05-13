@@ -54,7 +54,7 @@ class BasicNotificationHandler extends BasicPaymentOptions
      * merchant and tpay system.
      *
      * @param string $md5sum md5 sum received from tpay
-     * @param float $transactionAmount transaction amount
+     * @param string $transactionAmount transaction amount
      * @param string $crc transaction crc
      *
      * @return bool
