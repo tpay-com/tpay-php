@@ -46,7 +46,7 @@ class CardRefunds extends CardApi
         }
         $params[CardDictionary::CURRENCY] = $this->currency;
         $params[CardDictionary::LANGUAGE] = $this->lang;
-        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('', $params) . $this->cardVerificationCode);
+        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) .'&'. $this->cardVerificationCode);
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log('Card refund', print_r($params, true));
         $result = $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
