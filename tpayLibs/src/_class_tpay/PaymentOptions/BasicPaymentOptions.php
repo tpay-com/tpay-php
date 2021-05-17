@@ -58,12 +58,12 @@ class BasicPaymentOptions extends ObjectsHelper
             $this->validateConfig(new PaymentTypeBasic(), $config);
         $crc = isset($ready['crc']) ? $ready['crc'] : '';
 
-        $md5Params = array(
+        $md5Params = [
             $this->merchantId,
             $ready['amount'],
             $crc,
             $this->merchantSecret,
-        );
+        ];
         $ready['md5sum'] = md5(implode('&', $md5Params));
         $ready['id'] = $this->merchantId;
 

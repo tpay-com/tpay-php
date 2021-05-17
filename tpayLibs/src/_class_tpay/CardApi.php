@@ -97,7 +97,7 @@ class CardApi extends CardOptions
             $params[CardDictionary::ORDERID] = $this->orderID;
         }
 
-        $hashParams = array(
+        $hashParams = [
             CardDictionary::PRESALE,
             $this->clientAuthCode,
             $saleDescription,
@@ -106,7 +106,7 @@ class CardApi extends CardOptions
             $this->orderID,
             $this->lang,
             $this->cardVerificationCode,
-            );
+            ];
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $hashParams));
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log('Pre sale params with hash ',
@@ -134,12 +134,14 @@ class CardApi extends CardOptions
             CardDictionary::CLIAUTH  => $this->clientAuthCode,
             CardDictionary::SALEAUTH => $saleAuthCode,
         );
-        $hashParams= array(
+        $hashParams = [
             CardDictionary::SALE,
             $this->clientAuthCode,
             $saleAuthCode,
             $this->cardVerificationCode,
-        );
+        ];
+
+
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $hashParams));
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log('Sale request params', print_r($params, true));
