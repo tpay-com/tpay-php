@@ -96,7 +96,6 @@ class CardApi extends CardOptions
         if (!empty($this->orderID)) {
             $params[CardDictionary::ORDERID] = $this->orderID;
         }
-
         $hashParams = [
             CardDictionary::PRESALE,
             $this->clientAuthCode,
@@ -140,7 +139,6 @@ class CardApi extends CardOptions
             $saleAuthCode,
             $this->cardVerificationCode,
         ];
-
 
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $hashParams));
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
