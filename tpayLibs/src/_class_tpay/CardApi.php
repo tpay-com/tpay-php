@@ -32,23 +32,29 @@ class CardApi extends CardOptions
             $params['card'] = $this->cardData;
         }
         $params = array_merge($params, array(
-            CardDictionary::NAME   => $clientName,
-            CardDictionary::EMAIL  => $clientEmail,
-            CardDictionary::DESC   => $saleDescription,
+            CardDictionary::NAME => $clientName,
+            CardDictionary::EMAIL => $clientEmail,
+            CardDictionary::DESC => $saleDescription,
             CardDictionary::AMOUNT => $this->amount,
         ));
         $params[CardDictionary::CURRENCY] = $this->currency;
-        if (!empty($this->orderID)) {
-            $params['order_id'] = $this->orderID;
+        $optionalParams = [
+            'order_id' => !empty($this->orderID) ? $this->orderID : '',
+            'onetimer' => $this->oneTimer ? : '',
+            CardDictionary::LANGUAGE => $this->lang,
+            'enable_pow_url' => $this->enablePowUrl ? 1 : '',
+        ];
+        if($this->method === 'register_sale')
+        {
+            unset($optionalParams['enable_pow_url']);
         }
-        if ($this->oneTimer) {
-            $params['onetimer'] = $this->oneTimer;
+        $params = array_merge($params, $optionalParams);
+        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) . '&' . $this->cardVerificationCode);
+        foreach ($optionalParams as $optionalParamKey => $optionalParamValue) {
+            if ($optionalParamValue === '') {
+                unset($params[$optionalParamKey]);
+            }
         }
-        $params[CardDictionary::LANGUAGE] = $this->lang;
-        if ($this->enablePowUrl) {
-            $params['enable_pow_url'] = 1;
-        }
-        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) .'&'. $this->cardVerificationCode);
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         $params = array_merge($params, $this->checkReturnUrls());
         if (!is_null($this->moduleName)) {
@@ -165,3 +171,4 @@ class CardApi extends CardOptions
         return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
     }
 }
+
