@@ -54,12 +54,6 @@ class CardRefunds extends CardApi
                 unset($params[$paramsValue]);
             }
         }
-
-
-
-
-
-
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log('Card refund', print_r($params, true));
         $result = $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
