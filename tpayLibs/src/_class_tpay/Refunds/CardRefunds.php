@@ -43,9 +43,7 @@ class CardRefunds extends CardApi
         }
         $params[CardDictionary::SALE_AUTH] = isset($saleAuthCode) ? $saleAuthCode : '';
         $params[CardDictionary::DESC] = isset($refundDesc) ? $refundDesc : '';
-        if (!empty($this->amount)) {
-            $params[CardDictionary::AMOUNT] = $this->amount;
-        }
+        $params[CardDictionary::AMOUNT] = !empty($this->amount) ? $this->amount : '';
         $params[CardDictionary::CURRENCY] = isset($this->currency) ? $this->currency : '';
         $params[CardDictionary::LANGUAGE] = isset($this->lang) ? $this->lang : '';
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) .'&'. $this->cardVerificationCode);
