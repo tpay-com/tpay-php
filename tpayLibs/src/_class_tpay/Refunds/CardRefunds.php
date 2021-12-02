@@ -48,8 +48,8 @@ class CardRefunds extends CardApi
         $params[CardDictionary::LANGUAGE] = isset($this->lang) ? $this->lang : '';
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) .'&'. $this->cardVerificationCode);
         foreach ($params as $paramsKey => $paramsValue) {
-            if ($paramsKey === '') {
-                unset($params[$paramsValue]);
+            if ($paramsValue === '') {
+                unset($params[$paramsKey]);
             }
         }
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
