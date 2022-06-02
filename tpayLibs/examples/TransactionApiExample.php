@@ -62,8 +62,8 @@ class TransactionApiExample extends TransactionApi
         );
         try {
             $res = $this->create($config);
-            $this->trId = $res['title'];
-            echo '<a href="https://secure.tpay.com/?gtitle=' . $this->trId . '">go to payment</a>';
+            $this->trUrl = $res['url'];
+            echo '<a href='.$this->trUrl . '>go to payment</a>';
 
         } catch (TException $e) {
             var_dump($e);
