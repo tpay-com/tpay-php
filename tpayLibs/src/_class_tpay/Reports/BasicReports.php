@@ -12,6 +12,9 @@ use tpayLibs\src\_class_tpay\TransactionApi;
 
 class BasicReports extends TransactionApi
 {
+    const CSV_SEPARATOR = ';';
+    const CSV_EOL = "\n";
+
     /**
      * Get transactions report
      *
@@ -58,28 +61,53 @@ class BasicReports extends TransactionApi
         return $response;
     }
 
+    /**
+     * @param array $response
+     * @return array|null
+     */
     private function associateReportArray($response)
     {
-        $report = explode(';', preg_replace('/[\n]+[0-9]+/', '', $response['report']));
-        if (count($report) < 24) {
+        $reportCsvLines = explode(self::CSV_EOL, $response['report']);
+
+        $isEmpty = count($reportCsvLines) < 2;
+        if ($isEmpty) {
             return null;
         }
-        $reportDefinition = array_slice($report, 1, 22);
-        $j = 0;
-        $k = 0;
-        $reportArray = [];
-        for ($i = 23; $i < count($report); $i++) {
-            $reportArray[$j][$reportDefinition[$k]] = trim(preg_replace('/\s\s+/', ' ', str_replace('"', '', $report[$i])));
-            if ($i % 22 === 0) {
-                $j++;
-            }
-            ++$k;
-            if ($k === count($reportDefinition)) {
-                $k = 0;
-            }
+
+        $firstRowData = array_shift($reportCsvLines);
+        $columnNames = $this->removeLineCounterColumn(
+            $this->csvLineToArray($firstRowData)
+        );
+
+        $result = [];
+        while (false === empty($reportCsvLines)) {
+            $rowData = array_shift($reportCsvLines);
+
+            $values = $this->removeLineCounterColumn(
+                $this->csvLineToArray($rowData)
+            );
+
+            $result[] = array_combine($columnNames, $values);
         }
 
-        return $reportArray;
+        return $result;
     }
 
+    /**
+     * @param array $values
+     * @return array
+     */
+    private function removeLineCounterColumn(array $values)
+    {
+        return array_slice($values, 1);
+    }
+
+    /**
+     * @param string $csvLine
+     * @return array
+     */
+    private function csvLineToArray($csvLine)
+    {
+        return str_getcsv($csvLine, self::CSV_SEPARATOR);
+    }
 }
