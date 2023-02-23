@@ -67,7 +67,9 @@ class BasicReports extends TransactionApi
      */
     private function associateReportArray($response)
     {
-        $reportCsvLines = explode(self::CSV_EOL, $response['report']);
+        $allReportCsvLines = explode(self::CSV_EOL, $response['report']);
+
+        $reportCsvLines = $this->removeCsvHeader($allReportCsvLines);
 
         $isEmpty = count($reportCsvLines) < 2;
         if ($isEmpty) {
@@ -83,6 +85,10 @@ class BasicReports extends TransactionApi
         while (false === empty($reportCsvLines)) {
             $rowData = array_shift($reportCsvLines);
 
+            if (empty($rowData)) {
+                break;
+            }
+
             $values = $this->removeLineCounterColumn(
                 $this->csvLineToArray($rowData)
             );
@@ -91,6 +97,15 @@ class BasicReports extends TransactionApi
         }
 
         return $result;
+    }
+
+    /**
+     * @param array $reportCsvLines
+     * @return array
+     */
+    private function removeCsvHeader(array $reportCsvLines)
+    {
+        return array_slice($reportCsvLines, 2);
     }
 
     /**
