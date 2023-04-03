@@ -10,109 +10,22 @@ function CardPayment(url, pubkey) {
         termsOfServiceInput = $('#tpay-cards-accept-regulations-checkbox');
     const TRIGGER_EVENTS = 'input change blur';
 
-    const PEMPatternsByType = {
-      public: {
-        header: /-+BEGIN PUBLIC KEY-+/,
-        footer: /-+END PUBLIC KEY-+/,
-      },
-      private: {
-        header: /-+BEGIN PRIVATE KEY-+/,
-        footer: /-+END PRIVATE KEY-+/,
-      },
-    };
-
-    function binaryStringToArrayBuffer(str) {
-      const buf = new ArrayBuffer(str.length);
-      const bufView = new Uint8Array(buf);
-      for (let i = 0, strLen = str.length; i < strLen; i += 1) {
-        bufView[i] = str.charCodeAt(i);
-      }
-      return buf;
-    }
-
-    function arrayBufferToBase64(buffer) {
-      const bufView = new Uint8Array(buffer);
-      let inputString = "";
-      for (let i = 0, byteLength = bufView.byteLength; i < byteLength; i += 1) {
-        inputString += String.fromCharCode(bufView[i]);
-      }
-      return window.btoa(inputString);
-    }
-
-    function extractDER(pem, type) {
-      if (typeof pem !== "string") {
-        throw new TypeError("The pem argument must be a string");
-      }
-      // fetch the part of the PEM string between header and footer
-      if (!PEMPatternsByType[type]) {
-        throw new Error(
-          "Unknown key type: " +
-            type +
-            " - supported key types: " +
-            Object.keys(PEMPatternsByType).join(", ")
-        );
-      }
-      const { header: headerPattern, footer: footerPattern } =
-        PEMPatternsByType[type];
-      const headerMatch = pem.match(headerPattern);
-      const footerMatch = pem.match(footerPattern);
-      if (!headerMatch || !footerMatch) {
-        throw new Error("No header/footer found in PEM");
-      }
-      const pemContents = pem.slice(
-        headerMatch.index + headerMatch[0].length,
-        footerMatch.index
-      );
-      // base64 decode the string to get the binary data
-      const binaryDerString = window.atob(pemContents);
-      // convert from a binary string to an ArrayBuffer
-      return binaryStringToArrayBuffer(binaryDerString);
-    }
-
-    function encodeCardDetails(publicKey, cardDetails) {
-      const extractedDER = extractDER(window.atob(publicKey), "public");
-      return window.crypto.subtle
-        .importKey(
-          "spki",
-          extractedDER,
-          { name: "RSA-OAEP", hash: "SHA-256" },
-          false,
-          ["encrypt"]
-        )
-        .then(function (cryptoKey) {
-          return window.crypto.subtle
-            .encrypt(
-              { name: "RSA-OAEP" },
-              cryptoKey,
-              new TextEncoder().encode(cardDetails)
-            )
-            .then(function (cryptoText) {
-              return arrayBufferToBase64(cryptoText);
-            });
-        });
-    }
-
     function SubmitPayment() {
-      const cardNumber = numberInput.val().replace(/\s/g, "");
-      const cd =
-        cardNumber +
-        "|" +
-        expiryInput.val().replace(/\s/g, "") +
-        "|" +
-        cvcInput.val().replace(/\s/g, "") +
-        "|" +
-        document.location.origin;
-
-      encodeCardDetails(pubkey, cd).then(function (encryptedDetails) {
+        var cardNumber = numberInput.val().replace(/\s/g, ''),
+            cd = cardNumber + '|' + expiryInput.val().replace(/\s/g, '') + '|' + cvcInput.val().replace(/\s/g, '') + '|' + document.location.origin,
+            encrypt = new JSEncrypt(),
+            decoded = Base64.decode(pubkey),
+            encrypted;
         $("#card_continue_btn").fadeOut();
         $("#loading_scr").fadeIn();
-        $("#carddata").val(encryptedDetails);
+        encrypt.setPublicKey(decoded);
+        encrypted = encrypt.encrypt(cd);
+        $("#carddata").val(encrypted);
         $("#card_vendor").val($.payment.cardType(cardNumber));
-        numberInput.val("");
-        expiryInput.val("");
-        cvcInput.val("");
-        $("#card_payment_form").trigger("submit");
-      });
+        numberInput.val('');
+        expiryInput.val('');
+        cvcInput.val('');
+        $('#card_payment_form').submit();
     }
 
     function setWrong($elem) {
