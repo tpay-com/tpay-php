@@ -1,0 +1,46 @@
+name: Continuous integration
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  check:
+    name: PHP ${{ matrix.php-version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php-version: '5.6'
+          - php-version: '7.0'
+          - php-version: '7.1'
+          - php-version: '7.2'
+          - php-version: '7.3'
+          - php-version: '7.4'
+          - php-version: '8.0'
+          - php-version: '8.1'
+          - php-version: '8.2'
+          - php-version: '8.3'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: none, curl, dom, iconv, json, mbstring, tokenizer, xml, xmlwriter
+          coverage: none
+
+      - id: composer-cache
+        shell: bash
+        run: echo "dir=$(composer config cache-dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+
+      - run: composer update --no-progress --classmap-authoritative
+
+      - run: ./vendor/bin/parallel-lint ./tpayLibs/
