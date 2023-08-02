@@ -20,6 +20,9 @@
     "php": ">=5.6.0",
     "ext-curl": "*"
   },
+  "require-dev": {
+    "php-parallel-lint/php-parallel-lint": "^1.3.2"
+  },
   "support": {
     "issues": "https://github.com/tpay-com/tpay-php/issues"
   },
