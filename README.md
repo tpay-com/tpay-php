@@ -1,78 +1,74 @@
 # Tpay
 
-Library for all payment methods available in Tpay
+Library for all payment methods available in [Tpay](https://tpay.com).
 
-## Requirements
-
-  * PHP > 5.6.0
+[![Latest stable version](https://img.shields.io/packagist/v/tpay-com/tpay-php.svg?label=current%20version)](https://packagist.org/packages/tpay-com/tpay-php)
+[![PHP version](https://img.shields.io/packagist/php-v/tpay-com/tpay-php.svg)](https://php.net)
+[![License](https://img.shields.io/github/license/tpay-com/tpay-php.svg)](LICENSE)
+[![CI status](https://github.com/tpay-com/tpay-php/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/tpay-com/tpay-php/actions)
 
 ## Installation
 
-Install via composer:
-```php
+Install via [Composer](https://getcomposer.org):
+```console
 composer require tpay-com/tpay-php
 ```
-Install via git over ssh:
-```php
+
+Install via [Git](https://git-scm.com) over SSH:
+```console
 git clone git@github.com:tpay-com/tpay-php.git
 ```
 
-Install via git over https:
-```php
+Install via [Git](https://git-scm.com) over HTTPS:
+```console
 git clone https://github.com/tpay-com/tpay-php.git
 ```
-manual download:
+
+Manual download:
 https://github.com/tpay-com/tpay-php/archive/master.zip
 
 ## Configuration
 
-The only thing you need to do is to set your API access data via $this-> ([see examples](tpayLibs/examples))
-You can generate access keys in tpay merchant panel (https://secure.tpay.com/panel)
+The only thing you need to do is to set your API access data via `$this->` ([see examples](tpayLibs/examples)).
+You can generate access keys in [Tpay's merchant panel](https://secure.tpay.com/panel).
 
-The [loader.php](tpayLibs/examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing
+The [`loader.php`](tpayLibs/examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing.
 (remember to configure your current working path correctly).
 
-All methods described in [tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [src](tpayLibs/src) folder ([see examples](tpayLibs/examples))
-  
-###Example configuration data should look like this:
+All methods described in [Tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [`src`](tpayLibs/src) directory ([see examples](tpayLibs/examples)).
 
-  merchantId - merchant id ex. 1010
-  
-  merchantSecret - merchant secret ex. demo
+##### Basic Payments and bank selection forms
 
-##### Basic Payments and bank selection forms: 
-  
-   Example of usages: [Basic](tpayLibs/examples/BasicPaymentForm.php), [Bank selection html form](tpayLibs/examples/BankSelection.php), [Bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [Blik form](tpayLibs/examples/BlikTransactionExample.php)
-  
-##### Transaction API / create, get, refund, report 
-    
-   Example of usages: [Create transaction](tpayLibs/examples/TransactionApiExample.php), [Refund Transaction](tpayLibs/examples/TransactionRefund.php), [Refund Transaction Status](tpayLibs/examples/TransactionRefundStatus.php)
-  
+   Example of usages: [basic](tpayLibs/examples/BasicPaymentForm.php), [bank selection HTML form](tpayLibs/examples/BankSelection.php), [bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [Blik form](tpayLibs/examples/BlikTransactionExample.php).
+
+##### Transaction API / create, get, refund, report
+
+   Example of usages: [create transaction](tpayLibs/examples/TransactionApiExample.php), [refund transaction](tpayLibs/examples/TransactionRefund.php), [refund transaction status](tpayLibs/examples/TransactionRefundStatus.php).
+
 ##### Card Basic / Card On-Site
 
-  Example of usages: [Card basic form](tpayLibs/examples/CardBasic.php), [Card On-site Gateway](tpayLibs/examples/CardGate.php), [Card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php), [Card On-site Gateway with saved cards](tpayLibs/examples/CardGateExtended.php)
+  Example of usages: [card basic form](tpayLibs/examples/CardBasic.php), [card on-site gateway](tpayLibs/examples/CardGate.php), [card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php), [card on-site gateway with saved cards](tpayLibs/examples/CardGateExtended.php).
 
 ## Logs
 Library has own logging system to save all confirmations and notifications sent by Tpay.com server, outgoing requests and exceptions.
-Be sure that file src/Logs directory is writable and add rule to Apache htaccess or NGINX to deny access to this area from browser.
-The log files are created for each day separately under 'Logs' directory.
+Be sure that file `src/Logs` directory is writable and add rule to Apache htaccess or NGINX to deny access to this area from browser.
+The log files are created for each day separately under `Logs` directory.
 
-The logging is enabled by default but you can switch this feature by command:
- 
+The logging is enabled by default, but you can disable this feature with:
  ```php
 Util::$loggingEnabled = false;
  ```
 
 You can also set your own logging path by this command:
-
  ```php
 Util::$customLogPatch = '/my/own/path/Logs/';
  ```
- The logs file names will be assigned automatically.
+
+The logs file names will be assigned automatically.
 
 ## Custom templates path
 
-You can set your own templates path so you can copy and modify the phtml template files from this library.
+You can set your own templates path, so you can copy and modify the `phtml` template files from this library.
 
  ```php
 Util::$customTemplateDirectory = '/my/own/templates/path/';
@@ -80,23 +76,23 @@ Util::$customTemplateDirectory = '/my/own/templates/path/';
 
 ## Language
 
-For this moment library supports two languages (EN, PL). Default language is english.
-Change language example:
+Currently, the library supports two languages (English and Polish). Default language is English.
+Changing language example:
 
 ```php
-//All Tpay class constructors load Lang class
+// All Tpay class constructors load Lang class
 $tpay = new BankSelectionExample();
 
-//After this line all static messages (input labels, buttons titles) will be displayed in Polish
+// After this line all static messages (input labels, buttons titles etc.) will be displayed in Polish
 (new Util())->setLanguage('pl');
 
-If you want to access translations manually, use:
-$language = new Lang()
-$language->setLang('pl'); for setting language
-$language->l('pay'); to echo translated key
+// If you want to access translations manually, use:
+$language = new Lang();
+$language->setLang('pl'); // for setting language
+$language->l('pay'); // to echo translated key
 ```
 
 ## License
 
-This library is released under the [MIT License](http://www.opensource.org/licenses/MIT)
-but uses third party libraries that are distributed under their own terms (see LICENSE-3RD-PARTY.md)
+This library is released under the [MIT License](http://www.opensource.org/licenses/MIT),
+but uses third party libraries that are distributed under their own terms (see [LICENSE-3RD-PARTY.md](LICENSE-3RD-PARTY.md)).
