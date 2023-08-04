@@ -17,3 +17,9 @@ jobs:
           coverage: none
 
       - run: composer validate --strict
+
+      - working-directory: .dev-tools
+        run: composer install
+
+      - working-directory: .dev-tools
+        run: composer normalize --diff --dry-run --indent-size=4 --indent-style=space ../composer.json
