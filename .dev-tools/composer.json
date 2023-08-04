@@ -1,0 +1,12 @@
+{
+    "require": {
+        "ergebnis/composer-normalize": "^2.34",
+        "kubawerlos/composer-smaller-lock": "^1.0.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "kubawerlos/composer-smaller-lock": true
+        }
+    }
+}

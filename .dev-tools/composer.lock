@@ -1,0 +1,320 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e841770c4b877d0bb1b71e0b63494de4",
+    "packages": [
+        {
+            "name": "ergebnis/composer-normalize",
+            "version": "2.34.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/composer-normalize.git",
+                "reference": "39beb6b5f1e2d923c27fe30c48c3b88582081228"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/39beb6b5f1e2d923c27fe30c48c3b88582081228",
+                "reference": "39beb6b5f1e2d923c27fe30c48c3b88582081228"
+            },
+            "require": {
+                "composer-plugin-api": "^2.0.0",
+                "ergebnis/json": "^1.0.1",
+                "ergebnis/json-normalizer": "^4.2.0",
+                "ergebnis/json-printer": "^3.3.0",
+                "ext-json": "*",
+                "justinrainbow/json-schema": "^5.2.12",
+                "localheinz/diff": "^1.1.1",
+                "php": "~8.1.0 || ~8.2.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Ergebnis\\Composer\\Normalize\\NormalizePlugin",
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                },
+                "plugin-optional": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Composer\\Normalize\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides a composer plugin for normalizing composer.json."
+        },
+        {
+            "name": "ergebnis/json",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json.git",
+                "reference": "d66ea30060856d0729a4aa319a02752519ca63a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json/zipball/d66ea30060856d0729a4aa319a02752519ca63a0",
+                "reference": "d66ea30060856d0729a4aa319a02752519ca63a0"
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides a Json value object for representing a valid JSON string."
+        },
+        {
+            "name": "ergebnis/json-normalizer",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json-normalizer.git",
+                "reference": "7d06355857dc5fad96e8b296996f26150dfab299"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json-normalizer/zipball/7d06355857dc5fad96e8b296996f26150dfab299",
+                "reference": "7d06355857dc5fad96e8b296996f26150dfab299"
+            },
+            "require": {
+                "ergebnis/json": "^1.0.1",
+                "ergebnis/json-pointer": "^3.2.0",
+                "ergebnis/json-printer": "^3.3.0",
+                "ergebnis/json-schema-validator": "^4.0.0",
+                "ext-json": "*",
+                "justinrainbow/json-schema": "^5.2.12",
+                "php": "~8.1.0 || ~8.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\Normalizer\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents."
+        },
+        {
+            "name": "ergebnis/json-pointer",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json-pointer.git",
+                "reference": "861516ff5afa1aa8905fdf3361315909523a1bf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/861516ff5afa1aa8905fdf3361315909523a1bf8",
+                "reference": "861516ff5afa1aa8905fdf3361315909523a1bf8"
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\Pointer\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides JSON pointer as a value object."
+        },
+        {
+            "name": "ergebnis/json-printer",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json-printer.git",
+                "reference": "18920367473b099633f644f0ca6dc8794345148f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json-printer/zipball/18920367473b099633f644f0ca6dc8794345148f",
+                "reference": "18920367473b099633f644f0ca6dc8794345148f"
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\Printer\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides a JSON printer, allowing for flexible indentation."
+        },
+        {
+            "name": "ergebnis/json-schema-validator",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json-schema-validator.git",
+                "reference": "a6166272ac5691a9bc791f185841e5f92a6d4723"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json-schema-validator/zipball/a6166272ac5691a9bc791f185841e5f92a6d4723",
+                "reference": "a6166272ac5691a9bc791f185841e5f92a6d4723"
+            },
+            "require": {
+                "ergebnis/json": "^1.0.0",
+                "ergebnis/json-pointer": "^3.2.0",
+                "ext-json": "*",
+                "justinrainbow/json-schema": "^5.2.12",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\SchemaValidator\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides a JSON schema validator, building on top of justinrainbow/json-schema."
+        },
+        {
+            "name": "justinrainbow/json-schema",
+            "version": "5.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "bin": [
+                "bin/validate-json"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsonSchema\\": "src/JsonSchema/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A library to validate a json schema."
+        },
+        {
+            "name": "kubawerlos/composer-smaller-lock",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kubawerlos/composer-smaller-lock.git",
+                "reference": "3b0a8695de0595d471d3383118972f10e31ab41e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kubawerlos/composer-smaller-lock/zipball/3b0a8695de0595d471d3383118972f10e31ab41e",
+                "reference": "3b0a8695de0595d471d3383118972f10e31ab41e"
+            },
+            "require": {
+                "composer-plugin-api": "^2.0.12",
+                "ext-json": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "ComposerSmallerLock\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ComposerSmallerLock\\": "./src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Plugin to keep composer.lock smaller and readable"
+        },
+        {
+            "name": "localheinz/diff",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localheinz/diff.git",
+                "reference": "851bb20ea8358c86f677f5f111c4ab031b1c764c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localheinz/diff/zipball/851bb20ea8358c86f677f5f111c4ab031b1c764c",
+                "reference": "851bb20ea8358c86f677f5f111c4ab031b1c764c"
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Fork of sebastian/diff for use with ergebnis/composer-normalize"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
