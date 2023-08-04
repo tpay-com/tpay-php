@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: git archive --output=tpay-php.zip HEAD
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: tpay-php.zip
