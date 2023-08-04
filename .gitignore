@@ -1,3 +1,2 @@
-.idea/
-tpayLibs/src/Logs/*
-!tpayLibs/src/Logs/.gitkeep
+/vendor/
+/composer.lock
