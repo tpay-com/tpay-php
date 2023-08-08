@@ -8,5 +8,6 @@ return (new PhpCsFixer\Config())
     )
     ->setRules([
         '@PSR12'    =>    true,
+        'array_indentation '=> true,
         'visibility_required'=>['elements' => ['method']],
     ]);

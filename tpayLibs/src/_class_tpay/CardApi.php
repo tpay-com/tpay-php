@@ -111,7 +111,7 @@ class CardApi extends CardOptions
             $this->orderID,
             $this->lang,
             $this->cardVerificationCode,
-            ];
+        ];
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $hashParams));
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log(
