@@ -41,7 +41,7 @@ All methods described in [Tpay documentation](https://docs.tpay.com) can be easi
 
 ##### Basic Payments and bank selection forms
 
-Example of usages: [basic](tpayLibs/examples/BasicPaymentForm.php), [bank selection HTML form](tpayLibs/examples/BankSelection.php), [bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [Blik form](tpayLibs/examples/BlikTransactionExample.php).
+Example of usages: [basic](tpayLibs/examples/BasicPaymentForm.php), [bank selection HTML form](tpayLibs/examples/BankSelection.php), [bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [BLIK form](tpayLibs/examples/BlikTransactionExample.php).
 
 ##### Transaction API / create, get, refund, report
 
