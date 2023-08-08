@@ -35,7 +35,6 @@ class TransactionRefund extends BasicRefunds
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
     public function refundTransaction()
@@ -50,7 +49,6 @@ class TransactionRefund extends BasicRefunds
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 }
 

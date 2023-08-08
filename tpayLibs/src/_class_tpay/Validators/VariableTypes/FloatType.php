@@ -15,6 +15,5 @@ class FloatType implements VariableTypesInterface
         if ($value < 0) {
             throw new TException(sprintf('Field "%s" must be higher than zero', $name));
         }
-
     }
 }

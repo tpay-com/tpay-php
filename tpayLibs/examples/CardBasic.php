@@ -18,7 +18,6 @@ class CardBasic extends PaymentCardForms
         $this->cardVerificationCode = '6680181602d396e640cb091ea5418171';
         $this->cardHashAlg = 'sha1';
         parent::__construct();
-
     }
 
     public function getCardTransactionForm()
@@ -32,7 +31,6 @@ class CardBasic extends PaymentCardForms
             $this->setAmount(99.15);
 
             echo $this->getTransactionForm($config);
-
         } catch (TException $e) {
             var_dump($e);
         }

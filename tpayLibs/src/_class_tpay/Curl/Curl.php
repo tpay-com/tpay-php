@@ -177,7 +177,6 @@ class Curl extends CurlOptions
         $successCall = ($responseCode >= 200 && $responseCode <= 299);
 
         return $successCall ? true : $this->getResponseCode($responseCode);
-
     }
 
     /**
@@ -194,6 +193,5 @@ class Curl extends CurlOptions
             throw new TException($codeDescription);
         }
         throw new TException(sprintf('Unexpected response from tpay server %s', $code));
-
     }
 }

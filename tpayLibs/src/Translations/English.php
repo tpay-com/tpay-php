@@ -5,7 +5,6 @@ namespace tpayLibs\src\Translations;
 class English
 {
     public $translations = [
-
         // GLOBALS
         'fee_info' => 'Fee for using this payment method: ',
         'pay' => 'Pay with Tpay',

@@ -70,7 +70,6 @@ trait FieldsValidator
             return 'en';
         }
         return $language;
-
     }
 
     /**

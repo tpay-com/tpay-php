@@ -15,6 +15,5 @@ class ArrayType implements VariableTypesInterface
         if (count($value) <= 0) {
             throw new TException(sprintf('Array "%s" must not be empty', $name));
         }
-
     }
 }

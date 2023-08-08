@@ -21,7 +21,6 @@ class BankSelectionExample extends PaymentBasicForms
      */
     public function getBankForm()
     {
-
         $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',

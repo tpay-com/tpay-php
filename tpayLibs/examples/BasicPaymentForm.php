@@ -18,7 +18,6 @@ class TpayBasicExample extends PaymentBasicForms
 
     public function getDataForTpay()
     {
-
         $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
@@ -34,7 +33,6 @@ class TpayBasicExample extends PaymentBasicForms
          * This method return HTML form
          */
         echo $this->getTransactionForm($config);
-
     }
 }
 

@@ -86,7 +86,6 @@ class MassPayments extends TransactionApi
 
         $this->checkError($response);
         return $response;
-
     }
 
     /**
@@ -112,6 +111,5 @@ class MassPayments extends TransactionApi
         $this->checkError($response);
 
         return $response;
-
     }
 }

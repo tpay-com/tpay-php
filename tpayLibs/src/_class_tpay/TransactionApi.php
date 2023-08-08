@@ -120,7 +120,6 @@ class TransactionApi extends PaymentBasicForms
                 throw new TException($this->errorCodes[$response[static::ERROR_CODE]]);
             }
             throw new TException('Unexpected error');
-
         }
     }
 }

@@ -34,7 +34,6 @@ class TransactionApiExample extends TransactionApi
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
     public function createTransaction()
@@ -58,11 +57,9 @@ class TransactionApiExample extends TransactionApi
             $res = $this->create($config);
             $this->trUrl = $res['url'];
             echo '<a href='.$this->trUrl.'>go to payment</a>';
-
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 }
 

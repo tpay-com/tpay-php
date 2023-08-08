@@ -54,7 +54,6 @@ class RecurrentPayment extends PaymentCard
         }
         //Log rejection code
         return $result['reason'];
-
     }
 
     private function setOrderAsConfirmed()

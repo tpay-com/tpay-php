@@ -5,7 +5,6 @@ namespace tpayLibs\src\Translations;
 class Polish
 {
     public $translations = [
-
         // GLOBALS
         'fee_info' => 'Za korzystanie z płatności online sprzedawca dolicza: ',
         'pay' => 'Zapłać z Tpay',

@@ -30,7 +30,6 @@ class TransactionRefundStatus extends BasicReports
         } catch (TException $e) {
             var_dump($e->getMessage());
         }
-
     }
 }
 

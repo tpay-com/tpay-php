@@ -117,7 +117,6 @@ class CardGateExtended extends PaymentCardForms
             return $this->tryToSaleAgain();
         }
         return $this->payBySavedCard($cardToken);
-
     }
 
     private function payBySavedCard($cardToken)
@@ -133,7 +132,6 @@ class CardGateExtended extends PaymentCardForms
             return $this->setOrderAsComplete($result);
         }
         return $this->tryToSaleAgain();
-
     }
 
     private function setOrderAsComplete($params)
