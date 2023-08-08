@@ -55,7 +55,7 @@ class CardBasic extends PaymentCardForms
                 ->setCurrency(985)
                 ->setOrderID('123')
                 ->setReturnUrls('https://shop.com/success', 'https://shop.com/error');
-            $transaction =  $this->registerSale($config['name'], $config['email'], $config['desc']);
+            $transaction = $this->registerSale($config['name'], $config['email'], $config['desc']);
             if (isset($transaction['sale_auth']) === false) {
                 throw new TException('Error generating transaction: ' . $transaction['err_desc']);
             }

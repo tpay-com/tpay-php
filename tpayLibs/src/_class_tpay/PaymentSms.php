@@ -37,7 +37,7 @@ class PaymentSMS extends ObjectsHelper
 
         $postData = [
             'tfCodeToCheck' => $codeToCheck,
-            'tfHash'        => $hash,
+            'tfHash' => $hash,
         ];
         Util::log('Sms verification request', json_encode($postData));
         $response = $this->requests($this->secureURL, $postData);

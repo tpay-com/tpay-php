@@ -52,7 +52,7 @@ class PaymentCardForms extends PaymentCard
         }
 
         $data = [
-            'action_url'              => $this->cardsURL,
+            'action_url' => $this->cardsURL,
             CardDictionary::SALE_AUTH => $apiResponse[CardDictionary::SALE_AUTH],
         ];
 

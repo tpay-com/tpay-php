@@ -7,8 +7,9 @@ return (new PhpCsFixer\Config())
             ->in(__DIR__ . '/..')
     )
     ->setRules([
-        '@PSR12'    =>    true,
+        '@PSR12' => true,
         'array_indentation' => true,
         'array_syntax' => true,
-        'visibility_required'=>['elements' => ['method']],
+        'binary_operator_spaces' => true,
+        'visibility_required' => ['elements' => ['method']],
     ]);

@@ -40,7 +40,7 @@ class CardNotification extends CardNotificationHandler
         //If you use proxy communication and want to check for Tpay server IP at HTTP_X_FORWARDED_FOR, fun this command:
         $this->enableForwardedIPValidation();
         //Check Tpay server IP and validate parameters
-        $notification =  $this->handleNotification();
+        $notification = $this->handleNotification();
         //Get order details from your DB
         $shopOrderData = $this->getOrderDetailsFromDatabase($notification['order_id']);
         $testMode = isset($notification['test_mode']) ? $notification['test_mode'] : '';

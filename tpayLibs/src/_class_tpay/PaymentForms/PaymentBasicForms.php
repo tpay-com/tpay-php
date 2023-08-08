@@ -98,7 +98,7 @@ class PaymentBasicForms extends BasicPaymentOptions
             static::FIELDS => $config,
             'redirect' => false,
             'show_regulations_checkbox' => $showRegulations,
-            'regulation_url'  => static::TPAY_TERMS_OF_SERVICE_URL,
+            'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
         ];
 
         $form = Util::parseTemplate(static::PAYMENT_FORM, $data);

@@ -27,14 +27,14 @@ class VariableTypesValidator
     private function validateType($type, $value, $name)
     {
         $a = [
-            FieldsConfigDictionary::FLOAT          => new FloatType(),
-            FieldsConfigDictionary::STRING         => new StringType(),
-            FieldsConfigDictionary::INT            => new IntType(),
-            FieldsConfigDictionary::EMAIL_LIST     => new EmailListType(),
-            FieldsConfigDictionary::ARR            => new ArrayType(),
-            FieldsConfigDictionary::BOOLEAN        => new BooleanType(),
+            FieldsConfigDictionary::FLOAT => new FloatType(),
+            FieldsConfigDictionary::STRING => new StringType(),
+            FieldsConfigDictionary::INT => new IntType(),
+            FieldsConfigDictionary::EMAIL_LIST => new EmailListType(),
+            FieldsConfigDictionary::ARR => new ArrayType(),
+            FieldsConfigDictionary::BOOLEAN => new BooleanType(),
             FieldsConfigDictionary::CUSTOM_DESCRIPTION => new DescriptionType(),
-            'CountryCode'                          => new CountryCodeType(),
+            'CountryCode' => new CountryCodeType(),
         ];
         if (array_key_exists($type, $a)) {
             foreach ($a as $key => $value2) {

@@ -42,12 +42,12 @@ class Util
         if (is_null(static::$libraryPath)) {
             $data['static_files_url'] = $_SERVER['REQUEST_URI'] . '/../../src/';
         } else {
-            $data['static_files_url'] =  static::$libraryPath;
+            $data['static_files_url'] = static::$libraryPath;
         }
         if (is_null(static::$customTemplateDirectory)) {
             $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
         } else {
-            $templateDirectory =  static::$customTemplateDirectory;
+            $templateDirectory = static::$customTemplateDirectory;
         }
         $buffer = false;
 

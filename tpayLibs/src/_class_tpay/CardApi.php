@@ -92,10 +92,10 @@ class CardApi extends CardOptions
     public function presaleMethod($saleDescription)
     {
         $params = [
-            CardDictionary::AMOUNT   => $this->amount,
-            CardDictionary::METHOD   => CardDictionary::PRESALE,
-            CardDictionary::CLIAUTH  => $this->clientAuthCode,
-            CardDictionary::DESC     => $saleDescription,
+            CardDictionary::AMOUNT => $this->amount,
+            CardDictionary::METHOD => CardDictionary::PRESALE,
+            CardDictionary::CLIAUTH => $this->clientAuthCode,
+            CardDictionary::DESC => $saleDescription,
             CardDictionary::CURRENCY => $this->currency,
             CardDictionary::LANGUAGE => $this->lang,
         ];
@@ -138,8 +138,8 @@ class CardApi extends CardOptions
             throw new TException('invalid sale_auth code');
         }
         $params = [
-            CardDictionary::METHOD   => CardDictionary::SALE,
-            CardDictionary::CLIAUTH  => $this->clientAuthCode,
+            CardDictionary::METHOD => CardDictionary::SALE,
+            CardDictionary::CLIAUTH => $this->clientAuthCode,
             CardDictionary::SALEAUTH => $saleAuthCode,
         ];
         $hashParams = [

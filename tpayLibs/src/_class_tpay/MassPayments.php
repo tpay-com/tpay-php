@@ -27,7 +27,7 @@ class MassPayments extends TransactionApi
         $csvEncode = base64_encode($csv);
 
         $postData = [
-            'csv'  => $csvEncode,
+            'csv' => $csvEncode,
             'sign' => sha1($this->merchantId . $csv . $this->merchantSecret),
         ];
         $response = $this->requests($url, $postData);
@@ -107,7 +107,7 @@ class MassPayments extends TransactionApi
 
         $postData = [
             static::PACK_ID => $packId,
-            'trId'          => $trId,
+            'trId' => $trId,
         ];
         $response = $this->requests($url, $postData);
 
