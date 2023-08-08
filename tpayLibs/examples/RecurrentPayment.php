@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentCard;
@@ -53,12 +49,12 @@ class RecurrentPayment extends PaymentCard
         //Try to execute payment
         //In test mode this method has 50% probability of success
         $result = $this->saleMethod($this->transactionId);
-        if (isset($result['status']) && $result['status'] === 'correct') {
+        if (isset($result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsConfirmed();
-        } else {
-            //Log rejection code
-            return $result['reason'];
         }
+        //Log rejection code
+        return $result['reason'];
+
     }
 
     private function setOrderAsConfirmed()
@@ -66,7 +62,6 @@ class RecurrentPayment extends PaymentCard
         //Code updating order ($this->orderID) status as paid at your DB
         //Save transaction ID for later use
     }
-
 }
 
 (new RecurrentPayment())

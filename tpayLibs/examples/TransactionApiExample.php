@@ -1,13 +1,9 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\TransactionApi;
+use tpayLibs\src\_class_tpay\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';
@@ -30,7 +26,6 @@ class TransactionApiExample extends TransactionApi
         /**
          * Get info about transaction
          */
-
         $transactionId = $this->trId;
 
         try {
@@ -47,7 +42,6 @@ class TransactionApiExample extends TransactionApi
         /**
          * Create new transaction
          */
-
         $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
@@ -63,14 +57,13 @@ class TransactionApiExample extends TransactionApi
         try {
             $res = $this->create($config);
             $this->trUrl = $res['url'];
-            echo '<a href='.$this->trUrl . '>go to payment</a>';
+            echo '<a href='.$this->trUrl.'>go to payment</a>';
 
         } catch (TException $e) {
             var_dump($e);
         }
 
     }
-
 }
 
 (new TransactionApiExample())->createTransaction();

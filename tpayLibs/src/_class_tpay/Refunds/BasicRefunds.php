@@ -2,16 +2,18 @@
 
 namespace tpayLibs\src\_class_tpay\Refunds;
 
-use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\TransactionApi;
+use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 
 class BasicRefunds extends TransactionApi
 {
     /**
      * Refund full amount to customer
-     * @return array
+     *
      * @throws TException
+     *
+     * @return array
      */
     public function refund()
     {
@@ -27,9 +29,12 @@ class BasicRefunds extends TransactionApi
 
     /**
      * Refund custom amount to customer
+     *
      * @param float $amount refund amount
-     * @return array
+     *
      * @throws TException
+     *
+     * @return array
      */
     public function refundAny($amount)
     {
@@ -45,5 +50,4 @@ class BasicRefunds extends TransactionApi
 
         return $response;
     }
-
 }

@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries\Payments;
 
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
@@ -14,6 +8,7 @@ class BlikFieldsDictionary
 {
     /**
      * List of fields available in response for blik payment
+     *
      * @var array
      */
     const ALIAS_RESPONSE_FIELDS = [
@@ -46,16 +41,16 @@ class BlikFieldsDictionary
         'code' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_6', 'minlength_6'],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::NUMBERS
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::NUMBERS,
         ],
         'title' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         'alias' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::ARR],
-        ]
+        ],
     ];
 }

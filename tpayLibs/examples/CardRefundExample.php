@@ -28,7 +28,6 @@ class CardRefundExample extends CardRefunds
         }
         $result = parent::refund($transactionId, $refundDescription);
 
-        return $result['result'] === 1;
+        return 1 === $result['result'];
     }
-
 }

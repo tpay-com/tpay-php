@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 12.06.2017
- * Time: 17:49
- */
-
 namespace tpayLibs\src\_class_tpay\Utilities;
 
 use tpayLibs\src\_class_tpay\Curl\Curl;
@@ -18,54 +12,63 @@ class ObjectsHelper
 
     /**
      * Api key
+     *
      * @var string
      */
     protected $trApiKey;
 
     /**
      * Api pass
+     *
      * @var string
      */
     protected $trApiPass;
 
     /**
      * Merchant id
+     *
      * @var int
      */
     protected $merchantId;
 
     /**
      * Merchant secret
+     *
      * @var string
      */
     protected $merchantSecret;
 
     /**
      * Card API key
+     *
      * @var string
      */
     protected $cardApiKey;
 
     /**
      * Card API password
+     *
      * @var string
      */
     protected $cardApiPass;
 
     /**
      * Card API code
+     *
      * @var string
      */
     protected $cardVerificationCode;
 
     /**
      * Card RSA key
+     *
      * @var string
      */
     protected $cardKeyRSA;
 
     /**
      * Card hash algorithm
+     *
      * @var string
      */
     protected $cardHashAlg = 'sha1';
@@ -142,5 +145,4 @@ class ObjectsHelper
         )
         )->isValid();
     }
-
 }

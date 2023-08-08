@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries\Payments;
 
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
@@ -15,7 +9,6 @@ class BasicFieldsDictionary
     /**
      * List of supported request fields for basic payment
      */
-
     const REQUEST_FIELDS = [
         /**
          * Transaction amount with dot as decimal separator.
@@ -31,9 +24,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * The secondary parameter to the transaction identification.
@@ -43,7 +36,7 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
         ],
         /**
@@ -67,6 +60,7 @@ class BasicFieldsDictionary
         ],
         /**
          * If this parameter is set, the payer will always be redirected to step 2 in tpay.com panel
+         *
          * @deprecated
          */
         'choice' => [
@@ -76,6 +70,7 @@ class BasicFieldsDictionary
         ],
         /**
          * Customer will be redirected to bank login page.
+         *
          * @deprecated
          */
         'direct' => [
@@ -89,9 +84,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_512
+                FieldsConfigDictionary::MAXLENGTH_512,
             ],
-            FieldsConfigDictionary::FILTER => 'url'
+            FieldsConfigDictionary::FILTER => 'url',
         ],
         /**
          * E-mail address to which you will be notified about the status of the transaction.
@@ -107,9 +102,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * Optional field used during card transactions processed through Elavon.
@@ -122,9 +117,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::CUSTOM_DESCRIPTION,
-                FieldsConfigDictionary::MAXLENGTH_32
+                FieldsConfigDictionary::MAXLENGTH_32,
             ],
-            FieldsConfigDictionary::FILTER => 'mixed'
+            FieldsConfigDictionary::FILTER => 'mixed',
         ],
         /**
          * The URL to which the customer will be transferred after successful completion of the transaction.
@@ -133,9 +128,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_512
+                FieldsConfigDictionary::MAXLENGTH_512,
             ],
-            FieldsConfigDictionary::FILTER => 'url'
+            FieldsConfigDictionary::FILTER => 'url',
         ],
         /**
          * The URL to which the client will be transferred in the event of an error.
@@ -145,9 +140,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_512
+                FieldsConfigDictionary::MAXLENGTH_512,
             ],
-            FieldsConfigDictionary::FILTER => 'url'
+            FieldsConfigDictionary::FILTER => 'url',
         ],
         /**
          * Transactional panel language.
@@ -165,9 +160,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
+                FieldsConfigDictionary::MAXLENGTH_64,
             ],
-            FieldsConfigDictionary::FILTER => 'mail'
+            FieldsConfigDictionary::FILTER => 'mail',
         ],
         /**
          * Customer surname.
@@ -176,9 +171,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
+                FieldsConfigDictionary::MAXLENGTH_64,
             ],
-            FieldsConfigDictionary::FILTER => 'name'
+            FieldsConfigDictionary::FILTER => 'name',
         ],
         /**
          * Customer address.
@@ -187,9 +182,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
+                FieldsConfigDictionary::MAXLENGTH_64,
             ],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * Customer city.
@@ -198,9 +193,9 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_32
+                FieldsConfigDictionary::MAXLENGTH_32,
             ],
-            FieldsConfigDictionary::FILTER => 'name'
+            FieldsConfigDictionary::FILTER => 'name',
         ],
         /**
          * Customer postal code.
@@ -208,7 +203,7 @@ class BasicFieldsDictionary
         'zip' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_10'],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * Country code.
@@ -224,7 +219,7 @@ class BasicFieldsDictionary
         'phone' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_16'],
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::PHONE
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::PHONE,
         ],
         /**
          * The parameter indicating acceptance of Terms tpay if it is available on the payee.
@@ -241,7 +236,7 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
         ],
         /**
@@ -251,7 +246,7 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
         ],
         /**
@@ -261,7 +256,7 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_32
+                FieldsConfigDictionary::MAXLENGTH_32,
             ],
         ],
     ];

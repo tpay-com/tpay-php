@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\Notifications\CardNotificationHandler;
@@ -28,7 +24,7 @@ class CardNotification extends CardNotificationHandler
     {
         //response contains array of data https://docs.tpay.com/#!/Tpay/tpay_elavon_notifications
         $notification = $this->getTpayNotification();
-        if (isset($notification['status']) && $notification['status'] === 'correct') {
+        if (isset($notification['status']) && 'correct' === $notification['status']) {
             $this->setOrderAsConfirmed($notification);
         }
     }
@@ -85,7 +81,6 @@ class CardNotification extends CardNotificationHandler
         $RefundClass = new CardRefundExample();
         $RefundClass->refund($transactionId, $refundDescription);
     }
-
 }
 
 (new CardNotification())->init();

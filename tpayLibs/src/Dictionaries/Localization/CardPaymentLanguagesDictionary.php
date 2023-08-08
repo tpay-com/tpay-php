@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries\Localization;
 
 class CardPaymentLanguagesDictionary
@@ -16,6 +10,6 @@ class CardPaymentLanguagesDictionary
         'ES' => 'sp_SP',
         'IT' => 'it_IT',
         'RU' => 'ru_RU',
-        'FR' => 'fr_FR'
+        'FR' => 'fr_FR',
     ];
 }

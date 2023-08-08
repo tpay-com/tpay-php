@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentBasicForms;
@@ -15,8 +11,6 @@ use tpayLibs\src\Dictionaries\ErrorCodes\TransactionApiErrors;
  * Class TransactionAPI
  *
  * Includes group of methods responsible for connection with tpay Transaction API
- *
- * @package tpay
  */
 class TransactionApi extends PaymentBasicForms
 {
@@ -36,6 +30,7 @@ class TransactionApi extends PaymentBasicForms
 
     /**
      * List of errors
+     *
      * @var array
      */
     private $errorCodes = TransactionApiErrors::ERROR_CODES;
@@ -57,20 +52,20 @@ class TransactionApi extends PaymentBasicForms
      *
      * @param array $config transaction config
      *
-     * @return array
-     *
      * @throws TException
+     *
+     * @return array
      */
     public function create($config)
     {
-        $url = $this->apiURL . $this->trApiKey . '/transaction/create';
+        $url = $this->apiURL.$this->trApiKey.'/transaction/create';
 
         $config = $this->prepareConfig($config, true);
         Util::log('Transaction create request params', print_r($config, true));
         $response = $this->requests($url, $config);
         Util::log('Transaction create response', print_r($response, true));
 
-        if ($response[static::RESULT] !== 1) {
+        if (1 !== $response[static::RESULT]) {
             throw new TException(sprintf('Error in %s', $response['err']));
         }
         return $response;
@@ -79,8 +74,8 @@ class TransactionApi extends PaymentBasicForms
     /**
      * Execute request to tpay transaction API
      *
-     * @param string $url url
-     * @param array $params post params
+     * @param string $url    url
+     * @param array  $params post params
      *
      * @return bool|mixed
      */
@@ -94,13 +89,13 @@ class TransactionApi extends PaymentBasicForms
     /**
      * Get information about transaction
      *
-     * @return array
-     *
      * @throws TException
+     *
+     * @return array
      */
     public function get()
     {
-        $url = $this->apiURL . $this->trApiKey . '/transaction/get';
+        $url = $this->apiURL.$this->trApiKey.'/transaction/get';
 
         $response = $this->requests($url, [static::TITLE => $this->transactionID]);
 
@@ -117,15 +112,15 @@ class TransactionApi extends PaymentBasicForms
      */
     public function checkError($response)
     {
-        if ($response[static::RESULT] !== 1) {
+        if (1 !== $response[static::RESULT]) {
             if (isset($response[static::ERR]) && isset($this->errorCodes[$response[static::ERR]])) {
                 throw new TException($this->errorCodes[$response[static::ERR]]);
-            } elseif (isset($response[static::ERROR_CODE]) && isset($this->errorCodes[$response[static::ERROR_CODE]])) {
-                throw new TException($this->errorCodes[$response[static::ERROR_CODE]]);
-            } else {
-                throw new TException('Unexpected error');
             }
+            if (isset($response[static::ERROR_CODE]) && isset($this->errorCodes[$response[static::ERROR_CODE]])) {
+                throw new TException($this->errorCodes[$response[static::ERROR_CODE]]);
+            }
+            throw new TException('Unexpected error');
+
         }
     }
-
 }

@@ -11,19 +11,14 @@ use Exception;
  *  - parsing template files
  *  - log library operations
  *  - handle POST array
- *
- * @package tpay
  */
 class Util
 {
     const REMOTE_ADDR = 'REMOTE_ADDR';
 
     static $lang = 'en';
-
     static $libraryPath;
-
     static $loggingEnabled = true;
-
     static $customLogPatch;
 
     /**
@@ -33,19 +28,21 @@ class Util
 
     /**
      * Parse template file
+     *
      * @param string $templateFileName filename
-     * @param array $data
+     * @param array  $data
+     *
      * @return string
      */
     public static function parseTemplate($templateFileName, $data = [])
     {
         if (is_null(static::$libraryPath)) {
-            $data['static_files_url'] = $_SERVER['REQUEST_URI'] . '/../../src/';
+            $data['static_files_url'] = $_SERVER['REQUEST_URI'].'/../../src/';
         } else {
             $data['static_files_url'] = static::$libraryPath;
         }
         if (is_null(static::$customTemplateDirectory)) {
-            $templateDirectory = dirname(__FILE__) . '/../../View/Templates/';
+            $templateDirectory = dirname(__FILE__).'/../../View/Templates/';
         } else {
             $templateDirectory = static::$customTemplateDirectory;
         }
@@ -56,16 +53,16 @@ class Util
             ob_clean();
         }
         ob_start();
-        if (!file_exists($templateDirectory . $templateFileName . '.phtml')) {
+        if (!file_exists($templateDirectory.$templateFileName.'.phtml')) {
             return '';
         }
         $lang = new Lang();
         $lang->setLang(static::$lang);
-        include_once $templateDirectory . $templateFileName . '.phtml';
+        include_once $templateDirectory.$templateFileName.'.phtml';
         $parsedHTML = ob_get_contents();
         ob_clean();
 
-        if ($buffer !== false) {
+        if (false !== $buffer) {
             ob_start();
             echo $buffer;
         }
@@ -77,7 +74,7 @@ class Util
      * Save text to log file with details
      *
      * @param string $title action name
-     * @param string $text text to save
+     * @param string $text  text to save
      */
     public static function log($title, $text)
     {
@@ -85,16 +82,16 @@ class Util
         $logFilePath = self::getLogPath();
         $ip = (isset($_SERVER[static::REMOTE_ADDR])) ? $_SERVER[static::REMOTE_ADDR] : '';
 
-        $logText = PHP_EOL . '===========================';
-        $logText .= PHP_EOL . $title;
-        $logText .= PHP_EOL . '===========================';
-        $logText .= PHP_EOL . date('Y-m-d H:i:s');
-        $logText .= PHP_EOL . 'ip: ' . $ip;
+        $logText = PHP_EOL.'===========================';
+        $logText .= PHP_EOL.$title;
+        $logText .= PHP_EOL.'===========================';
+        $logText .= PHP_EOL.date('Y-m-d H:i:s');
+        $logText .= PHP_EOL.'ip: '.$ip;
         $logText .= PHP_EOL;
         $logText .= $text;
-        $logText .= PHP_EOL . PHP_EOL;
+        $logText .= PHP_EOL.PHP_EOL;
 
-        if (static::$loggingEnabled === true) {
+        if (true === static::$loggingEnabled) {
             file_put_contents($logFilePath, $logText, FILE_APPEND);
         }
     }
@@ -108,7 +105,7 @@ class Util
     {
         $text = (string)$text;
         $logFilePath = self::getLogPath();
-        if (static::$loggingEnabled === true) {
+        if (true === static::$loggingEnabled) {
             file_put_contents($logFilePath, PHP_EOL.$text, FILE_APPEND);
         }
     }
@@ -120,7 +117,6 @@ class Util
      * @param string $name
      * @param string $type variable type
      *
-     * @return mixed
      * @throws TException
      */
     public static function post($name, $type)
@@ -129,13 +125,13 @@ class Util
             return false;
         }
         $val = $_POST[$name];
-        if ($type === 'int') {
+        if ('int' === $type) {
             $val = (int)$val;
-        } elseif ($type === 'float') {
+        } elseif ('float' === $type) {
             $val = (float)$val;
-        } elseif ($type === 'string') {
+        } elseif ('string' === $type) {
             $val = (string)$val;
-        } elseif ($type === 'array') {
+        } elseif ('array' === $type) {
             $val = (array)$val;
         } else {
             throw new TException('Undefined $_POST variable type');
@@ -155,6 +151,7 @@ class Util
      * Set custom library path
      *
      * @param string $path
+     *
      * @return $this
      */
     public function setPath($path)
@@ -166,17 +163,17 @@ class Util
 
     private static function getLogPath()
     {
-        if (static::$loggingEnabled === false) {
+        if (false === static::$loggingEnabled) {
             return null;
         }
-        $logFileName = 'log_' . date('Y-m-d') . '.php';
+        $logFileName = 'log_'.date('Y-m-d').'.php';
         if (!empty(static::$customLogPatch)) {
-            $logPath = static::$customLogPatch . $logFileName;
+            $logPath = static::$customLogPatch.$logFileName;
         } else {
-            $logPath = dirname(__FILE__) . '/../../Logs/' . $logFileName;
+            $logPath = dirname(__FILE__).'/../../Logs/'.$logFileName;
         }
         if (!file_exists($logPath)) {
-            file_put_contents($logPath, '<?php exit; ?> ' . PHP_EOL);
+            file_put_contents($logPath, '<?php exit; ?> '.PHP_EOL);
             chmod($logPath, 0644);
         }
         if (!file_exists($logPath) || !is_writable($logPath)) {
@@ -185,5 +182,4 @@ class Util
 
         return $logPath;
     }
-
 }

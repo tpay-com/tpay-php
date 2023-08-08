@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 19.06.2017
- * Time: 14:39
- */
-
 namespace tpayLibs\src\_class_tpay\Validators\VariableTypes;
 
 use tpayLibs\src\_class_tpay\Utilities\TException;
@@ -17,7 +11,7 @@ class CountryCodeType implements VariableTypesInterface
     public function validateType($value, $name)
     {
         if (!is_string($value)
-            || (strlen($value) !== 2 && strlen($value) !== 3)
+            || (2 !== strlen($value) && 3 !== strlen($value))
             || (!in_array($value, CountryCodesDictionary::CODES))
         ) {
             throw new TException(

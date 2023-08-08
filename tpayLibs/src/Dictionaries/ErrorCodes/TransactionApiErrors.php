@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 09.06.2017
- * Time: 17:56
- */
-
 namespace tpayLibs\src\Dictionaries\ErrorCodes;
 
 class TransactionApiErrors
@@ -58,5 +52,4 @@ class TransactionApiErrors
         'ERR98' => 'Authorisation error (wrong api_key or api_password)',
         'ERR99' => 'General error',
     ];
-
 }

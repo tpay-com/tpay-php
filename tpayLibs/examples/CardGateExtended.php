@@ -38,11 +38,11 @@ class CardGateExtended extends PaymentCardForms
             //Try to sale with provided card data
             $response = $this->makeCardPayment();
             //Successful payment by card not protected by 3DS
-            if (isset($response['result']) && (int)$response['result'] === 1) {
+            if (isset($response['result']) && 1 === (int)$response['result']) {
                 $this->setOrderAsComplete($response);
                 //Successfully generated 3DS link for payment authorization
             } elseif (isset($response['3ds_url'])) {
-                header("Location: ".$response['3ds_url']);
+                header('Location: '.$response['3ds_url']);
             } else {
                 //Invalid credit card data
                 $this->tryToSaleAgain();
@@ -80,13 +80,13 @@ class CardGateExtended extends PaymentCardForms
         $cardData = Util::post('carddata', FieldsConfigDictionary::STRING);
         $saveCard = Util::post('card_save', FieldsConfigDictionary::STRING);
         Util::log('Secure Sale post params', print_r($_POST, true));
-        if ($saveCard === 'on') {
+        if ('on' === $saveCard) {
             $this->setOneTimer(false);
         }
 
-        return $failOver === false ?
-            $this->registerSale($clientName, $clientEmail, 'test sale', $cardData) :
-            $this->setCardData(null)->registerSale($clientName, $clientEmail, 'test sale');
+        return false === $failOver
+            ? $this->registerSale($clientName, $clientEmail, 'test sale', $cardData)
+            : $this->setCardData(null)->registerSale($clientName, $clientEmail, 'test sale');
     }
 
     private function processSavedCardPayment($savedCardId)
@@ -107,7 +107,7 @@ class CardGateExtended extends PaymentCardForms
                 $cardToken = $card['cli_auth'];
             }
         }
-        if ($isValid === false) {
+        if (false === $isValid) {
             Util::log(
                 'Unauthorized payment try',
                 sprintf('User %s has tried to pay by not owned cardId: %s', $exampleCurrentUserId, $requestedCardId)
@@ -115,9 +115,9 @@ class CardGateExtended extends PaymentCardForms
 
             //Reject current payment try and redirect user to tpay payment panel new card form
             return $this->tryToSaleAgain();
-        } else {
-            return $this->payBySavedCard($cardToken);
         }
+        return $this->payBySavedCard($cardToken);
+
     }
 
     private function payBySavedCard($cardToken)
@@ -129,11 +129,11 @@ class CardGateExtended extends PaymentCardForms
         }
         $transaction['sale_auth'];
         $result = $this->saleMethod($transaction['sale_auth']);
-        if (isset($result['status']) && $result['status'] === 'correct') {
+        if (isset($result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsComplete($result);
-        } else {
-            return $this->tryToSaleAgain();
         }
+        return $this->tryToSaleAgain();
+
     }
 
     private function setOrderAsComplete($params)
@@ -147,7 +147,7 @@ class CardGateExtended extends PaymentCardForms
         //Try to create new transaction and redirect customer to Tpay transaction panel
         $response = $this->makeCardPayment(true);
         if (isset($response['sale_auth'])) {
-            header("Location: ".'https://secure.tpay.com/cards/?sale_auth='.$response['sale_auth']);
+            header('Location: https://secure.tpay.com/cards/?sale_auth='.$response['sale_auth']);
         } else {
             echo $response['err_desc'];
         }
@@ -155,7 +155,9 @@ class CardGateExtended extends PaymentCardForms
 
     /**
      * Returns stored cards by userId as array. Each row contains card details
+     *
      * @param int $userId
+     *
      * @return array
      */
     private function getUserSavedCards($userId = 0)
@@ -199,7 +201,6 @@ class CardGateExtended extends PaymentCardForms
         //Code getting the user Id from your system. This is only an example.
         return 2;
     }
-
 }
 
 (new CardGateExtended())->init();

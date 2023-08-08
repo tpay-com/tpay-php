@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries\Payments;
 
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
@@ -14,6 +8,7 @@ class CardDeregisterFieldsDictionary
 {
     /**
      * List of fields available in card deregistration
+     *
      * @var array
      */
     const REQUEST_FIELDS = [
@@ -27,7 +22,7 @@ class CardDeregisterFieldsDictionary
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40,
-                FieldsConfigDictionary::MINLENGTH_40
+                FieldsConfigDictionary::MINLENGTH_40,
             ],
         ],
         /**
@@ -47,7 +42,7 @@ class CardDeregisterFieldsDictionary
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 'maxlength_128',
-                FieldsConfigDictionary::MINLENGTH_40
+                FieldsConfigDictionary::MINLENGTH_40,
             ],
         ],
     ];
@@ -72,7 +67,7 @@ class CardDeregisterFieldsDictionary
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40,
-                FieldsConfigDictionary::MINLENGTH_40
+                FieldsConfigDictionary::MINLENGTH_40,
             ],
         ],
         /**
@@ -90,7 +85,7 @@ class CardDeregisterFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
-            FieldsConfigDictionary::FILTER => 'date'
+            FieldsConfigDictionary::FILTER => 'date',
         ],
         /**
          * Message checksum

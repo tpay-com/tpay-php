@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 19.06.2017
- * Time: 14:39
- */
-
 namespace tpayLibs\src\_class_tpay\Validators\VariableTypes;
 
 use tpayLibs\src\_class_tpay\Utilities\TException;
@@ -17,10 +11,10 @@ class ArrayType implements VariableTypesInterface
     {
         if (!is_array($value)) {
             throw new TException(sprintf('Field "%s" must be an array', $name));
-        } else {
-            if (count($value) <= 0) {
-                throw new TException(sprintf('Array "%s" must not be empty', $name));
-            }
         }
+        if (count($value) <= 0) {
+            throw new TException(sprintf('Array "%s" must not be empty', $name));
+        }
+
     }
 }

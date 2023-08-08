@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
@@ -56,16 +52,15 @@ class CardBasic extends PaymentCardForms
                 ->setOrderID('123')
                 ->setReturnUrls('https://shop.com/success', 'https://shop.com/error');
             $transaction = $this->registerSale($config['name'], $config['email'], $config['desc']);
-            if (isset($transaction['sale_auth']) === false) {
-                throw new TException('Error generating transaction: ' . $transaction['err_desc']);
+            if (false === isset($transaction['sale_auth'])) {
+                throw new TException('Error generating transaction: '.$transaction['err_desc']);
             }
             $transactionId = $transaction['sale_auth'];
             header("Location: https://secure.tpay.com/cards/?sale_auth=$transactionId");
         } catch (TException $e) {
-            echo 'Unable to generate transaction. Reason: ' . $e->getMessage();
+            echo 'Unable to generate transaction. Reason: '.$e->getMessage();
         }
     }
-
 }
 
 (new CardBasic())->getRedirectTransaction();

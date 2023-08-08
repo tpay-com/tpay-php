@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 19.06.2017
- * Time: 14:39
- */
-
 namespace tpayLibs\src\_class_tpay\Validators\VariableTypes;
 
 use tpayLibs\src\_class_tpay\Utilities\TException;

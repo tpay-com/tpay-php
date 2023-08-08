@@ -1,15 +1,9 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 15:50
- */
-
 namespace tpayLibs\src\_class_tpay\Reports;
 
-use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\TransactionApi;
+use tpayLibs\src\_class_tpay\Utilities\TException;
 
 class BasicReports extends TransactionApi
 {
@@ -19,20 +13,20 @@ class BasicReports extends TransactionApi
     /**
      * Get transactions report
      *
-     * @param string $fromDate start date in format YYYY-MM-DD
-     * @param string|bool $toDate end date in format YYYY-MM-DD
+     * @param string      $fromDate start date in format YYYY-MM-DD
+     * @param bool|string $toDate   end date in format YYYY-MM-DD
+     * @param bool        $raw      decide if return raw CSV format or array formatted report
      *
-     * @param bool $raw decide if return raw CSV format or array formatted report
      * @return array
      */
     public function report($fromDate, $toDate = false, $raw = true)
     {
-        $url = $this->apiURL . $this->trApiKey . '/transaction/report';
+        $url = $this->apiURL.$this->trApiKey.'/transaction/report';
         $postData = [
-            'from_date' => $fromDate
+            'from_date' => $fromDate,
         ];
 
-        if ($toDate !== false) {
+        if (false !== $toDate) {
             $postData['to_date'] = $toDate;
         }
 
@@ -40,7 +34,7 @@ class BasicReports extends TransactionApi
 
         $this->checkError($response);
         $response[static::REPORT] = base64_decode($response[static::REPORT]);
-        if ($raw === false) {
+        if (false === $raw) {
             $response = $this->associateReportArray($response);
         }
 
@@ -49,7 +43,7 @@ class BasicReports extends TransactionApi
 
     public function transactionRefundStatus()
     {
-        $url = $this->apiURL . $this->trApiKey . '/chargeback/status';
+        $url = $this->apiURL.$this->trApiKey.'/chargeback/status';
         if (!is_string($this->transactionID)) {
             throw new TException('Assign transaction title first!');
         }
@@ -64,7 +58,8 @@ class BasicReports extends TransactionApi
 
     /**
      * @param array $response
-     * @return array|null
+     *
+     * @return null|array
      */
     private function associateReportArray($response)
     {
@@ -101,7 +96,6 @@ class BasicReports extends TransactionApi
     }
 
     /**
-     * @param array $reportCsvLines
      * @return array
      */
     private function removeCsvHeader(array $reportCsvLines)
@@ -110,7 +104,6 @@ class BasicReports extends TransactionApi
     }
 
     /**
-     * @param array $values
      * @return array
      */
     private function removeLineCounterColumn(array $values)
@@ -120,6 +113,7 @@ class BasicReports extends TransactionApi
 
     /**
      * @param string $csvLine
+     *
      * @return array
      */
     private function csvLineToArray($csvLine)

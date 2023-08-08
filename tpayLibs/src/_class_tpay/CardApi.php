@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay;
 
 use tpayLibs\src\_class_tpay\PaymentOptions\CardOptions;
@@ -17,9 +13,10 @@ class CardApi extends CardOptions
     /**
      * Prepare for register sale @see $this->registerSale
      *
-     * @param string $clientName client name
-     * @param string $clientEmail client email
+     * @param string $clientName      client name
+     * @param string $clientEmail     client email
      * @param string $saleDescription sale description
+     *
      * @return bool|mixed
      */
     public function registerSaleMethod(
@@ -44,13 +41,13 @@ class CardApi extends CardOptions
             CardDictionary::LANGUAGE => $this->lang,
             'enable_pow_url' => $this->enablePowUrl ? 1 : '',
         ];
-        if($this->method === 'register_sale') {
+        if ('register_sale' === $this->method) {
             unset($optionalParams['enable_pow_url']);
         }
         $params = array_merge($params, $optionalParams);
-        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) . '&' . $this->cardVerificationCode);
+        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params).'&'.$this->cardVerificationCode);
         foreach ($optionalParams as $optionalParamKey => $optionalParamValue) {
-            if ($optionalParamValue === '') {
+            if ('' === $optionalParamValue) {
                 unset($params[$optionalParamKey]);
             }
         }
@@ -62,7 +59,7 @@ class CardApi extends CardOptions
         $this->validateConfig(new PaymentTypeCard(), $params);
         Util::log('Card request', print_r($params, true));
 
-        return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
+        return $this->requests($this->cardsApiURL.$this->cardApiKey, $params);
     }
 
     private function checkReturnUrls()
@@ -85,9 +82,9 @@ class CardApi extends CardOptions
      *
      * @param string $saleDescription sale description
      *
-     * @return bool|mixed
-     *
      * @throws TException
+     *
+     * @return bool|mixed
      */
     public function presaleMethod($saleDescription)
     {
@@ -116,10 +113,10 @@ class CardApi extends CardOptions
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log(
             'Pre sale params with hash ',
-            print_r($params, true) . 'req url ' . $this->cardsApiURL . $this->cardApiKey
+            print_r($params, true).'req url '.$this->cardsApiURL.$this->cardApiKey
         );
 
-        return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
+        return $this->requests($this->cardsApiURL.$this->cardApiKey, $params);
     }
 
     /**
@@ -129,12 +126,14 @@ class CardApi extends CardOptions
      * In that case, client card is not charged the second time.
      *
      * @param string $saleAuthCode sale auth code
-     * @return bool|mixed
+     *
      * @throws TException
+     *
+     * @return bool|mixed
      */
     public function saleMethod($saleAuthCode)
     {
-        if (strlen($saleAuthCode) !== 40) {
+        if (40 !== strlen($saleAuthCode)) {
             throw new TException('invalid sale_auth code');
         }
         $params = [
@@ -153,7 +152,7 @@ class CardApi extends CardOptions
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
         Util::log('Sale request params', print_r($params, true));
 
-        return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
+        return $this->requests($this->cardsApiURL.$this->cardApiKey, $params);
     }
 
     /**
@@ -168,9 +167,9 @@ class CardApi extends CardOptions
         $params[CardDictionary::METHOD] = CardDictionary::DEREGISTER;
         $params[CardDictionary::CLIAUTH] = $this->clientAuthCode;
         $params[CardDictionary::LANGUAGE] = $this->lang;
-        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params) .'&'. $this->cardVerificationCode);
+        $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $params).'&'.$this->cardVerificationCode);
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
 
-        return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
+        return $this->requests($this->cardsApiURL.$this->cardApiKey, $params);
     }
 }

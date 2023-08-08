@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 14:55
- */
-
 namespace tpayLibs\src\_class_tpay\PaymentForms;
 
 use tpayLibs\src\_class_tpay\PaymentCard;
@@ -19,6 +13,7 @@ class PaymentCardForms extends PaymentCard
 
     /**
      * tpay payment url
+     *
      * @var string
      */
     private $cardsURL = 'https://secure.tpay.com/cards/';
@@ -29,9 +24,9 @@ class PaymentCardForms extends PaymentCard
      *
      * @param array $config transaction config
      *
-     * @return string
-     *
      * @throws TException
+     *
+     * @return string
      */
     public function getTransactionForm($config)
     {
@@ -43,10 +38,8 @@ class PaymentCardForms extends PaymentCard
 
         Util::log('card register sale', print_r($apiResponse, true));
         if (!is_array($apiResponse)
-            ||
-            !isset($apiResponse[CardDictionary::RESULT])
-            ||
-            !isset($apiResponse[CardDictionary::SALE_AUTH])
+            || !isset($apiResponse[CardDictionary::RESULT])
+            || !isset($apiResponse[CardDictionary::SALE_AUTH])
         ) {
             throw new TException('Invalid api response code');
         }
@@ -63,13 +56,13 @@ class PaymentCardForms extends PaymentCard
      * Get HTML form for direct sale gate. Using for payment in merchant shop
      *
      * @param string $paymentRedirectPath payment redirect path
-     * @param bool $cardSaveAllowed set true if your want to display the save card checkbox
-     * @param bool $payerFields set true if you want to display the name and email fields in card form.
-     * Otherwise you will need to get those values from your DataBase.
-     * @param array $savedCards list of user saved cards. Must contain id, shortCode and vendor parameters
+     * @param bool   $cardSaveAllowed     set true if your want to display the save card checkbox
+     * @param bool   $payerFields         set true if you want to display the name and email fields in card form.
+     *                                    Otherwise you will need to get those values from your DataBase.
+     * @param array  $savedCards          list of user saved cards. Must contain id, shortCode and vendor parameters
+     *
      * @return string
      */
-
     public function getOnSiteCardForm(
         $paymentRedirectPath = 'index.html',
         $cardSaveAllowed = true,
@@ -91,11 +84,11 @@ class PaymentCardForms extends PaymentCard
 
     /**
      * @param array $data
+     *
      * @return string HTML input form
      */
     public function getCardPaymentLinkBuilderForm($data)
     {
         return Util::parseTemplate('cardLinkBuilder', $data);
     }
-
 }

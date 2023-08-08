@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by tpay.com.
- * Date: 28.09.2017
- * Time: 12:02
- */
 
 namespace tpayLibs\src\Translations;
 
@@ -57,5 +52,4 @@ class Polish
         'saved_card_label' => 'Zapłać zapisaną kartą ',
         'new_card_label' => 'Zapłać nową kartą',
     ];
-
 }

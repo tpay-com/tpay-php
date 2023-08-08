@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
@@ -35,11 +31,11 @@ class CardGate extends PaymentCardForms
             //Try to sale with provided card data
             $response = $this->makeCardPayment();
             //Successful payment by card not protected by 3DS
-            if (isset($response['result']) && (int)$response['result'] === 1) {
+            if (isset($response['result']) && 1 === (int)$response['result']) {
                 $this->setOrderAsComplete($response);
                 //Successfully generated 3DS link for payment authorization
             } elseif (isset($response['3ds_url'])) {
-                header("Location: " . $response['3ds_url']);
+                header('Location: '.$response['3ds_url']);
             } else {
                 //Invalid credit card data
                 $this->tryToSaleAgain();
@@ -58,15 +54,15 @@ class CardGate extends PaymentCardForms
         $cardData = Util::post('carddata', FieldsConfigDictionary::STRING);
         $saveCard = Util::post('card_save', FieldsConfigDictionary::STRING);
         Util::log('Secure Sale post params', print_r($_POST, true));
-        if ($saveCard === 'on') {
+        if ('on' === $saveCard) {
             $this->setOneTimer(false);
         }
         $this->setAmount(123)->setCurrency(985)->setOrderID('test payment 123');
         $this->setLanguage('en')->setReturnUrls('https://tpay.com', 'https://google.pl');
 
-        return $failOver === false ?
-            $this->registerSale($clientName, $clientEmail, 'test sale', $cardData) :
-            $this->setCardData(null)->registerSale($clientName, $clientEmail, 'test sale');
+        return false === $failOver
+            ? $this->registerSale($clientName, $clientEmail, 'test sale', $cardData)
+            : $this->setCardData(null)->registerSale($clientName, $clientEmail, 'test sale');
     }
 
     private function setOrderAsComplete($params)
@@ -79,12 +75,11 @@ class CardGate extends PaymentCardForms
         //Try to create new transaction and redirect customer to Tpay transaction panel
         $response = $this->makeCardPayment(true);
         if (isset($response['sale_auth'])) {
-            header("Location: " . 'https://secure.tpay.com/cards/?sale_auth=' . $response['sale_auth']);
+            header('Location: https://secure.tpay.com/cards/?sale_auth='.$response['sale_auth']);
         } else {
             echo $response['err_desc'];
         }
     }
-
 }
 
 (new CardGate())->init();

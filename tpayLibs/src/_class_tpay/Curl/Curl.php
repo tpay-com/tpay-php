@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay\Curl;
 
 use tpayLibs\src\_class_tpay\Utilities\TException;
@@ -11,34 +7,33 @@ use tpayLibs\src\Dictionaries\HttpCodesDictionary;
 
 /**
  * Curl class which helps with CURL handling
- *
- * @package tpay
  */
 class Curl extends CurlOptions
 {
     /**
      * Last executed cURL info
-     * @var array|null
+     *
+     * @var null|array
      */
     private $curlInfo;
+
     /**
      * Last executed cURL error
+     *
      * @var string
      */
     private $curlError = '';
 
     /**
      * Last executed cURL errno
+     *
      * @var string
      */
     private $curlErrorNumber = '';
 
     private $url = '';
-
     private $postData = [];
-
     private $json = false;
-
     private $result;
 
     public function __construct()
@@ -50,8 +45,6 @@ class Curl extends CurlOptions
 
     /**
      * Get last info
-     *
-     * @return mixed
      */
     public function getCurlLastInfo()
     {
@@ -60,8 +53,6 @@ class Curl extends CurlOptions
 
     /**
      * Get last Curl error info
-     *
-     * @return mixed
      */
     public function getCurlLastError()
     {
@@ -70,8 +61,6 @@ class Curl extends CurlOptions
 
     /**
      * Get last Curl error number info
-     *
-     * @return mixed
      */
     public function getCurlLastErrorNo()
     {
@@ -80,7 +69,9 @@ class Curl extends CurlOptions
 
     /**
      * Set Curl request url
+     *
      * @param string $url
+     *
      * @return object
      */
     public function setRequestUrl($url)
@@ -92,9 +83,12 @@ class Curl extends CurlOptions
 
     /**
      * Set Curl request data
+     *
      * @param array $postData
-     * @return object
+     *
      * @throws TException
+     *
+     * @return object
      */
     public function setPostData($postData)
     {
@@ -110,6 +104,7 @@ class Curl extends CurlOptions
 
     /**
      * Set Curl request data
+     *
      * @return object
      */
     public function enableJSONResponse()
@@ -122,19 +117,20 @@ class Curl extends CurlOptions
 
     /**
      * Set Curl timeout time
-     * @return array
+     *
      * @throws TException
+     *
+     * @return array
      */
     public function getResult()
     {
         $response = $this->json ? json_decode($this->result, true) : $this->result;
-        if ($response === null) {
-            throw new TException("Error decoding response to JSON");
+        if (null === $response) {
+            throw new TException('Error decoding response to JSON');
         }
 
         return $response;
     }
-
 
     /**
      * @return $this
@@ -155,6 +151,7 @@ class Curl extends CurlOptions
 
     /**
      * Execute Curl request
+     *
      * @return object
      */
     public function init()
@@ -187,6 +184,7 @@ class Curl extends CurlOptions
      * Check cURL response and throw exception
      *
      * @param int $code
+     *
      * @throws TException
      */
     private function getResponseCode($code)
@@ -194,8 +192,8 @@ class Curl extends CurlOptions
         if (array_key_exists($code, HttpCodesDictionary::HTTP_CODES)) {
             $codeDescription = sprintf('tpay.com server return %s', HttpCodesDictionary::HTTP_CODES[$code]);
             throw new TException($codeDescription);
-        } else {
-            throw new TException(sprintf('Unexpected response from tpay server %s', $code));
         }
+        throw new TException(sprintf('Unexpected response from tpay server %s', $code));
+
     }
 }

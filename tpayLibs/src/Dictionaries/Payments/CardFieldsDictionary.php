@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries\Payments;
 
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
@@ -14,6 +8,7 @@ class CardFieldsDictionary
 {
     /**
      * List of supported fields for card payment request
+     *
      * @var array
      */
     const REQUEST_FIELDS = [
@@ -31,7 +26,7 @@ class CardFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
+                FieldsConfigDictionary::MAXLENGTH_64,
             ],
         ],
         /**
@@ -41,7 +36,7 @@ class CardFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::EMAIL_LIST
+                FieldsConfigDictionary::EMAIL_LIST,
             ],
         ],
         /**
@@ -51,7 +46,7 @@ class CardFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
         ],
         /**
@@ -61,7 +56,7 @@ class CardFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_40
+                FieldsConfigDictionary::MAXLENGTH_40,
             ],
         ],
         /**
@@ -116,7 +111,7 @@ class CardFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::INT,
-                'maxlength_3'
+                'maxlength_3',
             ],
         ],
         /**
@@ -135,6 +130,7 @@ class CardFieldsDictionary
 
     /**
      * List of fields available in card payment response
+     *
      * @var array
      */
     const RESPONSE_FIELDS = [
@@ -155,8 +151,8 @@ class CardFieldsDictionary
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_40
-            ]
+                FieldsConfigDictionary::MAXLENGTH_40,
+            ],
         ],
         /**
          * Payment status
@@ -176,8 +172,8 @@ class CardFieldsDictionary
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_128,
-                FieldsConfigDictionary::MINLENGTH_40
-            ]
+                FieldsConfigDictionary::MINLENGTH_40,
+            ],
         ],
         /**
          * Created sale/refund id
@@ -187,8 +183,8 @@ class CardFieldsDictionary
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_40
-            ]
+                FieldsConfigDictionary::MAXLENGTH_40,
+            ],
         ],
         /**
          * Created client token
@@ -198,8 +194,8 @@ class CardFieldsDictionary
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_40
-            ]
+                FieldsConfigDictionary::MAXLENGTH_40,
+            ],
         ],
         /**
          * Date of accounting/deregistering
@@ -207,7 +203,7 @@ class CardFieldsDictionary
         'date' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING]
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
         ],
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
@@ -224,7 +220,7 @@ class CardFieldsDictionary
         'card' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_8', 'minlength_8']
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_8', 'minlength_8'],
         ],
         /**
          * shortcut for client card number, eg ****5678
@@ -232,7 +228,7 @@ class CardFieldsDictionary
         'amount' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::FLOAT,
-            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT]
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT],
         ],
         /**
          * payment currency
@@ -240,12 +236,12 @@ class CardFieldsDictionary
         FieldsConfigDictionary::CURRENCY => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::INT,
-            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT, 'maxlength_3', 'minlength_3']
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT, 'maxlength_3', 'minlength_3'],
         ],
         'reason' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING]
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
         ],
     ];
 }

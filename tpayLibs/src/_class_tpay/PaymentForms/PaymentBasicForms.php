@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 14:26
- */
-
 namespace tpayLibs\src\_class_tpay\PaymentForms;
 
 use tpayLibs\src\_class_tpay\PaymentOptions\BasicPaymentOptions;
@@ -14,10 +8,12 @@ use tpayLibs\src\_class_tpay\Utilities\Util;
 class PaymentBasicForms extends BasicPaymentOptions
 {
     const ACTION_URL = 'action_url';
+
     /**
      * @var string
      */
     const FIELDS = 'fields';
+
     /**
      * @var string
      */
@@ -31,10 +27,10 @@ class PaymentBasicForms extends BasicPaymentOptions
      * Create HTML form for basic panel payment based on transaction config
      * More information about config fields @see FieldsConfigValidator::$panelPaymentRequestFields
      *
-     * @param array $config transaction config
+     * @param array $config          transaction config
+     * @param bool  $redirect        redirect automatically
+     * @param bool  $showRegulations show the Tpay regulations and the acceptance checkbox
      *
-     * @param bool $redirect redirect automatically
-     * @param bool $showRegulations show the Tpay regulations and the acceptance checkbox
      * @return string
      */
     public function getTransactionForm($config, $redirect = false, $showRegulations = false)
@@ -55,8 +51,11 @@ class PaymentBasicForms extends BasicPaymentOptions
     /**
      * Create HTML form for payment with blik selection based on transaction config
      * More information about config fields @see FieldsConfigValidator::$blikPaymentRequestFields
+     *
      * @param string $formActionUrl the form will be submitted to this url
+     *
      * @return string
+     *
      * @internal param string $alias alias of registered user for One Click transactions
      */
     public function getBlikSelectionForm($formActionUrl)
@@ -73,11 +72,12 @@ class PaymentBasicForms extends BasicPaymentOptions
      * Create HTML form for payment with bank selection based on transaction config
      * More information about config fields @see FieldsConfigValidator::$panelPaymentRequestFields
      *
-     * @param array $config transaction config
-     * @param bool $smallList type of bank selection list big icons or small form with select
-     * @param bool $showRegulations show accept regulations input
-     * @param string $actionURL sets non default action URL of form
-     * @param bool $onlineOnly show only banks booking online
+     * @param array  $config          transaction config
+     * @param bool   $smallList       type of bank selection list big icons or small form with select
+     * @param bool   $showRegulations show accept regulations input
+     * @param string $actionURL       sets non default action URL of form
+     * @param bool   $onlineOnly      show only banks booking online
+     *
      * @return string
      */
     public function getBankSelectionForm(
@@ -115,8 +115,10 @@ class PaymentBasicForms extends BasicPaymentOptions
 
     /**
      * Returns the bank choice form without any payment buttons. Useful for gathering bank choice information.
-     * @param bool $onlineOnly show only banks booking online
+     *
+     * @param bool $onlineOnly      show only banks booking online
      * @param bool $showRegulations show Tpay terms and conditions checkbox
+     *
      * @return string
      */
     public function getSimpleBankList($onlineOnly = false, $showRegulations = true)
@@ -130,5 +132,4 @@ class PaymentBasicForms extends BasicPaymentOptions
 
         return Util::parseTemplate('bankSelectionSimple', $data);
     }
-
 }

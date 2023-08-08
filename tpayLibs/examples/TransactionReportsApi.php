@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\Reports\BasicReports;
@@ -25,9 +21,10 @@ class TransactionReportsApi extends BasicReports
 
     /**
      * Get transactions report
-     * @param string $dateStart 'report date start range'
-     * @param bool|string $dateEnd 'report date end range - false if to current date'
-     * @param bool $csv 'decide if return report in csv format or table associated'
+     *
+     * @param string      $dateStart 'report date start range'
+     * @param bool|string $dateEnd   'report date end range - false if to current date'
+     * @param bool        $csv       'decide if return report in csv format or table associated'
      */
     public function getReportTransaction($dateStart, $dateEnd = false, $csv = false)
     {
@@ -44,7 +41,6 @@ class TransactionReportsApi extends BasicReports
             var_dump($e->getMessage());
         }
     }
-
 }
 
 (new TransactionReportsApi())->getReportTransaction('2017-01-01');

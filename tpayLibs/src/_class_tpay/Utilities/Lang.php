@@ -1,17 +1,11 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay\Utilities;
 
 use tpayLibs\src\Translations\Keys;
 
 /**
  * Class Lang
- *
- * @package tpay
  */
 class Lang extends Keys
 {
@@ -29,7 +23,7 @@ class Lang extends Keys
         if (array_key_exists($lang, $this->translations)) {
             $this->currentLanguage = $lang;
         } else {
-            throw new TException('This language is not supported: '. print_r($lang, true));
+            throw new TException('This language is not supported: '.print_r($lang, true));
         }
     }
 
@@ -40,7 +34,6 @@ class Lang extends Keys
 
     /**
      * Get and print translated string
-     * @param $key
      */
     public function l($key)
     {
@@ -54,10 +47,8 @@ class Lang extends Keys
      *
      * @return string
      */
-
     public function get($key)
     {
         return $this->translations[$this->currentLanguage][$key];
     }
-
 }

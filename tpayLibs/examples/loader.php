@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 spl_autoload_register(function ($class) {
@@ -12,11 +8,11 @@ spl_autoload_register(function ($class) {
     $prefix = 'tpayLibs\\';
 
     // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/../';
+    $base_dir = __DIR__.'/../';
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
+    if (0 !== strncmp($prefix, $class, $len)) {
         // no, move to the next registered autoloader
         return;
     }
@@ -27,7 +23,7 @@ spl_autoload_register(function ($class) {
     // replace the namespace prefix with the base directory, replace namespace
     // separators with directory separators in the relative class name, append
     // with .php
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+    $file = $base_dir.str_replace('\\', '/', $relative_class).'.php';
 
     // if the file exists, require it
 

@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 16:56
- */
-
 namespace tpayLibs\src\_class_tpay\Notifications;
 
 use tpayLibs\src\_class_tpay\PaymentCard;
@@ -22,29 +16,27 @@ class CardNotificationHandler extends PaymentCard
      * This method check server ip, required fields and md5 checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
      *
-     * @return mixed
-     *
      * @throws TException
      */
     public function handleNotification()
     {
-        Util::log('Card notification', "POST params: \n" . print_r($_POST, true));
+        Util::log('Card notification', "POST params: \n".print_r($_POST, true));
         $notificationType = Util::post('type', CardDictionary::STRING);
-        if ($notificationType === CardDictionary::SALE) {
+        if (CardDictionary::SALE === $notificationType) {
             $response = $this->getResponse(new PaymentTypeCard());
-        } elseif ($notificationType === CardDictionary::DEREGISTER) {
+        } elseif (CardDictionary::DEREGISTER === $notificationType) {
             $response = $this->getResponse(new PaymentTypeCardDeregister());
         } else {
             throw new TException('Unknown notification type');
         }
-        if ($this->validateServerIP === true && $this->isTpayServer() === false) {
+        if (true === $this->validateServerIP && false === $this->isTpayServer()) {
             throw new TException('Request is not from secure server');
         }
 
         echo json_encode([CardDictionary::RESULT => '1']);
 
-        if (($notificationType === CardDictionary::SALE && $response['status'] === 'correct')
-            || $notificationType === CardDictionary::DEREGISTER
+        if ((CardDictionary::SALE === $notificationType && 'correct' === $response['status'])
+            || CardDictionary::DEREGISTER === $notificationType
         ) {
             if (isset($response[CardDictionary::CLIAUTH])) {
                 $this->setClientToken($response[CardDictionary::CLIAUTH]);
@@ -55,5 +47,4 @@ class CardNotificationHandler extends PaymentCard
 
         return $response;
     }
-
 }
