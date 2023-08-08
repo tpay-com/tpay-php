@@ -26,10 +26,10 @@ class MassPayments extends TransactionApi
 
         $csvEncode = base64_encode($csv);
 
-        $postData = array(
+        $postData = [
             'csv'  => $csvEncode,
             'sign' => sha1($this->merchantId . $csv . $this->merchantSecret),
-        );
+        ];
         $response = $this->requests($url, $postData);
 
         $this->checkError($response);
@@ -49,9 +49,9 @@ class MassPayments extends TransactionApi
     {
         $url = $this->apiURL . $this->trApiKey . '/masspayment/authorize';
 
-        $postData = array(
+        $postData = [
             static::PACK_ID => $packId,
-        );
+        ];
         $response = $this->requests($url, $postData);
 
         $this->checkError($response);
@@ -73,7 +73,7 @@ class MassPayments extends TransactionApi
     {
         $url = $this->apiURL . $this->trApiKey . '/masspayment/packs';
 
-        $postData = array();
+        $postData = [];
 
         if ($packId !== false) {
             $postData[static::PACK_ID] = $packId;
@@ -105,10 +105,10 @@ class MassPayments extends TransactionApi
     {
         $url = $this->apiURL . $this->trApiKey . '/masspayment/transfers';
 
-        $postData = array(
+        $postData = [
             static::PACK_ID => $packId,
             'trId'          => $trId,
-        );
+        ];
         $response = $this->requests($url, $postData);
 
         $this->checkError($response);

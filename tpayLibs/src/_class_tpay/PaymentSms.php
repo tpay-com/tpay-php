@@ -35,10 +35,10 @@ class PaymentSMS extends ObjectsHelper
             throw new TException('Invalid input data');
         }
 
-        $postData = array(
+        $postData = [
             'tfCodeToCheck' => $codeToCheck,
             'tfHash'        => $hash,
-        );
+        ];
         Util::log('Sms verification request', json_encode($postData));
         $response = $this->requests($this->secureURL, $postData);
         Util::log('Sms verification response', print_r($response, true));

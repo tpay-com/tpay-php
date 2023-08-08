@@ -177,7 +177,7 @@ class CurlOptions
 
     public function getOptionsArray()
     {
-        return array(
+        return [
             CURLOPT_CONNECTTIMEOUT => $this->connectTimeout,
             CURLOPT_FOLLOWLOCATION => $this->followLocation,
             CURLOPT_SSL_VERIFYHOST => $this->verifyHost,
@@ -187,7 +187,7 @@ class CurlOptions
             CURLOPT_POST           => $this->post,
             CURLOPT_RETURNTRANSFER => $this->returnTransfer,
             CURLOPT_FAILONERROR    => $this->failOnError
-        );
+        ];
     }
 
 }

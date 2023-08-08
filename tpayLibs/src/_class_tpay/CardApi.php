@@ -31,12 +31,12 @@ class CardApi extends CardOptions
         if (!is_null($this->cardData)) {
             $params['card'] = $this->cardData;
         }
-        $params = array_merge($params, array(
+        $params = array_merge($params, [
             CardDictionary::NAME => $clientName,
             CardDictionary::EMAIL => $clientEmail,
             CardDictionary::DESC => $saleDescription,
             CardDictionary::AMOUNT => $this->amount,
-        ));
+        ]);
         $params[CardDictionary::CURRENCY] = $this->currency;
         $optionalParams = [
             'order_id' => !empty($this->orderID) ? $this->orderID : '',
@@ -67,7 +67,7 @@ class CardApi extends CardOptions
 
     private function checkReturnUrls()
     {
-        $params = array();
+        $params = [];
         if (filter_var($this->powUrl, FILTER_VALIDATE_URL)) {
             $params['pow_url'] = $this->powUrl;
         }
@@ -91,14 +91,14 @@ class CardApi extends CardOptions
      */
     public function presaleMethod($saleDescription)
     {
-        $params = array(
+        $params = [
             CardDictionary::AMOUNT   => $this->amount,
             CardDictionary::METHOD   => CardDictionary::PRESALE,
             CardDictionary::CLIAUTH  => $this->clientAuthCode,
             CardDictionary::DESC     => $saleDescription,
             CardDictionary::CURRENCY => $this->currency,
             CardDictionary::LANGUAGE => $this->lang,
-        );
+        ];
         if (!empty($this->orderID)) {
             $params[CardDictionary::ORDERID] = $this->orderID;
         }
@@ -137,11 +137,11 @@ class CardApi extends CardOptions
         if (strlen($saleAuthCode) !== 40) {
             throw new TException('invalid sale_auth code');
         }
-        $params = array(
+        $params = [
             CardDictionary::METHOD   => CardDictionary::SALE,
             CardDictionary::CLIAUTH  => $this->clientAuthCode,
             CardDictionary::SALEAUTH => $saleAuthCode,
-        );
+        ];
         $hashParams = [
             CardDictionary::SALE,
             $this->clientAuthCode,

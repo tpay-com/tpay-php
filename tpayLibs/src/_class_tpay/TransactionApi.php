@@ -102,7 +102,7 @@ class TransactionApi extends PaymentBasicForms
     {
         $url = $this->apiURL . $this->trApiKey . '/transaction/get';
 
-        $response = $this->requests($url, array(static::TITLE => $this->transactionID));
+        $response = $this->requests($url, [static::TITLE => $this->transactionID]);
 
         $this->checkError($response);
         return $response;

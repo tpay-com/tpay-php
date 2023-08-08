@@ -40,7 +40,7 @@ trait FieldsConfigValidator
             }
         }
         $this->dirPath = $_SERVER["DOCUMENT_ROOT"] . '/' . str_replace("\\", '/', __NAMESPACE__);
-        $ready = array();
+        $ready = [];
         $this->setPaymentFields($paymentType);
         $config = $this->checkDeprecatedFields($paymentType, $config);
         foreach ($config as $key => $value) {
@@ -83,7 +83,7 @@ trait FieldsConfigValidator
     {
         $this->requestFields = $notResp ? $paymentType->getRequestFields() : $paymentType->getResponseFields();
         $this->requestFields['json'][FieldsConfigDictionary::REQUIRED] = false;
-        $this->requestFields['json'][FieldsConfigDictionary::VALIDATION] = array(FieldsConfigDictionary::BOOLEAN);
+        $this->requestFields['json'][FieldsConfigDictionary::VALIDATION] = [FieldsConfigDictionary::BOOLEAN];
     }
 
     /**
@@ -194,7 +194,7 @@ trait FieldsConfigValidator
      */
     private function isSetRequiredPaymentFields($config)
     {
-        $missing = array();
+        $missing = [];
 
         foreach ($this->requestFields as $fieldName => $field) {
             if ($field[FieldsConfigDictionary::REQUIRED] === true && !isset($config[$fieldName])) {

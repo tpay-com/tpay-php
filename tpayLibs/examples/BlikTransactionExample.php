@@ -46,7 +46,7 @@ class BlikTransactionExample extends PaymentBlik
      */
     private function blikTransaction($blikCode)
     {
-        $config = array(
+        $config = [
             'description' => 'Test API transaction',
             'amount' => 0.20,
             'crc' => 'test',
@@ -55,7 +55,7 @@ class BlikTransactionExample extends PaymentBlik
             'email' => 'customer@example.com',
             'accept_tos' => 1,
             'result_url' => 'https://example.com/notify.php',
-        );
+        ];
         $transaction = $this->create($config);
         $title = $transaction['title'];
 

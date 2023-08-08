@@ -51,10 +51,10 @@ class PaymentCardForms extends PaymentCard
             throw new TException('Invalid api response code');
         }
 
-        $data = array(
+        $data = [
             'action_url'              => $this->cardsURL,
             CardDictionary::SALE_AUTH => $apiResponse[CardDictionary::SALE_AUTH],
-        );
+        ];
 
         return Util::parseTemplate('cardPaymentForm', $data);
     }

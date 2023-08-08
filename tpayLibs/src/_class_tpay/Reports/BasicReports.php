@@ -28,9 +28,9 @@ class BasicReports extends TransactionApi
     public function report($fromDate, $toDate = false, $raw = true)
     {
         $url = $this->apiURL . $this->trApiKey . '/transaction/report';
-        $postData = array(
+        $postData = [
             'from_date' => $fromDate
-        );
+        ];
 
         if ($toDate !== false) {
             $postData['to_date'] = $toDate;

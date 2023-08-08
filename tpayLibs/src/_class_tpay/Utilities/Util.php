@@ -37,7 +37,7 @@ class Util
      * @param array $data
      * @return string
      */
-    public static function parseTemplate($templateFileName, $data = array())
+    public static function parseTemplate($templateFileName, $data = [])
     {
         if (is_null(static::$libraryPath)) {
             $data['static_files_url'] = $_SERVER['REQUEST_URI'] . '/../../src/';

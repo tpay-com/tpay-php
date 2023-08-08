@@ -36,7 +36,7 @@ class PaymentBlik extends TransactionApi
                 break;
             case 0:
                 if (isset($response[static::ERR]) && $response[static::ERR] === 'ERR82') {
-                    $apps = array();
+                    $apps = [];
                     foreach ($response['availableUserApps'] as $userApp) {
                         $apps[] = get_object_vars($userApp);
                     }

@@ -16,85 +16,85 @@ class CardDeregisterFieldsDictionary
      * List of fields available in card deregistration
      * @var array
      */
-    const REQUEST_FIELDS = array(
+    const REQUEST_FIELDS = [
         /**
          * client authorization ID, sent if oneTimer option is not set
          * when creating client and client has not been deregistered (himFieldsConfigDictionary or by api)
          */
-        'cli_auth' => array(
+        'cli_auth' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40,
                 FieldsConfigDictionary::MINLENGTH_40
-            ),
-        ),
+            ],
+        ],
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
-        FieldsConfigDictionary::LANGUAGE => array(
+        FieldsConfigDictionary::LANGUAGE => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
+        ],
         /**
          * Message checksum
          */
-        'sign' => array(
+        'sign' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 'maxlength_128',
                 FieldsConfigDictionary::MINLENGTH_40
-            ),
-        ),
-    );
+            ],
+        ],
+    ];
 
-    const RESPONSE_FIELDS = array(
+    const RESPONSE_FIELDS = [
         /**
          * Method type
          */
-        FieldsConfigDictionary::TYPE => array(
+        FieldsConfigDictionary::TYPE => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array('deregister'),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => ['deregister'],
+        ],
         /**
          * client authorization ID, sent if oneTimer option is not set
          * when creating client and client has not been deregistered (himFieldsConfigDictionary or by api)
          */
-        'cli_auth' => array(
+        'cli_auth' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
                 FieldsConfigDictionary::MAXLENGTH_40,
                 FieldsConfigDictionary::MINLENGTH_40
-            ),
-        ),
+            ],
+        ],
         /**
          * carry value of 1 if account has test mode, otherwise parameter not sent
          */
-        FieldsConfigDictionary::TEST_MODE => array(
+        FieldsConfigDictionary::TEST_MODE => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::INT,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::INT],
+        ],
         /**
          * Date of accounting/deregistering
          */
-        'date' => array(
+        'date' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
             FieldsConfigDictionary::FILTER => 'date'
-        ),
+        ],
         /**
          * Message checksum
          */
         'sign' => self::REQUEST_FIELDS['sign'],
-    );
+    ];
 }

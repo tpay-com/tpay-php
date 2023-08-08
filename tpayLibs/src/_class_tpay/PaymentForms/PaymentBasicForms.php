@@ -41,13 +41,13 @@ class PaymentBasicForms extends BasicPaymentOptions
     {
         $config = $this->prepareConfig($config);
 
-        $data = array(
+        $data = [
             static::ACTION_URL => $this->panelURL,
             static::FIELDS => $config,
             'redirect' => $redirect,
             'show_regulations_checkbox' => $showRegulations,
             'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
-        );
+        ];
 
         return Util::parseTemplate(static::PAYMENT_FORM, $data);
     }
@@ -61,10 +61,10 @@ class PaymentBasicForms extends BasicPaymentOptions
      */
     public function getBlikSelectionForm($formActionUrl)
     {
-        $data = array(
+        $data = [
             'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
             'action_url' => $formActionUrl,
-        );
+        ];
 
         return Util::parseTemplate('blikForm', $data);
     }
@@ -81,7 +81,7 @@ class PaymentBasicForms extends BasicPaymentOptions
      * @return string
      */
     public function getBankSelectionForm(
-        $config = array(),
+        $config = [],
         $smallList = false,
         $showRegulations = true,
         $actionURL = null,
@@ -93,22 +93,22 @@ class PaymentBasicForms extends BasicPaymentOptions
         $config['group'] = 0;
         $config['accept_tos'] = 0;
 
-        $data = array(
+        $data = [
             static::ACTION_URL => is_null($actionURL) ? $this->panelURL : (string)$actionURL,
             static::FIELDS => $config,
             'redirect' => false,
             'show_regulations_checkbox' => $showRegulations,
             'regulation_url'  => static::TPAY_TERMS_OF_SERVICE_URL,
-        );
+        ];
 
         $form = Util::parseTemplate(static::PAYMENT_FORM, $data);
 
-        $data = array(
+        $data = [
             'merchant_id' => $this->merchantId,
             'form' => $form,
             'online_only' => (int)$onlineOnly,
             'small_list' => $smallList,
-        );
+        ];
 
         return Util::parseTemplate('bankSelection', $data);
     }

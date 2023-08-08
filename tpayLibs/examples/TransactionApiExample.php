@@ -48,7 +48,7 @@ class TransactionApiExample extends TransactionApi
          * Create new transaction
          */
 
-        $config = array(
+        $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
             'crc' => '100020003000',
@@ -59,7 +59,7 @@ class TransactionApiExample extends TransactionApi
             'name' => 'John Doe',
             'group' => isset($_POST['group']) ? (int)$_POST['group'] : 150,
             'accept_tos' => 1,
-        );
+        ];
         try {
             $res = $this->create($config);
             $this->trUrl = $res['url'];

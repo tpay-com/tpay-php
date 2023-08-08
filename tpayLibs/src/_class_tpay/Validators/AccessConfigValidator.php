@@ -34,7 +34,7 @@ trait AccessConfigValidator
      */
     public static function validateCardHashAlg($hashAlg)
     {
-        if (!in_array($hashAlg, array('sha1', 'sha256', 'sha512', 'ripemd160', 'ripemd320', 'md5'))) {
+        if (!in_array($hashAlg, ['sha1', 'sha256', 'sha512', 'ripemd160', 'ripemd320', 'md5'])) {
             throw new TException('Invalid hash algorithm');
         }
     }

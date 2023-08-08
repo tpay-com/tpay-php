@@ -35,7 +35,7 @@ class Curl extends CurlOptions
 
     private $url = '';
 
-    private $postData = array();
+    private $postData = [];
 
     private $json = false;
 

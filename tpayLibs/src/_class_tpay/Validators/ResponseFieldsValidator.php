@@ -25,8 +25,8 @@ trait ResponseFieldsValidator
      */
     public function getResponse($paymentType)
     {
-        $ready = array();
-        $missed = array();
+        $ready = [];
+        $missed = [];
 
         $responseFields = $paymentType->getResponseFields();
 

@@ -23,7 +23,7 @@ class TpayBasicExample extends PaymentBasicForms
     public function getDataForTpay()
     {
 
-        $config = array(
+        $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
             'crc' => '100020003000',
@@ -32,7 +32,7 @@ class TpayBasicExample extends PaymentBasicForms
             'result_email' => 'shop@example.com',
             'email' => 'customer@example.com',
             'name' => 'John Doe',
-        );
+        ];
 
         /*
          * This method return HTML form
