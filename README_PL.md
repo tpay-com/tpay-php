@@ -41,7 +41,7 @@ Wszystkie metody opisane w [dokumentacji Tpay](https://docs.tpay.com) można ła
 
 ##### Podstawowe płatności i formularze wyboru banku
 
-Przykłady użycia: [podstawowy](tpayLibs/examples/BasicPaymentForm.php), [formularz HTML wyboru banku](tpayLibs/examples/BankSelection.php), [formularz API wyboru banku](tpayLibs/examples/BankSelectionAPI.php), [formularz Blik](tpayLibs/examples/BlikTransactionExample.php).
+Przykłady użycia: [podstawowy](tpayLibs/examples/BasicPaymentForm.php), [formularz HTML wyboru banku](tpayLibs/examples/BankSelection.php), [formularz API wyboru banku](tpayLibs/examples/BankSelectionAPI.php), [formularz BLIK](tpayLibs/examples/BlikTransactionExample.php).
 
 ##### API transakcji / tworzenie, odbieranie, zwrot, zgłoszenie
 
@@ -69,7 +69,7 @@ Util::$customLogPatch = '/my/own/path/Logs/';
 
 Nazwy plików dzienników zostaną przypisane automatycznie.
 
-## Niestandardowa Ścieżka szablonów
+## Niestandardowa ścieżka szablonów
 
 Możesz ustawić własną ścieżkę szablonów, dzięki czemu możesz kopiować i modyfikować pliki szablonów `phtml` z tej biblioteki.
  ```php
