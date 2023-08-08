@@ -7,6 +7,8 @@ Library for all payment methods available in [Tpay](https://tpay.com).
 [![License](https://img.shields.io/github/license/tpay-com/tpay-php.svg)](LICENSE)
 [![CI status](https://github.com/tpay-com/tpay-php/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/tpay-com/tpay-php/actions)
 
+[Polish version :poland: wersja polska](./README_PL.md)
+
 ## Installation
 
 Install via [Composer](https://getcomposer.org):
@@ -39,19 +41,20 @@ All methods described in [Tpay documentation](https://docs.tpay.com) can be easi
 
 ##### Basic Payments and bank selection forms
 
-   Example of usages: [basic](tpayLibs/examples/BasicPaymentForm.php), [bank selection HTML form](tpayLibs/examples/BankSelection.php), [bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [Blik form](tpayLibs/examples/BlikTransactionExample.php).
+Example of usages: [basic](tpayLibs/examples/BasicPaymentForm.php), [bank selection HTML form](tpayLibs/examples/BankSelection.php), [bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [BLIK form](tpayLibs/examples/BlikTransactionExample.php).
 
 ##### Transaction API / create, get, refund, report
 
-   Example of usages: [create transaction](tpayLibs/examples/TransactionApiExample.php), [refund transaction](tpayLibs/examples/TransactionRefund.php), [refund transaction status](tpayLibs/examples/TransactionRefundStatus.php).
+Example of usages: [create transaction](tpayLibs/examples/TransactionApiExample.php), [refund transaction](tpayLibs/examples/TransactionRefund.php), [refund transaction status](tpayLibs/examples/TransactionRefundStatus.php).
 
 ##### Card Basic / Card On-Site
 
-  Example of usages: [card basic form](tpayLibs/examples/CardBasic.php), [card on-site gateway](tpayLibs/examples/CardGate.php), [card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php), [card on-site gateway with saved cards](tpayLibs/examples/CardGateExtended.php).
+Example of usages: [card basic form](tpayLibs/examples/CardBasic.php), [card on-site gateway](tpayLibs/examples/CardGate.php), [card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php), [card on-site gateway with saved cards](tpayLibs/examples/CardGateExtended.php).
 
 ## Logs
+
 Library has own logging system to save all confirmations and notifications sent by Tpay.com server, outgoing requests and exceptions.
-Be sure that file `src/Logs` directory is writable and add rule to Apache htaccess or NGINX to deny access to this area from browser.
+Be sure that file `src/Logs` directory is writable and add rule to Apache `.htaccess` or NGINX to deny access to this area from browser.
 The log files are created for each day separately under `Logs` directory.
 
 The logging is enabled by default, but you can disable this feature with:
@@ -69,7 +72,6 @@ The logs file names will be assigned automatically.
 ## Custom templates path
 
 You can set your own templates path, so you can copy and modify the `phtml` template files from this library.
-
  ```php
 Util::$customTemplateDirectory = '/my/own/templates/path/';
  ```
@@ -78,7 +80,6 @@ Util::$customTemplateDirectory = '/my/own/templates/path/';
 
 Currently, the library supports two languages (English and Polish). Default language is English.
 Changing language example:
-
 ```php
 // All Tpay class constructors load Lang class
 $tpay = new BankSelectionExample();
@@ -95,4 +96,4 @@ $language->l('pay'); // to echo translated key
 ## License
 
 This library is released under the [MIT License](http://www.opensource.org/licenses/MIT),
-but uses third party libraries that are distributed under their own terms (see [LICENSE-3RD-PARTY.md](LICENSE-3RD-PARTY.md)).
+but uses third party libraries that are distributed under their own terms ([see `LICENSE-3RD-PARTY.md`](LICENSE-3RD-PARTY.md)).
