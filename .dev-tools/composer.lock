@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e841770c4b877d0bb1b71e0b63494de4",
+    "content-hash": "955f690d063e28542cb2c05b190bb621",
     "packages": [
         {
             "name": "ergebnis/composer-normalize",
@@ -306,6 +306,37 @@
                 "BSD-3-Clause"
             ],
             "description": "Fork of sebastian/diff for use with ergebnis/composer-normalize"
+        },
+        {
+            "name": "php-cs-fixer/shim",
+            "version": "v3.22.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CS-Fixer/shim.git",
+                "reference": "f6692934a6d1fe40fd8bc3339487490baa4a6700"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f6692934a6d1fe40fd8bc3339487490baa4a6700",
+                "reference": "f6692934a6d1fe40fd8bc3339487490baa4a6700"
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-tokenizer": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "replace": {
+                "friendsofphp/php-cs-fixer": "self.version"
+            },
+            "bin": [
+                "php-cs-fixer",
+                "php-cs-fixer.phar"
+            ],
+            "type": "application",
+            "license": [
+                "MIT"
+            ],
+            "description": "A tool to automatically fix PHP code style"
         }
     ],
     "packages-dev": [],
