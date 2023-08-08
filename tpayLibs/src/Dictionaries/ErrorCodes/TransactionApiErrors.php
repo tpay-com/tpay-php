@@ -5,6 +5,7 @@
  * Date: 09.06.2017
  * Time: 17:56
  */
+
 namespace tpayLibs\src\Dictionaries\ErrorCodes;
 
 class TransactionApiErrors

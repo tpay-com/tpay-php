@@ -13,7 +13,6 @@ use tpayLibs\src\_class_tpay\Validators\VariableTypesInterface;
 
 class ArrayType implements VariableTypesInterface
 {
-
     public function validateType($value, $name)
     {
         if (!is_array($value)) {

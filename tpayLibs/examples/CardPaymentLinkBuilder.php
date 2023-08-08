@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
@@ -80,7 +81,7 @@ class CardPaymentLinkBuilder extends PaymentCardForms
             }
             $_POST['amount'] = str_replace(',', '.', $_POST['amount']);
             $this
-                ->setAmount((double)$_POST['amount'])
+                ->setAmount((float)$_POST['amount'])
                 ->setCurrency((int)$_POST['currency']);
             $this->setNotRequiredFields();
             $transaction = $this->registerSale($_POST['name'], $_POST['email'], $_POST['desc']);
@@ -114,4 +115,4 @@ class CardPaymentLinkBuilder extends PaymentCardForms
 
 }
 
-(new CardPaymentLinkBuilder)->init();
+(new CardPaymentLinkBuilder())->init();

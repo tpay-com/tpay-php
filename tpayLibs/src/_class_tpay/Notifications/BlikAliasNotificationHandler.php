@@ -15,7 +15,6 @@ use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBlikAlias;
 
 class BlikAliasNotificationHandler extends BasicPaymentOptions
 {
-
     /**
      * Check cURL request from tpay server after payment.
      * This method check server ip sent by payment server.

@@ -49,8 +49,14 @@ class CardNotification extends CardNotificationHandler
             ->setAmount($shopOrderData['amount'])
             ->setCurrency($shopOrderData['currency'])
             ->setOrderID($notification['order_id']);
-        $this->validateCardSign($notification['sign'], $notification['sale_auth'], $notification['card'],
-            $notification['date'], $notification['status'], $testMode);
+        $this->validateCardSign(
+            $notification['sign'],
+            $notification['sale_auth'],
+            $notification['card'],
+            $notification['date'],
+            $notification['status'],
+            $testMode
+        );
 
         return $notification;
     }

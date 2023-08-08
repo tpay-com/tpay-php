@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentSMS;
@@ -25,4 +26,4 @@ class SmsNotification extends PaymentSMS
     }
 
 }
-new SmsNotification;
+new SmsNotification();

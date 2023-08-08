@@ -6,7 +6,6 @@
 
 namespace tpayLibs\src\_class_tpay\Validators;
 
-
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\_class_tpay\Validators\VariableTypes\VariableTypesValidator;
@@ -160,8 +159,13 @@ trait FieldsConfigValidator
 
         $filterName = $fieldConfig[FieldsConfigDictionary::FILTER];
         if (array_key_exists($filterName, $filters)) {
-            $filteredValue = preg_replace($filters[$filterName], '', $value, -1,
-                $count);
+            $filteredValue = preg_replace(
+                $filters[$filterName],
+                '',
+                $value,
+                -1,
+                $count
+            );
             if ($count > 0) {
                 Util::log('Variable Warning!', 'Unsupported signs has been trimmed from '
                     . $value . ' to ' . $filteredValue . ' in field ' . $name);

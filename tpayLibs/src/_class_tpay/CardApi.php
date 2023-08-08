@@ -40,12 +40,11 @@ class CardApi extends CardOptions
         $params[CardDictionary::CURRENCY] = $this->currency;
         $optionalParams = [
             'order_id' => !empty($this->orderID) ? $this->orderID : '',
-            'onetimer' => $this->oneTimer ? : '',
+            'onetimer' => $this->oneTimer ?: '',
             CardDictionary::LANGUAGE => $this->lang,
             'enable_pow_url' => $this->enablePowUrl ? 1 : '',
         ];
-        if($this->method === 'register_sale')
-        {
+        if($this->method === 'register_sale') {
             unset($optionalParams['enable_pow_url']);
         }
         $params = array_merge($params, $optionalParams);
@@ -90,7 +89,8 @@ class CardApi extends CardOptions
      *
      * @throws TException
      */
-    public function presaleMethod($saleDescription) {
+    public function presaleMethod($saleDescription)
+    {
         $params = array(
             CardDictionary::AMOUNT   => $this->amount,
             CardDictionary::METHOD   => CardDictionary::PRESALE,
@@ -114,8 +114,10 @@ class CardApi extends CardOptions
             ];
         $params[CardDictionary::SIGN] = hash($this->cardHashAlg, implode('&', $hashParams));
         $params[CardDictionary::APIPASS] = $this->cardApiPass;
-        Util::log('Pre sale params with hash ',
-            print_r($params, true) . 'req url ' . $this->cardsApiURL . $this->cardApiKey);
+        Util::log(
+            'Pre sale params with hash ',
+            print_r($params, true) . 'req url ' . $this->cardsApiURL . $this->cardApiKey
+        );
 
         return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
     }
@@ -130,7 +132,8 @@ class CardApi extends CardOptions
      * @return bool|mixed
      * @throws TException
      */
-    public function saleMethod($saleAuthCode) {
+    public function saleMethod($saleAuthCode)
+    {
         if (strlen($saleAuthCode) !== 40) {
             throw new TException('invalid sale_auth code');
         }
@@ -171,4 +174,3 @@ class CardApi extends CardOptions
         return $this->requests($this->cardsApiURL . $this->cardApiKey, $params);
     }
 }
-

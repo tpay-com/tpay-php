@@ -8,7 +8,6 @@
 
 namespace tpayLibs\src\_class_tpay\Validators;
 
-
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\Dictionaries\ISO_codes\CurrencyCodesDictionary;
 use tpayLibs\src\Dictionaries\Localization\CardPaymentLanguagesDictionary;
@@ -66,8 +65,10 @@ trait FieldsValidator
             throw new TException('Invalid language value type.');
         }
         if (in_array($language, CardPaymentLanguagesDictionary::LANGUAGES)) {
-            return CardPaymentLanguagesDictionary::LANGUAGES[array_search($language,
-                CardPaymentLanguagesDictionary::LANGUAGES)];
+            return CardPaymentLanguagesDictionary::LANGUAGES[array_search(
+                $language,
+                CardPaymentLanguagesDictionary::LANGUAGES
+            )];
         } elseif (!array_key_exists($language, CardPaymentLanguagesDictionary::LANGUAGES)) {
             return 'en';
         } else {

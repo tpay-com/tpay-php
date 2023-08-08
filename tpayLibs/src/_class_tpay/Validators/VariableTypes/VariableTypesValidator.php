@@ -13,8 +13,6 @@ use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
 
 class VariableTypesValidator
 {
-
-
     public function __construct($type, $value, $name)
     {
         $this->validateType($type, $value, $name);

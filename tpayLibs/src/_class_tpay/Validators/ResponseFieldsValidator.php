@@ -8,7 +8,6 @@
 
 namespace tpayLibs\src\_class_tpay\Validators;
 
-
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;

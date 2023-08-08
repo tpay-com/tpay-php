@@ -8,7 +8,6 @@
 
 namespace tpayLibs\src\Dictionaries\Payments;
 
-
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
 
 class BlikFieldsDictionary

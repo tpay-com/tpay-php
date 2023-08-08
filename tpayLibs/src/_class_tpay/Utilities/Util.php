@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\src\_class_tpay\Utilities;
 
 use Exception;

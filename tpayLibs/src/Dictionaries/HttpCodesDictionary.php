@@ -8,7 +8,6 @@
 
 namespace tpayLibs\src\Dictionaries;
 
-
 class HttpCodesDictionary
 {
     /**

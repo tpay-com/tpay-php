@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
@@ -71,8 +72,8 @@ class CardGateExtended extends PaymentCardForms
     private function makeCardPayment($failOver = false)
     {
         //If you set the third getOnSiteCardForm() parameter true, you can get client name and email here. Otherwise, you must get those values from your DB.
-//        $clientName = Util::post('client_name', FieldsConfigDictionary::STRING);
-//        $clientEmail = Util::post('client_email', FieldsConfigDictionary::STRING);
+        //        $clientName = Util::post('client_name', FieldsConfigDictionary::STRING);
+        //        $clientEmail = Util::post('client_email', FieldsConfigDictionary::STRING);
         $clientEmail = 'customer@example.com';
         $clientName = 'John Doe';
 

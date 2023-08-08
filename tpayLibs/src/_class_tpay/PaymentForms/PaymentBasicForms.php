@@ -86,8 +86,7 @@ class PaymentBasicForms extends BasicPaymentOptions
         $showRegulations = true,
         $actionURL = null,
         $onlineOnly = false
-    )
-    {
+    ) {
         if (!empty($config)) {
             $config = $this->prepareConfig($config);
         }

@@ -13,7 +13,6 @@ include_once 'loader.php';
 
 class TpayBasicExample extends PaymentBasicForms
 {
-
     public function __construct()
     {
         $this->merchantSecret = 'demo';

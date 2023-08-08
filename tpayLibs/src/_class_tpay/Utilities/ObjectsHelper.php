@@ -138,7 +138,8 @@ class ObjectsHelper
         return (new ServerValidator(
             $this->validateServerIP,
             $this->validateForwardedIP,
-            $this->secureIP)
+            $this->secureIP
+        )
         )->isValid();
     }
 

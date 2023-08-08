@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\src\_class_tpay\Refunds;
 
 use tpayLibs\src\_class_tpay\CardApi;
@@ -24,7 +25,7 @@ class CardRefunds extends CardApi
     public function refund($saleAuthCode, $refundDesc)
     {
         if (empty($this->clientAuthCode) && empty($saleAuthCode)) {
-            throw new TException ('Empty Token or sale auth');
+            throw new TException('Empty Token or sale auth');
         }
         if (!empty($this->clientAuthCode && empty($this->amount))) {
             throw new TException('Amount is required for Token based refunds.');

@@ -69,4 +69,4 @@ class BlikTransactionExample extends PaymentBlik
 
 }
 
-new BlikTransactionExample;
+new BlikTransactionExample();

@@ -61,8 +61,11 @@ class PaymentBlik extends TransactionApi
                 $response = $this->blik($params[static::TITLE], $params[FieldsConfigDictionary::CODE]);
                 break;
             case $type instanceof PaymentTypeT6Register:
-                $response = $this->blik($params[static::TITLE], $params[FieldsConfigDictionary::CODE],
-                    $params[static::ALIAS]);
+                $response = $this->blik(
+                    $params[static::TITLE],
+                    $params[FieldsConfigDictionary::CODE],
+                    $params[static::ALIAS]
+                );
                 break;
             case $type instanceof PaymentTypeBlikAlias:
                 $response = $this->blik($params[static::TITLE], '', $params[static::ALIAS]);

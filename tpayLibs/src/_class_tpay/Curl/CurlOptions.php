@@ -8,7 +8,6 @@
 
 namespace tpayLibs\src\_class_tpay\Curl;
 
-
 class CurlOptions
 {
     private $verifyHost = 0;

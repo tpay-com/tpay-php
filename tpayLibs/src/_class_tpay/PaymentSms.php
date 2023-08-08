@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\src\_class_tpay;
 
 use tpayLibs\src\_class_tpay\Curl\Curl;

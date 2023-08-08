@@ -10,7 +10,6 @@ use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\Dictionaries\CardDictionary;
 
-
 /**
  * Class PaymentCard
  *

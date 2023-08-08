@@ -7,7 +7,6 @@
 
 namespace tpayLibs\src\Translations;
 
-
 use tpayLibs\src\_class_tpay\Utilities\TException;
 
 class Keys
