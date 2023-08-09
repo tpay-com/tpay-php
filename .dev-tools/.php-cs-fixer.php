@@ -1,6 +1,11 @@
 <?php
 
+require __DIR__.'/vendor/kubawerlos/php-cs-fixer-custom-fixers/bootstrap.php';
+
+use PhpCsFixerCustomFixers\Fixer;
+
 return (new PhpCsFixer\Config())
+    ->registerCustomFixers(new \PhpCsFixerCustomFixers\Fixers())
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->ignoreDotFiles(false)
@@ -59,4 +64,19 @@ return (new PhpCsFixer\Config())
         'trim_array_spaces' => true,
         'visibility_required' => ['elements' => ['method']],
         'yoda_style' => true,
+        Fixer\CommentSurroundedBySpacesFixer::name() => true,
+        Fixer\NoCommentedOutCodeFixer::name() => true,
+        Fixer\NoPhpStormGeneratedCommentFixer::name() => true,
+        Fixer\NoSuperfluousConcatenationFixer::name() => true,
+        Fixer\NoTrailingCommaInSinglelineFixer::name() => true,
+        Fixer\NoUselessCommentFixer::name() => true,
+        Fixer\NoUselessDirnameCallFixer::name() => true,
+        Fixer\NoUselessParenthesisFixer::name() => true,
+        Fixer\PhpdocArrayStyleFixer::name() => true,
+        Fixer\PhpdocNoIncorrectVarAnnotationFixer::name() => true,
+        Fixer\PhpdocNoSuperfluousParamFixer::name() => true,
+        Fixer\PhpdocParamTypeFixer::name() => true,
+        Fixer\PhpdocSelfAccessorFixer::name() => true,
+        Fixer\PhpdocTypesCommaSpacesFixer::name() => true,
+        Fixer\PhpdocTypesTrimFixer::name() => true,
     ]);
