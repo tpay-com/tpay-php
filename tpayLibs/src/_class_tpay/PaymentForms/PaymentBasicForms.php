@@ -8,17 +8,8 @@ use tpayLibs\src\_class_tpay\Utilities\Util;
 class PaymentBasicForms extends BasicPaymentOptions
 {
     const ACTION_URL = 'action_url';
-
-    /**
-     * @var string
-     */
     const FIELDS = 'fields';
-
-    /**
-     * @var string
-     */
     const PAYMENT_FORM = 'paymentForm';
-
     const TPAY_TERMS_OF_SERVICE_URL = 'https://secure.tpay.com/regulamin.pdf';
 
     protected $panelURL = 'https://secure.tpay.com';

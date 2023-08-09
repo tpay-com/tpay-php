@@ -8,8 +8,6 @@ use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\Dictionaries\ErrorCodes\TransactionApiErrors;
 
 /**
- * Class TransactionAPI
- *
  * Includes group of methods responsible for connection with tpay Transaction API
  */
 class TransactionApi extends PaymentBasicForms

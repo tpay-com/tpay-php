@@ -19,7 +19,7 @@ class CardGateExtended extends PaymentCardForms
 
     public function __construct()
     {
-        //This is pre-configured sandbox access. You should use your own data in production mode.
+        // This is pre-configured sandbox access. You should use your own data in production mode.
         $this->cardApiKey = 'bda5eda723bf1ae71a82e90a249803d3f852248d';
         $this->cardApiPass = 'IhZVgraNcZoWPLgA';
         $this->cardKeyRSA = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JR2ZNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0R05BRENCaVFLQmdRQ2NLRTVZNU1Wemd5a1Z5ODNMS1NTTFlEMEVrU2xadTRVZm1STS8NCmM5L0NtMENuVDM2ekU0L2dMRzBSYzQwODRHNmIzU3l5NVpvZ1kwQXFOVU5vUEptUUZGVyswdXJacU8yNFRCQkxCcU10TTVYSllDaVQNCmVpNkx3RUIyNnpPOFZocW9SK0tiRS92K1l1YlFhNGQ0cWtHU0IzeHBhSUJncllrT2o0aFJDOXk0WXdJREFRQUINCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ';
@@ -35,25 +35,25 @@ class CardGateExtended extends PaymentCardForms
             if (isset($_POST['card_vendor']) && in_array($_POST['card_vendor'], static::SUPPORTED_CARD_VENDORS)) {
                 $this->saveUserCardVendor($_POST['card_vendor']);
             }
-            //Try to sale with provided card data
+            // Try to sale with provided card data
             $response = $this->makeCardPayment();
-            //Successful payment by card not protected by 3DS
+            // Successful payment by card not protected by 3DS
             if (isset($response['result']) && 1 === (int)$response['result']) {
                 $this->setOrderAsComplete($response);
-                //Successfully generated 3DS link for payment authorization
+                // Successfully generated 3DS link for payment authorization
             } elseif (isset($response['3ds_url'])) {
                 header('Location: '.$response['3ds_url']);
             } else {
-                //Invalid credit card data
+                // Invalid credit card data
                 $this->tryToSaleAgain();
             }
         } elseif (isset($_POST['savedId'])) {
             $this->setPaymentParameters();
-            //Payment by saved card
+            // Payment by saved card
             $this->processSavedCardPayment($_POST['savedId']);
         } else {
             $userCards = $this->getUserSavedCards($this->getCurrentUserId());
-            //Show new payment form
+            // Show new payment form
             echo $this->getOnSiteCardForm('CardGateExtended.php', true, false, $userCards);
         }
     }
@@ -66,14 +66,12 @@ class CardGateExtended extends PaymentCardForms
 
     private function saveUserCardVendor($cardVendor)
     {
-        //Code saving the user card vendor name for later use
+        // Code saving the user card vendor name for later use
     }
 
     private function makeCardPayment($failOver = false)
     {
-        //If you set the third getOnSiteCardForm() parameter true, you can get client name and email here. Otherwise, you must get those values from your DB.
-        //        $clientName = Util::post('client_name', FieldsConfigDictionary::STRING);
-        //        $clientEmail = Util::post('client_email', FieldsConfigDictionary::STRING);
+        // If you set the third getOnSiteCardForm() parameter true, you can get client name and email here. Otherwise, you must get those values from your DB.
         $clientEmail = 'customer@example.com';
         $clientName = 'John Doe';
 
@@ -113,7 +111,7 @@ class CardGateExtended extends PaymentCardForms
                 sprintf('User %s has tried to pay by not owned cardId: %s', $exampleCurrentUserId, $requestedCardId)
             );
 
-            //Reject current payment try and redirect user to tpay payment panel new card form
+            // Reject current payment try and redirect user to tpay payment panel new card form
             return $this->tryToSaleAgain();
         }
         return $this->payBySavedCard($cardToken);
@@ -136,13 +134,13 @@ class CardGateExtended extends PaymentCardForms
 
     private function setOrderAsComplete($params)
     {
-        //Code setting the order status and other details in your system
+        // Code setting the order status and other details in your system
         var_dump($params);
     }
 
     private function tryToSaleAgain()
     {
-        //Try to create new transaction and redirect customer to Tpay transaction panel
+        // Try to create new transaction and redirect customer to Tpay transaction panel
         $response = $this->makeCardPayment(true);
         if (isset($response['sale_auth'])) {
             header('Location: https://secure.tpay.com/cards/?sale_auth='.$response['sale_auth']);
@@ -160,7 +158,7 @@ class CardGateExtended extends PaymentCardForms
      */
     private function getUserSavedCards($userId = 0)
     {
-        //Code getting current logged user cards from your DB. This is only an example of DB.
+        // Code getting current logged user cards from your DB. This is only an example of DB.
         $exampleDbUsersIdsWithCards = [
             0 => [],
             2 => [
@@ -196,7 +194,7 @@ class CardGateExtended extends PaymentCardForms
 
     private function getCurrentUserId()
     {
-        //Code getting the user Id from your system. This is only an example.
+        // Code getting the user Id from your system. This is only an example.
         return 2;
     }
 }

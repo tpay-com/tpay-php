@@ -174,7 +174,7 @@ class Curl extends CurlOptions
     private function checkResponse()
     {
         $responseCode = $this->curlInfo['http_code'];
-        $successCall = ($responseCode >= 200 && $responseCode <= 299);
+        $successCall = $responseCode >= 200 && $responseCode <= 299;
 
         return $successCall ? true : $this->getResponseCode($responseCode);
     }

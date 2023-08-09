@@ -8,8 +8,6 @@ class CardDeregisterFieldsDictionary
 {
     /**
      * List of fields available in card deregistration
-     *
-     * @var array
      */
     const REQUEST_FIELDS = [
         /**

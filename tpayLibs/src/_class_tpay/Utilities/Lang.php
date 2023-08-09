@@ -4,9 +4,6 @@ namespace tpayLibs\src\_class_tpay\Utilities;
 
 use tpayLibs\src\Translations\Keys;
 
-/**
- * Class Lang
- */
 class Lang extends Keys
 {
     private $currentLanguage = 'en';

@@ -7,9 +7,6 @@ use tpayLibs\src\_class_tpay\Utilities\ObjectsHelper;
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 
-/**
- * Class PaymentSMS
- */
 class PaymentSMS extends ObjectsHelper
 {
     /**

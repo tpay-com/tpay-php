@@ -8,8 +8,6 @@ class BlikFieldsDictionary
 {
     /**
      * List of fields available in response for blik payment
-     *
-     * @var array
      */
     const ALIAS_RESPONSE_FIELDS = [
         'id' => [

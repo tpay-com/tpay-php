@@ -5,8 +5,6 @@ namespace tpayLibs\src\_class_tpay\Utilities;
 use Exception;
 
 /**
- * Class Util
- *
  * Utility class which helps with:
  *  - parsing template files
  *  - log library operations

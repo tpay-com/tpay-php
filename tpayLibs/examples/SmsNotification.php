@@ -11,7 +11,7 @@ class SmsNotification extends PaymentSMS
 {
     public function __construct()
     {
-        //While configuring your SMS service, add the query ?check_sms in redirect URL or remove this check.
+        // While configuring your SMS service, add the query ?check_sms in redirect URL or remove this check.
         if (filter_input(INPUT_GET, 'check_sms')) {
             $this->handleSmsNotification();
         }

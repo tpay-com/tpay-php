@@ -29,12 +29,12 @@ class TransactionReportsApi extends BasicReports
     public function getReportTransaction($dateStart, $dateEnd = false, $csv = false)
     {
         try {
-            //Set $csv parameter value to bool true, to get RAW CSV formatted report
+            // Set $csv parameter value to bool true, to get RAW CSV formatted report
             $result = $this->report($dateStart, $dateEnd, $csv);
             if (is_null($result)) {
                 echo 'Report is empty for this time range.';
             } else {
-                //Will return each transaction in separate array element
+                // Will return each transaction in separate array element
                 var_dump($result);
             }
         } catch (TException $e) {

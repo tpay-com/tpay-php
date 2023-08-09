@@ -8,8 +8,6 @@ use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasic;
 use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasicApi;
 
 /**
- * Class BasicPaymentOptions
- *
  * Class handles bank transfer payment through tpay panel
  */
 class BasicPaymentOptions extends ObjectsHelper

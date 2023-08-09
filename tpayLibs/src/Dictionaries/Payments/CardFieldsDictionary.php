@@ -8,8 +8,6 @@ class CardFieldsDictionary
 {
     /**
      * List of supported fields for card payment request
-     *
-     * @var array
      */
     const REQUEST_FIELDS = [
         /**
@@ -130,8 +128,6 @@ class CardFieldsDictionary
 
     /**
      * List of fields available in card payment response
-     *
-     * @var array
      */
     const RESPONSE_FIELDS = [
         /**

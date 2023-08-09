@@ -7,8 +7,6 @@ use tpayLibs\src\_class_tpay\Utilities\Util;
 use tpayLibs\src\Dictionaries\CardDictionary;
 
 /**
- * Class PaymentCard
- *
  * Class handles credit card payments through "Card API".
  * Depending on the chosen method:
  *  - client is redirected to card payment panel

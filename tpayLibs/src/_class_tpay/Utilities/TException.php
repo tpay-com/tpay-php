@@ -4,9 +4,6 @@ namespace tpayLibs\src\_class_tpay\Utilities;
 
 use Exception;
 
-/**
- * Class TException
- */
 class TException extends Exception
 {
     /**

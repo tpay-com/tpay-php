@@ -6,8 +6,6 @@ class HttpCodesDictionary
 {
     /**
      * List of http response codes the occurrence of which results in throw exception
-     *
-     * @var array
      */
     const HTTP_CODES = [
         401 => '401: Unauthorized access',

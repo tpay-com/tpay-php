@@ -13,7 +13,7 @@ class RecurrentPayment extends PaymentCard
 
     public function __construct()
     {
-        //This is pre-configured sandbox access. You should use your own data in production mode.
+        // This is pre-configured sandbox access. You should use your own data in production mode.
         $this->cardApiKey = 'bda5eda723bf1ae71a82e90a249803d3f852248d';
         $this->cardApiPass = 'IhZVgraNcZoWPLgA';
         $this->cardKeyRSA = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JR2ZNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0R05BRENCaVFLQmdRQ2NLRTVZNU1Wemd5a1Z5ODNMS1NTTFlEMEVrU2xadTRVZm1STS8NCmM5L0NtMENuVDM2ekU0L2dMRzBSYzQwODRHNmIzU3l5NVpvZ1kwQXFOVU5vUEptUUZGVyswdXJacU8yNFRCQkxCcU10TTVYSllDaVQNCmVpNkx3RUIyNnpPOFZocW9SK0tiRS92K1l1YlFhNGQ0cWtHU0IzeHBhSUJncllrT2o0aFJDOXk0WXdJREFRQUINCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ';
@@ -30,14 +30,14 @@ class RecurrentPayment extends PaymentCard
         $currency = 985,
         $language = 'pl'
     ) {
-        //Prepare transaction data
+        // Prepare transaction data
         $this
             ->setAmount($amount)
             ->setCurrency($currency)
             ->setOrderID($orderId)
             ->setLanguage($language)
             ->setClientToken($clientToken);
-        //Prepare unpaid transaction
+        // Prepare unpaid transaction
         $transaction = $this->presaleMethod($saleDescription);
         $this->transactionId = $transaction['sale_auth'];
 
@@ -46,20 +46,20 @@ class RecurrentPayment extends PaymentCard
 
     public function payBySavedCreditCard()
     {
-        //Try to execute payment
-        //In test mode this method has 50% probability of success
+        // Try to execute payment
+        // In test mode this method has 50% probability of success
         $result = $this->saleMethod($this->transactionId);
         if (isset($result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsConfirmed();
         }
-        //Log rejection code
+        // Log rejection code
         return $result['reason'];
     }
 
     private function setOrderAsConfirmed()
     {
-        //Code updating order ($this->orderID) status as paid at your DB
-        //Save transaction ID for later use
+        // Code updating order ($this->orderID) status as paid at your DB
+        // Save transaction ID for later use
     }
 }
 
