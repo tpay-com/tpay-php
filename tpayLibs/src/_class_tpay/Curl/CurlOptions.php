@@ -1,13 +1,6 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 20.04.2017
- * Time: 15:40
- */
-
 namespace tpayLibs\src\_class_tpay\Curl;
-
 
 class CurlOptions
 {
@@ -23,7 +16,9 @@ class CurlOptions
 
     /**
      * Set timeout time
+     *
      * @param int $timeout
+     *
      * @return object
      */
     public function setTimeout($timeout)
@@ -34,7 +29,9 @@ class CurlOptions
 
     /**
      * Set connect timeout time
+     *
      * @param int $timeout
+     *
      * @return object
      */
     public function setConnectTimeout($timeout)
@@ -45,7 +42,9 @@ class CurlOptions
 
     /**
      * Set host verification
+     *
      * @param int $verifyHost
+     *
      * @return object
      */
     public function setVerifyHost($verifyHost)
@@ -67,6 +66,7 @@ class CurlOptions
 
     /**
      * Disable Verbose
+     *
      * @return object
      */
     public function disableVerbose()
@@ -77,6 +77,7 @@ class CurlOptions
 
     /**
      * Disable POST
+     *
      * @return object
      */
     public function disablePost()
@@ -87,6 +88,7 @@ class CurlOptions
 
     /**
      * Disable Return Transfer
+     *
      * @return object
      */
     public function disableReturnTransfer()
@@ -97,6 +99,7 @@ class CurlOptions
 
     /**
      * Disable Failing on Error
+     *
      * @return object
      */
     public function disableFailOnError()
@@ -107,6 +110,7 @@ class CurlOptions
 
     /**
      * Disable Following Location
+     *
      * @return object
      */
     public function disableFollowLocation()
@@ -128,6 +132,7 @@ class CurlOptions
 
     /**
      * enable Verbose
+     *
      * @return object
      */
     public function enableVerbose()
@@ -138,6 +143,7 @@ class CurlOptions
 
     /**
      * enable POST
+     *
      * @return object
      */
     public function enablePost()
@@ -148,6 +154,7 @@ class CurlOptions
 
     /**
      * enable Return Transfer
+     *
      * @return object
      */
     public function enableReturnTransfer()
@@ -158,6 +165,7 @@ class CurlOptions
 
     /**
      * enable Failing on Error
+     *
      * @return object
      */
     public function enableFailOnError()
@@ -168,6 +176,7 @@ class CurlOptions
 
     /**
      * enable Following Location
+     *
      * @return object
      */
     public function enableFollowLocation()
@@ -178,17 +187,16 @@ class CurlOptions
 
     public function getOptionsArray()
     {
-        return array(
+        return [
             CURLOPT_CONNECTTIMEOUT => $this->connectTimeout,
             CURLOPT_FOLLOWLOCATION => $this->followLocation,
             CURLOPT_SSL_VERIFYHOST => $this->verifyHost,
             CURLOPT_SSL_VERIFYPEER => $this->verifyPeer,
-            CURLOPT_TIMEOUT        => $this->timeout,
-            CURLOPT_VERBOSE        => $this->verbose,
-            CURLOPT_POST           => $this->post,
+            CURLOPT_TIMEOUT => $this->timeout,
+            CURLOPT_VERBOSE => $this->verbose,
+            CURLOPT_POST => $this->post,
             CURLOPT_RETURNTRANSFER => $this->returnTransfer,
-            CURLOPT_FAILONERROR    => $this->failOnError
-        );
+            CURLOPT_FAILONERROR => $this->failOnError,
+        ];
     }
-
 }

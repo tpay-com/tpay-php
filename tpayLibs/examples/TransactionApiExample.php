@@ -1,13 +1,9 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\TransactionApi;
+use tpayLibs\src\_class_tpay\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';
@@ -30,7 +26,6 @@ class TransactionApiExample extends TransactionApi
         /**
          * Get info about transaction
          */
-
         $transactionId = $this->trId;
 
         try {
@@ -39,7 +34,6 @@ class TransactionApiExample extends TransactionApi
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
     public function createTransaction()
@@ -47,8 +41,7 @@ class TransactionApiExample extends TransactionApi
         /**
          * Create new transaction
          */
-
-        $config = array(
+        $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
             'crc' => '100020003000',
@@ -59,18 +52,15 @@ class TransactionApiExample extends TransactionApi
             'name' => 'John Doe',
             'group' => isset($_POST['group']) ? (int)$_POST['group'] : 150,
             'accept_tos' => 1,
-        );
+        ];
         try {
             $res = $this->create($config);
             $this->trUrl = $res['url'];
-            echo '<a href='.$this->trUrl . '>go to payment</a>';
-
+            echo '<a href='.$this->trUrl.'>go to payment</a>';
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
-
 }
 
 (new TransactionApiExample())->createTransaction();

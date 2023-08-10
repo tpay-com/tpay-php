@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries;
 
 class FieldsConfigDictionary
@@ -42,5 +36,4 @@ class FieldsConfigDictionary
     const LANGUAGE = 'language';
     const CODE = 'code';
     const NAME = 'name';
-
 }

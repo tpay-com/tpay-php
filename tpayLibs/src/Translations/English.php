@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by tpay.com.
- * Date: 28.09.2017
- * Time: 12:02
- */
 
 namespace tpayLibs\src\Translations;
 
 class English
 {
     public $translations = [
-
         // GLOBALS
         'fee_info' => 'Fee for using this payment method: ',
         'pay' => 'Pay with Tpay',
@@ -56,5 +50,4 @@ class English
         'saved_card_label' => 'Pay by saved card ',
         'new_card_label' => 'Pay by a new card',
     ];
-
 }

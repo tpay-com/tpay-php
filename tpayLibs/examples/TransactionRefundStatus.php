@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\Reports\BasicReports;
@@ -34,9 +30,7 @@ class TransactionRefundStatus extends BasicReports
         } catch (TException $e) {
             var_dump($e->getMessage());
         }
-
     }
-
 }
 
 (new TransactionRefundStatus())->getTransactionRefundsStatuses();

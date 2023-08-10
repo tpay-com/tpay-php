@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 16:14
- */
-
 namespace tpayLibs\src\_class_tpay;
 
 use tpayLibs\src\_class_tpay\Utilities\TException;
@@ -35,15 +29,15 @@ class PaymentBlik extends TransactionApi
                 $success = true;
                 break;
             case 0:
-                if (isset($response[static::ERR]) && $response[static::ERR] === 'ERR82') {
-                    $apps = array();
+                if (isset($response[static::ERR]) && 'ERR82' === $response[static::ERR]) {
+                    $apps = [];
                     foreach ($response['availableUserApps'] as $userApp) {
                         $apps[] = get_object_vars($userApp);
                     }
                     return $apps;
-                } else {
-                    $success = false;
                 }
+                $success = false;
+
                 break;
             default:
                 $success = false;
@@ -61,8 +55,11 @@ class PaymentBlik extends TransactionApi
                 $response = $this->blik($params[static::TITLE], $params[FieldsConfigDictionary::CODE]);
                 break;
             case $type instanceof PaymentTypeT6Register:
-                $response = $this->blik($params[static::TITLE], $params[FieldsConfigDictionary::CODE],
-                    $params[static::ALIAS]);
+                $response = $this->blik(
+                    $params[static::TITLE],
+                    $params[FieldsConfigDictionary::CODE],
+                    $params[static::ALIAS]
+                );
                 break;
             case $type instanceof PaymentTypeBlikAlias:
                 $response = $this->blik($params[static::TITLE], '', $params[static::ALIAS]);
@@ -86,12 +83,11 @@ class PaymentBlik extends TransactionApi
             $config[static::ALIAS][] = $alias;
         }
 
-        $url = $this->apiURL . $this->trApiKey . '/transaction/blik';
+        $url = $this->apiURL.$this->trApiKey.'/transaction/blik';
         Util::log('Blik request params', print_r($config, true));
         $res = $this->requests($url, $config);
         Util::log('Blik response', print_r($res, true));
 
         return $res;
     }
-
 }

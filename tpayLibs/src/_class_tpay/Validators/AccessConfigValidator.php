@@ -1,11 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 12:51
- */
-
 namespace tpayLibs\src\_class_tpay\Validators;
 
 use tpayLibs\src\_class_tpay\Utilities\TException;
@@ -22,19 +16,21 @@ trait AccessConfigValidator
      */
     public static function validateCardCode($cardCode)
     {
-        if (!is_string($cardCode) || strlen($cardCode) === 0 || strlen($cardCode) > 40) {
+        if (!is_string($cardCode) || 0 === strlen($cardCode) || strlen($cardCode) > 40) {
             throw new TException('Invalid card code');
         }
     }
 
     /**
      * FieldsConfigValidator card hash algorithm
+     *
      * @param string $hashAlg
+     *
      * @throws TException
      */
     public static function validateCardHashAlg($hashAlg)
     {
-        if (!in_array($hashAlg, array('sha1', 'sha256', 'sha512', 'ripemd160', 'ripemd320', 'md5'))) {
+        if (!in_array($hashAlg, ['sha1', 'sha256', 'sha512', 'ripemd160', 'ripemd320', 'md5'])) {
             throw new TException('Invalid hash algorithm');
         }
     }

@@ -1,7 +1,9 @@
 {
     "require": {
         "ergebnis/composer-normalize": "^2.34",
-        "kubawerlos/composer-smaller-lock": "^1.0.1"
+        "kubawerlos/composer-smaller-lock": "^1.0.1",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.16.2",
+        "php-cs-fixer/shim": "^3.22"
     },
     "config": {
         "allow-plugins": {

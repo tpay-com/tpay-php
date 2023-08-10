@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\MassPayments;
@@ -84,7 +80,6 @@ class MassPaymentExample extends MassPayments
             var_dump($e);
         }
     }
-
 }
 
 (new MassPaymentExample())->listMassPayment();

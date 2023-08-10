@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
@@ -16,7 +17,6 @@ class CardPaymentLinkBuilder extends PaymentCardForms
         'amount',
         'currency',
     ];
-
     const ALLOWED_CURRENCIES = [
         '985' => 'PLN',
         '826' => 'GBP',
@@ -37,7 +37,6 @@ class CardPaymentLinkBuilder extends PaymentCardForms
         '124' => 'CAD',
         '344' => 'HKD',
     ];
-
     const ALLOWED_LANGUAGES = [
         'PL',
         'EN',
@@ -80,11 +79,11 @@ class CardPaymentLinkBuilder extends PaymentCardForms
             }
             $_POST['amount'] = str_replace(',', '.', $_POST['amount']);
             $this
-                ->setAmount((double)$_POST['amount'])
+                ->setAmount((float)$_POST['amount'])
                 ->setCurrency((int)$_POST['currency']);
             $this->setNotRequiredFields();
             $transaction = $this->registerSale($_POST['name'], $_POST['email'], $_POST['desc']);
-            if (isset($transaction['sale_auth']) === false) {
+            if (false === isset($transaction['sale_auth'])) {
                 echo sprintf('Error generating transaction. Tpay server response: %s', $transaction['err_desc']);
             }
             $transactionId = $transaction['sale_auth'];
@@ -111,7 +110,6 @@ class CardPaymentLinkBuilder extends PaymentCardForms
             $this->setReturnUrls($_POST['return_url_success'], $_POST['return_url_error']);
         }
     }
-
 }
 
-(new CardPaymentLinkBuilder)->init();
+(new CardPaymentLinkBuilder())->init();

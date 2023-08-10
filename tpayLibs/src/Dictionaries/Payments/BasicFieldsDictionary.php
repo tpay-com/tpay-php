@@ -1,13 +1,6 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
-
 namespace tpayLibs\src\Dictionaries\Payments;
-
 
 use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
 
@@ -16,25 +9,24 @@ class BasicFieldsDictionary
     /**
      * List of supported request fields for basic payment
      */
-
     const REQUEST_FIELDS = [
         /**
          * Transaction amount with dot as decimal separator.
          */
         'amount' => [
             FieldsConfigDictionary::REQUIRED => true,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT],
         ],
         /**
          * Transaction description
          */
         'description' => [
             FieldsConfigDictionary::REQUIRED => true,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
-            ),
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * The secondary parameter to the transaction identification.
@@ -42,10 +34,10 @@ class BasicFieldsDictionary
          */
         'crc' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
-            ),
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
         ],
         /**
          * Allow only online payment.
@@ -53,8 +45,8 @@ class BasicFieldsDictionary
          */
         'online' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array(0, 1),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => [0, 1],
         ],
         /**
          * Imposing the customer the pre-payment channel.
@@ -64,53 +56,55 @@ class BasicFieldsDictionary
          */
         'group' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::INT],
         ],
         /**
          * If this parameter is set, the payer will always be redirected to step 2 in tpay.com panel
+         *
          * @deprecated
          */
         'choice' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array(0, 1),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => [0, 1],
         ],
         /**
          * Customer will be redirected to bank login page.
+         *
          * @deprecated
          */
         'direct' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::INT),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::INT],
         ],
         /**
          * The resulting URL return address that will send the result of a transaction in the form POST parameters.
          */
         'result_url' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_512
-            ),
-            FieldsConfigDictionary::FILTER => 'url'
+                FieldsConfigDictionary::MAXLENGTH_512,
+            ],
+            FieldsConfigDictionary::FILTER => 'url',
         ],
         /**
          * E-mail address to which you will be notified about the status of the transaction.
          */
         'result_email' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::EMAIL_LIST),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::EMAIL_LIST],
         ],
         /**
          * Description payees during the transaction.
          */
         'merchant_description' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
-            ),
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * Optional field used during card transactions processed through Elavon.
@@ -121,22 +115,22 @@ class BasicFieldsDictionary
          */
         'custom_description' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::CUSTOM_DESCRIPTION,
-                FieldsConfigDictionary::MAXLENGTH_32
-            ),
-            FieldsConfigDictionary::FILTER => 'mixed'
+                FieldsConfigDictionary::MAXLENGTH_32,
+            ],
+            FieldsConfigDictionary::FILTER => 'mixed',
         ],
         /**
          * The URL to which the customer will be transferred after successful completion of the transaction.
          */
         'return_url' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_512
-            ),
-            FieldsConfigDictionary::FILTER => 'url'
+                FieldsConfigDictionary::MAXLENGTH_512,
+            ],
+            FieldsConfigDictionary::FILTER => 'url',
         ],
         /**
          * The URL to which the client will be transferred in the event of an error.
@@ -144,11 +138,11 @@ class BasicFieldsDictionary
          */
         'return_error_url' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_512
-            ),
-            FieldsConfigDictionary::FILTER => 'url'
+                FieldsConfigDictionary::MAXLENGTH_512,
+            ],
+            FieldsConfigDictionary::FILTER => 'url',
         ],
         /**
          * Transactional panel language.
@@ -156,60 +150,60 @@ class BasicFieldsDictionary
          */
         'language' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array('PL', 'EN', 'DE', 'IT', 'ES', 'FR', 'RU'),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => ['PL', 'EN', 'DE', 'IT', 'ES', 'FR', 'RU'],
         ],
         /**
          * Customer email address.
          */
         'email' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
-            ),
-            FieldsConfigDictionary::FILTER => 'mail'
+                FieldsConfigDictionary::MAXLENGTH_64,
+            ],
+            FieldsConfigDictionary::FILTER => 'mail',
         ],
         /**
          * Customer surname.
          */
         'name' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
-            ),
-            FieldsConfigDictionary::FILTER => 'name'
+                FieldsConfigDictionary::MAXLENGTH_64,
+            ],
+            FieldsConfigDictionary::FILTER => 'name',
         ],
         /**
          * Customer address.
          */
         'address' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64
-            ),
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+                FieldsConfigDictionary::MAXLENGTH_64,
+            ],
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * Customer city.
          */
         'city' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_32
-            ),
-            FieldsConfigDictionary::FILTER => 'name'
+                FieldsConfigDictionary::MAXLENGTH_32,
+            ],
+            FieldsConfigDictionary::FILTER => 'name',
         ],
         /**
          * Customer postal code.
          */
         'zip' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING, 'maxlength_10'),
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_10'],
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::TEXT,
         ],
         /**
          * Country code.
@@ -217,60 +211,60 @@ class BasicFieldsDictionary
          */
         'country' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array('country_code'),
+            FieldsConfigDictionary::VALIDATION => ['country_code'],
         ],
         /**
          * Customer phone.
          */
         'phone' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING, 'maxlength_16'),
-            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::PHONE
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_16'],
+            FieldsConfigDictionary::FILTER => FieldsConfigDictionary::PHONE,
         ],
         /**
          * The parameter indicating acceptance of Terms tpay if it is available on the payee.
          */
         'accept_tos' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array(0, 1),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => [0, 1],
         ],
         /**
          * Description payees during the transaction.
          */
         'expiration_date' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
-            ),
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
         ],
         /**
          * Description payees during the transaction.
          */
         'timehash' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128
-            ),
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
         ],
         /**
          * Module/integration name. Used for statistics.
          */
         'module' => [
             FieldsConfigDictionary::REQUIRED => false,
-            FieldsConfigDictionary::VALIDATION => array(
+            FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_32
-            ),
+                FieldsConfigDictionary::MAXLENGTH_32,
+            ],
         ],
     ];
 
     /**
      * List of deprecated parameters
      */
-    const OLD_REQUEST_FIELDS = array(
+    const OLD_REQUEST_FIELDS = [
         'kwota' => 'amount',
         'opis' => 'description',
         'grupa' => 'group',
@@ -289,75 +283,75 @@ class BasicFieldsDictionary
         'kraj' => 'country',
         'telefon' => 'phone',
         'akceptuje_regulamin' => 'accept_tos',
-    );
+    ];
 
-    const RESPONSE_FIELDS = array(
+    const RESPONSE_FIELDS = [
         /**
          * The merchant ID assigned by the system tpay
          */
-        'id' => array(
+        'id' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::FLOAT,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT],
+        ],
         /**
          * The transaction ID assigned by the system tpay
          */
-        'tr_id' => array(
+        'tr_id' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
+        ],
         /**
          * Date of transaction.
          */
-        'tr_date' => array(
+        'tr_date' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
+        ],
         /**
          * The secondary parameter to the transaction identification.
          */
-        'tr_crc' => array(
+        'tr_crc' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
+        ],
         /**
          * Transaction amount.
          */
-        'tr_amount' => array(
+        'tr_amount' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::FLOAT,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT],
+        ],
         /**
          * Transaction amount.
          */
-        'tr_channel' => array(
+        'tr_channel' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::FLOAT,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT],
+        ],
         /**
          * The amount paid for the transaction.
          * Note: Depending on the settings, the amount paid can be different
          * than transactions eg. When the customer does overpayment.
          */
-        'tr_paid' => array(
+        'tr_paid' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::FLOAT,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::FLOAT),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::FLOAT],
+        ],
         /**
          * Description of the transaction.
          */
-        'tr_desc' => array(
+        'tr_desc' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING],
+        ],
         /**
          * Transaction status: TRUE after successful payment, CHARGEBACK after refund.
          * FALSE and PAID statuses may be obtained in two-step payment acceptance mode.
@@ -365,12 +359,12 @@ class BasicFieldsDictionary
          * even if the amount paid is different from the amount of the transaction!
          * Eg. If the Seller accepts the overpayment or underpayment threshold is set.
          */
-        'tr_status' => array(
+        'tr_status' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array(0, 1, true, false, 'TRUE', 'FALSE', 'PAID', 'CHARGEBACK'),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => [0, 1, true, false, 'TRUE', 'FALSE', 'PAID', 'CHARGEBACK'],
+        ],
         /**
          * Transaction error status.
          * Could have the following values:
@@ -378,48 +372,48 @@ class BasicFieldsDictionary
          * - overpay
          * - surcharge
          */
-        'tr_error' => array(
+        'tr_error' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array('none', 'overpay', 'surcharge'),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => ['none', 'overpay', 'surcharge'],
+        ],
         /**
          * Customer email address.
          */
-        'tr_email' => array(
+        'tr_email' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::EMAIL_LIST),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::EMAIL_LIST],
+        ],
         /**
          * The checksum verifies the data sent to the payee.
          * It is built according to the following scheme using the MD5 hash function:
          * MD5(id + tr_id + tr_amount + tr_crc + security code)
          */
-        'md5sum' => array(
+        'md5sum' => [
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::STRING, 'maxlength_32', 'minlength_32'),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::STRING, 'maxlength_32', 'minlength_32'],
+        ],
         /**
          * Transaction marker indicates whether the transaction was executed in test mode:
          * 1 – in test mode
          * 0 – in normal mode
          */
-        'test_mode' => array(
+        'test_mode' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::INT,
-            FieldsConfigDictionary::VALIDATION => array(FieldsConfigDictionary::OPTIONS),
-            FieldsConfigDictionary::OPTIONS => array(0, 1),
-        ),
+            FieldsConfigDictionary::VALIDATION => [FieldsConfigDictionary::OPTIONS],
+            FieldsConfigDictionary::OPTIONS => [0, 1],
+        ],
         /**
          * The parameter is sent only when you use a payment channel or MasterPass or V.me.
          * Could have the following values: „masterpass” or „vme”
          */
-        'wallet' => array(
+        'wallet' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::TYPE => FieldsConfigDictionary::STRING,
-        ),
-    );
+        ],
+    ];
 }

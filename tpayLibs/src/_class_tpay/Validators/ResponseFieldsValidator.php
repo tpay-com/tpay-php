@@ -1,13 +1,6 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 20.06.2017
- * Time: 17:49
- */
-
 namespace tpayLibs\src\_class_tpay\Validators;
-
 
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
@@ -21,19 +14,20 @@ trait ResponseFieldsValidator
      *
      * @param object $paymentType
      *
-     * @return array
      * @throws TException
+     *
+     * @return array
      */
     public function getResponse($paymentType)
     {
-        $ready = array();
-        $missed = array();
+        $ready = [];
+        $missed = [];
 
         $responseFields = $paymentType->getResponseFields();
 
         foreach ($responseFields as $fieldName => $field) {
-            if (Util::post($fieldName, FieldsConfigDictionary::STRING) === false) {
-                if ($field[FieldsConfigDictionary::REQUIRED] === true) {
+            if (false === Util::post($fieldName, FieldsConfigDictionary::STRING)) {
+                if (true === $field[FieldsConfigDictionary::REQUIRED]) {
                     $missed[] = $fieldName;
                 }
             } else {

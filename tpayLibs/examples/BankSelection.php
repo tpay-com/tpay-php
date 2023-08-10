@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentBasicForms;
@@ -25,8 +21,7 @@ class BankSelectionExample extends PaymentBasicForms
      */
     public function getBankForm()
     {
-
-        $config = array(
+        $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
             'crc' => '100020003000',
@@ -35,7 +30,7 @@ class BankSelectionExample extends PaymentBasicForms
             'return_url' => 'http://example.pl/examples/success.html',
             'email' => 'customer@example.com',
             'name' => 'John Doe',
-        );
+        ];
 
         $form = $this->getBankSelectionForm($config, false, true, null, true);
 
@@ -49,7 +44,6 @@ class BankSelectionExample extends PaymentBasicForms
     {
         echo $this->getSimpleBankList(false, false);
     }
-
 }
 
 (new BankSelectionExample())->getBankForm();

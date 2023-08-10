@@ -1,4 +1,5 @@
 <?php
+
 namespace tpayLibs\src\_class_tpay;
 
 use tpayLibs\src\_class_tpay\Curl\Curl;
@@ -6,15 +7,11 @@ use tpayLibs\src\_class_tpay\Utilities\ObjectsHelper;
 use tpayLibs\src\_class_tpay\Utilities\TException;
 use tpayLibs\src\_class_tpay\Utilities\Util;
 
-/**
- * Class PaymentSMS
- *
- * @package tpay
- */
 class PaymentSMS extends ObjectsHelper
 {
     /**
      * Url to verify SMS code
+     *
      * @var string
      */
     private $secureURL = 'https://sms.tpay.com/widget/verifyCode.php';
@@ -30,14 +27,14 @@ class PaymentSMS extends ObjectsHelper
         $codeToCheck = Util::post('tfCodeToCheck', 'string');
         $hash = Util::post('tfHash', 'string');
 
-        if ($codeToCheck === false || $hash === false) {
+        if (false === $codeToCheck || false === $hash) {
             throw new TException('Invalid input data');
         }
 
-        $postData = array(
+        $postData = [
             'tfCodeToCheck' => $codeToCheck,
-            'tfHash'        => $hash,
-        );
+            'tfHash' => $hash,
+        ];
         Util::log('Sms verification request', json_encode($postData));
         $response = $this->requests($this->secureURL, $postData);
         Util::log('Sms verification response', print_r($response, true));
@@ -57,7 +54,6 @@ class PaymentSMS extends ObjectsHelper
     }
 
     /**
-     * @param $response
      * @return bool
      */
     private function isValidCode($response)
@@ -68,5 +64,4 @@ class PaymentSMS extends ObjectsHelper
 
         return (bool)$status;
     }
-
 }

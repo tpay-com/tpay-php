@@ -23,3 +23,6 @@ jobs:
 
       - working-directory: .dev-tools
         run: composer normalize --diff --dry-run --indent-size=4 --indent-style=space ../composer.json
+
+      - working-directory: .dev-tools
+        run: ./vendor/bin/php-cs-fixer fix -vvv --diff --dry-run

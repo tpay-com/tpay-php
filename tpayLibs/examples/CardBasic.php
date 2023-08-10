@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
@@ -22,7 +18,6 @@ class CardBasic extends PaymentCardForms
         $this->cardVerificationCode = '6680181602d396e640cb091ea5418171';
         $this->cardHashAlg = 'sha1';
         parent::__construct();
-
     }
 
     public function getCardTransactionForm()
@@ -36,7 +31,6 @@ class CardBasic extends PaymentCardForms
             $this->setAmount(99.15);
 
             echo $this->getTransactionForm($config);
-
         } catch (TException $e) {
             var_dump($e);
         }
@@ -55,17 +49,16 @@ class CardBasic extends PaymentCardForms
                 ->setCurrency(985)
                 ->setOrderID('123')
                 ->setReturnUrls('https://shop.com/success', 'https://shop.com/error');
-            $transaction =  $this->registerSale($config['name'], $config['email'], $config['desc']);
-            if (isset($transaction['sale_auth']) === false) {
-                throw new TException('Error generating transaction: ' . $transaction['err_desc']);
+            $transaction = $this->registerSale($config['name'], $config['email'], $config['desc']);
+            if (false === isset($transaction['sale_auth'])) {
+                throw new TException('Error generating transaction: '.$transaction['err_desc']);
             }
             $transactionId = $transaction['sale_auth'];
             header("Location: https://secure.tpay.com/cards/?sale_auth=$transactionId");
         } catch (TException $e) {
-            echo 'Unable to generate transaction. Reason: ' . $e->getMessage();
+            echo 'Unable to generate transaction. Reason: '.$e->getMessage();
         }
     }
-
 }
 
 (new CardBasic())->getRedirectTransaction();

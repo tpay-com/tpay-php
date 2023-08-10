@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\Notifications\BasicNotificationHandler;
@@ -18,7 +14,6 @@ class TransactionNotification extends BasicNotificationHandler
         $this->merchantSecret = 'demo';
         $this->merchantId = 1010;
         parent::__construct();
-
     }
 
     /**

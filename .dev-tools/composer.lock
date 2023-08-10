@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e841770c4b877d0bb1b71e0b63494de4",
+    "content-hash": "c6e28ba1d59a81f286198003cade38c3",
     "packages": [
         {
             "name": "ergebnis/composer-normalize",
@@ -281,6 +281,36 @@
             "description": "Plugin to keep composer.lock smaller and readable"
         },
         {
+            "name": "kubawerlos/php-cs-fixer-custom-fixers",
+            "version": "v3.16.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers.git",
+                "reference": "d3f2590069d06ba49ad24cac03f802e8ad0aaeba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/d3f2590069d06ba49ad24cac03f802e8ad0aaeba",
+                "reference": "d3f2590069d06ba49ad24cac03f802e8ad0aaeba"
+            },
+            "require": {
+                "ext-filter": "*",
+                "ext-tokenizer": "*",
+                "friendsofphp/php-cs-fixer": "^3.22",
+                "php": "^7.4 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCsFixerCustomFixers\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A set of custom fixers for PHP CS Fixer"
+        },
+        {
             "name": "localheinz/diff",
             "version": "1.1.1",
             "source": {
@@ -306,6 +336,37 @@
                 "BSD-3-Clause"
             ],
             "description": "Fork of sebastian/diff for use with ergebnis/composer-normalize"
+        },
+        {
+            "name": "php-cs-fixer/shim",
+            "version": "v3.22.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CS-Fixer/shim.git",
+                "reference": "f6692934a6d1fe40fd8bc3339487490baa4a6700"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f6692934a6d1fe40fd8bc3339487490baa4a6700",
+                "reference": "f6692934a6d1fe40fd8bc3339487490baa4a6700"
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-tokenizer": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "replace": {
+                "friendsofphp/php-cs-fixer": "self.version"
+            },
+            "bin": [
+                "php-cs-fixer",
+                "php-cs-fixer.phar"
+            ],
+            "type": "application",
+            "license": [
+                "MIT"
+            ],
+            "description": "A tool to automatically fix PHP code style"
         }
     ],
     "packages-dev": [],

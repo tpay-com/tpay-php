@@ -1,14 +1,9 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentBlik;
 use tpayLibs\src\_class_tpay\Utilities\TException;
-use tpayLibs\src\_class_tpay\Utilities\Util;
 
 include_once 'config.php';
 include_once 'loader.php';
@@ -42,11 +37,12 @@ class BlikTransactionExample extends PaymentBlik
     /**
      * Pass BLIK code to created transaction
      * Bank group for create method must be 150
+     *
      * @param string $blikCode
      */
     private function blikTransaction($blikCode)
     {
-        $config = array(
+        $config = [
             'description' => 'Test API transaction',
             'amount' => 0.20,
             'crc' => 'test',
@@ -55,7 +51,7 @@ class BlikTransactionExample extends PaymentBlik
             'email' => 'customer@example.com',
             'accept_tos' => 1,
             'result_url' => 'https://example.com/notify.php',
-        );
+        ];
         $transaction = $this->create($config);
         $title = $transaction['title'];
 
@@ -66,7 +62,6 @@ class BlikTransactionExample extends PaymentBlik
             var_dump($e);
         }
     }
-
 }
 
-new BlikTransactionExample;
+new BlikTransactionExample();

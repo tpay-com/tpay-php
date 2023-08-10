@@ -1,15 +1,10 @@
 <?php
 
-/*
- * Created by tpay.com.
- * Date: 13.06.2017
- * Time: 17:05
- */
 namespace tpayLibs\src\Dictionaries\ISO_codes;
 
 class CountryCodesDictionary
 {
-    const CODES = array(
+    const CODES = [
         'AF' => 'AFG',
         'AX' => 'ALA',
         'AL' => 'ALB',
@@ -255,5 +250,5 @@ class CountryCodesDictionary
         'YE' => 'YEM',
         'ZM' => 'ZMB',
         'ZW' => 'ZWE',
-    );
+    ];
 }

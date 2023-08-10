@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\src\_class_tpay\PaymentOptions;
 
 use tpayLibs\src\_class_tpay\Utilities\ObjectsHelper;
@@ -12,11 +8,7 @@ use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasic;
 use tpayLibs\src\_class_tpay\Validators\PaymentTypes\PaymentTypeBasicApi;
 
 /**
- * Class BasicPaymentOptions
- *
  * Class handles bank transfer payment through tpay panel
- *
- * @package tpay
  */
 class BasicPaymentOptions extends ObjectsHelper
 {
@@ -37,7 +29,7 @@ class BasicPaymentOptions extends ObjectsHelper
     public function setTransactionID($transactionID)
     {
         if (strpos($transactionID, 'TR-') > 0) {
-            throw new TException('Invalid Transaction ID' . $transactionID);
+            throw new TException('Invalid Transaction ID'.$transactionID);
         }
         $this->transactionID = $transactionID;
         return $this;
@@ -48,14 +40,14 @@ class BasicPaymentOptions extends ObjectsHelper
      * More information about config fields @see FieldsConfigValidator::$panelPaymentRequestField
      *
      * @param array $config transaction config
+     * @param bool  $isApi  set to get config fields for transaction API
      *
-     * @param bool $isApi set to get config fields for transaction API
      * @return array
      */
     public function prepareConfig($config, $isApi = false)
     {
-        $ready = $isApi ? $this->validateConfig(new PaymentTypeBasicApi(), $config) :
-            $this->validateConfig(new PaymentTypeBasic(), $config);
+        $ready = $isApi ? $this->validateConfig(new PaymentTypeBasicApi(), $config)
+            : $this->validateConfig(new PaymentTypeBasic(), $config);
         $crc = isset($ready['crc']) ? $ready['crc'] : '';
 
         $md5Params = [

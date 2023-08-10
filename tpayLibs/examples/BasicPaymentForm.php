@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\PaymentForms\PaymentBasicForms;
@@ -13,7 +9,6 @@ include_once 'loader.php';
 
 class TpayBasicExample extends PaymentBasicForms
 {
-
     public function __construct()
     {
         $this->merchantSecret = 'demo';
@@ -23,8 +18,7 @@ class TpayBasicExample extends PaymentBasicForms
 
     public function getDataForTpay()
     {
-
-        $config = array(
+        $config = [
             'amount' => 999.99,
             'description' => 'Transaction description',
             'crc' => '100020003000',
@@ -33,13 +27,12 @@ class TpayBasicExample extends PaymentBasicForms
             'result_email' => 'shop@example.com',
             'email' => 'customer@example.com',
             'name' => 'John Doe',
-        );
+        ];
 
         /*
          * This method return HTML form
          */
         echo $this->getTransactionForm($config);
-
     }
 }
 

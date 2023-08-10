@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Created by tpay.com
- */
-
 namespace tpayLibs\examples;
 
 use tpayLibs\src\_class_tpay\Refunds\BasicRefunds;
@@ -30,18 +26,15 @@ class TransactionRefund extends BasicRefunds
         /**
          * Refund custom amount
          */
-
         $amount = 100.00;
 
         try {
             $this->transactionID = static::TRID;
             $result = $this->refundAny($amount);
             print_r($result);
-        } catch
-        (TException $e) {
+        } catch (TException $e) {
             var_dump($e);
         }
-
     }
 
     public function refundTransaction()
@@ -49,7 +42,6 @@ class TransactionRefund extends BasicRefunds
         /**
          * Refund transaction
          */
-
         try {
             $this->transactionID = static::TRID;
             $result = $this->refund();
@@ -57,9 +49,7 @@ class TransactionRefund extends BasicRefunds
         } catch (TException $e) {
             var_dump($e);
         }
-
     }
-
 }
 
 (new TransactionRefund())->refundTransaction();
