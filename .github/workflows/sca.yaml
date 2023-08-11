@@ -13,7 +13,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          extensions: none, curl, mbstring
+          extensions: none, curl, dom, mbstring, tokenizer
           coverage: none
 
       - run: composer validate --strict
