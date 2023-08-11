@@ -6,6 +6,7 @@ Library for all payment methods available in [Tpay](https://tpay.com).
 [![PHP version](https://img.shields.io/packagist/php-v/tpay-com/tpay-php.svg)](https://php.net)
 [![License](https://img.shields.io/github/license/tpay-com/tpay-php.svg)](LICENSE)
 [![CI status](https://github.com/tpay-com/tpay-php/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/tpay-com/tpay-php/actions)
+[![Type coverage](https://shepherd.dev/github/tpay-com/tpay-php/coverage.svg)](https://shepherd.dev/github/tpay-com/tpay-php)
 
 [Polish version :poland: wersja polska](./README_PL.md)
 
