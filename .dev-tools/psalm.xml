@@ -9,8 +9,5 @@
 >
     <projectFiles>
         <directory name='../tpayLibs/' />
-        <ignoreFiles>
-            <directory name='vendor' />
-        </ignoreFiles>
     </projectFiles>
 </psalm>
