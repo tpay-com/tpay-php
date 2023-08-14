@@ -28,4 +28,7 @@ jobs:
         run: ./vendor/bin/php-cs-fixer fix -vvv --diff --dry-run
 
       - working-directory: .dev-tools
+        run: ./vendor/bin/phpstan
+
+      - working-directory: .dev-tools
         run: ./vendor/bin/psalm --no-progress --shepherd
