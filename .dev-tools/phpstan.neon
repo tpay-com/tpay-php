@@ -1,6 +1,4 @@
 parameters:
-  bootstrapFiles:
-    - ../vendor/autoload.php
   level: 0
   paths:
     - ../tpayLibs/src/
