@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<phpunit
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='vendor/phpunit/phpunit/phpunit.xsd'
+    beStrictAboutChangesToGlobalState='true'
+    beStrictAboutOutputDuringTests='true'
+    beStrictAboutTodoAnnotatedTests='true'
+    bootstrap='./vendor/autoload.php'
+    cacheResult='false'
+    colors='true'
+    columns='max'
+    defaultTimeLimit='10'
+    enforceTimeLimit='true'
+    failOnRisky='true'
+    failOnWarning='true'
+    timeoutForSmallTests='10'
+    timeoutForMediumTests='20'
+    timeoutForLargeTests='30'
+    verbose='true'
+>
+    <testsuites>
+        <testsuite name='all'>
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <ini name='display_errors' value='1' />
+        <ini name='display_startup_errors' value='1' />
+        <ini name='error_reporting' value='-1' />
+    </php>
+</phpunit>
