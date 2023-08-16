@@ -1,11 +1,11 @@
 <?php
 
 namespace Tpay\Tests;
+
 use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
- *
  */
 class LegacyNamespaceTest extends TestCase
 {
@@ -35,15 +35,15 @@ class LegacyNamespaceTest extends TestCase
             if (!$fileInfo->isFile()) {
                 continue;
             }
-            if ($fileInfo->getExtension() !== 'php') {
+            if ('php' !== $fileInfo->getExtension()) {
                 continue;
             }
 
             $className = 'tpayLibs\\src\\'.substr(
-                    $fileInfo->getRealPath(),
-                    strlen($modelDirectory) + 1,
-                    -4
-                );
+                $fileInfo->getRealPath(),
+                strlen($modelDirectory) + 1,
+                -4
+            );
             $className = str_replace('/', '\\', $className);
 
             $legacyClassNames[] = $className;
