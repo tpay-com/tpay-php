@@ -2,8 +2,8 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\PaymentBlik;
-use tpayLibs\src\_class_tpay\Utilities\TException;
+use Tpay\PaymentBlik;
+use Tpay\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';

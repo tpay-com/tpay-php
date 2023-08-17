@@ -58,6 +58,7 @@ return (new PhpCsFixer\Config())
         'phpdoc_var_annotation_correct_order' => true,
         'return_assignment' => true,
         'simplified_if_return' => true,
+        'single_line_empty_body' => true,
         'single_quote' => true,
         'single_space_around_construct' => true,
         'trailing_comma_in_multiline' => ['elements' => ['arrays']],

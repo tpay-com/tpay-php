@@ -2,8 +2,8 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
-use tpayLibs\src\_class_tpay\Utilities\TException;
+use Tpay\PaymentForms\PaymentCardForms;
+use Tpay\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';

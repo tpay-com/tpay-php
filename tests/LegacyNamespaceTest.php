@@ -19,14 +19,6 @@ class LegacyNamespaceTest extends TestCase
         }
     }
 
-    public function testClassesFromArrayAndFromFilesystemAreTheSame()
-    {
-        self::assertSame(
-            self::getLegacyClassNamesFromArray(),
-            self::getLegacyClassNamesFromFileSystem()
-        );
-    }
-
     public function testClassesHaveUniqueNames()
     {
         $legacyClassShortNames = array_map(
