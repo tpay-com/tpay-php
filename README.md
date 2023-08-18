@@ -38,7 +38,7 @@ You can generate access keys in [Tpay's merchant panel](https://secure.tpay.com/
 The [`loader.php`](tpayLibs/examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing.
 (remember to configure your current working path correctly).
 
-All methods described in [Tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [`src`](tpayLibs/src) directory ([see examples](tpayLibs/examples)).
+All methods described in [Tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [`src`](src) directory ([see examples](tpayLibs/examples)).
 
 ##### Basic Payments and bank selection forms
 
