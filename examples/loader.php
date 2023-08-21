@@ -1,6 +1,6 @@
 <?php
 
-namespace tpayLibs\examples;
+namespace TpayExample;
 
 spl_autoload_register(function ($class) {
     // project-specific namespace prefix

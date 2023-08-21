@@ -32,25 +32,25 @@ https://github.com/tpay-com/tpay-php/archive/master.zip
 
 ## Konfiguracja
 
-Jedyne, co musisz zrobić, to ustawić dane dostępu do API za pomocą `$this->` ([zobacz przykłady](tpayLibs/examples)).
+Jedyne, co musisz zrobić, to ustawić dane dostępu do API za pomocą `$this->` ([zobacz przykłady](examples)).
 Klucze dostępu możesz wygenerować w [panelu sprzedawcy Tpay](https://secure.tpay.com/panel).
 
-Plik [`loader.php`](tpayLibs/examples/BasicPaymentForm.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
+Plik [`loader.php`](examples/BasicPaymentForm.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
 (pamiętaj o poprawnym skonfigurowaniu bieżącej ścieżki roboczej).
 
-Wszystkie metody opisane w [dokumentacji Tpay](https://docs.tpay.com) można łatwo wykonać poprzez rozszerzenie wymaganej klasy z katalogu głównego [`src`](src) ([zobacz przykłady](tpayLibs/examples)).
+Wszystkie metody opisane w [dokumentacji Tpay](https://docs.tpay.com) można łatwo wykonać poprzez rozszerzenie wymaganej klasy z katalogu głównego [`src`](src) ([zobacz przykłady](examples)).
 
 ##### Podstawowe płatności i formularze wyboru banku
 
-Przykłady użycia: [podstawowy](tpayLibs/examples/BasicPaymentForm.php), [formularz HTML wyboru banku](tpayLibs/examples/BankSelection.php), [formularz API wyboru banku](tpayLibs/examples/BankSelectionAPI.php), [formularz BLIK](tpayLibs/examples/BlikTransactionExample.php).
+Przykłady użycia: [podstawowy](examples/BasicPaymentForm.php), [formularz HTML wyboru banku](examples/BankSelection.php), [formularz API wyboru banku](examples/BankSelectionAPI.php), [formularz BLIK](examples/BlikTransactionExample.php).
 
 ##### API transakcji / tworzenie, odbieranie, zwrot, zgłoszenie
 
-Przykład użycia: [utwórz transakcję](tpayLibs/examples/TransactionApiExample.php), [zwrot transakcji](tpayLibs/examples/TransactionRefund.php), [zwrot statusu transakcji](tpayLibs/examples/TransactionRefundStatus.php).
+Przykład użycia: [utwórz transakcję](examples/TransactionApiExample.php), [zwrot transakcji](examples/TransactionRefund.php), [zwrot statusu transakcji](examples/TransactionRefundStatus.php).
 
 ##### Karta podstawowa / Karta On-Site
 
-Przykłady użycia: [podstawowy formularz karty](tpayLibs/examples/CardBasic.php), [bramka na stronie karty](tpayLibs/examples/CardGate.php), [konstruktor linków do płatności kartą](tpayLibs/examples/CardPaymentLinkBuilder.php ), [bramka karty na stronie z zapisanymi kartami](tpayLibs/examples/CardGateExtended.php).
+Przykłady użycia: [podstawowy formularz karty](examples/CardBasic.php), [bramka na stronie karty](examples/CardGate.php), [konstruktor linków do płatności kartą](examples/CardPaymentLinkBuilder.php ), [bramka karty na stronie z zapisanymi kartami](examples/CardGateExtended.php).
 
 ## Logi
 
