@@ -1,9 +1,9 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
-use Tpay\PaymentBlik;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\PaymentBlik;
+use Tpay\OriginApi\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';

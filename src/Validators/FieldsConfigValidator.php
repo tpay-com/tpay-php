@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\Validators;
+namespace Tpay\OriginApi\Validators;
 
-use Tpay\Dictionaries\FieldsConfigDictionary;
-use Tpay\Dictionaries\FieldValueFilters;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
-use Tpay\Validators\VariableTypes\VariableTypesValidator;
+use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
+use Tpay\OriginApi\Dictionaries\FieldValueFilters;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\VariableTypes\VariableTypesValidator;
 
 trait FieldsConfigValidator
 {

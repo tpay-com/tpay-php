@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OriginApi;
 
-use Tpay\Dictionaries\CardDictionary;
-use Tpay\PaymentOptions\CardOptions;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
-use Tpay\Validators\PaymentTypes\PaymentTypeCard;
+use Tpay\OriginApi\Dictionaries\CardDictionary;
+use Tpay\OriginApi\PaymentOptions\CardOptions;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeCard;
 
 class CardApi extends CardOptions
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
-use Tpay\Dictionaries\FieldsConfigDictionary;
-use Tpay\PaymentForms\PaymentCardForms;
-use Tpay\Utilities\Util;
+use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
+use Tpay\OriginApi\PaymentForms\PaymentCardForms;
+use Tpay\OriginApi\Utilities\Util;
 
 include_once 'config.php';
 include_once 'loader.php';

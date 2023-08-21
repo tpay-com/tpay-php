@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Validators;
+namespace Tpay\OriginApi\Validators;
 
-use Tpay\Utilities\TException;
-use Tpay\Validators\VariableTypes\StringType;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Validators\VariableTypes\StringType;
 
 trait AccessConfigValidator
 {

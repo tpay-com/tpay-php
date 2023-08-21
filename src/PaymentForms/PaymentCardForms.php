@@ -1,11 +1,11 @@
 <?php
 
-namespace Tpay\PaymentForms;
+namespace Tpay\OriginApi\PaymentForms;
 
-use Tpay\Dictionaries\CardDictionary;
-use Tpay\PaymentCard;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
+use Tpay\OriginApi\Dictionaries\CardDictionary;
+use Tpay\OriginApi\PaymentCard;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
 
 class PaymentCardForms extends PaymentCard
 {

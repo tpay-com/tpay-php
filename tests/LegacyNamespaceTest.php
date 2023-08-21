@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Tests;
+namespace Tpay\OriginApi\Tests;
 
 use PHPUnit\Framework\TestCase;
 
@@ -100,35 +100,5 @@ class LegacyNamespaceTest extends TestCase
             'tpayLibs\\src\\_class_tpay\\Validators\\VariableTypes\\StringType',
             'tpayLibs\\src\\_class_tpay\\Validators\\VariableTypes\\VariableTypesValidator',
         ];
-    }
-
-    private static function getLegacyClassNamesFromFileSystem()
-    {
-        $modelDirectory = realpath(__DIR__.'/../tpayLibs/src');
-
-        $legacyClassNames = [];
-
-        /** @var \SplFileInfo $fileInfo */
-        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($modelDirectory)) as $fileInfo) {
-            if (!$fileInfo->isFile()) {
-                continue;
-            }
-            if ('php' !== $fileInfo->getExtension()) {
-                continue;
-            }
-
-            $className = 'tpayLibs\\src\\'.substr(
-                $fileInfo->getRealPath(),
-                strlen($modelDirectory) + 1,
-                -4
-            );
-            $className = str_replace('/', '\\', $className);
-
-            $legacyClassNames[] = $className;
-        }
-
-        sort($legacyClassNames);
-
-        return $legacyClassNames;
     }
 }

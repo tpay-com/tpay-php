@@ -1,13 +1,13 @@
 <?php
 
-namespace Tpay\Notifications;
+namespace Tpay\OriginApi\Notifications;
 
-use Tpay\Dictionaries\CardDictionary;
-use Tpay\PaymentCard;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
-use Tpay\Validators\PaymentTypes\PaymentTypeCard;
-use Tpay\Validators\PaymentTypes\PaymentTypeCardDeregister;
+use Tpay\OriginApi\Dictionaries\CardDictionary;
+use Tpay\OriginApi\PaymentCard;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeCard;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeCardDeregister;
 
 class CardNotificationHandler extends PaymentCard
 {

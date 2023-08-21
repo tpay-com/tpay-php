@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Utilities;
+namespace Tpay\OriginApi\Utilities;
 
-use Tpay\Translations\Keys;
+use Tpay\OriginApi\Translations\Keys;
 
 class Lang extends Keys
 {

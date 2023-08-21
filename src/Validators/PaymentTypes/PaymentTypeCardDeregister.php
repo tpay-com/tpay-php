@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Validators\PaymentTypes;
+namespace Tpay\OriginApi\Validators\PaymentTypes;
 
-use Tpay\Dictionaries\Payments\CardDeregisterFieldsDictionary;
-use Tpay\Validators\PaymentTypesInterface;
+use Tpay\OriginApi\Dictionaries\Payments\CardDeregisterFieldsDictionary;
+use Tpay\OriginApi\Validators\PaymentTypesInterface;
 
 class PaymentTypeCardDeregister implements PaymentTypesInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Dictionaries\ISO_codes;
+namespace Tpay\OriginApi\Dictionaries\ISO_codes;
 
 class CurrencyCodesDictionary
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Validators\VariableTypes;
+namespace Tpay\OriginApi\Validators\VariableTypes;
 
-use Tpay\Dictionaries\ISO_codes\CountryCodesDictionary;
-use Tpay\Utilities\TException;
-use Tpay\Validators\VariableTypesInterface;
+use Tpay\OriginApi\Dictionaries\ISO_codes\CountryCodesDictionary;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Validators\VariableTypesInterface;
 
 class CountryCodeType implements VariableTypesInterface
 {

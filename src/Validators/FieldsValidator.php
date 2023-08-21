@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Validators;
+namespace Tpay\OriginApi\Validators;
 
-use Tpay\Dictionaries\ISO_codes\CurrencyCodesDictionary;
-use Tpay\Dictionaries\Localization\CardPaymentLanguagesDictionary;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Dictionaries\ISO_codes\CurrencyCodesDictionary;
+use Tpay\OriginApi\Dictionaries\Localization\CardPaymentLanguagesDictionary;
+use Tpay\OriginApi\Utilities\TException;
 
 trait FieldsValidator
 {

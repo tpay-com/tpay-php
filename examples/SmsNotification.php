@@ -1,8 +1,8 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
-use Tpay\PaymentSMS;
+use Tpay\OriginApi\PaymentSMS;
 
 include_once 'config.php';
 include_once 'loader.php';

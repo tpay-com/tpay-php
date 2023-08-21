@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Reports;
+namespace Tpay\OriginApi\Reports;
 
-use Tpay\TransactionApi;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\TransactionApi;
+use Tpay\OriginApi\Utilities\TException;
 
 class BasicReports extends TransactionApi
 {

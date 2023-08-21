@@ -1,8 +1,8 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
-use Tpay\PaymentForms\PaymentBasicForms;
+use Tpay\OriginApi\PaymentForms\PaymentBasicForms;
 
 include_once 'config.php';
 include_once 'loader.php';

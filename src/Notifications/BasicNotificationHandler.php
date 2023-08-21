@@ -1,11 +1,11 @@
 <?php
 
-namespace Tpay\Notifications;
+namespace Tpay\OriginApi\Notifications;
 
-use Tpay\PaymentOptions\BasicPaymentOptions;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
-use Tpay\Validators\PaymentTypes\PaymentTypeBasic;
+use Tpay\OriginApi\PaymentOptions\BasicPaymentOptions;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasic;
 
 class BasicNotificationHandler extends BasicPaymentOptions
 {

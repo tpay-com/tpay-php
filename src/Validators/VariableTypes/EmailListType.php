@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Validators\VariableTypes;
+namespace Tpay\OriginApi\Validators\VariableTypes;
 
-use Tpay\Utilities\TException;
-use Tpay\Validators\VariableTypesInterface;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Validators\VariableTypesInterface;
 
 class EmailListType implements VariableTypesInterface
 {

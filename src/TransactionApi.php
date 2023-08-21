@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OriginApi;
 
-use Tpay\Dictionaries\ErrorCodes\TransactionApiErrors;
-use Tpay\PaymentForms\PaymentBasicForms;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
-use Tpay\Validators\FieldsConfigValidator;
+use Tpay\OriginApi\Dictionaries\ErrorCodes\TransactionApiErrors;
+use Tpay\OriginApi\PaymentForms\PaymentBasicForms;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\FieldsConfigValidator;
 
 /**
  * Includes group of methods responsible for connection with tpay Transaction API

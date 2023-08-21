@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OriginApi;
 
-use Tpay\Dictionaries\CardDictionary;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
+use Tpay\OriginApi\Dictionaries\CardDictionary;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
 
 /**
  * Class handles credit card payments through "Card API".

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\PaymentOptions;
+namespace Tpay\OriginApi\PaymentOptions;
 
-use Tpay\Dictionaries\FieldsConfigDictionary;
-use Tpay\Utilities\ObjectsHelper;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
+use Tpay\OriginApi\Utilities\ObjectsHelper;
+use Tpay\OriginApi\Utilities\TException;
 
 class CardOptions extends ObjectsHelper
 {

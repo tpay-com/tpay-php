@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Curl;
+namespace Tpay\OriginApi\Curl;
 
-use Tpay\Dictionaries\HttpCodesDictionary;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Dictionaries\HttpCodesDictionary;
+use Tpay\OriginApi\Utilities\TException;
 
 /**
  * Curl class which helps with CURL handling

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Utilities;
+namespace Tpay\OriginApi\Utilities;
 
-use Tpay\Curl\Curl;
-use Tpay\Dictionaries\NotificationsIP;
-use Tpay\Validators\FieldsConfigValidator;
+use Tpay\OriginApi\Curl\Curl;
+use Tpay\OriginApi\Dictionaries\NotificationsIP;
+use Tpay\OriginApi\Validators\FieldsConfigValidator;
 
 class ObjectsHelper
 {

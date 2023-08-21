@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\PaymentForms;
+namespace Tpay\OriginApi\PaymentForms;
 
-use Tpay\PaymentOptions\BasicPaymentOptions;
-use Tpay\Utilities\Util;
-use Tpay\Validators\FieldsConfigValidator;
+use Tpay\OriginApi\PaymentOptions\BasicPaymentOptions;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\FieldsConfigValidator;
 
 class PaymentBasicForms extends BasicPaymentOptions
 {

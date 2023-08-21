@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Translations;
+namespace Tpay\OriginApi\Translations;
 
 class English
 {
