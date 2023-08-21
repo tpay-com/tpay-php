@@ -32,25 +32,25 @@ https://github.com/tpay-com/tpay-php/archive/master.zip
 
 ## Configuration
 
-The only thing you need to do is to set your API access data via `$this->` ([see examples](tpayLibs/examples)).
+The only thing you need to do is to set your API access data via `$this->` ([see examples](examples)).
 You can generate access keys in [Tpay's merchant panel](https://secure.tpay.com/panel).
 
-The [`loader.php`](tpayLibs/examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing.
+The [`loader.php`](examples/BasicPaymentForm.php) file handles all required class loading, so you can include this file to any file you are editing.
 (remember to configure your current working path correctly).
 
-All methods described in [Tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [`src`](src) directory ([see examples](tpayLibs/examples)).
+All methods described in [Tpay documentation](https://docs.tpay.com) can be easily executed by extending required class in main [`src`](src) directory ([see examples](examples)).
 
 ##### Basic Payments and bank selection forms
 
-Example of usages: [basic](tpayLibs/examples/BasicPaymentForm.php), [bank selection HTML form](tpayLibs/examples/BankSelection.php), [bank selection API form](tpayLibs/examples/BankSelectionAPI.php), [BLIK form](tpayLibs/examples/BlikTransactionExample.php).
+Example of usages: [basic](examples/BasicPaymentForm.php), [bank selection HTML form](examples/BankSelection.php), [bank selection API form](examples/BankSelectionAPI.php), [BLIK form](examples/BlikTransactionExample.php).
 
 ##### Transaction API / create, get, refund, report
 
-Example of usages: [create transaction](tpayLibs/examples/TransactionApiExample.php), [refund transaction](tpayLibs/examples/TransactionRefund.php), [refund transaction status](tpayLibs/examples/TransactionRefundStatus.php).
+Example of usages: [create transaction](examples/TransactionApiExample.php), [refund transaction](examples/TransactionRefund.php), [refund transaction status](examples/TransactionRefundStatus.php).
 
 ##### Card Basic / Card On-Site
 
-Example of usages: [card basic form](tpayLibs/examples/CardBasic.php), [card on-site gateway](tpayLibs/examples/CardGate.php), [card payment links builder](tpayLibs/examples/CardPaymentLinkBuilder.php), [card on-site gateway with saved cards](tpayLibs/examples/CardGateExtended.php).
+Example of usages: [card basic form](examples/CardBasic.php), [card on-site gateway](examples/CardGate.php), [card payment links builder](examples/CardPaymentLinkBuilder.php), [card on-site gateway with saved cards](examples/CardGateExtended.php).
 
 ## Logs
 

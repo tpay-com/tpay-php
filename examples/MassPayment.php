@@ -1,6 +1,6 @@
 <?php
 
-namespace tpayLibs\examples;
+namespace TpayExample;
 
 use Tpay\MassPayments;
 use Tpay\Utilities\TException;
