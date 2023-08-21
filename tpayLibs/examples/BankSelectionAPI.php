@@ -2,7 +2,7 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\PaymentForms\PaymentBasicForms;
+use Tpay\PaymentForms\PaymentBasicForms;
 
 include_once 'config.php';
 include_once 'loader.php';

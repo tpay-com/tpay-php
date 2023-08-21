@@ -2,7 +2,7 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\Notifications\CardNotificationHandler;
+use Tpay\Notifications\CardNotificationHandler;
 
 include_once 'config.php';
 include_once 'loader.php';

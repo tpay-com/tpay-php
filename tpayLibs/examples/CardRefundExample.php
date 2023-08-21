@@ -2,7 +2,7 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\Refunds\CardRefunds;
+use Tpay\Refunds\CardRefunds;
 
 include_once 'config.php';
 include_once 'loader.php';

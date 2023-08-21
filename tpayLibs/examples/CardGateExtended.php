@@ -2,9 +2,9 @@
 
 namespace tpayLibs\examples;
 
-use tpayLibs\src\_class_tpay\PaymentForms\PaymentCardForms;
-use tpayLibs\src\_class_tpay\Utilities\Util;
-use tpayLibs\src\Dictionaries\FieldsConfigDictionary;
+use Tpay\Dictionaries\FieldsConfigDictionary;
+use Tpay\PaymentForms\PaymentCardForms;
+use Tpay\Utilities\Util;
 
 include_once 'config.php';
 include_once 'loader.php';

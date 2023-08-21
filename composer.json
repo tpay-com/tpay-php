@@ -21,8 +21,11 @@
         "phpunit/phpunit": "^5.7.27 || ^9.6.10"
     },
     "autoload": {
-        "classmap": [
-            "tpayLibs/src/"
+        "psr-4": {
+            "Tpay\\": "src/"
+        },
+        "files": [
+            "src/legacy_classes.php"
         ]
     },
     "autoload-dev": {

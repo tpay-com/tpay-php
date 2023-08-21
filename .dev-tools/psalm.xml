@@ -8,6 +8,6 @@
        findUnusedCode='false'
 >
     <projectFiles>
-        <directory name='../tpayLibs/' />
+        <directory name='../src/' />
     </projectFiles>
 </psalm>

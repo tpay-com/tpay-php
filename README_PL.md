@@ -38,7 +38,7 @@ Klucze dostępu możesz wygenerować w [panelu sprzedawcy Tpay](https://secure.t
 Plik [`loader.php`](tpayLibs/examples/BasicPaymentForm.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
 (pamiętaj o poprawnym skonfigurowaniu bieżącej ścieżki roboczej).
 
-Wszystkie metody opisane w [dokumentacji Tpay](https://docs.tpay.com) można łatwo wykonać poprzez rozszerzenie wymaganej klasy z katalogu głównego [`src`](tpayLibs/src) ([zobacz przykłady](tpayLibs/examples)).
+Wszystkie metody opisane w [dokumentacji Tpay](https://docs.tpay.com) można łatwo wykonać poprzez rozszerzenie wymaganej klasy z katalogu głównego [`src`](src) ([zobacz przykłady](tpayLibs/examples)).
 
 ##### Podstawowe płatności i formularze wyboru banku
 
