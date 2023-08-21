@@ -1,6 +1,6 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
 use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
 use Tpay\OriginApi\PaymentForms\PaymentCardForms;

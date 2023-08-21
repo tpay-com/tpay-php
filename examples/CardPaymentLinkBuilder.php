@@ -1,6 +1,6 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
 use Tpay\OriginApi\PaymentForms\PaymentCardForms;
 use Tpay\OriginApi\Utilities\TException;
