@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Refunds;
+namespace Tpay\OriginApi\Refunds;
 
-use Tpay\TransactionApi;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
+use Tpay\OriginApi\TransactionApi;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
 
 class BasicRefunds extends TransactionApi
 {

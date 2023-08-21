@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tpay\\": "src/"
+            "Tpay\\OriginApi\\": "src/"
         },
         "files": [
             "src/legacy_classes.php"
@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tpay\\Tests\\": "tests/"
+            "Tpay\\OriginApi\\Tests\\": "tests/"
         }
     },
     "extra": [

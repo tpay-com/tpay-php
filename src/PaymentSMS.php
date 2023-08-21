@@ -1,11 +1,11 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OriginApi;
 
-use Tpay\Curl\Curl;
-use Tpay\Utilities\ObjectsHelper;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
+use Tpay\OriginApi\Curl\Curl;
+use Tpay\OriginApi\Utilities\ObjectsHelper;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
 
 class PaymentSMS extends ObjectsHelper
 {

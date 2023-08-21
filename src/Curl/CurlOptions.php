@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Curl;
+namespace Tpay\OriginApi\Curl;
 
 class CurlOptions
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\PaymentOptions;
+namespace Tpay\OriginApi\PaymentOptions;
 
-use Tpay\Utilities\ObjectsHelper;
-use Tpay\Utilities\TException;
-use Tpay\Validators\FieldsConfigValidator;
-use Tpay\Validators\PaymentTypes\PaymentTypeBasic;
-use Tpay\Validators\PaymentTypes\PaymentTypeBasicApi;
+use Tpay\OriginApi\Utilities\ObjectsHelper;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Validators\FieldsConfigValidator;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasic;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasicApi;
 
 /**
  * Class handles bank transfer payment through tpay panel

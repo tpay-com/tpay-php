@@ -1,11 +1,11 @@
 <?php
 
-namespace Tpay\Refunds;
+namespace Tpay\OriginApi\Refunds;
 
-use Tpay\CardApi;
-use Tpay\Dictionaries\CardDictionary;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
+use Tpay\OriginApi\CardApi;
+use Tpay\OriginApi\Dictionaries\CardDictionary;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
 
 class CardRefunds extends CardApi
 {

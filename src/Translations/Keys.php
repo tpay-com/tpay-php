@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Translations;
+namespace Tpay\OriginApi\Translations;
 
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Utilities\TException;
 
 class Keys
 {

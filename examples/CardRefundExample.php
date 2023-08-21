@@ -2,7 +2,7 @@
 
 namespace TpayExample;
 
-use Tpay\Refunds\CardRefunds;
+use Tpay\OriginApi\Refunds\CardRefunds;
 
 include_once 'config.php';
 include_once 'loader.php';

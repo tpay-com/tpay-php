@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Dictionaries\Localization;
+namespace Tpay\OriginApi\Dictionaries\Localization;
 
 class CardPaymentLanguagesDictionary
 {

@@ -2,7 +2,7 @@
 
 namespace TpayExample;
 
-use Tpay\Notifications\BasicNotificationHandler;
+use Tpay\OriginApi\Notifications\BasicNotificationHandler;
 
 include_once 'config.php';
 include_once 'loader.php';

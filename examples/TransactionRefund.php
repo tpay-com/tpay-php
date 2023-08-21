@@ -2,8 +2,8 @@
 
 namespace TpayExample;
 
-use Tpay\Refunds\BasicRefunds;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Refunds\BasicRefunds;
+use Tpay\OriginApi\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';

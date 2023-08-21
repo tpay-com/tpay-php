@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Dictionaries\Payments;
+namespace Tpay\OriginApi\Dictionaries\Payments;
 
-use Tpay\Dictionaries\FieldsConfigDictionary;
+use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
 
 class BasicFieldsDictionary
 {

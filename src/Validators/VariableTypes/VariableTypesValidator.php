@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Validators\VariableTypes;
+namespace Tpay\OriginApi\Validators\VariableTypes;
 
-use Tpay\Dictionaries\FieldsConfigDictionary;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
+use Tpay\OriginApi\Utilities\TException;
 
 class VariableTypesValidator
 {

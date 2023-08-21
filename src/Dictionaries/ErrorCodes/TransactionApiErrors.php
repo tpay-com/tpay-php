@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Dictionaries\ErrorCodes;
+namespace Tpay\OriginApi\Dictionaries\ErrorCodes;
 
 class TransactionApiErrors
 {

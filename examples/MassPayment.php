@@ -2,8 +2,8 @@
 
 namespace TpayExample;
 
-use Tpay\MassPayments;
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\MassPayments;
+use Tpay\OriginApi\Utilities\TException;
 
 include_once 'config.php';
 include_once 'loader.php';

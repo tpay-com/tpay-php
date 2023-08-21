@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Validators\PaymentTypes;
+namespace Tpay\OriginApi\Validators\PaymentTypes;
 
-use Tpay\Dictionaries\Payments\CardFieldsDictionary;
-use Tpay\Validators\PaymentTypesInterface;
+use Tpay\OriginApi\Dictionaries\Payments\CardFieldsDictionary;
+use Tpay\OriginApi\Validators\PaymentTypesInterface;
 
 class PaymentTypeCard implements PaymentTypesInterface
 {

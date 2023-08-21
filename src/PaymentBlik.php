@@ -1,13 +1,13 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OriginApi;
 
-use Tpay\Dictionaries\FieldsConfigDictionary;
-use Tpay\Utilities\TException;
-use Tpay\Utilities\Util;
-use Tpay\Validators\PaymentTypes\PaymentTypeBlikAlias;
-use Tpay\Validators\PaymentTypes\PaymentTypeT6Register;
-use Tpay\Validators\PaymentTypes\PaymentTypeT6Standard;
+use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
+use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBlikAlias;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeT6Register;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeT6Standard;
 
 class PaymentBlik extends TransactionApi
 {

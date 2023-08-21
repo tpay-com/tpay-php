@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OriginApi;
 
-use Tpay\Utilities\TException;
+use Tpay\OriginApi\Utilities\TException;
 
 class MassPayments extends TransactionApi
 {

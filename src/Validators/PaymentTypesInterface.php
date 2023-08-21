@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Validators;
+namespace Tpay\OriginApi\Validators;
 
 interface PaymentTypesInterface
 {

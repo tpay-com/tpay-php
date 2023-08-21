@@ -2,7 +2,7 @@
 
 namespace TpayExample;
 
-use Tpay\PaymentCard;
+use Tpay\OriginApi\PaymentCard;
 
 include_once 'config.php';
 include_once 'loader.php';
