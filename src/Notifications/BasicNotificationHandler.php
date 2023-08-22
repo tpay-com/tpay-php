@@ -31,7 +31,7 @@ class BasicNotificationHandler extends BasicPaymentOptions
             number_format($res['tr_amount'], 2, '.', ''),
             $res['tr_crc']
         );
-        Util::logLine('Check MD5: '.(int)$checkMD5);
+        Util::logLine('Check MD5: '.(int) $checkMD5);
         if (true === $this->validateServerIP && false === $this->isTpayServer()) {
             throw new TException('Request is not from secure server');
         }

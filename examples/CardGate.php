@@ -31,7 +31,7 @@ class CardGate extends PaymentCardForms
             // Try to sale with provided card data
             $response = $this->makeCardPayment();
             // Successful payment by card not protected by 3DS
-            if (isset($response['result']) && 1 === (int)$response['result']) {
+            if (isset($response['result']) && 1 === (int) $response['result']) {
                 $this->setOrderAsComplete($response);
                 // Successfully generated 3DS link for payment authorization
             } elseif (isset($response['3ds_url'])) {

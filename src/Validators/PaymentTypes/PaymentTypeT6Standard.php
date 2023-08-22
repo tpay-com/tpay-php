@@ -12,11 +12,9 @@ class PaymentTypeT6Standard implements PaymentTypesInterface
     {
         $fields = BlikFieldsDictionary::REQUEST_FIELDS;
         $fields['alias'][FieldsConfigDictionary::REQUIRED] = false;
+
         return $fields;
     }
 
-    public function getResponseFields()
-    {
-        return null;
-    }
+    public function getResponseFields() {}
 }

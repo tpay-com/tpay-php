@@ -54,7 +54,7 @@ class CardBasic extends PaymentCardForms
                 throw new TException('Error generating transaction: '.$transaction['err_desc']);
             }
             $transactionId = $transaction['sale_auth'];
-            header("Location: https://secure.tpay.com/cards/?sale_auth=$transactionId");
+            header("Location: https://secure.tpay.com/cards/?sale_auth={$transactionId}");
         } catch (TException $e) {
             echo 'Unable to generate transaction. Reason: '.$e->getMessage();
         }

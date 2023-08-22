@@ -49,6 +49,19 @@ trait FieldsConfigValidator
     }
 
     /**
+     * Set payment fields dictionary for validation
+     *
+     * @param object $paymentType payment type
+     * @param bool   $notResp     is it not response value
+     */
+    public function setPaymentFields($paymentType, $notResp = true)
+    {
+        $this->requestFields = $notResp ? $paymentType->getRequestFields() : $paymentType->getResponseFields();
+        $this->requestFields['json'][FieldsConfigDictionary::REQUIRED] = false;
+        $this->requestFields['json'][FieldsConfigDictionary::VALIDATION] = [FieldsConfigDictionary::BOOLEAN];
+    }
+
+    /**
      * Check and rename deprecated parameters
      *
      * @param object $paymentType payment type
@@ -68,20 +81,8 @@ trait FieldsConfigValidator
                 }
             }
         }
-        return $config;
-    }
 
-    /**
-     * Set payment fields dictionary for validation
-     *
-     * @param object $paymentType payment type
-     * @param bool   $notResp     is it not response value
-     */
-    public function setPaymentFields($paymentType, $notResp = true)
-    {
-        $this->requestFields = $notResp ? $paymentType->getRequestFields() : $paymentType->getResponseFields();
-        $this->requestFields['json'][FieldsConfigDictionary::REQUIRED] = false;
-        $this->requestFields['json'][FieldsConfigDictionary::VALIDATION] = [FieldsConfigDictionary::BOOLEAN];
+        return $config;
     }
 
     /**
@@ -100,11 +101,15 @@ trait FieldsConfigValidator
             return true;
         }
         $this->validateFields($name, $value, $fieldConfig);
+
         return (isset($fieldConfig[FieldsConfigDictionary::FILTER])) ? $this->filterValues($value, $fieldConfig, $name)
             : $value;
     }
 
     /**
+     * @param mixed $name
+     * @param mixed $requestFields
+     *
      * @throws TException
      */
     private function checkFieldName($name, $requestFields)
@@ -118,6 +123,10 @@ trait FieldsConfigValidator
     }
 
     /**
+     * @param mixed $name
+     * @param mixed $value
+     * @param mixed $fieldConfig
+     *
      * @throws TException
      */
     private function validateFields($name, $value, $fieldConfig)
@@ -142,6 +151,7 @@ trait FieldsConfigValidator
      *
      * @param string $value
      * @param array  $fieldConfig
+     * @param mixed  $name
      *
      * @throws TException
      *
@@ -164,6 +174,7 @@ trait FieldsConfigValidator
                 Util::log('Variable Warning!', 'Unsupported signs has been trimmed from '
                     .$value.' to '.$filteredValue.' in field '.$name);
             }
+
             return $filteredValue;
         }
         if ((('mail' === $filterName) && !filter_var($value, FILTER_VALIDATE_EMAIL))

@@ -12,8 +12,5 @@ class PaymentTypeT6Register implements PaymentTypesInterface
         return BlikFieldsDictionary::REQUEST_FIELDS;
     }
 
-    public function getResponseFields()
-    {
-        return null;
-    }
+    public function getResponseFields() {}
 }

@@ -3,6 +3,7 @@
 namespace Tpay\OriginApi\Tests;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 /**
  * @coversNothing
@@ -23,7 +24,7 @@ class LegacyNamespaceTest extends TestCase
     {
         $legacyClassShortNames = array_map(
             function ($className) {
-                return (new \ReflectionClass($className))->getShortName();
+                return (new ReflectionClass($className))->getShortName();
             },
             self::getLegacyClassNamesFromArray()
         );

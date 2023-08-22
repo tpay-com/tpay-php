@@ -3,9 +3,10 @@
         "ergebnis/composer-normalize": "^2.35",
         "kubawerlos/composer-smaller-lock": "^1.0.1",
         "kubawerlos/php-cs-fixer-custom-fixers": "^3.16.2",
-        "php-cs-fixer/shim": "^3.22",
-        "phpstan/phpstan": "^1.10.28",
-        "vimeo/psalm": "^5.14.1"
+        "php-cs-fixer/shim": "^3.23",
+        "phpstan/phpstan": "^1.10.29",
+        "tpay-com/coding-standards": "^1.0",
+        "vimeo/psalm": "^5.15.0"
     },
     "config": {
         "allow-plugins": {

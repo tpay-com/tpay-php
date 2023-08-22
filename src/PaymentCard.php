@@ -56,6 +56,7 @@ class PaymentCard extends CardApi
      * Register sale for client saved card
      *
      * @param string $saleAuth client sale sign
+     * @param mixed  $cliAuth
      *
      * @return bool|mixed
      */

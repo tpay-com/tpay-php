@@ -39,9 +39,7 @@ class TransactionRefund extends BasicRefunds
 
     public function refundTransaction()
     {
-        /**
-         * Refund transaction
-         */
+        // Refund transaction
         try {
             $this->transactionID = static::TRID;
             $result = $this->refund();

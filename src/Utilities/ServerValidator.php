@@ -7,19 +7,13 @@ class ServerValidator
     const REMOTE_ADDRESS = 'REMOTE_ADDR';
     const FORWARDER_ADDRESS = 'HTTP_X_FORWARDED_FOR';
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $validateForwardedIP;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $validateServerIP;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $secureIP;
 
     public function __construct($validateServerIP, $validateForwardedIP, array $secureIP)
@@ -51,7 +45,7 @@ class ServerValidator
             return true;
         }
 
-        return (bool)($this->validateForwardedIP && $this->checkIP($forwarderIP));
+        return (bool) ($this->validateForwardedIP && $this->checkIP($forwarderIP));
     }
 
     /**
@@ -70,6 +64,8 @@ class ServerValidator
 
     /**
      * Validate if $ip is secure
+     *
+     * @param mixed $ip
      *
      * @return bool
      */

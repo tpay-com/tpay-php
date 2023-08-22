@@ -4,9 +4,7 @@ namespace Tpay\OriginApi\Dictionaries;
 
 class HttpCodesDictionary
 {
-    /**
-     * List of http response codes the occurrence of which results in throw exception
-     */
+    /** List of http response codes the occurrence of which results in throw exception */
     const HTTP_CODES = [
         401 => '401: Unauthorized access',
         404 => '404: Resource not found on server',

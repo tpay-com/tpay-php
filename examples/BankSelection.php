@@ -16,9 +16,7 @@ class BankSelectionExample extends PaymentBasicForms
         parent::__construct();
     }
 
-    /**
-     * Get bank selection by sending data array
-     */
+    /** Get bank selection by sending data array */
     public function getBankForm()
     {
         $config = [
@@ -37,9 +35,7 @@ class BankSelectionExample extends PaymentBasicForms
         echo $form;
     }
 
-    /**
-     * Get simple banks list presented as tiles without any other elements
-     */
+    /** Get simple banks list presented as tiles without any other elements */
     public function getSimpleBanksForm()
     {
         echo $this->getSimpleBankList(false, false);

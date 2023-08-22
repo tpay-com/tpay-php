@@ -16,9 +16,7 @@ class BankSelectionAPIExample extends PaymentBasicForms
         parent::__construct();
     }
 
-    /*
-     *Get bank selection by sending data array
-     */
+    // Get bank selection by sending data array
     public function getBankForm()
     {
         $form = $this->getBankSelectionForm([], false, true, 'TransactionApiExample.php');

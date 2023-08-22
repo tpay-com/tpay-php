@@ -33,6 +33,7 @@ class BasicPaymentOptions extends ObjectsHelper
             throw new TException('Invalid Transaction ID'.$transactionID);
         }
         $this->transactionID = $transactionID;
+
         return $this;
     }
 

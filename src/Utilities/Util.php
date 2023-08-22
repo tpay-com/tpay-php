@@ -19,9 +19,7 @@ class Util
     static $loggingEnabled = true;
     static $customLogPatch;
 
-    /**
-     * Override to set your own templates directory. You can modify the library templates copied to your custom path
-     */
+    /** Override to set your own templates directory. You can modify the library templates copied to your custom path */
     static $customTemplateDirectory;
 
     /**
@@ -76,7 +74,7 @@ class Util
      */
     public static function log($title, $text)
     {
-        $text = (string)$text;
+        $text = (string) $text;
         $logFilePath = self::getLogPath();
         $ip = (isset($_SERVER[static::REMOTE_ADDR])) ? $_SERVER[static::REMOTE_ADDR] : '';
 
@@ -101,7 +99,7 @@ class Util
      */
     public static function logLine($text)
     {
-        $text = (string)$text;
+        $text = (string) $text;
         $logFilePath = self::getLogPath();
         if (true === static::$loggingEnabled) {
             file_put_contents($logFilePath, PHP_EOL.$text, FILE_APPEND);
@@ -124,13 +122,13 @@ class Util
         }
         $val = $_POST[$name];
         if ('int' === $type) {
-            $val = (int)$val;
+            $val = (int) $val;
         } elseif ('float' === $type) {
-            $val = (float)$val;
+            $val = (float) $val;
         } elseif ('string' === $type) {
-            $val = (string)$val;
+            $val = (string) $val;
         } elseif ('array' === $type) {
-            $val = (array)$val;
+            $val = (array) $val;
         } else {
             throw new TException('Undefined $_POST variable type');
         }
@@ -162,7 +160,7 @@ class Util
     private static function getLogPath()
     {
         if (false === static::$loggingEnabled) {
-            return null;
+            return;
         }
         $logFileName = 'log_'.date('Y-m-d').'.php';
         if (!empty(static::$customLogPatch)) {

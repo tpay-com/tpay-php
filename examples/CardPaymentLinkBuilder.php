@@ -79,8 +79,8 @@ class CardPaymentLinkBuilder extends PaymentCardForms
             }
             $_POST['amount'] = str_replace(',', '.', $_POST['amount']);
             $this
-                ->setAmount((float)$_POST['amount'])
-                ->setCurrency((int)$_POST['currency']);
+                ->setAmount((float) $_POST['amount'])
+                ->setCurrency((int) $_POST['currency']);
             $this->setNotRequiredFields();
             $transaction = $this->registerSale($_POST['name'], $_POST['email'], $_POST['desc']);
             if (false === isset($transaction['sale_auth'])) {

@@ -12,6 +12,7 @@ class PaymentTypeBlikAlias implements PaymentTypesInterface
     {
         $fields = BlikFieldsDictionary::REQUEST_FIELDS;
         $fields['code'][FieldsConfigDictionary::REQUIRED] = false;
+
         return $fields;
     }
 

@@ -24,6 +24,7 @@ class CurlOptions
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+
         return $this;
     }
 
@@ -37,6 +38,7 @@ class CurlOptions
     public function setConnectTimeout($timeout)
     {
         $this->connectTimeout = $timeout;
+
         return $this;
     }
 
@@ -49,7 +51,8 @@ class CurlOptions
      */
     public function setVerifyHost($verifyHost)
     {
-        $this->verifyHost = (int)$verifyHost;
+        $this->verifyHost = (int) $verifyHost;
+
         return $this;
     }
 
@@ -61,6 +64,7 @@ class CurlOptions
     public function disableVerifyPeer()
     {
         $this->verifyPeer = false;
+
         return $this;
     }
 
@@ -72,6 +76,7 @@ class CurlOptions
     public function disableVerbose()
     {
         $this->verbose = false;
+
         return $this;
     }
 
@@ -83,6 +88,7 @@ class CurlOptions
     public function disablePost()
     {
         $this->post = false;
+
         return $this;
     }
 
@@ -94,6 +100,7 @@ class CurlOptions
     public function disableReturnTransfer()
     {
         $this->returnTransfer = false;
+
         return $this;
     }
 
@@ -105,6 +112,7 @@ class CurlOptions
     public function disableFailOnError()
     {
         $this->failOnError = false;
+
         return $this;
     }
 
@@ -116,6 +124,7 @@ class CurlOptions
     public function disableFollowLocation()
     {
         $this->followLocation = false;
+
         return $this;
     }
 
@@ -127,6 +136,7 @@ class CurlOptions
     public function enableVerifyPeer()
     {
         $this->verifyPeer = true;
+
         return $this;
     }
 
@@ -138,6 +148,7 @@ class CurlOptions
     public function enableVerbose()
     {
         $this->verbose = true;
+
         return $this;
     }
 
@@ -149,6 +160,7 @@ class CurlOptions
     public function enablePost()
     {
         $this->post = true;
+
         return $this;
     }
 
@@ -160,6 +172,7 @@ class CurlOptions
     public function enableReturnTransfer()
     {
         $this->returnTransfer = true;
+
         return $this;
     }
 
@@ -171,6 +184,7 @@ class CurlOptions
     public function enableFailOnError()
     {
         $this->failOnError = true;
+
         return $this;
     }
 
@@ -182,6 +196,7 @@ class CurlOptions
     public function enableFollowLocation()
     {
         $this->followLocation = true;
+
         return $this;
     }
 

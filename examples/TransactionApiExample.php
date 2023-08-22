@@ -50,7 +50,7 @@ class TransactionApiExample extends TransactionApi
             'return_url' => 'http://example.pl/examples/TransactionApiExample.php',
             'email' => 'customer@example.com',
             'name' => 'John Doe',
-            'group' => isset($_POST['group']) ? (int)$_POST['group'] : 150,
+            'group' => isset($_POST['group']) ? (int) $_POST['group'] : 150,
             'accept_tos' => 1,
         ];
         try {

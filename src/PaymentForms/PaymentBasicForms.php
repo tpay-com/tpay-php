@@ -86,7 +86,7 @@ class PaymentBasicForms extends BasicPaymentOptions
         $config['accept_tos'] = 0;
 
         $data = [
-            static::ACTION_URL => is_null($actionURL) ? $this->panelURL : (string)$actionURL,
+            static::ACTION_URL => is_null($actionURL) ? $this->panelURL : (string) $actionURL,
             static::FIELDS => $config,
             'redirect' => false,
             'show_regulations_checkbox' => $showRegulations,
@@ -98,7 +98,7 @@ class PaymentBasicForms extends BasicPaymentOptions
         $data = [
             'merchant_id' => $this->merchantId,
             'form' => $form,
-            'online_only' => (int)$onlineOnly,
+            'online_only' => (int) $onlineOnly,
             'small_list' => $smallList,
         ];
 
@@ -117,7 +117,7 @@ class PaymentBasicForms extends BasicPaymentOptions
     {
         $data = [
             'merchant_id' => $this->merchantId,
-            'online_only' => (int)$onlineOnly,
+            'online_only' => (int) $onlineOnly,
             'show_regulations_checkbox' => $showRegulations,
             'regulation_url' => static::TPAY_TERMS_OF_SERVICE_URL,
         ];
