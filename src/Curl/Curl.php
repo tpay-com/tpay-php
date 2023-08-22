@@ -43,25 +43,19 @@ class Curl extends CurlOptions
         }
     }
 
-    /**
-     * Get last info
-     */
+    /** Get last info */
     public function getCurlLastInfo()
     {
         return $this->curlInfo;
     }
 
-    /**
-     * Get last Curl error info
-     */
+    /** Get last Curl error info */
     public function getCurlLastError()
     {
         return $this->curlError;
     }
 
-    /**
-     * Get last Curl error number info
-     */
+    /** Get last Curl error number info */
     public function getCurlLastErrorNo()
     {
         return $this->curlErrorNumber;
@@ -132,9 +126,7 @@ class Curl extends CurlOptions
         return $response;
     }
 
-    /**
-     * @return $this
-     */
+    /** @return $this */
     public function doRequest()
     {
         $ch = $this->init();

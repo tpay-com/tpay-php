@@ -29,9 +29,7 @@ class TpayBasicExample extends PaymentBasicForms
             'name' => 'John Doe',
         ];
 
-        /*
-         * This method return HTML form
-         */
+        // This method return HTML form
         echo $this->getTransactionForm($config);
     }
 }

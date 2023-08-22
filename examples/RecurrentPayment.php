@@ -9,7 +9,7 @@ include_once 'loader.php';
 
 class RecurrentPayment extends PaymentCard
 {
-    private $transactionId = null;
+    private $transactionId;
 
     public function __construct()
     {
@@ -52,6 +52,7 @@ class RecurrentPayment extends PaymentCard
         if (isset($result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsConfirmed();
         }
+
         // Log rejection code
         return $result['reason'];
     }

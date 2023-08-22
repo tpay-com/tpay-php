@@ -34,9 +34,7 @@ class TransactionApi extends PaymentBasicForms
      */
     private $errorCodes = TransactionApiErrors::ERROR_CODES;
 
-    /**
-     * PaymentTransactionAPI class constructor
-     */
+    /** PaymentTransactionAPI class constructor */
     public function __construct()
     {
         parent::__construct();
@@ -67,6 +65,7 @@ class TransactionApi extends PaymentBasicForms
         if (1 !== $response[static::RESULT]) {
             throw new TException(sprintf('Error in %s', $response['err']));
         }
+
         return $response;
     }
 
@@ -99,6 +98,7 @@ class TransactionApi extends PaymentBasicForms
         $response = $this->requests($url, [static::TITLE => $this->transactionID]);
 
         $this->checkError($response);
+
         return $response;
     }
 

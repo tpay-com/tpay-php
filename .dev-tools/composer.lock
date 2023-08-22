@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0526b1bb4828bee60509de94fe2647ec",
+    "content-hash": "91b354e2dd73aaef4efa2b90944185df",
     "packages": [
         {
             "name": "amphp/amp",
@@ -713,16 +713,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.22.0",
+            "version": "v3.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "f6692934a6d1fe40fd8bc3339487490baa4a6700"
+                "reference": "ddca9b342374087121e44cca3b7d8aca8f121fa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f6692934a6d1fe40fd8bc3339487490baa4a6700",
-                "reference": "f6692934a6d1fe40fd8bc3339487490baa4a6700"
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/ddca9b342374087121e44cca3b7d8aca8f121fa7",
+                "reference": "ddca9b342374087121e44cca3b7d8aca8f121fa7"
             },
             "require": {
                 "ext-json": "*",
@@ -876,16 +876,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.28",
+            "version": "1.10.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e4545b55904ebef470423d3ddddb74fa7325497a"
+                "reference": "ee5d8f2d3977fb09e55603eee6fb53bdd76ee9c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e4545b55904ebef470423d3ddddb74fa7325497a",
-                "reference": "e4545b55904ebef470423d3ddddb74fa7325497a"
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee5d8f2d3977fb09e55603eee6fb53bdd76ee9c1",
+                "reference": "ee5d8f2d3977fb09e55603eee6fb53bdd76ee9c1"
             },
             "require": {
                 "php": "^7.2|^8.0"
@@ -1377,17 +1377,46 @@
             "description": "Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way"
         },
         {
-            "name": "vimeo/psalm",
-            "version": "5.14.1",
+            "name": "tpay-com/coding-standards",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vimeo/psalm.git",
-                "reference": "b9d355e0829c397b9b3b47d0c0ed042a8a70284d"
+                "url": "https://github.com/tpay-com/php-coding-standards.git",
+                "reference": "ea0211bcaa6143690f4dc25a00abc7a0befa359a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/b9d355e0829c397b9b3b47d0c0ed042a8a70284d",
-                "reference": "b9d355e0829c397b9b3b47d0c0ed042a8a70284d"
+                "url": "https://api.github.com/repos/tpay-com/php-coding-standards/zipball/ea0211bcaa6143690f4dc25a00abc7a0befa359a",
+                "reference": "ea0211bcaa6143690f4dc25a00abc7a0befa359a"
+            },
+            "require": {
+                "friendsofphp/php-cs-fixer": "^3.22",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.16.2",
+                "php": "^7.4 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tpay\\CodingStandards\\": "./src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Tpay.com coding standards library"
+        },
+        {
+            "name": "vimeo/psalm",
+            "version": "5.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vimeo/psalm.git",
+                "reference": "5c774aca4746caf3d239d9c8cadb9f882ca29352"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/5c774aca4746caf3d239d9c8cadb9f882ca29352",
+                "reference": "5c774aca4746caf3d239d9c8cadb9f882ca29352"
             },
             "require": {
                 "amphp/amp": "^2.4.2",

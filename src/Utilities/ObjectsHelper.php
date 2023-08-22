@@ -85,6 +85,7 @@ class ObjectsHelper
     public function requests($url, $params)
     {
         $this->curl = new Curl();
+
         return $this->curl->setRequestUrl($url)
             ->setPostData($params)
             ->enableJSONResponse()
@@ -100,15 +101,15 @@ class ObjectsHelper
     public function disableValidationServerIP()
     {
         $this->validateServerIP = false;
+
         return $this;
     }
 
-    /**
-     * Enabling validation of payment notification server IP
-     */
+    /** Enabling validation of payment notification server IP */
     public function enableValidationServerIP()
     {
         $this->validateServerIP = true;
+
         return $this;
     }
 
@@ -119,15 +120,15 @@ class ObjectsHelper
     public function disableForwardedIPValidation()
     {
         $this->validateForwardedIP = false;
+
         return $this;
     }
 
-    /**
-     * Enabling validation for CloudFlare protected servers
-     */
+    /** Enabling validation for CloudFlare protected servers */
     public function enableForwardedIPValidation()
     {
         $this->validateForwardedIP = true;
+
         return $this;
     }
 

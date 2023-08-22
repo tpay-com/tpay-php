@@ -14,6 +14,7 @@ class VariableTypesValidator
 
     /**
      * @param string $type
+     * @param mixed  $value
      * @param string $name
      *
      * @throws TException

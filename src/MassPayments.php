@@ -85,6 +85,7 @@ class MassPayments extends TransactionApi
         $response = $this->requests($url, $postData);
 
         $this->checkError($response);
+
         return $response;
     }
 

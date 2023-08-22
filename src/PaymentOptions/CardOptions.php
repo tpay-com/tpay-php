@@ -16,11 +16,11 @@ class CardOptions extends ObjectsHelper
     protected $enablePowUrl = false;
     protected $powUrl = '';
     protected $powUrlBlad = '';
-    protected $cardData = null;
+    protected $cardData;
     protected $method = 'register_sale';
     protected $clientAuthCode = '';
     protected $amount;
-    protected $moduleName = null;
+    protected $moduleName;
 
     public function __construct()
     {
@@ -43,30 +43,35 @@ class CardOptions extends ObjectsHelper
     public function setCurrency($currency)
     {
         $this->currency = $this->validateCardCurrency($currency);
+
         return $this;
     }
 
     public function setOrderID($orderID)
     {
         $this->orderID = $orderID;
+
         return $this;
     }
 
     public function setOneTimer($oneTimer)
     {
         $this->oneTimer = $oneTimer;
+
         return $this;
     }
 
     public function setLanguage($lang)
     {
         $this->lang = strtolower($this->validateCardLanguage($lang));
+
         return $this;
     }
 
     public function setEnablePowUrl($enablePowUrl)
     {
         $this->enablePowUrl = $enablePowUrl;
+
         return $this;
     }
 
@@ -74,18 +79,21 @@ class CardOptions extends ObjectsHelper
     {
         $this->powUrl = $successUrl;
         $this->powUrlBlad = $errorUrl;
+
         return $this;
     }
 
     public function setCardData($data)
     {
         $this->cardData = $data;
+
         return $this;
     }
 
     public function setMethod($method)
     {
         $this->method = $method;
+
         return $this;
     }
 
@@ -93,6 +101,7 @@ class CardOptions extends ObjectsHelper
     {
         $this->validateNumeric($amount);
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -100,6 +109,7 @@ class CardOptions extends ObjectsHelper
     {
         $this->validateMaxLength($name, FieldsConfigDictionary::MAXLENGTH_32, 'module');
         $this->moduleName = $name;
+
         return $this;
     }
 }

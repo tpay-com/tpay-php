@@ -54,14 +54,16 @@ class PaymentSMS extends ObjectsHelper
     }
 
     /**
+     * @param mixed $response
+     *
      * @return bool
      */
     private function isValidCode($response)
     {
         $data = explode("\n", $response);
 
-        $status = (int)$data[0];
+        $status = (int) $data[0];
 
-        return (bool)$status;
+        return (bool) $status;
     }
 }

@@ -6,9 +6,7 @@ use Tpay\OriginApi\Dictionaries\FieldsConfigDictionary;
 
 class BlikFieldsDictionary
 {
-    /**
-     * List of fields available in response for blik payment
-     */
+    /** List of fields available in response for blik payment */
     const ALIAS_RESPONSE_FIELDS = [
         'id' => [
             FieldsConfigDictionary::REQUIRED => true,
@@ -32,9 +30,7 @@ class BlikFieldsDictionary
         ],
     ];
 
-    /**
-     * List of supported request fields for blik payment
-     */
+    /** List of supported request fields for blik payment */
     const REQUEST_FIELDS = [
         'code' => [
             FieldsConfigDictionary::REQUIRED => true,

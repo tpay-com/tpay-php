@@ -69,7 +69,7 @@ class BasicReports extends TransactionApi
 
         $isEmpty = count($reportCsvLines) < 2;
         if ($isEmpty) {
-            return null;
+            return;
         }
 
         $firstRowData = array_shift($reportCsvLines);
@@ -95,17 +95,13 @@ class BasicReports extends TransactionApi
         return $result;
     }
 
-    /**
-     * @return array
-     */
+    /** @return array */
     private function removeCsvHeader(array $reportCsvLines)
     {
         return array_slice($reportCsvLines, 2);
     }
 
-    /**
-     * @return array
-     */
+    /** @return array */
     private function removeLineCounterColumn(array $values)
     {
         return array_slice($values, 1);

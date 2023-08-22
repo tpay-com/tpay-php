@@ -22,7 +22,7 @@ class SmsNotification extends PaymentSMS
         $result = $this->doSmsRequest();
 
         echo '<h1>sprawdzenie SMS</h1>';
-        echo 'result: '.(int)$result;
+        echo 'result: '.(int) $result;
     }
 }
 new SmsNotification();

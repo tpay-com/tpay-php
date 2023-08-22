@@ -34,6 +34,7 @@ class PaymentBlik extends TransactionApi
                     foreach ($response['availableUserApps'] as $userApp) {
                         $apps[] = get_object_vars($userApp);
                     }
+
                     return $apps;
                 }
                 $success = false;
@@ -43,6 +44,7 @@ class PaymentBlik extends TransactionApi
                 $success = false;
                 break;
         }
+
         return $success;
     }
 
@@ -67,6 +69,7 @@ class PaymentBlik extends TransactionApi
             default:
                 throw new TException('Undefined transaction type!');
         }
+
         return $response;
     }
 

@@ -38,7 +38,7 @@ class CardGateExtended extends PaymentCardForms
             // Try to sale with provided card data
             $response = $this->makeCardPayment();
             // Successful payment by card not protected by 3DS
-            if (isset($response['result']) && 1 === (int)$response['result']) {
+            if (isset($response['result']) && 1 === (int) $response['result']) {
                 $this->setOrderAsComplete($response);
                 // Successfully generated 3DS link for payment authorization
             } elseif (isset($response['3ds_url'])) {
@@ -95,7 +95,7 @@ class CardGateExtended extends PaymentCardForms
 
             return $this->tryToSaleAgain();
         }
-        $requestedCardId = (int)$savedCardId;
+        $requestedCardId = (int) $savedCardId;
         $currentUserCards = $this->getUserSavedCards($exampleCurrentUserId);
         $isValid = false;
         $cardToken = '';
@@ -114,6 +114,7 @@ class CardGateExtended extends PaymentCardForms
             // Reject current payment try and redirect user to tpay payment panel new card form
             return $this->tryToSaleAgain();
         }
+
         return $this->payBySavedCard($cardToken);
     }
 
@@ -129,6 +130,7 @@ class CardGateExtended extends PaymentCardForms
         if (isset($result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsComplete($result);
         }
+
         return $this->tryToSaleAgain();
     }
 

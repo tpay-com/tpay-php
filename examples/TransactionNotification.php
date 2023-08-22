@@ -16,16 +16,14 @@ class TransactionNotification extends BasicNotificationHandler
         parent::__construct();
     }
 
-    /**
-     * @return array
-     */
+    /** @return array */
     public function getTpayNotification()
     {
         return $this->checkPayment();
     }
 }
 /*
-     * Example $paymentDetails response
+ * Example $paymentDetails response
     Array
     (
         [id] => 12345
@@ -41,6 +39,6 @@ class TransactionNotification extends BasicNotificationHandler
         [test_mode] => 1
         [md5sum] => 0d1cf3083e2fe3b49d046c28e28d120c
     )
-     */
+ */
 
 $notification = (new TransactionNotification())->getTpayNotification();
