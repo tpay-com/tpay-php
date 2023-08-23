@@ -8,18 +8,43 @@ use Tpay\OriginApi\Utilities\TException;
 
 class CardOptions extends ObjectsHelper
 {
+    /** @var string */
     public $cardsApiURL = 'https://secure.tpay.com/api/cards/';
+
+    /** @var int|string */
     public $currency = 985;
+
+    /** @var string */
     protected $orderID = '';
+
+    /** @var bool */
     protected $oneTimer = true;
+
+    /** @var string */
     protected $lang = 'pl';
+
+    /** @var bool */
     protected $enablePowUrl = false;
+
+    /** @var string */
     protected $powUrl = '';
+
+    /** @var string */
     protected $powUrlBlad = '';
+
+    /** @var null|string */
     protected $cardData;
+
+    /** @var string */
     protected $method = 'register_sale';
+
+    /** @var string */
     protected $clientAuthCode = '';
+
+    /** @var string */
     protected $amount;
+
+    /** @var string */
     protected $moduleName;
 
     public function __construct()
@@ -30,6 +55,11 @@ class CardOptions extends ObjectsHelper
         $this->validateCardCode($this->cardVerificationCode);
     }
 
+    /**
+     * @param string $token
+     *
+     * @return $this
+     */
     public function setClientToken($token)
     {
         if (!is_string($token) || 40 !== strlen($token)) {
@@ -40,6 +70,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param int|string $currency
+     *
+     * @return $this
+     */
     public function setCurrency($currency)
     {
         $this->currency = $this->validateCardCurrency($currency);
@@ -47,6 +82,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $orderID
+     *
+     * @return $this
+     */
     public function setOrderID($orderID)
     {
         $this->orderID = $orderID;
@@ -54,6 +94,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $oneTimer
+     *
+     * @return $this
+     */
     public function setOneTimer($oneTimer)
     {
         $this->oneTimer = $oneTimer;
@@ -61,6 +106,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $lang
+     *
+     * @return $this
+     */
     public function setLanguage($lang)
     {
         $this->lang = strtolower($this->validateCardLanguage($lang));
@@ -68,6 +118,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $enablePowUrl
+     *
+     * @return $this
+     */
     public function setEnablePowUrl($enablePowUrl)
     {
         $this->enablePowUrl = $enablePowUrl;
@@ -75,6 +130,12 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $successUrl
+     * @param string $errorUrl
+     *
+     * @return $this
+     */
     public function setReturnUrls($successUrl, $errorUrl)
     {
         $this->powUrl = $successUrl;
@@ -83,6 +144,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $data
+     *
+     * @return $this
+     */
     public function setCardData($data)
     {
         $this->cardData = $data;
@@ -90,6 +156,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $method
+     *
+     * @return $this
+     */
     public function setMethod($method)
     {
         $this->method = $method;
@@ -97,6 +168,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $amount
+     *
+     * @return $this
+     */
     public function setAmount($amount)
     {
         $this->validateNumeric($amount);
@@ -105,6 +181,11 @@ class CardOptions extends ObjectsHelper
         return $this;
     }
 
+    /**
+     * @param string $name
+     *
+     * @throws TException
+     */
     public function setModuleName($name)
     {
         $this->validateMaxLength($name, FieldsConfigDictionary::MAXLENGTH_32, 'module');

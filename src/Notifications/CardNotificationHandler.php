@@ -21,7 +21,10 @@ class CardNotificationHandler extends PaymentCard
     public function handleNotification()
     {
         Util::log('Card notification', "POST params: \n".print_r($_POST, true));
+
+        /** @var string $notificationType */
         $notificationType = Util::post('type', CardDictionary::STRING);
+
         if (CardDictionary::SALE === $notificationType) {
             $response = $this->getResponse(new PaymentTypeCard());
         } elseif (CardDictionary::DEREGISTER === $notificationType) {

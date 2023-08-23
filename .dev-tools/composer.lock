@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91b354e2dd73aaef4efa2b90944185df",
+    "content-hash": "2dd0b0c9d6cbbbea388566eb3c2f002c",
     "packages": [
         {
             "name": "amphp/amp",
@@ -876,16 +876,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.29",
+            "version": "1.10.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "ee5d8f2d3977fb09e55603eee6fb53bdd76ee9c1"
+                "reference": "2910afdd3fe33e5afd71c09f3fb0d0845b48c410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee5d8f2d3977fb09e55603eee6fb53bdd76ee9c1",
-                "reference": "ee5d8f2d3977fb09e55603eee6fb53bdd76ee9c1"
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2910afdd3fe33e5afd71c09f3fb0d0845b48c410",
+                "reference": "2910afdd3fe33e5afd71c09f3fb0d0845b48c410"
             },
             "require": {
                 "php": "^7.2|^8.0"
@@ -1378,21 +1378,21 @@
         },
         {
             "name": "tpay-com/coding-standards",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tpay-com/php-coding-standards.git",
-                "reference": "ea0211bcaa6143690f4dc25a00abc7a0befa359a"
+                "reference": "9a924d5098f7623dfa64ab8f6c228418048e02b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tpay-com/php-coding-standards/zipball/ea0211bcaa6143690f4dc25a00abc7a0befa359a",
-                "reference": "ea0211bcaa6143690f4dc25a00abc7a0befa359a"
+                "url": "https://api.github.com/repos/tpay-com/php-coding-standards/zipball/9a924d5098f7623dfa64ab8f6c228418048e02b9",
+                "reference": "9a924d5098f7623dfa64ab8f6c228418048e02b9"
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^3.22",
                 "kubawerlos/php-cs-fixer-custom-fixers": "^3.16.2",
-                "php": "^7.4 || ^8.0"
+                "php": "^7.4 || ^8.0",
+                "php-cs-fixer/shim": "^3.22"
             },
             "type": "library",
             "autoload": {

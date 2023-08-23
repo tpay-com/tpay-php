@@ -2,6 +2,7 @@
 
 namespace Tpay\OriginApi\Curl;
 
+use CurlHandle;
 use Tpay\OriginApi\Dictionaries\HttpCodesDictionary;
 use Tpay\OriginApi\Utilities\TException;
 
@@ -31,9 +32,15 @@ class Curl extends CurlOptions
      */
     private $curlErrorNumber = '';
 
+    /** @var string */
     private $url = '';
+
+    /** @var array */
     private $postData = [];
+
+    /** @var bool */
     private $json = false;
+
     private $result;
 
     public function __construct()
@@ -66,7 +73,7 @@ class Curl extends CurlOptions
      *
      * @param string $url
      *
-     * @return object
+     * @return $this
      */
     public function setRequestUrl($url)
     {
@@ -82,7 +89,7 @@ class Curl extends CurlOptions
      *
      * @throws TException
      *
-     * @return object
+     * @return $this
      */
     public function setPostData($postData)
     {
@@ -99,7 +106,7 @@ class Curl extends CurlOptions
     /**
      * Set Curl request data
      *
-     * @return object
+     * @return $this
      */
     public function enableJSONResponse()
     {
@@ -144,7 +151,7 @@ class Curl extends CurlOptions
     /**
      * Execute Curl request
      *
-     * @return object
+     * @return CurlHandle
      */
     public function init()
     {

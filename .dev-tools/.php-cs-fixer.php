@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/vendor/tpay-com/coding-standards/bootstrap.php';
 
 return Tpay\CodingStandards\PhpCsFixerConfigFactory::createWithLegacyRules()
     ->setFinder(

@@ -17,14 +17,14 @@ class CardApi extends CardOptions
      * @param string $clientEmail     client email
      * @param string $saleDescription sale description
      *
-     * @return bool|mixed
+     * @return array
      */
     public function registerSaleMethod(
         $clientName,
         $clientEmail,
         $saleDescription
     ) {
-        $params[CardDictionary::METHOD] = $this->method;
+        $params = [CardDictionary::METHOD => $this->method];
         if (!is_null($this->cardData)) {
             $params['card'] = $this->cardData;
         }
@@ -146,12 +146,13 @@ class CardApi extends CardOptions
     /**
      * Method used to deregister client card data from system.
      * Client can also do it himself from link in email after payment - if oneTimer was not set - in that case system
-     * will sent notification. After successful deregistration Merchant can no more charge client's card
+     * will send notification. After successful deregistration Merchant can no more charge client's card
      *
      * @return array
      */
     public function deregisterClient()
     {
+        $params = [];
         $params[CardDictionary::METHOD] = CardDictionary::DEREGISTER;
         $params[CardDictionary::CLIAUTH] = $this->clientAuthCode;
         $params[CardDictionary::LANGUAGE] = $this->lang;
@@ -161,6 +162,7 @@ class CardApi extends CardOptions
         return $this->requests($this->cardsApiURL.$this->cardApiKey, $params);
     }
 
+    /** @return array<string, string> */
     private function checkReturnUrls()
     {
         $params = [];

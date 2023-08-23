@@ -48,6 +48,12 @@ class PaymentBlik extends TransactionApi
         return $success;
     }
 
+    /**
+     * @param object $type
+     * @param array  $params
+     *
+     * @return array
+     */
     public function handleBlik($type, $params)
     {
         $params = $this->validateConfig($type, $params);
@@ -73,6 +79,13 @@ class PaymentBlik extends TransactionApi
         return $response;
     }
 
+    /**
+     * @param string $title
+     * @param string $code
+     * @param string $alias
+     *
+     * @return array
+     */
     public function blik($title, $code = '', $alias = '')
     {
         if (empty($title) || !is_string($title)) {

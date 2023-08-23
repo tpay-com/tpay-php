@@ -25,6 +25,7 @@ class TransactionApi extends PaymentBasicForms
     const ALIAS = 'alias';
     const CODE = 'code';
 
+    /** @var string */
     protected $apiURL = 'https://secure.tpay.com/api/gw/';
 
     /**
@@ -75,7 +76,7 @@ class TransactionApi extends PaymentBasicForms
      * @param string $url    url
      * @param array  $params post params
      *
-     * @return bool|mixed
+     * @return array
      */
     public function requests($url, $params)
     {

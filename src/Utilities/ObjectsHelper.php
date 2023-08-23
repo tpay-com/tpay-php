@@ -82,6 +82,12 @@ class ObjectsHelper
     protected $validator;
     protected $curl;
 
+    /**
+     * @param string $url
+     * @param array  $params
+     *
+     * @return array
+     */
     public function requests($url, $params)
     {
         $this->curl = new Curl();
