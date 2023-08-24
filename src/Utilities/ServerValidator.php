@@ -13,7 +13,7 @@ class ServerValidator
     /** @var bool */
     private $validateServerIP;
 
-    /** @var bool */
+    /** @var array<string> */
     private $secureIP;
 
     public function __construct($validateServerIP, $validateForwardedIP, array $secureIP)
@@ -65,7 +65,7 @@ class ServerValidator
     /**
      * Validate if $ip is secure
      *
-     * @param mixed $ip
+     * @param string $ip
      *
      * @return bool
      */

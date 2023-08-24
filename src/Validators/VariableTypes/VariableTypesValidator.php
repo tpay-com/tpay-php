@@ -7,6 +7,11 @@ use Tpay\OriginApi\Utilities\TException;
 
 class VariableTypesValidator
 {
+    /**
+     * @param string $type
+     * @param mixed  $value
+     * @param string $name
+     */
     public function __construct($type, $value, $name)
     {
         $this->validateType($type, $value, $name);
