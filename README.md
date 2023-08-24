@@ -1,6 +1,6 @@
 # Tpay
 
-Library for all payment methods available in [Tpay](https://tpay.com).
+Library for all payment methods available in [Tpay](https://docs.tpay.com/).
 
 [![Latest stable version](https://img.shields.io/packagist/v/tpay-com/tpay-php.svg?label=current%20version)](https://packagist.org/packages/tpay-com/tpay-php)
 [![PHP version](https://img.shields.io/packagist/php-v/tpay-com/tpay-php.svg)](https://php.net)
