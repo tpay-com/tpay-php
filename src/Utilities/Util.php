@@ -74,22 +74,7 @@ class Util
      */
     public static function log($title, $text)
     {
-        $text = (string) $text;
-        $logFilePath = self::getLogPath();
-        $ip = (isset($_SERVER[static::REMOTE_ADDR])) ? $_SERVER[static::REMOTE_ADDR] : '';
-
-        $logText = PHP_EOL.'===========================';
-        $logText .= PHP_EOL.$title;
-        $logText .= PHP_EOL.'===========================';
-        $logText .= PHP_EOL.date('Y-m-d H:i:s');
-        $logText .= PHP_EOL.'ip: '.$ip;
-        $logText .= PHP_EOL;
-        $logText .= $text;
-        $logText .= PHP_EOL.PHP_EOL;
-
-        if (true === static::$loggingEnabled) {
-            file_put_contents($logFilePath, $logText, FILE_APPEND);
-        }
+        Logger::log($title, $text);
     }
 
     /**
@@ -99,11 +84,7 @@ class Util
      */
     public static function logLine($text)
     {
-        $text = (string) $text;
-        $logFilePath = self::getLogPath();
-        if (true === static::$loggingEnabled) {
-            file_put_contents($logFilePath, PHP_EOL.$text, FILE_APPEND);
-        }
+        Logger::logLine($text);
     }
 
     /**
@@ -155,27 +136,5 @@ class Util
         static::$libraryPath = $path;
 
         return $this;
-    }
-
-    private static function getLogPath()
-    {
-        if (false === static::$loggingEnabled) {
-            return;
-        }
-        $logFileName = 'log_'.date('Y-m-d').'.php';
-        if (!empty(static::$customLogPatch)) {
-            $logPath = static::$customLogPatch.$logFileName;
-        } else {
-            $logPath = dirname(__FILE__).'/../../Logs/'.$logFileName;
-        }
-        if (!file_exists($logPath)) {
-            file_put_contents($logPath, '<?php exit; ?> '.PHP_EOL);
-            chmod($logPath, 0644);
-        }
-        if (!file_exists($logPath) || !is_writable($logPath)) {
-            throw new Exception('Unable to create or write the log file');
-        }
-
-        return $logPath;
     }
 }
