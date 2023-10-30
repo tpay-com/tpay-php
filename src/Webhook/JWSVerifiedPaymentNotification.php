@@ -8,7 +8,7 @@ use Tpay\OriginApi\Validators\FieldsConfigValidator;
 use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasic;
 use Tpay\OriginApi\Utilities\Util;
 
-class JWSVerifiedPaymentNotification extends Notification
+class JWSVerifiedPaymentNotification
 {
     use FieldsConfigValidator;
 
@@ -29,7 +29,6 @@ class JWSVerifiedPaymentNotification extends Notification
     {
         $this->productionMode = $productionMode;
         $this->merchantSecret = $merchantSecret;
-        parent::__construct();
     }
 
     /**
