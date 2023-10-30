@@ -88,6 +88,17 @@ class Util
     }
 
     /**
+     * @param float|int $number
+     * @param int       $decimals
+     *
+     * @return string
+     */
+    public static function numberFormat($number, $decimals = 2)
+    {
+        return number_format($number, $decimals, '.', '');
+    }
+
+    /**
      * Get value from $_POST array.
      * If not exists return false
      *
