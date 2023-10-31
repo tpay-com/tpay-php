@@ -2,8 +2,6 @@
 
 namespace Tpay\OriginApi\Utilities;
 
-use Exception;
-
 /**
  * Utility class which helps with:
  *  - parsing template files

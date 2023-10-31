@@ -13,39 +13,32 @@ class Logger
     /** @var string */
     private static $customLogPath;
 
-    /**
-     * @return void
-     */
     public static function disableLogging()
     {
         self::$logger = new NullLogger();
     }
 
     /**
+     * @param mixed $logger
+     *
      * @throws TException
      */
     public static function setLogger($logger)
     {
         if (false === assert($logger instanceof LoggerInterface)) {
-            throw new TException(sprintf("%s is not instance of LoggerInterface", get_class($logger)));
+            throw new TException(sprintf('%s is not instance of LoggerInterface', get_class($logger)));
         }
 
         self::$logger = $logger;
     }
 
-    /**
-     * @param string $logPath
-     *
-     * @return void
-     */
+    /** @param string $logPath */
     public static function setLogPath($logPath)
     {
         self::$customLogPath = $logPath;
     }
 
-    /**
-     * @return LoggerInterface|FileLogger
-     */
+    /** @return FileLogger|LoggerInterface */
     public static function getLogger()
     {
         if (null === self::$logger) {
@@ -58,8 +51,6 @@ class Logger
     /**
      * @param string $title
      * @param string $text
-     *
-     * @return void
      */
     public static function log($title, $text)
     {
@@ -76,11 +67,7 @@ class Logger
         self::getLogger()->info($logText);
     }
 
-    /**
-     * @param string $text
-     *
-     * @return void
-     */
+    /** @param string $text */
     public static function logLine($text)
     {
         self::$logger->info((string) $text);

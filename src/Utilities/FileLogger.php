@@ -15,6 +15,7 @@ class FileLogger
 
     /**
      * @param string $message
+     *
      * @throws TException
      */
     public function info($message)
@@ -26,7 +27,7 @@ class FileLogger
     /** @return string */
     private function getLogPath()
     {
-        $logFileName = sprintf("log_%s.log", date('Y-m-d'));
+        $logFileName = sprintf('log_%s.log', date('Y-m-d'));
 
         if (null !== $this->logFilePath) {
             $logPath = $this->logFilePath.$logFileName;
@@ -37,9 +38,7 @@ class FileLogger
         return $logPath;
     }
 
-    /**
-     * @throws TException
-     */
+    /** @throws TException */
     private function checkLogFile()
     {
         $logFilePath = $this->getLogPath();

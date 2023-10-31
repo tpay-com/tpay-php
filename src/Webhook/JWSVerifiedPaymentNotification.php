@@ -2,11 +2,12 @@
 
 namespace Tpay\OriginApi\Webhook;
 
+use Tpay\OriginApi\Utilities\phpseclib\Crypt\RSA;
 use Tpay\OriginApi\Utilities\phpseclib\File\X509;
 use Tpay\OriginApi\Utilities\TException;
+use Tpay\OriginApi\Utilities\Util;
 use Tpay\OriginApi\Validators\FieldsConfigValidator;
 use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasic;
-use Tpay\OriginApi\Utilities\Util;
 
 class JWSVerifiedPaymentNotification
 {
@@ -122,6 +123,8 @@ class JWSVerifiedPaymentNotification
     }
 
     /**
+     * @param mixed $notification
+     *
      * @throws TException
      */
     private function checkMd5($notification)
