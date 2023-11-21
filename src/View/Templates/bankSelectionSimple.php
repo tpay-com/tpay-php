@@ -1,14 +1,14 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url']; ?>View/Styles/style.css"/>
 <div class="tpay-insidebg" id="main-payment">
     <div id="groups_v" class="tpay-panel-inside-content">
         <div id="bank-selection-form" class="tpay-groups-wrapper"></div>
         <input type="hidden" name="tpay-selected-group" id="tpay-selected-group">
-        <?php if ($data['show_regulations_checkbox'] === true) { ?>
+        <?php if (true === $data['show_regulations_checkbox']) { ?>
             <div class="tpay-amPmCheckbox">
                 <input id="tpay-accept-tos-checkbox" type="checkbox" name="tpay-tos" value="0">
                 <label for="tpay-accept-tos-checkbox" class="tpay-info-label">
-                    <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                                   target="_blank" rel="noreferrer noopener"><?php $lang->l('regulations_url') ?></a>
+                    <?php $lang->l('accept'); ?> <a href="<?php echo $data['regulation_url']; ?>"
+                                                   target="_blank" rel="noreferrer noopener"><?php $lang->l('regulations_url'); ?></a>
                     <?php $lang->l('regulations'); ?>
                 </label>
             </div>
@@ -33,7 +33,7 @@
                 bank_block.className = bank_block.className + ' tpay-active';
             }
         };
-    s.src = 'https://secure.tpay.com/groups-<?php echo $data['merchant_id'].$data['online_only'] ?>.js';
+    s.src = 'https://secure.tpay.com/groups-<?php echo $data['merchant_id'].$data['online_only']; ?>.js';
     s.onload = function () {
         var str = '',
             i,

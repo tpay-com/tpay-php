@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url']; ?>View/Styles/style.css"/>
 <div class="tpay-insidebg" id="main-payment">
     <div class="tpay-header-wrapper">
         <div class="tpay-header-logo">
@@ -8,11 +8,13 @@
     </div>
     <div id="groups_v" class="tpay-panel-inside-content">
         <div id="bank-selection-form" class="tpay-groups-wrapper">
-            <?php if ($data['small_list'] === true) { ?>
+            <?php if (true === $data['small_list']) { ?>
                 <select name="bank_list" id="tpay-bank-list" onchange="changeOption()" class="tpay-select"></select>
             <?php } ?>
         </div>
-        <?php if (isset($data['form'])) {echo $data['form'];} ?>
+        <?php if (isset($data['form'])) {
+            echo $data['form'];
+        } ?>
     </div>
 </div>
 
@@ -36,7 +38,7 @@
         changeOption = function () {
             document.getElementById('tpay-channel-input').value = document.getElementById('tpay-bank-list').value;
         };
-    s.src = 'https://secure.tpay.com/groups-<?php echo $data['merchant_id'].$data['online_only'] ?>.js';
+    s.src = 'https://secure.tpay.com/groups-<?php echo $data['merchant_id'].$data['online_only']; ?>.js';
     s.onload = function () {
         var str = '',
             i,
@@ -47,7 +49,7 @@
             id,
             groupName,
             logoSrc;
-        <?php if ($data['small_list'] === false) { ?>
+        <?php if (false === $data['small_list']) { ?>
         for (i in tr_groups) {
             group = tr_groups[i];
             id = group[0];

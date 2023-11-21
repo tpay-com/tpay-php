@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url']; ?>View/Styles/style.css"/>
 <div class="tpay-insidebg" id="main-payment">
     <div class="tpay-header-wrapper">
         <div class="tpay-header-logo">
@@ -9,12 +9,12 @@
     <div class="tpay-panel-inside-content">
         <div class="tpay-channel-form-wrapper tpay-content-wrapper-class">
             <img src="https://secure.tpay.com/_/banks/b64.png"/>
-            <form action="<?php echo $data['action_url'] ?>" method="post" id="tpay-blik-form">
+            <form action="<?php echo $data['action_url']; ?>" method="post" id="tpay-blik-form">
                 <div class="tpay-row">
                     <div class="tpay-input-blik-code">
                         <div class="tpay-input-wrapper">
                             <div class="tpay-input-label"
-                                 title="<?php $lang->l('blik_info') ?>"><?php $lang->l('codeInputText') ?></div>
+                                 title="<?php $lang->l('blik_info'); ?>"><?php $lang->l('codeInputText'); ?></div>
                             <input id="blik_code"
                                    name="blik_code"
                                    pattern="\d*"
@@ -33,15 +33,15 @@
                 <div class="tpay-amPmCheckbox">
                     <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
                     <label for="tpay-accept-regulations-checkbox" class="tpay-info-label">
-                        <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                                       target="_blank" rel="noopener noreferrer"><?php $lang->l('regulations_url') ?></a>
+                        <?php $lang->l('accept'); ?> <a href="<?php echo $data['regulation_url']; ?>"
+                                                       target="_blank" rel="noopener noreferrer"><?php $lang->l('regulations_url'); ?></a>
                         <?php $lang->l('regulations'); ?>
                     </label>
                 </div>
             </form>
         </div>
         <div class="tpay-buttons-holder">
-            <input class="tpay-pay-button" id="tpay-payment-submit" type="submit" value="<?php $lang->l('pay') ?>">
+            <input class="tpay-pay-button" id="tpay-payment-submit" type="submit" value="<?php $lang->l('pay'); ?>">
         </div>
     </div>
 </div>
@@ -51,11 +51,11 @@
         blik_code_input = document.getElementById('blik_code');
     submit_form_input.onclick = function () {
         if (regulation_checkbox.value == 0) {
-            alert('<?php $lang->l('acceptance_is_required') ?>');
+            alert('<?php $lang->l('acceptance_is_required'); ?>');
             return false;
         }
         if (blik_code_input.value.length !== 6 || /^\d+$/.test(blik_code_input.value) === false) {
-            alert('<?php $lang->l('blik_code_error') ?>');
+            alert('<?php $lang->l('blik_code_error'); ?>');
             return false;
         }
         document.getElementById('tpay-blik-form').submit();
