@@ -48,13 +48,18 @@ class Util
             $buffer = ob_get_contents();
             ob_clean();
         }
-        ob_start();
-        if (!file_exists($templateDirectory.$templateFileName.'.phtml')) {
-            return '';
-        }
         $lang = new Lang();
         $lang->setLang(static::$lang);
-        include_once $templateDirectory.$templateFileName.'.phtml';
+
+        ob_start();
+        if (file_exists($templateDirectory.$templateFileName.'.phtml')) {
+            include_once $templateDirectory.$templateFileName.'.phtml';
+        }
+
+        if (file_exists($templateDirectory.$templateFileName.'.php')) {
+            include_once $templateDirectory.$templateFileName.'.php';
+        }
+
         $parsedHTML = ob_get_contents();
         ob_clean();
 

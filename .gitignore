@@ -2,3 +2,4 @@
 /.dev-tools/.php-cs-fixer.cache
 /vendor/
 /composer.lock
+.idea/
