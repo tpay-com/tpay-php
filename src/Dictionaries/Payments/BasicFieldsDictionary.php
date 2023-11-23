@@ -153,7 +153,7 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64,
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
             FieldsConfigDictionary::FILTER => 'name',
         ],

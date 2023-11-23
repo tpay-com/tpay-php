@@ -18,7 +18,7 @@ class CardFieldsDictionary
             FieldsConfigDictionary::REQUIRED => true,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_64,
+                FieldsConfigDictionary::MAXLENGTH_128,
             ],
         ],
         // Client email
