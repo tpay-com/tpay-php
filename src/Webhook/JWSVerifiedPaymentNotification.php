@@ -9,6 +9,9 @@ use Tpay\OriginApi\Utilities\Util;
 use Tpay\OriginApi\Validators\FieldsConfigValidator;
 use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasic;
 
+/**
+ * @psalm-suppress UndefinedClass
+ */
 class JWSVerifiedPaymentNotification
 {
     use FieldsConfigValidator;
@@ -99,6 +102,10 @@ class JWSVerifiedPaymentNotification
         $payload = str_replace('=', '', strtr(base64_encode($body), '+/', '-_'));
         $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
         $publicKey = $x509->getPublicKey();
+
+        /**
+         * @phpstan-ignore-next-line
+         */
         $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
         if (!$publicKey->verify($headers.'.'.$payload, $decodedSignature)) {
             throw new TException('FALSE - Invalid JWS signature');
