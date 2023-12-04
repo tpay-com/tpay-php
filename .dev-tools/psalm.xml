@@ -10,4 +10,7 @@
     <projectFiles>
         <directory name='../src/' />
     </projectFiles>
+    <ignoreFiles>
+        <directory name="../src/View/Templates/"/>
+    </ignoreFiles>
 </psalm>
