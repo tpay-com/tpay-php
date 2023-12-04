@@ -9,8 +9,8 @@
 >
     <projectFiles>
         <directory name='../src/' />
+        <ignoreFiles>
+            <directory name="../src/View/Templates/"/>
+        </ignoreFiles>
     </projectFiles>
-    <ignoreFiles>
-        <directory name="../src/View/Templates/"/>
-    </ignoreFiles>
 </psalm>
