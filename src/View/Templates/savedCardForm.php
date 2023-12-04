@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url']; ?>View/Styles/style.css"/>
 <div class="tpay-insidebg" id="main-payment">
     <div class="tpay-header-wrapper">
         <div class="tpay-header-logo">
@@ -12,19 +12,19 @@
                   id="saved_card_payment_form"
                   name="saved_card_payment_form"
                   class="tpay-cards-choice"
-                  action="<?php echo $data['payment_redirect_path'] ?>"
+                  action="<?php echo $data['payment_redirect_path']; ?>"
             >
                 <div id="saved_card_payment" style="visibility: visible">
                     <?php
                     foreach ($data['userCards'] as $card) { ?>
                         <div>
                             <input type="radio" name="savedId"
-                                   id="cardN<?php echo $card['cardId'] ?>"
-                                   value="<?php echo $card['cardId'] ?>"/>
-                            <label for="cardN<?php echo $card['cardId'] ?>"><?php $lang->l('saved_card_label');
-                                echo $card['shortCode'];
-                                if (isset($card['vendor'])) { ?>
-                                    <div id="saved_icon" class="tpay-<?php echo $card['vendor'] ?>-icon"></div>
+                                   id="cardN<?php echo $card['cardId']; ?>"
+                                   value="<?php echo $card['cardId']; ?>"/>
+                            <label for="cardN<?php echo $card['cardId']; ?>"><?php $lang->l('saved_card_label');
+                        echo $card['shortCode'];
+                        if (isset($card['vendor'])) { ?>
+                                    <div id="saved_icon" class="tpay-<?php echo $card['vendor']; ?>-icon"></div>
                                 <?php } ?>
                             </label>
                         </div>
@@ -44,17 +44,17 @@
         <div class="tpay-amPmCheckbox">
             <input id="tpay-cards-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
             <label for="tpay-cards-accept-regulations-checkbox" class="tpay-info-label">
-                <?php $lang->l('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
-                                               target="_blank" rel="noopener noreferrer"><?php $lang->l('regulations_url') ?></a>
+                <?php $lang->l('accept'); ?> <a href="<?php echo $data['regulation_url']; ?>"
+                                               target="_blank" rel="noopener noreferrer"><?php $lang->l('regulations_url'); ?></a>
                 <?php $lang->l('regulations'); ?>
             </label>
         </div>
         <div class="tpay-buttons-holder">
             <div id="loading_scr" style="display:none">
-                <img src="<?php echo $data[STATIC_FILES_URL] ?>View/Images/loading.gif"
-                     style="vertical-align: middle;"/><?php $lang->l('processing') ?>
+                <img src="<?php echo $data[STATIC_FILES_URL]; ?>View/Images/loading.gif"
+                     style="vertical-align: middle;"/><?php $lang->l('processing'); ?>
             </div>
-            <input class="tpay-pay-button" id="card_continue_btn" type="submit" value="<?php $lang->l('pay') ?>"/>
+            <input class="tpay-pay-button" id="card_continue_btn" type="submit" value="<?php $lang->l('pay'); ?>"/>
         </div>
     </div>
 </div>

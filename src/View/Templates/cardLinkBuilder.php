@@ -33,19 +33,19 @@
             <td><select name="currency" id="t_currency" required>
                     <?php
                     foreach ($data['currencies'] as $currencyCode => $currencyName) {
-                        echo "<option value='$currencyCode'>$currencyName</option>";
+                        echo "<option value='{$currencyCode}'>{$currencyName}</option>";
                     }
-                    ?>
+?>
                 </select></td>
         </tr>
         <tr>
             <td><label for="t_language">Client language</label></td>
             <td><select name="language" id="t_language" required>
                     <?php
-                    foreach ($data['languages'] as $language) {
-                        echo "<option value='$language'>$language</option>";
-                    }
-                    ?>
+foreach ($data['languages'] as $language) {
+    echo "<option value='{$language}'>{$language}</option>";
+}
+?>
                 </select></td>
         </tr>
     </table>

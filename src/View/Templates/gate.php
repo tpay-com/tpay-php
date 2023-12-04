@@ -13,7 +13,7 @@ const CARD_SAVE_ALLOWED = 'card_save_allowed';
                 <div class="tpay-row">
                     <div class="tpay-input-wrapper">
                         <div class="tpay-input-credit-card-number">
-                            <div class="tpay-input-label"><?php $lang->l('card_number') ?></div>
+                            <div class="tpay-input-label"><?php $lang->l('card_number'); ?></div>
                             <input id="card_number"
                                    pattern="\d*"
                                    autocompletetype="cc-number"
@@ -32,10 +32,10 @@ const CARD_SAVE_ALLOWED = 'card_save_allowed';
 
                     <?php if ($data['showPayerFields']) { ?>
                         <div class="tpay-input-wrapper">
-                            <div class="tpay-input-label"><?php $lang->l('name_on_card') ?></div>
+                            <div class="tpay-input-label"><?php $lang->l('name_on_card'); ?></div>
                             <input type="text"
                                    id="c_name"
-                                   placeholder="<?php $lang->l('name_surname') ?>"
+                                   placeholder="<?php $lang->l('name_surname'); ?>"
                                    autocomplete="off"
                                    name="client_name"
                                    maxlength="64"
@@ -50,7 +50,7 @@ const CARD_SAVE_ALLOWED = 'card_save_allowed';
             <div class="tpay-col">
                 <div class="tpay-row">
                     <div class="tpay-expiration-date-input tpay-input-wrapper">
-                        <div class="tpay-input-label"><?php $lang->l('expiration_date') ?></div>
+                        <div class="tpay-input-label"><?php $lang->l('expiration_date'); ?></div>
                         <input id="expiry_date"
                                maxlength="9"
                                type="tel"
@@ -63,7 +63,7 @@ const CARD_SAVE_ALLOWED = 'card_save_allowed';
                         />
                     </div>
                     <div class="tpay-cvv-input tpay-input-wrapper">
-                        <div class="tpay-input-label tpay-input-cvc" title="<?php $lang->l('signature') ?>">CVC</div>
+                        <div class="tpay-input-label tpay-input-cvc" title="<?php $lang->l('signature'); ?>">CVC</div>
                         <input id="cvc"
                                maxlength="4"
                                type="tel"
@@ -100,22 +100,22 @@ const CARD_SAVE_ALLOWED = 'card_save_allowed';
             <input type="checkbox" id="card_save" name="card_save"/>
             <label for="card_save"
                    class="tpay-info-label"
-                   title="<?php $lang->l('save_card_info') ?>"><?php $lang->l('save_card') ?>
+                   title="<?php $lang->l('save_card_info'); ?>"><?php $lang->l('save_card'); ?>
             </label>
         </div>
     <?php } ?>
-    <p id="info_msg_not_supported" style="display: none"><?php $lang->l('not_supported_card') ?></p>
-    <p id="info_msg_not_valid" style="display: none"><?php $lang->l('not_valid_card') ?></p>
+    <p id="info_msg_not_supported" style="display: none"><?php $lang->l('not_supported_card'); ?></p>
+    <p id="info_msg_not_valid" style="display: none"><?php $lang->l('not_valid_card'); ?></p>
 </form>
 
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.formance.min.js"></script>
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jsencrypt.min.js"></script>
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/string_routines.js"></script>
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/jquery.payment.js"></script>
-<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL] ?>View/JS/cardPayment.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL]; ?>View/JS/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL]; ?>View/JS/jquery.formance.min.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL]; ?>View/JS/jsencrypt.min.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL]; ?>View/JS/string_routines.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL]; ?>View/JS/jquery.payment.js"></script>
+<script type="text/javascript" src="<?php echo $data[STATIC_FILES_URL]; ?>View/JS/cardPayment.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        new CardPayment('<?php echo $data['payment_redirect_path'] ?>', "<?php echo $data['rsa_key'] ?>");
+        new CardPayment('<?php echo $data['payment_redirect_path']; ?>', "<?php echo $data['rsa_key']; ?>");
     });
 </script>
