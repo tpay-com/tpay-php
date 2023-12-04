@@ -13,6 +13,11 @@ class FileLogger
         $this->logFilePath = $logFilePath;
     }
 
+    public function log($level, $message, array $context = [])
+    {
+        $this->info($message);
+    }
+
     /**
      * @param string $message
      *
@@ -20,8 +25,18 @@ class FileLogger
      */
     public function info($message)
     {
+        $content = json_decode($message, true);
+        $logText = PHP_EOL.'===========================';
+        $logText .= PHP_EOL.$content['title'];
+        $logText .= PHP_EOL.'===========================';
+        $logText .= PHP_EOL.$content['date'];
+        $logText .= PHP_EOL.'ip: '.$content['ip'];
+        $logText .= PHP_EOL;
+        $logText .= $content['message'];
+        $logText .= PHP_EOL;
+
         $this->checkLogFile();
-        file_put_contents($this->getLogPath(), $message, FILE_APPEND);
+        file_put_contents($this->getLogPath(), $logText, FILE_APPEND);
     }
 
     /** @return string */

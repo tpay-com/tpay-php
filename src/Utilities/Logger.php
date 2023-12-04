@@ -51,20 +51,20 @@ class Logger
     /**
      * @param string $title
      * @param string $text
+     * @param string $logLevel
      */
-    public static function log($title, $text)
+    public static function log($title, $text, $logLevel = 'info')
     {
         $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : 'Empty server REMOTE_ADDR';
-        $logText = PHP_EOL.'===========================';
-        $logText .= PHP_EOL.$title;
-        $logText .= PHP_EOL.'===========================';
-        $logText .= PHP_EOL.date('Y-m-d H:i:s');
-        $logText .= PHP_EOL.'ip: '.$ip;
-        $logText .= PHP_EOL;
-        $logText .= $text;
-        $logText .= PHP_EOL;
+        $content = [
+            'ip' => $ip,
+            'title' => $title,
+            'date' => date('Y-m-d H:i:s'),
+            'message' => $text,
+            'logLevel' => $logLevel,
+        ];
 
-        self::getLogger()->info($logText);
+        self::getLogger()->log($logLevel, json_encode($content));
     }
 
     /** @param string $text */
