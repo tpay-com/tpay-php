@@ -15,7 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 5.6
+          extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter, json
+          coverage: none
+
+      - run: composer install --no-dev
+
       - run: git archive --output=tpay-php.zip HEAD
+
+      - run: zip -ur tpay-php.zip vendor/
 
       - uses: softprops/action-gh-release@v1
         with:
