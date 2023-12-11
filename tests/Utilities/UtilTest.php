@@ -25,7 +25,7 @@ class UtilTest extends TestCase
 
         Util::log('test', 'test');
 
-        $this->assertFileDoesNotExist($this->logFilename());
+        $this->assertFalse(is_readable($this->logFilename()));
     }
 
     public function testCustomLogPath()
