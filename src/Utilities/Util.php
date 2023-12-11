@@ -77,6 +77,14 @@ class Util
      */
     public static function log($title, $text)
     {
+        if (false === self::$loggingEnabled) {
+            return;
+        }
+
+        if (self::$customLogPatch) {
+            Logger::setLogPath(self::$customLogPatch);
+        }
+
         Logger::log($title, $text);
     }
 
@@ -87,6 +95,14 @@ class Util
      */
     public static function logLine($text)
     {
+        if (false === self::$loggingEnabled) {
+            return;
+        }
+
+        if (self::$customLogPatch) {
+            Logger::setLogPath(self::$customLogPatch);
+        }
+
         Logger::logLine($text);
     }
 

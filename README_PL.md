@@ -60,13 +60,18 @@ Pliki logów są tworzone dla każdego dnia oddzielnie w katalogu `Logs`.
 
 Logowanie jest domyślnie włączone, ale możesz wyłączyć tę funkcję za pomocą:
  ```php
-Util::$loggingEnabled = false;
+Logger::disableLogging();
  ```
 
 Możesz także ustawić własną ścieżkę logowania za pomocą tego polecenia:
  ```php
-Util::$customLogPatch = '/my/own/path/Logs/';
+Logger::setLogPath('/my/own/path/Logs/');
  ```
+
+Możesz też przekazać własny logger kompatybilny z `Psr\Log\LoggerInterface`:
+```php
+Logger::setLogger(new CustomLogger());
+```
 
 Nazwy plików dzienników zostaną przypisane automatycznie.
 
