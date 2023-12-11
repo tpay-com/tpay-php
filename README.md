@@ -60,13 +60,18 @@ The log files are created for each day separately under `Logs` directory.
 
 The logging is enabled by default, but you can disable this feature with:
  ```php
-Util::$loggingEnabled = false;
+Logger::disableLogging();
  ```
 
 You can also set your own logging path by this command:
  ```php
-Util::$customLogPatch = '/my/own/path/Logs/';
+Logger::setLogPath('/my/own/path/Logs/');
  ```
+
+You can also set you own Logger by this command it has to be compatible with `Psr\Log\LoggerInterface`:
+```php
+Logger::setLogger(new CustomLogger());
+```
 
 The logs file names will be assigned automatically.
 
