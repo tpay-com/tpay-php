@@ -11,7 +11,7 @@ use ReflectionClass;
 class LegacyNamespaceTest extends TestCase
 {
     /**
-     * @dataProvider getLegacyClassNamesFromArray
+     * @dataProvider legacyClassNamesFromArray
      */
     public function testClassesExist($classNames)
     {
@@ -24,7 +24,7 @@ class LegacyNamespaceTest extends TestCase
     }
 
     /**
-     * @dataProvider getLegacyClassNamesFromArray
+     * @dataProvider legacyClassNamesFromArray
      */
     public function testClassesHaveUniqueNames($classNames)
     {
@@ -41,7 +41,7 @@ class LegacyNamespaceTest extends TestCase
         );
     }
 
-    private static function getLegacyClassNamesFromArray()
+    public function legacyClassNamesFromArray()
     {
         return [
             [
