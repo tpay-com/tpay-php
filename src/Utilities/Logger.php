@@ -10,15 +10,13 @@ class Logger
     /** @var LoggerInterface */
     private static $logger;
 
-    /** @var string|null */
-    private static $customLogPath = null;
+    /** @var null|string */
+    private static $customLogPath;
 
-    /**
-     * @throws TException
-     */
+    /** @throws TException */
     public static function enableLogging()
     {
-        if (get_class(self::$logger) !== NullLogger::class) {
+        if (NullLogger::class !== get_class(self::$logger)) {
             throw new TException('Logging is already enabled');
         }
 
@@ -37,14 +35,14 @@ class Logger
      */
     public static function setLogger($logger)
     {
-        if (get_class($logger) !== LoggerInterface::class) {
+        if (LoggerInterface::class !== get_class($logger)) {
             throw new TException(sprintf('%s is not instance of LoggerInterface', get_class($logger)));
         }
 
         self::$logger = $logger;
     }
 
-    /** @param string|null $logPath */
+    /** @param null|string $logPath */
     public static function setLogPath($logPath = null)
     {
         self::$logger = new FileLogger($logPath);

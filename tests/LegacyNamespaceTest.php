@@ -12,6 +12,8 @@ class LegacyNamespaceTest extends TestCase
 {
     /**
      * @dataProvider legacyClassNamesFromArray
+     *
+     * @param mixed $classNames
      */
     public function testClassesExist($classNames)
     {
@@ -25,6 +27,8 @@ class LegacyNamespaceTest extends TestCase
 
     /**
      * @dataProvider legacyClassNamesFromArray
+     *
+     * @param mixed $classNames
      */
     public function testClassesHaveUniqueNames($classNames)
     {
@@ -108,8 +112,8 @@ class LegacyNamespaceTest extends TestCase
                     'tpayLibs\\src\\_class_tpay\\Validators\\VariableTypes\\IntType',
                     'tpayLibs\\src\\_class_tpay\\Validators\\VariableTypes\\StringType',
                     'tpayLibs\\src\\_class_tpay\\Validators\\VariableTypes\\VariableTypesValidator',
-                ]
-            ]
+                ],
+            ],
         ];
     }
 }
