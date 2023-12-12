@@ -92,6 +92,10 @@ class Util
      * Save one line to log file
      *
      * @param string $text text to save
+     *
+     * @throws TException
+     *
+     * @deprecated 3.0.0
      */
     public static function logLine($text)
     {

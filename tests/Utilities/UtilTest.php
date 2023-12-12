@@ -19,6 +19,18 @@ class UtilTest extends TestCase
         $this->deleteTestLog();
     }
 
+    public function testLineLogged()
+    {
+        Util::$loggingEnabled = true;
+        Util::$customLogPatch = null;
+
+        Util::logLine('test');
+
+        $this->assertFileExists($this->logFilename());
+
+        $this->deleteTestLog();
+    }
+
     public function testDisableLogging()
     {
         Util::$loggingEnabled = false;
