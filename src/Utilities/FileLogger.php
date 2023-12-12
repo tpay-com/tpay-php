@@ -19,6 +19,19 @@ class FileLogger
     }
 
     /**
+     * @param string $text
+     *
+     * @throws TException
+     *
+     * @deprecated 3.0.0
+     */
+    public function logLine($text)
+    {
+        $this->checkLogFile();
+        file_put_contents($this->getLogPath(), $text.PHP_EOL, FILE_APPEND);
+    }
+
+    /**
      * @param string $message
      *
      * @throws TException

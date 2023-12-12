@@ -19,6 +19,16 @@ class LoggerTest extends TestCase
         $this->deleteTestLog();
     }
 
+    public function testLineLogged()
+    {
+        Logger::logLine('test');
+
+        $this->assertFileExists($this->logFilename());
+
+        // tearDown
+        $this->deleteTestLog();
+    }
+
     public function testDisableLogging()
     {
         Logger::disableLogging();

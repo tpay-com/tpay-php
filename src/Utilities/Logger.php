@@ -77,9 +77,15 @@ class Logger
         self::getLogger()->log($logLevel, json_encode($content));
     }
 
-    /** @param string $text */
+    /**
+     * @param string $text
+     *
+     * @throws TException
+     *
+     * @deprecated 3.0.0
+     */
     public static function logLine($text)
     {
-        self::$logger->info((string) $text);
+        self::getLogger()->logLine($text);
     }
 }
