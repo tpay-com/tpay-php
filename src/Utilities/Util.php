@@ -36,7 +36,7 @@ class Util
             $data['static_files_url'] = static::$libraryPath;
         }
         if (is_null(static::$customTemplateDirectory)) {
-            $templateDirectory = dirname(__FILE__).'/../../View/Templates/';
+            $templateDirectory = dirname(__FILE__).'/../View/Templates/';
         } else {
             $templateDirectory = static::$customTemplateDirectory;
         }
