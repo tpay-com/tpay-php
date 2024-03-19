@@ -35,7 +35,7 @@ class Logger
      */
     public static function setLogger($logger)
     {
-        if (false === ($logger instanceof LoggerInterface::class)) {
+        if (false === ($logger instanceof LoggerInterface)) {
             throw new TException(sprintf('%s is not instance of LoggerInterface', get_class($logger)));
         }
 
