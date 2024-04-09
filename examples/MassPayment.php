@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class MassPaymentExample extends MassPayments
+final class MassPaymentExample extends MassPayments
 {
     const TRID = 'TR-C4Y-HJVWYX';
 
@@ -44,7 +44,7 @@ class MassPaymentExample extends MassPayments
          * Masspayment transfer
          */
         $packId = '123123';
-        $transactionId = static::TRID;
+        $transactionId = self::TRID;
         try {
             $result = $this->massPaymentTransfers($packId, $transactionId);
             print_r($result);

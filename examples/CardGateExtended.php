@@ -9,7 +9,7 @@ use Tpay\OriginApi\Utilities\Util;
 include_once 'config.php';
 include_once 'loader.php';
 
-class CardGateExtended extends PaymentCardForms
+final class CardGateExtended extends PaymentCardForms
 {
     const SUPPORTED_CARD_VENDORS = [
         'visa',
@@ -32,7 +32,7 @@ class CardGateExtended extends PaymentCardForms
     {
         if (isset($_POST['carddata'])) {
             $this->setPaymentParameters();
-            if (isset($_POST['card_vendor']) && in_array($_POST['card_vendor'], static::SUPPORTED_CARD_VENDORS)) {
+            if (isset($_POST['card_vendor']) && in_array($_POST['card_vendor'], self::SUPPORTED_CARD_VENDORS)) {
                 $this->saveUserCardVendor($_POST['card_vendor']);
             }
             // Try to sale with provided card data

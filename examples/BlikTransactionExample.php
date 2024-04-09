@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class BlikTransactionExample extends PaymentBlik
+final class BlikTransactionExample extends PaymentBlik
 {
     public function __construct()
     {

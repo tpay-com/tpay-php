@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class CardBasic extends PaymentCardForms
+final class CardBasic extends PaymentCardForms
 {
     public function __construct()
     {

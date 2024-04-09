@@ -7,7 +7,7 @@ use Tpay\OriginApi\PaymentForms\PaymentBasicForms;
 include_once 'config.php';
 include_once 'loader.php';
 
-class BankSelectionAPIExample extends PaymentBasicForms
+final class BankSelectionAPIExample extends PaymentBasicForms
 {
     public function __construct()
     {

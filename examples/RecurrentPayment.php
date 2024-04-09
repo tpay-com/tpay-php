@@ -7,7 +7,7 @@ use Tpay\OriginApi\PaymentCard;
 include_once 'config.php';
 include_once 'loader.php';
 
-class RecurrentPayment extends PaymentCard
+final class RecurrentPayment extends PaymentCard
 {
     private $transactionId;
 

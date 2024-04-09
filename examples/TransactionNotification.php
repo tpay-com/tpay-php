@@ -7,7 +7,7 @@ use Tpay\OriginApi\Notifications\BasicNotificationHandler;
 include_once 'config.php';
 include_once 'loader.php';
 
-class TransactionNotification extends BasicNotificationHandler
+final class TransactionNotification extends BasicNotificationHandler
 {
     public function __construct()
     {

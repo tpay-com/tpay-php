@@ -7,7 +7,7 @@ use Tpay\OriginApi\PaymentSMS;
 include_once 'config.php';
 include_once 'loader.php';
 
-class SmsNotification extends PaymentSMS
+final class SmsNotification extends PaymentSMS
 {
     public function __construct()
     {

@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class TransactionApiExample extends TransactionApi
+final class TransactionApiExample extends TransactionApi
 {
     private $trId;
 

@@ -7,7 +7,7 @@ use Tpay\OriginApi\Notifications\CardNotificationHandler;
 include_once 'config.php';
 include_once 'loader.php';
 
-class CardNotification extends CardNotificationHandler
+final class CardNotification extends CardNotificationHandler
 {
     public function __construct()
     {
