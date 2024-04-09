@@ -7,7 +7,7 @@ use Tpay\OriginApi\Refunds\CardRefunds;
 include_once 'config.php';
 include_once 'loader.php';
 
-class CardRefundExample extends CardRefunds
+final class CardRefundExample extends CardRefunds
 {
     public function __construct()
     {

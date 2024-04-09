@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class TransactionReportsApi extends BasicReports
+final class TransactionReportsApi extends BasicReports
 {
     public function __construct()
     {

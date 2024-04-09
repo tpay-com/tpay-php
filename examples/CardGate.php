@@ -9,7 +9,7 @@ use Tpay\OriginApi\Utilities\Util;
 include_once 'config.php';
 include_once 'loader.php';
 
-class CardGate extends PaymentCardForms
+final class CardGate extends PaymentCardForms
 {
     public function __construct()
     {

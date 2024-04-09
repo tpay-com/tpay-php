@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class TransactionRefund extends BasicRefunds
+final class TransactionRefund extends BasicRefunds
 {
     const TRID = 'TR-C4Y-HKR3HX';
 
@@ -29,7 +29,7 @@ class TransactionRefund extends BasicRefunds
         $amount = 100.00;
 
         try {
-            $this->transactionID = static::TRID;
+            $this->transactionID = self::TRID;
             $result = $this->refundAny($amount);
             print_r($result);
         } catch (TException $e) {
@@ -41,7 +41,7 @@ class TransactionRefund extends BasicRefunds
     {
         // Refund transaction
         try {
-            $this->transactionID = static::TRID;
+            $this->transactionID = self::TRID;
             $result = $this->refund();
             print_r($result);
         } catch (TException $e) {

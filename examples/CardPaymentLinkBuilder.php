@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class CardPaymentLinkBuilder extends PaymentCardForms
+final class CardPaymentLinkBuilder extends PaymentCardForms
 {
     const REQUIRED_FIELDS = [
         'name',
@@ -63,8 +63,8 @@ class CardPaymentLinkBuilder extends PaymentCardForms
 
     public function showBuilderForm()
     {
-        $data['currencies'] = static::ALLOWED_CURRENCIES;
-        $data['languages'] = static::ALLOWED_LANGUAGES;
+        $data['currencies'] = self::ALLOWED_CURRENCIES;
+        $data['languages'] = self::ALLOWED_LANGUAGES;
         $data['actionPath'] = '';
         echo $this->getCardPaymentLinkBuilderForm($data);
     }
@@ -72,7 +72,7 @@ class CardPaymentLinkBuilder extends PaymentCardForms
     public function getCardPaymentLink()
     {
         try {
-            foreach (static::REQUIRED_FIELDS as $fieldName) {
+            foreach (self::REQUIRED_FIELDS as $fieldName) {
                 if (!isset($_POST[$fieldName])) {
                     throw new TException(sprintf('Required field %s is missing', $fieldName));
                 }

@@ -8,7 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 include_once 'config.php';
 include_once 'loader.php';
 
-class TransactionRefundStatus extends BasicReports
+final class TransactionRefundStatus extends BasicReports
 {
     const TRID = 'TR-BRA-KGZK0X';
 
@@ -24,7 +24,7 @@ class TransactionRefundStatus extends BasicReports
     public function getTransactionRefundsStatuses()
     {
         try {
-            $this->transactionID = static::TRID;
+            $this->transactionID = self::TRID;
             $result = $this->transactionRefundStatus();
             var_dump($result);
         } catch (TException $e) {
