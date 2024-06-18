@@ -8,6 +8,7 @@ use Tpay\OriginApi\Utilities\TException;
 use Tpay\OriginApi\Utilities\Util;
 use Tpay\OriginApi\Validators\FieldsConfigValidator;
 use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeBasic;
+use Tpay\OriginApi\Validators\PaymentTypes\PaymentTypeCard;
 
 /**
  * @psalm-suppress UndefinedClass
@@ -45,9 +46,21 @@ class JWSVerifiedPaymentNotification
      */
     public function getNotification()
     {
+        if (isset($_POST['card'])) {
+            return $this->getCardNotification();
+        }
+
         $notification = $this->getNotificationObject();
 
         $this->checkMd5($notification);
+        $this->checkJwsSignature();
+
+        return $notification;
+    }
+
+    public function getCardNotification()
+    {
+        $notification = $this->getCardNotificationObject();
         $this->checkJwsSignature();
 
         return $notification;
@@ -163,5 +176,14 @@ class JWSVerifiedPaymentNotification
         }
 
         return $this->getResponse(new PaymentTypeBasic());
+    }
+
+    private function getCardNotificationObject()
+    {
+        if (!isset($_POST['card']) && !isset($_POST['order_id'])) {
+            throw new TException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
+        }
+
+        return $this->getResponse(new PaymentTypeCard());
     }
 }
