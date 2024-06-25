@@ -25,13 +25,13 @@ jobs:
 
       - run: zip -ur tpay-php.zip vendor/
 
-      - run: mkdir plugin && unzip tpay-php.zip -d plugin
+      - run: mkdir sdk && unzip tpay-php.zip -d plugin
 
       - uses: actions/upload-artifact@v4
         id: plugin-upload
         with:
           name: 'tpay-php'
-          path: 'plugin/'
+          path: 'sdk/'
 
       - uses: actions/github-script@v6
         with:
