@@ -1,15 +1,14 @@
-name: Release
+name: Create release
 
 on:
-  push:
-    tags:
-      - '*'
-
-permissions:
-  contents: write
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to create'
+        required: true
 
 jobs:
-  check:
+  create_release:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +26,10 @@ jobs:
 
       - run: zip -ur tpay-php.zip vendor/
 
-      - uses: softprops/action-gh-release@v1
+      - name: Create Github release
+        uses: ncipollo/release-action@v1
         with:
-          files: tpay-php.zip
+          tag: ${{ github.event.inputs.version }}
+          name: "v${{ github.event.inputs.version }}"
+          generateReleaseNotes: true
+          artifacts: tpay-php.zip
