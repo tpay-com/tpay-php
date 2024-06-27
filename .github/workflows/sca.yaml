@@ -1,7 +1,6 @@
 name: Static code analysis
 
 on:
-  pull_request:
   push:
 
 jobs:
