@@ -93,7 +93,6 @@ namespace tpayLibs\src\Dictionaries {
     class FieldsConfigDictionary extends \Tpay\OriginApi\Dictionaries\FieldsConfigDictionary {}
     class FieldValueFilters extends \Tpay\OriginApi\Dictionaries\FieldValueFilters {}
     class HttpCodesDictionary extends \Tpay\OriginApi\Dictionaries\HttpCodesDictionary {}
-    class NotificationsIP extends \Tpay\OriginApi\Dictionaries\NotificationsIP {}
     class PaymentTypesDictionary extends \Tpay\OriginApi\Dictionaries\PaymentTypesDictionary {}
 }
 

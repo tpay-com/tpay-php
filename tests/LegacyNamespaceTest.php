@@ -58,7 +58,6 @@ class LegacyNamespaceTest extends TestCase
                     'tpayLibs\\src\\Dictionaries\\ISO_codes\\CountryCodesDictionary',
                     'tpayLibs\\src\\Dictionaries\\ISO_codes\\CurrencyCodesDictionary',
                     'tpayLibs\\src\\Dictionaries\\Localization\\CardPaymentLanguagesDictionary',
-                    'tpayLibs\\src\\Dictionaries\\NotificationsIP',
                     'tpayLibs\\src\\Dictionaries\\PaymentTypesDictionary',
                     'tpayLibs\\src\\Dictionaries\\Payments\\BasicFieldsDictionary',
                     'tpayLibs\\src\\Dictionaries\\Payments\\BlikFieldsDictionary',
