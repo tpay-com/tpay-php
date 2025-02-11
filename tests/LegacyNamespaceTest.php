@@ -86,7 +86,6 @@ class LegacyNamespaceTest extends TestCase
                     'tpayLibs\\src\\_class_tpay\\TransactionApi',
                     'tpayLibs\\src\\_class_tpay\\Utilities\\Lang',
                     'tpayLibs\\src\\_class_tpay\\Utilities\\ObjectsHelper',
-                    'tpayLibs\\src\\_class_tpay\\Utilities\\ServerValidator',
                     'tpayLibs\\src\\_class_tpay\\Utilities\\TException',
                     'tpayLibs\\src\\_class_tpay\\Utilities\\Util',
                     'tpayLibs\\src\\_class_tpay\\Validators\\AccessConfigValidator',

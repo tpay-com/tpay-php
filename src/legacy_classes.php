@@ -41,7 +41,6 @@ namespace tpayLibs\src\_class_tpay\Reports {
 namespace tpayLibs\src\_class_tpay\Utilities {
     class Lang extends \Tpay\OriginApi\Utilities\Lang {}
     class ObjectsHelper extends \Tpay\OriginApi\Utilities\ObjectsHelper {}
-    class ServerValidator extends \Tpay\OriginApi\Utilities\ServerValidator {}
     class TException extends \Tpay\OriginApi\Utilities\TException {}
     class Util extends \Tpay\OriginApi\Utilities\Util {}
 }
