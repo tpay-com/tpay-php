@@ -16,7 +16,6 @@ namespace tpayLibs\src\_class_tpay\Curl {
 
 namespace tpayLibs\src\_class_tpay\Notifications {
     class BasicNotificationHandler extends \Tpay\OriginApi\Notifications\BasicNotificationHandler {}
-    class BlikAliasNotificationHandler extends \Tpay\OriginApi\Notifications\BlikAliasNotificationHandler {}
     class CardNotificationHandler extends \Tpay\OriginApi\Notifications\CardNotificationHandler {}
 }
 

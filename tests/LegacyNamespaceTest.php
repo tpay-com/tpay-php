@@ -72,7 +72,6 @@ class LegacyNamespaceTest extends TestCase
                     'tpayLibs\\src\\_class_tpay\\Curl\\CurlOptions',
                     'tpayLibs\\src\\_class_tpay\\MassPayments',
                     'tpayLibs\\src\\_class_tpay\\Notifications\\BasicNotificationHandler',
-                    'tpayLibs\\src\\_class_tpay\\Notifications\\BlikAliasNotificationHandler',
                     'tpayLibs\\src\\_class_tpay\\Notifications\\CardNotificationHandler',
                     'tpayLibs\\src\\_class_tpay\\PaymentBlik',
                     'tpayLibs\\src\\_class_tpay\\PaymentCard',

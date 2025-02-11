@@ -11,7 +11,7 @@ class BasicNotificationHandler extends BasicPaymentOptions
 {
     /**
      * Check cURL request from tpay server after payment.
-     * This method check server ip, required fields and md5 checksum sent by payment server.
+     * This method check required fields and md5 checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
      *
      * @param string $response Print response to Tpay server (enum: 'TRUE', 'FALSE').
@@ -32,9 +32,6 @@ class BasicNotificationHandler extends BasicPaymentOptions
             $res['tr_crc']
         );
         Util::logLine('Check MD5: '.(int) $checkMD5);
-        if (true === $this->validateServerIP && false === $this->isTpayServer()) {
-            throw new TException('Request is not from secure server');
-        }
         if (false === $checkMD5) {
             throw new TException('MD5 checksum is invalid');
         }

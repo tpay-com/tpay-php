@@ -13,7 +13,7 @@ class CardNotificationHandler extends PaymentCard
 {
     /**
      * Check cURL request from tpay server after payment.
-     * This method check server ip, required fields and md5 checksum sent by payment server.
+     * This method check required fields and md5 checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
      *
      * @throws TException
@@ -31,9 +31,6 @@ class CardNotificationHandler extends PaymentCard
             $response = $this->getResponse(new PaymentTypeCardDeregister());
         } else {
             throw new TException('Unknown notification type');
-        }
-        if (true === $this->validateServerIP && false === $this->isTpayServer()) {
-            throw new TException('Request is not from secure server');
         }
 
         echo json_encode([CardDictionary::RESULT => '1']);
