@@ -225,6 +225,20 @@ class BasicFieldsDictionary
                 FieldsConfigDictionary::MAXLENGTH_32,
             ],
         ],
+        'payer_ip' => [
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::VALIDATION => [
+                FieldsConfigDictionary::STRING,
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
+        ],
+        'payer_user_agent' => [
+            FieldsConfigDictionary::REQUIRED => false,
+            FieldsConfigDictionary::VALIDATION => [
+                FieldsConfigDictionary::STRING,
+                FieldsConfigDictionary::MAXLENGTH_128,
+            ],
+        ],
     ];
 
     /** List of deprecated parameters */
@@ -247,6 +261,8 @@ class BasicFieldsDictionary
         'kraj' => 'country',
         'telefon' => 'phone',
         'akceptuje_regulamin' => 'accept_tos',
+        'platnik_ip' => 'payer_ip',
+        'platnik_user_agent' => 'payer_user_agent',
     ];
 
     const RESPONSE_FIELDS = [
