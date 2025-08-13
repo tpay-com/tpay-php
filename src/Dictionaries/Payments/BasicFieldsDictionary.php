@@ -229,14 +229,14 @@ class BasicFieldsDictionary
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128,
+                'maxlength_255',
             ],
         ],
         'payer_user_agent' => [
             FieldsConfigDictionary::REQUIRED => false,
             FieldsConfigDictionary::VALIDATION => [
                 FieldsConfigDictionary::STRING,
-                FieldsConfigDictionary::MAXLENGTH_128,
+                'maxlength_255',
             ],
         ],
     ];
