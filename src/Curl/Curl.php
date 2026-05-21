@@ -142,7 +142,6 @@ class Curl extends CurlOptions
         $this->curlError = curl_error($ch);
         $this->curlErrorNumber = curl_errno($ch);
         $this->checkResponse();
-        curl_close($ch);
         $this->result = $curlRes;
 
         return $this;
