@@ -16,7 +16,6 @@ namespace tpayLibs\src\_class_tpay\Curl {
 
 namespace tpayLibs\src\_class_tpay\Notifications {
     class BasicNotificationHandler extends \Tpay\OriginApi\Notifications\BasicNotificationHandler {}
-    class BlikAliasNotificationHandler extends \Tpay\OriginApi\Notifications\BlikAliasNotificationHandler {}
     class CardNotificationHandler extends \Tpay\OriginApi\Notifications\CardNotificationHandler {}
 }
 
@@ -42,7 +41,6 @@ namespace tpayLibs\src\_class_tpay\Reports {
 namespace tpayLibs\src\_class_tpay\Utilities {
     class Lang extends \Tpay\OriginApi\Utilities\Lang {}
     class ObjectsHelper extends \Tpay\OriginApi\Utilities\ObjectsHelper {}
-    class ServerValidator extends \Tpay\OriginApi\Utilities\ServerValidator {}
     class TException extends \Tpay\OriginApi\Utilities\TException {}
     class Util extends \Tpay\OriginApi\Utilities\Util {}
 }
@@ -95,7 +93,6 @@ namespace tpayLibs\src\Dictionaries {
     class FieldsConfigDictionary extends \Tpay\OriginApi\Dictionaries\FieldsConfigDictionary {}
     class FieldValueFilters extends \Tpay\OriginApi\Dictionaries\FieldValueFilters {}
     class HttpCodesDictionary extends \Tpay\OriginApi\Dictionaries\HttpCodesDictionary {}
-    class NotificationsIP extends \Tpay\OriginApi\Dictionaries\NotificationsIP {}
     class PaymentTypesDictionary extends \Tpay\OriginApi\Dictionaries\PaymentTypesDictionary {}
 }
 

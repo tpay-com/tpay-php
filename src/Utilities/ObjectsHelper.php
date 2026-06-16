@@ -3,7 +3,6 @@
 namespace Tpay\OriginApi\Utilities;
 
 use Tpay\OriginApi\Curl\Curl;
-use Tpay\OriginApi\Dictionaries\NotificationsIP;
 use Tpay\OriginApi\Validators\FieldsConfigValidator;
 
 class ObjectsHelper
@@ -73,17 +72,11 @@ class ObjectsHelper
      */
     protected $cardHashAlg = 'sha1';
 
-    protected $secureIP = NotificationsIP::SECURE_IPS;
-    protected $validateServerIP = true;
-    protected $validateForwardedIP = false;
-    protected $transactionApi;
-    protected $cardsApi;
-    protected $basicClient;
-    protected $validator;
     protected $curl;
 
     /**
      * @param string $url
+     *
      * @param array  $params
      *
      * @return array
@@ -97,59 +90,5 @@ class ObjectsHelper
             ->enableJSONResponse()
             ->doRequest()
             ->getResult();
-    }
-
-    /**
-     * Disabling validation of payment notification server IP
-     * Validation of tpay server ip is very important.
-     * Use this method only in test mode and be sure to enable validation in production.
-     */
-    public function disableValidationServerIP()
-    {
-        $this->validateServerIP = false;
-
-        return $this;
-    }
-
-    /** Enabling validation of payment notification server IP */
-    public function enableValidationServerIP()
-    {
-        $this->validateServerIP = true;
-
-        return $this;
-    }
-
-    /**
-     * CloudFlare protected servers will be validated like all others
-     * It is default behavior
-     */
-    public function disableForwardedIPValidation()
-    {
-        $this->validateForwardedIP = false;
-
-        return $this;
-    }
-
-    /** Enabling validation for CloudFlare protected servers */
-    public function enableForwardedIPValidation()
-    {
-        $this->validateForwardedIP = true;
-
-        return $this;
-    }
-
-    /**
-     * Check if request is called from secure tpay server
-     *
-     * @return bool
-     */
-    public function isTpayServer()
-    {
-        return (new ServerValidator(
-            $this->validateServerIP,
-            $this->validateForwardedIP,
-            $this->secureIP
-        )
-        )->isValid();
     }
 }

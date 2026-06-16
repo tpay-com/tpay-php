@@ -31,11 +31,6 @@ final class CardNotification extends CardNotificationHandler
 
     private function getTpayNotification()
     {
-        // If you want to disable server IP validation, run this command (not recommended):
-        $this->disableValidationServerIP();
-        // If you use proxy communication and want to check for Tpay server IP at HTTP_X_FORWARDED_FOR, fun this command:
-        $this->enableForwardedIPValidation();
-        // Check Tpay server IP and validate parameters
         $notification = $this->handleNotification();
         // Get order details from your DB
         $shopOrderData = $this->getOrderDetailsFromDatabase($notification['order_id']);
